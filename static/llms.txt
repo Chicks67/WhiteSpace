@@ -23,6 +23,8 @@ Every claim the product makes about a data source rests on a pre-registered test
 - `POST /api/run`: a live run, body `{concept, cuisine?, goal? | area? | leases?: [{address}]}`, streamed as server-sent events, rate limited
 - `POST /api/ask`: a follow-up question about a run, streamed, rate limited
 - `GET /api/around?concept=&lat=&lon=`: competitors near a point from city records, with Qloo's Friday closing times and review mentions; no model call
+- [Test 20 answers](/api/test20): every recorded answer behind the closing-time result, place by place
+- `POST /api/duel`: body `{name, lat, lon}`; asks the model when a real place closes on Friday, alone and with Qloo's record, side by side; rate limited
 - `POST /api/scene`: body `{anchors: [1 to 3 place names]}`; Qloo's places their fans also go, and the music and brands that crowd follows; no model call
 
 ## Key results

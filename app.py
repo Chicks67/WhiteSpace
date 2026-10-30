@@ -19,6 +19,7 @@ from sse_starlette.sse import EventSourceResponse
 
 import agent
 import around
+import duel
 import engine
 import evidence
 import followup
@@ -32,6 +33,7 @@ FIXTURES = os.path.join(ROOT, "fixtures", "replays")  # public, redacted copies:
 RUNS_PER_HOUR = int(os.environ.get("RUNS_PER_HOUR", "4"))
 ASKS_PER_HOUR = int(os.environ.get("ASKS_PER_HOUR", "15"))
 LOOKUPS_PER_HOUR = int(os.environ.get("LOOKUPS_PER_HOUR", "30"))
+DUELS_PER_HOUR = int(os.environ.get("DUELS_PER_HOUR", "10"))
 DAILY_CREDITS = float(os.environ.get("DAILY_CREDITS", "300"))
 MAX_CONCURRENT = int(os.environ.get("MAX_CONCURRENT", "3"))
 
@@ -313,6 +315,42 @@ def around_lookup(concept: str, lat: float, lon: float, request: Request):
         raise HTTPException(422, "give a tested cuisine and a point in New York City")
     lat, lon = round(lat, 3), round(lon, 3)  # about 100 m: nearby requests share one cached Qloo lookup
     return _lookup(request, lambda: around.for_point(concept, lat, lon))
+
+
+@app.get("/api/test20")
+def test20_answers():
+    """Every recorded answer behind Test 20's result, for the page's table (built privately by warm_cache.py)."""
+    path = os.path.join(qloo.WARM, "test20_answers.json")
+    if not os.path.exists(path):
+        raise HTTPException(404, "not available on this server")
+    with open(path) as f:
+        return json.load(f)
+
+
+class DuelRequest(BaseModel):
+    name: str = Field(min_length=2, max_length=80)
+    lat: float = Field(ge=40.45, le=40.95)
+    lon: float = Field(ge=-74.3, le=-73.65)
+
+
+@app.post("/api/duel")
+def duel_lookup(req: DuelRequest, request: Request):
+    """Test 20, live: the model alone against the model with Qloo's record, for one real place. Two short model calls."""
+    reason = _admit(_visitor(request), "duel", DUELS_PER_HOUR)
+    if reason:
+        return JSONResponse({"error": reason}, status_code=429)
+    try:
+        out, spent = duel.run(req.name.strip(), req.lat, req.lon)
+    except qloo.QuotaLow:
+        return JSONResponse({"error": "Live Qloo lookups are paused to protect this month's quota."}, status_code=503)
+    except duel.NoRecord as e:
+        return JSONResponse({"error": str(e)}, status_code=404)
+    except Exception as e:
+        msg = _friendly(e)
+        return JSONResponse({"error": msg[:1].upper() + msg[1:]}, status_code=502)
+    with _lock:
+        _spend["credits"] += spent
+    return out
 
 
 @app.post("/api/run")

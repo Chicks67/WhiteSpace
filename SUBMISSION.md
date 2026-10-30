@@ -36,6 +36,10 @@ that matters.
 6. **Scene explorer:** name up to three places your customers love; Qloo returns where their fans also go, and the
    music and brands that crowd follows.
 
+7. **See the Qloo difference yourself.** A table of all 30 recorded answers behind Test 20 (Google Maps, each model
+   alone, each model with Qloo), and a live "ask the model" duel beside every rival: one click asks GPT-6 Astra when the
+   place closes on Friday, alone and with Qloo's record, side by side.
+
 Every step and every Qloo call is shown live in an agent trace. Saved runs replay instantly with no API calls.
 
 ## What makes it Qloo-powered
@@ -69,5 +73,7 @@ the block.
 
 1. Open https://whitespace-nyc.vercel.app and click a saved run: it replays a recorded live run in seconds.
 2. Scroll to "What is around": the Friday closing-time timeline loads from Qloo.
-3. Ask a follow-up such as "When do the competitors near the top lease close on Friday?"
-4. Or run your own plan live (about a minute).
+3. Click "ask the model" beside a rival to see the model alone against the model with Qloo, live.
+4. Under "Why Qloo", open "See all 30 answers".
+5. Ask a follow-up such as "When do the competitors near the top lease close on Friday?"
+6. Or run your own plan live (about a minute).

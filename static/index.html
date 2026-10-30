@@ -33,7 +33,7 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400..600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <!-- the map only appears after a run, so its stylesheet does not hold up the first paint -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="/static/style.css?v=10">
+<link rel="stylesheet" href="/static/style.css?v=11">
 </head>
 <body>
 <a class="skip" href="#brief-form">Skip to the tool</a>
@@ -271,6 +271,10 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
       <p class="proof-note">Alone, one model declined every time and the other gave 6 confident wrong times.
         With Qloo's place record, both were right 29 times out of 30. This is why Whitespace answers every hours
         question from Qloo and never from the model's memory.</p>
+      <details class="answers" id="t20">
+        <summary>See all 30 answers</summary>
+        <div id="t20-body"><p class="hint">Loading the recorded answers…</p></div>
+      </details>
     </figure>
     <div class="proof-side">
       <article class="proof">
@@ -398,6 +402,6 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
 <div id="toast" class="toast" role="status" hidden></div>
 
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script defer src="/static/app.js?v=10"></script>
+<script defer src="/static/app.js?v=11"></script>
 </body>
 </html>

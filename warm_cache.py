@@ -37,6 +37,28 @@ def top_picks():
     return sorted(out)
 
 
+def test20_answers():
+    """Test 20's recorded answers for its 30 decision places, scored by the test's own rule (within 30 minutes of
+    Google Maps), for the page's "see every answer" table. Recorded answers only: no new model call."""
+    import test12 as t12
+    import test20 as t20
+    rows = []
+    for p in [p for p in t20.places() if not p["shown"]]:
+        r = {"name": p["name"], "address": p["address"], "google": f"{p['google'] // 60 % 24:02d}:{p['google'] % 60:02d}",
+             "qloo": p["qloo"]}
+        for arm, small, with_qloo in t20.ARMS:
+            a = t20.answer(p, arm, small, with_qloo)["closes"]
+            m = None if a is None else t12.minutes(str(a))
+            d = None if m is None else min(abs(m - p["google"]), 1440 - abs(m - p["google"]))
+            r[arm] = {"said": a, "right": d is not None and d <= 30}
+        rows.append(r)
+    out = {"rows": rows, "rule": "right means within 30 minutes of Google Maps' Friday closing time",
+           "totals": {arm: sum(r[arm]["right"] for r in rows) for arm, *_ in t20.ARMS}}
+    with open(os.path.join(qloo.WARM, "test20_answers.json"), "w") as f:
+        json.dump(out, f)
+    return out
+
+
 def main():
     print("reference areas", len(positioning.reference()))
     for concept, (_, slug) in engine.CONCEPTS.items():
@@ -52,6 +74,7 @@ def main():
         src = os.path.join(qloo.CACHE, base)
         if os.path.exists(src):
             shutil.copy2(src, os.path.join(qloo.WARM, base))
+    print("test20 answers", test20_answers()["totals"])
     size = sum(os.path.getsize(os.path.join(qloo.WARM, n)) for n in os.listdir(qloo.WARM))
     print(f"{len(os.listdir(qloo.WARM))} responses in qloo_warm/, {size / 1e6:.1f} MB")
 

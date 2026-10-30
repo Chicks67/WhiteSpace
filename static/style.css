@@ -456,7 +456,7 @@ table.data th, table.data td { text-align: left; padding: .5rem .7rem; border-bo
 
 /* ---------- why Qloo ---------- */
 .why { background: color-mix(in srgb, var(--qloo) 4%, var(--bg)); }
-.why-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 16px; align-items: stretch; }
+.why-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 16px; align-items: start; }
 .proof { margin: 0; background: var(--surface); border: 1px solid var(--rule); border-radius: 16px; padding: 22px; box-shadow: var(--shadow); }
 .proof-main { border-top: 3px solid var(--qloo); display: grid; gap: 1.2rem; align-content: space-between; }
 .proof-main figcaption { display: grid; gap: .35rem; }
@@ -480,6 +480,30 @@ table.data th, table.data td { text-align: left; padding: .5rem .7rem; border-bo
 .proof-side p:not(.big-num) { font-size: .88rem; color: var(--muted); }
 .why-foot { margin-top: 1.2rem; }
 .why-foot a { color: var(--ink); }
+
+.proof-main, .proof-main > * { min-width: 0; }   /* lets the wide answers table scroll inside the card */
+.answers { border-top: 1px solid var(--rule); padding-top: .8rem; }
+.answers summary { font-size: .9rem; color: var(--qloo); }
+.answers .t20-wrap { overflow-x: auto; margin-top: .8rem; max-height: 420px; overflow-y: auto; }
+.answers table { min-width: 620px; font-size: .8rem; }
+.answers th { position: sticky; top: 0; background: var(--surface); }
+.answers td.ok { color: var(--ok); }
+.answers td.no { color: var(--muted); }
+.answers td.ok::before { content: "\2713  "; font-weight: 700; }
+.answers td.no::before { content: "\2715  "; }
+.answers tfoot td { font-weight: 600; border-bottom: 0; }
+
+/* ---------- live duel: the model alone against the model with Qloo ---------- */
+.duel-btn { margin-left: .5rem; font: 500 .7rem var(--mono); letter-spacing: .03em; padding: .1rem .55rem; border-radius: 999px;
+  background: none; border: 1px solid var(--qloo); color: var(--qloo); vertical-align: 1px; }
+.duel-btn:hover:not(:disabled) { background: var(--qloo); color: var(--surface); }
+.duel { margin: .5rem 0 .7rem; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; list-style: none; }
+.duel > div { border: 1px solid var(--rule); border-radius: 12px; padding: .65rem .8rem; background: var(--field); }
+.duel .k { display: block; font: 500 .62rem var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.duel b { display: block; font: 400 1.6rem/1.15 var(--display); margin-top: .2rem; }
+.duel .wq { border-color: var(--qloo); }
+.duel .wq b, .duel .rec b { color: var(--qloo); }
+.duel-note { grid-column: 1 / -1; font-size: .78rem; color: var(--muted); }
 
 /* ---------- Friday closing times around the top pick ---------- */
 .hours { margin: .9rem 0 .3rem; }
@@ -517,6 +541,7 @@ table.data th, table.data td { text-align: left; padding: .5rem .7rem; border-bo
   .points li:not(:first-child) { display: none; }
   .eyebrow span { display: block; margin: .35rem 0 0; padding: 0; border: 0; }
   .bar-row { grid-template-columns: minmax(0, 1fr) 3.8rem; gap: .25rem .7rem; }
+  .duel { grid-template-columns: minmax(0, 1fr); }
   .bar-row .track { grid-column: 1 / -1; grid-row: 2; }
   .hours-axis, .hours-row { grid-template-columns: minmax(0, 7rem) minmax(0, 1fr) 3rem; }
   .inputs { padding: 18px; }

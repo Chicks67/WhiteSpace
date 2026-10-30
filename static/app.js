@@ -813,7 +813,8 @@ async function around() {
     const a = await lookup(`/api/around?concept=${encodeURIComponent(state.cuisine)}&lat=${top.lat}&lon=${top.lon}`);
     if (run !== state.runId) return;   // a new run started while Qloo answered
     const d = a.among_details;
-    const row = (name, q, extra = "") => `<li><b>${esc(name)}</b>${extra} ${qfacts(q)}</li>`;
+    const row = (name, q, extra = "") => `<li><b>${esc(name)}</b>${extra} ${qfacts(q)}` +
+      (q && q.closes_friday ? `<button type="button" class="duel-btn" data-name="${esc(name)}" title="Ask GPT-6 Astra when it closes, alone and with Qloo's record">ask the model</button>` : "") + `</li>`;
     body.innerHTML = `
       ${hoursChart([...a.competitors.map(c => ({ name: c.name, q: c.qloo })), ...a.also_tagged.map(c => ({ name: c.name, q: c }))])}
       <h3>${esc(a.competitors_in_city_records)} ${esc(a.concept)} restaurants within 1.5 km in city records</h3>
@@ -836,6 +837,46 @@ async function around() {
   } catch (e) { if (run === state.runId) body.innerHTML = `<p class="form-error">${esc(e.message)}</p>`; }
   finally { btn.disabled = false; }
 }
+/* Test 20, live: the model alone against the model with Qloo's record, for one rival the founder picks. */
+async function duel(btn) {
+  const top = topLease(), li = btn.closest("li"), run = state.runId;
+  if (!top) return;
+  let box = li.querySelector(".duel");
+  if (!box) { box = document.createElement("div"); box.className = "duel"; li.append(box); }
+  if (!state.live) { box.innerHTML = `<p class="duel-note">${esc(NO_KEYS)}</p>`; return; }
+  btn.disabled = true;
+  box.innerHTML = `<p class="duel-note">Asking GPT-6 Astra twice: once on its own, once with Qloo's record\u2026</p>`;
+  try {
+    const d = await lookup("/api/duel", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: btn.dataset.name, lat: top.lat, lon: top.lon }) });
+    if (run !== state.runId) return;
+    const said = t => t ? esc(t) : "doesn't know";
+    box.innerHTML = `<div><span class="k">${esc(d.model)} alone</span><b>${said(d.alone)}</b></div>
+      <div class="wq"><span class="k">${esc(d.model)} + Qloo</span><b>${said(d.with_qloo)}</b></div>
+      <div class="rec"><span class="k">Qloo's record</span><b>${esc(d.qloo_closes_friday)}</b></div>
+      <p class="duel-note">Friday closing time of ${esc(d.name)}. The same question as our Test 20, where the model alone was right
+        for ${d.test20.alone_right} of ${d.test20.of} places and with Qloo for ${d.test20.with_qloo_right}. This live answer is not checked against Google Maps.</p>`;
+  } catch (e) { if (run === state.runId) box.innerHTML = `<p class="duel-note">${esc(e.message)}</p>`; }
+  finally { btn.disabled = false; }
+}
+
+/* Every recorded answer behind Test 20, loaded the first time the table is opened. */
+async function loadTest20() {
+  const body = $("#t20-body");
+  if (body.dataset.loaded) return;
+  body.dataset.loaded = "1";
+  try {
+    const d = await lookup("/api/test20");
+    const cell = a => `<td class="${a.right ? "ok" : "no"}">${a.said ? esc(a.said) : "declined"}</td>`;
+    const arms = ["large_alone", "large_with_qloo", "small_alone", "small_with_qloo"];
+    body.innerHTML = `<div class="t20-wrap"><table class="data"><thead><tr><th>Restaurant</th><th>Google Maps</th>
+      <th>GPT-6 Astra alone</th><th>GPT-6 Astra + Qloo</th><th>Gemini 3.8 Flash alone</th><th>Gemini + Qloo</th></tr></thead><tbody>` +
+      d.rows.map(r => `<tr><td>${esc(r.name)}</td><td>${esc(r.google)}</td>${arms.map(a => cell(r[a])).join("")}</tr>`).join("") +
+      `</tbody><tfoot><tr><td>Right</td><td></td>${arms.map(a => `<td>${esc(d.totals[a])} of ${esc(d.rows.length)}</td>`).join("")}</tr></tfoot></table></div>
+      <p class="hint">${esc(d.rule[0].toUpperCase() + d.rule.slice(1))}. Recorded answers from the pre-registered test, not rerun.</p>`;
+  } catch (e) { body.innerHTML = `<p class="hint">${esc(e.message)}</p>`; delete body.dataset.loaded; }
+}
+
 async function showScene() {
   const names = $("#anchors").value.split(",").map(s => s.trim()).filter(s => s.length > 1).slice(0, 3);
   const body = $("#scene-body"), err = $("#scene-error"), btn = $("#scene-go");
@@ -873,6 +914,8 @@ async function showScene() {
 
 async function boot() {
   $("#around-go").onclick = around;
+  $("#around-body").addEventListener("click", ev => { const b = ev.target.closest(".duel-btn"); if (b) duel(b); });
+  $("#t20").addEventListener("toggle", () => { if ($("#t20").open) loadTest20(); });
   $("#scene-form").onsubmit = ev => { ev.preventDefault(); showScene(); };
   DEFAULT_LEASES.forEach(a => leaseRow(a));
   $("#add-lease").onclick = () => leaseRow("");

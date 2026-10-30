@@ -86,6 +86,13 @@ reasoning behind every decision is in `PROJECT_LOG.md`.
 7. **Answers follow-up questions** with twelve tools, including two Qloo tools for hours (`competitor_hours`,
    `place_hours`). Numbers in an answer that appear in no tool result are flagged.
 
+Two ways to see the Qloo difference for yourself, on the page:
+
+- **See all 30 answers:** under "Why Qloo", every recorded answer behind Test 20, place by place: Google Maps' closing
+  time, what each model said alone and with Qloo, and whether it was right.
+- **Ask the model (live duel):** beside each rival with Qloo hours, one click asks GPT-6 Astra when it closes on
+  Friday twice, side by side: alone, and with Qloo's record. The same question as Test 20, rerun live.
+
 The scene explorer works on its own: name up to three places your customers love and see the places Qloo says their
 fans also go, and the music and brands that crowd follows. No model is involved.
 
@@ -149,6 +156,7 @@ never a key.
 | `RUNS_PER_HOUR` | `4` | Live runs per visitor per hour. |
 | `ASKS_PER_HOUR` | `15` | Follow-up questions per visitor per hour. |
 | `LOOKUPS_PER_HOUR` | `30` | Qloo lookups (no model call) per visitor per hour. |
+| `DUELS_PER_HOUR` | `10` | Live "ask the model" duels per visitor per hour. |
 | `MAX_CONCURRENT` | `3` | Live runs at once on the server. |
 | `QLOO_RESERVE` | `300` | Qloo calls kept in reserve each month. Below this, uncached Qloo calls stop and the page says so. |
 | `QLOO_CACHE_DIR` | `./cache` | Where Qloo responses are cached. Private server storage only. |
@@ -348,6 +356,8 @@ the server deployment, so a fresh server instance spends no quota on them.
 | `GET /api/golden/{id}/sha256` | Hash of the full saved run this server replays. Compare with `fixtures/replays/SHA256SUMS`. |
 | `POST /api/run` | A live run. Body: `{concept, cuisine?, goal? \| area? \| leases?: [{address}]}`. Streams events. Rate limited. |
 | `POST /api/ask` | A follow-up question about a run. Body: `{question, context, history}`. Streams events. Rate limited. |
+| `GET /api/test20` | Every recorded answer behind Test 20 (30 places, four arms), scored by the test's rule. |
+| `POST /api/duel` | Body: `{name, lat, lon}`. Asks the model when a real place closes on Friday, alone and with Qloo's record. Two short model calls; rate limited. |
 | `GET /api/around?concept=&lat=&lon=` | What is around a point (city records plus Qloo place details). No model call. |
 | `POST /api/scene` | Scene explorer. Body: `{anchors: [1 to 3 place names]}`. No model call. |
 
@@ -395,7 +405,8 @@ Rebuild the public copies after any re-record: `python redact_replays.py`.
 | `evidence.py` | The "How we know" panel, read from the committed results files. |
 | `nyc.py`, `storefronts.py`, `census.py`, `transit.py`, `bids.py`, `partners.py`, `next_steps.py` | City data: inspections and neighbourhoods, vacant storefronts, census and jobs, subway ridership, business improvement districts, local partners, next steps. |
 | `build_data.py` | Build step: downloads city data and warms the Qloo cache. |
-| `warm_cache.py` | Copies the Qloo responses every server needs into the private `qloo_warm/` before a deploy. |
+| `warm_cache.py` | Copies the Qloo responses every server needs into the private `qloo_warm/` before a deploy, with Test 20's recorded answers for the page's table. |
+| `duel.py` | The live duel: Test 20's question to the model, alone and with Qloo's record, for a place the founder picks. |
 | `lease_model.json` | Fitted lease score coefficients and percentiles. |
 | `static/` | The page, plus `llms.txt` (served at `/llms.txt`). |
 | `fixtures/replays/` | Public, redacted saved runs and their hashes. |
@@ -573,8 +584,8 @@ The `starter` plan keeps the service awake; free plans sleep when idle. Health c
   explorer (`/docs`) is turned off.
 - **Rate limits use the address Vercel reports** (`x-vercel-forwarded-for`), which a visitor cannot set; IPv6 visitors
   are grouped by network. The app's own limits are kept per server instance, so a Vercel Firewall rule adds a shared
-  one in front of every instance: at most 150 requests an hour per address to `/api/run`, `/api/ask`, `/api/around`
-  and `/api/scene` (answered with HTTP 429), well above what the app's own limits let one visitor make.
+  one in front of every instance: at most 150 requests an hour per address to `/api/run`, `/api/ask`, `/api/around`,
+  `/api/scene` and `/api/duel` (answered with HTTP 429), well above what the app's own limits let one visitor make.
 - **Before every commit**, scan the diff for keys. If a key is ever committed, rotate it at the provider straight
   away; removing it from history is not enough.
 
