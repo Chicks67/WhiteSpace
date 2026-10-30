@@ -8,10 +8,11 @@ import json
 import os
 import threading
 import time
+from contextlib import asynccontextmanager
 from datetime import date
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, PlainTextResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, model_validator
 from sse_starlette.sse import EventSourceResponse
@@ -34,11 +35,77 @@ LOOKUPS_PER_HOUR = int(os.environ.get("LOOKUPS_PER_HOUR", "30"))
 DAILY_CREDITS = float(os.environ.get("DAILY_CREDITS", "300"))
 MAX_CONCURRENT = int(os.environ.get("MAX_CONCURRENT", "3"))
 
-app = FastAPI(title="Whitespace")
+SITE = os.environ.get("SITE_URL", "https://whitespace-nyc.vercel.app").rstrip("/")
+
+
+@asynccontextmanager
+async def lifespan(_app):
+    threading.Thread(target=engine.city, daemon=True).start()  # build the city index before the first visitor needs it
+    yield
+
+
+# No public API explorer: the page is the interface, and the docs would only advertise the paid endpoints.
+app = FastAPI(title="Whitespace", lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
 app.mount("/static", StaticFiles(directory=os.path.join(ROOT, "static")), name="static")
 _lock = threading.Lock()
 _hits, _spend = {}, {"day": str(date.today()), "credits": 0.0}
 _slots = threading.BoundedSemaphore(MAX_CONCURRENT)
+_ask_slots = threading.BoundedSemaphore(2 * MAX_CONCURRENT)
+
+CSP = ("default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; "
+       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; "
+       "font-src https://fonts.gstatic.com; img-src 'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://cdnjs.cloudflare.com; "
+       "connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'")
+
+
+@app.middleware("http")
+async def headers(request: Request, call_next):
+    response = await call_next(request)
+    h = response.headers
+    h.setdefault("Content-Security-Policy", CSP)
+    h.setdefault("X-Content-Type-Options", "nosniff")
+    h.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
+    h.setdefault("Permissions-Policy", "camera=(), microphone=(), geolocation=()")
+    if request.url.path.startswith("/static/") and response.status_code == 200:
+        # asset URLs carry a ?v= version, so browsers and the CDN may keep them; unversioned ones revalidate daily
+        h["Cache-Control"] = "public, max-age=31536000, immutable" if request.url.query else "public, max-age=86400"
+    return response
+
+
+class Cancelled(Exception):
+    """The visitor closed the page: stop the run instead of spending on it."""
+
+
+def _emitter(loop, queue, gone):
+    def emit(e):
+        if gone.is_set() and e is not None:
+            raise Cancelled()
+        loop.call_soon_threadsafe(queue.put_nowait, e)
+    return emit
+
+
+async def _drain(queue, gone):
+    try:
+        while True:
+            e = await queue.get()
+            if e is None:
+                break
+            yield {"data": json.dumps(e)}
+    finally:
+        gone.set()
+
+
+def _friendly(e):
+    """What a visitor may see of an error: messages written for them, else a plain line. Details go to the log."""
+    msg = str(e)
+    if llm.busy(msg):
+        return "the language model is busy right now; please try again in a minute (the saved runs work meanwhile)"
+    if llm.out_of_budget(msg):
+        return "the language model is out of budget or busy right now; the saved answers still work"
+    if isinstance(e, (engine.LeaseError, qloo.QuotaLow)) or type(e) is ValueError:
+        return msg[:200]
+    print("ask failed:", repr(e)[:500], flush=True)
+    return "something went wrong on our side; please try again"
 
 
 class Lease(BaseModel):
@@ -56,18 +123,29 @@ class RunRequest(BaseModel):
     def one_of(self):
         if not self.leases and not self.area and not self.goal:
             raise ValueError("describe your plan, name an area to search, or give two to five addresses")
+        if sum(bool(x) for x in (self.leases, self.area, self.goal)) > 1:
+            raise ValueError("choose one: describe your plan, name an area, or give addresses")
         return self
 
 
 def _visitor(request):
-    fwd = request.headers.get("x-forwarded-for", "")
-    return fwd.split(",")[0].strip() or (request.client.host if request.client else "unknown")
+    """The visitor's address. Vercel sets x-vercel-forwarded-for and x-real-ip itself, so they cannot be spoofed
+    there; x-forwarded-for is the fallback for other hosts. IPv6 visitors are grouped by their /64 network."""
+    h = request.headers
+    ip = (h.get("x-vercel-forwarded-for") or h.get("x-real-ip") or h.get("x-forwarded-for", "")).split(",")[0].strip()
+    ip = ip or (request.client.host if request.client else "unknown")
+    return ":".join(ip.split(":")[:4]) if ":" in ip else ip
+
+
+class Turn(BaseModel):
+    q: str = Field(max_length=300)
+    a: str = Field(max_length=2000)
 
 
 class AskRequest(BaseModel):
     question: str = Field(min_length=3, max_length=300)
     context: dict
-    history: list[dict] = Field(default_factory=list, max_length=10)
+    history: list[Turn] = Field(default_factory=list, max_length=4)
 
 
 def _admit(ip, kind="run", per_hour=None, spend=True):
@@ -81,6 +159,9 @@ def _admit(ip, kind="run", per_hour=None, spend=True):
             _spend.update(day=str(date.today()), credits=0.0)
         if spend and _spend["credits"] >= DAILY_CREDITS:
             return "Today's live-run budget is used up. The saved runs still work."
+        if len(_hits) > 5000:  # forget visitors with nothing in the last hour
+            for k in [k for k, v in _hits.items() if not v or now - v[-1] >= 3600]:
+                del _hits[k]
         recent = [t for t in _hits.get(ip, []) if now - t < 3600]
         if len(recent) >= per_hour:
             return f"Live {kind}s are limited to {per_hour} per hour per visitor. The saved runs still work."
@@ -100,14 +181,27 @@ def _live():
     return bool(llm.ENV.get("QLOO_API_KEY") and llm.ENV.get(llm.KEY_NAME))
 
 
-@app.on_event("startup")
-def warm():
-    threading.Thread(target=engine.city, daemon=True).start()
-
-
-@app.get("/")
+@app.api_route("/", methods=["GET", "HEAD"])
 def index():
     return FileResponse(os.path.join(ROOT, "static", "index.html"), headers={"Cache-Control": "no-cache"})
+
+
+@app.get("/robots.txt")
+def robots():
+    return PlainTextResponse(f"User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: {SITE}/sitemap.xml\n")
+
+
+@app.get("/sitemap.xml")
+def sitemap():
+    xml = (f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+           f"<url><loc>{SITE}/</loc></url><url><loc>{SITE}/llms.txt</loc></url></urlset>\n")
+    return Response(xml, media_type="application/xml")
+
+
+@app.get("/favicon.ico")
+def favicon():
+    return FileResponse(os.path.join(ROOT, "static", "favicon.svg"), media_type="image/svg+xml",
+                        headers={"Cache-Control": "public, max-age=86400"})
 
 
 @app.get("/llms.txt")
@@ -151,7 +245,8 @@ def golden_list():
     folder, redacted = _saved()
     for name in sorted(os.listdir(folder)) if os.path.isdir(folder) else []:
         if name.endswith(".json"):
-            g = json.load(open(os.path.join(folder, name)))
+            with open(os.path.join(folder, name)) as f:
+                g = json.load(f)
             out.append({"id": name[:-5], "title": g["title"], "request": g["request"], "recorded": g["recorded"],
                         "order": g.get("order", 99)})
     return {"runs": sorted(out, key=lambda r: (r["order"], "goal" not in r["request"], r["id"])), "redacted": redacted}
@@ -164,7 +259,8 @@ def golden_hash(run_id: str):
     path = os.path.join(GOLDEN, os.path.basename(run_id) + ".json")
     if not os.path.exists(path):
         raise HTTPException(404, "no such saved run")
-    return {"run": run_id, "sha256": hashlib.sha256(open(path, "rb").read()).hexdigest()}
+    with open(path, "rb") as f:
+        return {"run": run_id, "sha256": hashlib.sha256(f.read()).hexdigest()}
 
 
 @app.get("/api/golden/{run_id}")
@@ -172,7 +268,8 @@ async def golden(run_id: str):
     path = os.path.join(_saved()[0], os.path.basename(run_id) + ".json")
     if not os.path.exists(path):
         raise HTTPException(404, "no such saved run")
-    g = json.load(open(path))
+    with open(path) as f:
+        g = json.load(f)
 
     async def replay():
         last = None
@@ -214,6 +311,7 @@ def scene_lookup(req: SceneRequest, request: Request):
 def around_lookup(concept: str, lat: float, lon: float, request: Request):
     if concept not in engine.CONCEPTS or not (40.45 <= lat <= 40.95 and -74.3 <= lon <= -73.65):
         raise HTTPException(422, "give a tested cuisine and a point in New York City")
+    lat, lon = round(lat, 3), round(lon, 3)  # about 100 m: nearby requests share one cached Qloo lookup
     return _lookup(request, lambda: around.for_point(concept, lat, lon))
 
 
@@ -222,8 +320,8 @@ async def run(req: RunRequest, request: Request):
     reason = _admit(_visitor(request))
     if reason:
         return JSONResponse({"error": reason}, status_code=429)
-    loop, queue = asyncio.get_running_loop(), asyncio.Queue()
-    emit = lambda e: loop.call_soon_threadsafe(queue.put_nowait, e)
+    loop, queue, gone = asyncio.get_running_loop(), asyncio.Queue(), threading.Event()
+    emit = _emitter(loop, queue, gone)
 
     def work():
         if not _slots.acquire(timeout=60):
@@ -234,18 +332,13 @@ async def run(req: RunRequest, request: Request):
             spent = agent.run(req.model_dump(exclude_none=True), emit)
             with _lock:
                 _spend["credits"] += spent
+        except Cancelled:
+            pass
         finally:
             _slots.release()
             emit(None)
     threading.Thread(target=work, daemon=True).start()
-
-    async def stream():
-        while True:
-            e = await queue.get()
-            if e is None:
-                break
-            yield {"data": json.dumps(e)}
-    return EventSourceResponse(stream())
+    return EventSourceResponse(_drain(queue, gone))
 
 
 @app.post("/api/ask")
@@ -255,27 +348,25 @@ async def ask(req: AskRequest, request: Request):
     reason = _admit(_visitor(request), "question", ASKS_PER_HOUR)
     if reason:
         return JSONResponse({"error": reason}, status_code=429)
-    loop, queue = asyncio.get_running_loop(), asyncio.Queue()
-    emit = lambda e: loop.call_soon_threadsafe(queue.put_nowait, e)
+    loop, queue, gone = asyncio.get_running_loop(), asyncio.Queue(), threading.Event()
+    emit = _emitter(loop, queue, gone)
+    history = [t.model_dump() for t in req.history]
 
     def work():
+        if not _ask_slots.acquire(timeout=30):
+            emit({"type": "error", "message": "The agent is busy with other questions; please ask again shortly."})
+            emit(None)
+            return
         try:
-            spent = followup.ask(req.question, req.context, req.history, emit)
+            spent = followup.ask(req.question, req.context, history, emit)
             with _lock:
                 _spend["credits"] += spent
+        except Cancelled:
+            pass
         except Exception as e:
-            msg = str(e)
-            if llm.out_of_budget(msg):
-                msg = "the language model is out of budget or busy right now; the saved answers still work"
-            emit({"type": "error", "message": f"The agent could not answer: {msg[:200]}"})
+            emit({"type": "error", "message": f"The agent could not answer: {_friendly(e)}"})
         finally:
+            _ask_slots.release()
             emit(None)
     threading.Thread(target=work, daemon=True).start()
-
-    async def stream():
-        while True:
-            e = await queue.get()
-            if e is None:
-                break
-            yield {"data": json.dumps(e)}
-    return EventSourceResponse(stream())
+    return EventSourceResponse(_drain(queue, gone))

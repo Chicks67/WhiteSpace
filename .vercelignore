@@ -1,5 +1,7 @@
 # Files never uploaded to Vercel. The Vercel CLI reads this file, not .gitignore.
-# data/ IS uploaded on purpose: the app needs the public city data at runtime (only /tmp is writable on Vercel).
+# Uploaded on purpose (private server storage, never in git): data/ (public city data the app reads at runtime),
+# golden/ (full saved runs, so replays show the real brief) and qloo_warm/ (warm Qloo cache, built by warm_cache.py).
+# Qloo allows private server-side caching; only the public repo must stay free of Qloo data.
 
 # Secrets
 .env
@@ -10,7 +12,6 @@
 
 # Private Qloo responses and anything derived from them
 cache/
-golden/
 eval_runs/
 research_notes/
 reports/

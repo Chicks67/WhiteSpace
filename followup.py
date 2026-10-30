@@ -8,6 +8,8 @@ import json
 import re
 import time
 
+import around
+import backtest10 as b10
 import census
 import engine
 import partners
@@ -17,6 +19,8 @@ import positioning
 import storefronts
 import transit
 import bids
+import scene
+import test9_dev as t9
 
 MAX_CALLS = 6
 KIE = "https://api.kie.ai/codex/v1/responses"
@@ -28,7 +32,9 @@ INSTRUCTIONS = (
     "rank_in_this_set compares only the leases in one result, so compare leases from different results or areas "
     "with lease_score_percentile_nyc (share of NYC restaurant blocks scoring lower for this cuisine); Qloo describes an area's audience and is never evidence of where to open; if the tools cannot "
     "answer, say so plainly. For who lives or works somewhere use neighbourhood_profile (census), never Qloo; for "
-    "partners or cross-promotion use local_partners. Keep answers short (under 150 words), plain text, no markdown tables. "
+    "partners or cross-promotion use local_partners. For when a specific place or nearby competitors close, or what their "
+    "reviewers mention, use place_hours or competitor_hours (Qloo place records) and never state opening hours from "
+    "memory; if Qloo has no hours for a place, say so. Keep answers short (under 150 words), plain text, no markdown tables. "
     "Cuisines we tested: " + ", ".join(engine.CONCEPTS) + "."
 )
 
@@ -75,6 +81,13 @@ TOOLS = [
         {"name": S}, ["name"]),
     _fn("lookup_business", "Check whether a named business appears in NYC inspection records near an address "
         "(within 2 km) or elsewhere in NYC.",
+        {"name": S, "near_address": S}, ["name", "near_address"]),
+    _fn("competitor_hours", "Qloo place records for same-cuisine competitors near an address: Friday closing time and "
+        "what reviewers mention, for the competitors Qloo holds (city inspection records define who the competitors "
+        "are). Use for late-night or hours questions about the competition.",
+        {"cuisine": CUISINE, "address": S}, ["cuisine", "address"]),
+    _fn("place_hours", "Qloo's opening hours and review mentions for one named NYC place near an address (the place "
+        "must match by name within 2 km). Use whenever the founder asks when a real place opens or closes.",
         {"name": S, "near_address": S}, ["name", "near_address"]),
     _fn("test_results", "Our pre-registered test results: how leases are ranked, whether Qloo taste predicts "
         "openings, where supply data comes from, how the brief uses Qloo. Give a cuisine to also get that "
@@ -170,6 +183,31 @@ def run_tool(name, args):
         label, _, lat, lon, _ = _point(args["near_address"])
         where, hit = positioning.city_lookup(args["name"], lat, lon)
         return {"name": args["name"], "found": where or "not found in NYC inspection records", **({"match": hit} if hit else {})}
+    if name == "competitor_hours":
+        label, _, lat, lon, _ = _point(args["address"])
+        a = around.for_point(args["cuisine"], lat, lon)
+        return {"address": label, "competitors_in_city_records_within_1500m": a["competitors_in_city_records"],
+                "nearest": [{"name": c["name"], "metres": c["metres"],
+                             **({"qloo_closes_friday": c["qloo"]["closes_friday"], "reviewers_mention": c["qloo"]["mentions"]}
+                                if c["qloo"] else {"qloo": "no record"})} for c in a["competitors"]],
+                "latest_friday_close_among_those_with_hours": a["among_details"]["latest_friday_close"],
+                "source": "Qloo place records (Friday closing times matched Google Maps for 29 of 30 places in our Test 12); "
+                          "Qloo holds only some competitors, so never claim no competitor is open late"}
+    if name == "place_hours":
+        label, _, lat, lon, _ = _point(args["near_address"])
+        hits = [h for h in scene.search(args["name"], lat, lon, take=8, radius_km=2)
+                if b10.same_name(h.get("name", ""), args["name"])]
+        hit = min(hits, key=lambda h: engine.metres(lat, lon, float(h["location"]["lat"]), float(h["location"]["lon"])), default=None)
+        if not hit:
+            return {"name": args["name"], "error": f"Qloo has no place named {args['name']!r} within 2 km of {label}"}
+        p = hit.get("properties") or {}
+        days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+        return {"name": hit["name"], "address": p.get("address"),
+                "closes": {d: t9.closes(p, d) or "listed as closed (Qloo's closed entries were not reliable in our Test 22)"
+                           for d in days if (p.get("hours") or {}).get(d)},
+                "reviewers_mention": [k["name"] for k in p.get("keywords") or [] if k.get("name", "").lower() not in t9.JUNK][:6],
+                "source": "Qloo place record; Friday closing times were checked against Google Maps (29 of 30 matched), "
+                          "other days were not checked; a day missing here means Qloo has no hours for it"}
     if name == "test_results":
         p = evidence.panel()
         e = next(x for x in p["entries"] if x["id"] == args["topic"])
@@ -200,6 +238,11 @@ def _numbers(s):
     return {_canon(x) for x in re.findall(r"\d+(?:\.\d+)?", s.replace(",", ""))}
 
 
+def _clock(s):
+    """12-hour forms of the HH:MM times in s, so "10 p.m." in an answer matches "22:00" in a tool result."""
+    return {str(int(h) % 12 or 12) for h in re.findall(r"\b([01]?\d|2[0-3]):[0-5]\d\b", s)}
+
+
 def ask(question, context, history, emit):
     """context: compact JSON of the current run; history: [{"q":..., "a":...}] of earlier follow-ups."""
     inp = [{"role": "user", "content": "Run context:\n" + json.dumps(context)}]
@@ -221,7 +264,7 @@ def ask(question, context, history, emit):
                     raise llm.LLMError("the model returned no answer")
                 inp.append({"role": "user", "content": "Please answer the question now in plain text."})
                 continue
-            loose = sorted(_numbers(answer) - _numbers(seen) - _numbers(question), key=float)
+            loose = sorted(_numbers(answer) - _numbers(seen) - _clock(seen) - _numbers(question), key=float)
             emit({"type": "answer", "text": answer, "unchecked_numbers": loose, "tool_calls": calls,
                   "credits": round(credits, 2)})
             return credits
@@ -269,6 +312,12 @@ def _summary(name, out):
         return f"{out['name']}: {out['found']}"
     if name == "foot_traffic":
         return f"{out['subway_entries_within_500m']} weekday subway entries within 500 m of {out['address']}"
+    if name == "competitor_hours":
+        n = sum(1 for c in out["nearest"] if "qloo_closes_friday" in c)
+        return f"Qloo details for {n} of {len(out['nearest'])} nearest competitors; latest Friday close " + \
+               (out["latest_friday_close_among_those_with_hours"] or "unknown")
+    if name == "place_hours":
+        return f"{out['name']}: closes Friday {out['closes'].get('friday') or 'unknown'} (Qloo)"
     if name == "test_results":
         return out["title"]
     return ""

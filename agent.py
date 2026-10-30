@@ -225,7 +225,7 @@ def run(req, emit):
 
         leases = r.step("rank", "Rank leases on city inspection records",
                         lambda: (lambda L: (L, f"{len(L)} leases scored"))(
-                            engine.rank(cuisine, req["leases"], keep_order=bool(req.get("goal")))))
+                            engine.rank(cuisine, req["leases"], keep_order=bool(req.get("goal")) and not req.get("leases"))))
         for l in leases:
             l["subway"] = transit.near(l["lat"], l["lon"])
             l["bid"] = bids.bid_for(l["lat"], l["lon"])
@@ -308,13 +308,17 @@ def run(req, emit):
         emit({"type": "done", "credits": round(r.credits, 2), "provider": llm.PROVIDER,
               **({"usd": round(r.credits * 0.0142, 2)} if llm.PROVIDER == "comet" else {})})
     except Exception as e:
+        if type(e).__name__ == "Cancelled":  # the visitor left: stop quietly
+            raise
         msg = str(e)
-        detail = msg[:300]
         if llm.busy(msg):
             msg = "The language model is busy with other runs right now. Please try again in a minute; the saved runs work meanwhile."
         elif llm.out_of_budget(msg):
             msg = "Live runs are paused right now (the language model's budget for the demo is used up). The saved runs still work."
-        emit({"type": "error", "message": msg[:300], "detail": detail})
+        elif not (isinstance(e, (engine.LeaseError, qloo.QuotaLow)) or type(e) is ValueError):
+            print("run failed:", repr(e)[:500], flush=True)  # details stay in the server log
+            msg = "The run hit an error on our side. Please try again, or replay a saved run."
+        emit({"type": "error", "message": msg[:300]})
     finally:
         qloo.set_trace(None)
     return r.credits

@@ -8,6 +8,7 @@ Every claim the product makes about a data source rests on a pre-registered test
 
 - [Home and scout form](/): describe a plan, search an area, or compare two to five addresses
 - [Saved runs](/#saved): recorded live runs that replay instantly with no API calls
+- [Why Qloo](/#why): the model alone against the model with Qloo, from pre-registered tests
 - [How it works](/#how): the six steps of every run and what each source does
 - [Scene explorer](/#scene): name up to three places; Qloo returns where their fans also go
 - [How we know](/#evidence): every test, its result and its caveat
@@ -26,11 +27,12 @@ Every claim the product makes about a data source rests on a pre-registered test
 
 ## Key results
 
-- Lease score (restaurants in the block plus same-cuisine supply) found where a cuisine opened next at median AUC 0.851 across 25 cuisines.
-- Asked when a real NYC restaurant closes on Friday, models were right for 0 and 3 of 30 places alone and 29 of 30 with Qloo's record.
-- Qloo's Friday closing times matched Google Maps for 29 of 30 places.
-- A festival timetable built on Qloo's fan-overlap scores put far fewer real shared fans in conflict than a random one (0.663 of the possible gain).
-- The lease score shows where operators open, not where restaurants survive. There is no rent data. Staten Island is not covered.
+- Asked when 30 real NYC restaurants close on Friday, GPT-6 Astra alone was right 0 times and Gemini 3.8 Flash 3 times; with Qloo's place record both were right 29 times (Test 20).
+- Qloo's Friday closing times matched Google Maps for 29 of 30 places, checked by a person (Test 12).
+- For 40 real listeners, Qloo ranked the small artists each one plays at AUC 0.841, against 0.516 for popularity (Test 27).
+- A festival timetable built on Qloo's fan-overlap scores reached 0.663 of the possible cut in fan clashes, against 0.043 for popularity (Test 28).
+- The lease score (restaurants in the block plus same-cuisine supply) found where a cuisine opened next at median AUC 0.851 across 25 cuisines. It shows where operators open, not where restaurants survive. There is no rent data. Staten Island is not covered.
+- The follow-up agent has twelve tools, including competitor_hours and place_hours, which answer hours questions from Qloo's place records; it never states opening hours from memory.
 
 ## Optional
 

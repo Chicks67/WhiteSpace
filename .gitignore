@@ -70,6 +70,8 @@ data/snapshots/
 cache/
 # Full recorded runs replayed by the live site (redacted copies are in fixtures/replays)
 golden/
+# Private warm Qloo cache shipped with the server deployment (built by warm_cache.py)
+qloo_warm/
 eval_runs/
 research_notes/
 reports/

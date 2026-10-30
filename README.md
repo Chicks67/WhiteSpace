@@ -1,17 +1,18 @@
 # Whitespace
 
-**A site-selection agent for independent restaurant founders in New York City.** Describe your concept and your
-customers; Whitespace finds vacant storefronts, ranks them on city records, weighs each one against the competition
-around it, and writes a positioning brief for the top pick. Every step, every data call and every claim is shown, and
-every claim about a data source rests on a test that was written down before its result existed.
+**A site-selection agent for independent restaurant founders in New York City, grounded in Qloo's record of real
+places.** Describe your concept and your customers. Whitespace scouts vacant storefronts, ranks them on city records,
+then sizes up every rival around the top pick with Qloo: when each one closes on Friday, what its reviewers rave
+about, and where its fans also go. It writes a positioning brief and answers follow-up questions with the same tools.
 
-Built for the Qloo Agentic Hackathon 2026. MIT licence.
+**Live demo:** <https://whitespace-nyc.vercel.app> · **For language models:** <https://whitespace-nyc.vercel.app/llms.txt>
+· Built for the Qloo Agentic Hackathon 2026 · MIT licence
 
 ---
 
 ## Contents
 
-1. [The short version](#the-short-version)
+1. [Why Qloo](#why-qloo)
 2. [What the agent does](#what-the-agent-does)
 3. [Quick start](#quick-start)
 4. [Configuration](#configuration)
@@ -31,25 +32,33 @@ Built for the Qloo Agentic Hackathon 2026. MIT licence.
 
 ---
 
-## The short version
+## Why Qloo
 
-We set out to use Qloo's taste data to find where a cuisine is wanted and missing. Our first tests said that idea was
-wrong, so we kept testing. Every claim this product makes about a data source rests on a test whose rules were written
-and committed before its results existed. Most of those tests went against Qloo, and they are all here, in order.
+A language model can reason about a neighbourhood. It cannot know when the restaurant down the block closes tonight,
+what its regulars order, or which other places its fans love. Qloo can, and we measured that before building on it.
+Every number below comes from a test whose rules were committed before its result existed.
 
-What each source does in the product today:
+| What the agent needs to know | Without Qloo | With Qloo | Test |
+|---|---|---|---|
+| When a real NYC restaurant closes on Friday (30 places, checked against Google Maps) | GPT-6 Astra: **0 of 30** (declined every time). Gemini 3.8 Flash: **3 of 30**, with 6 confident wrong times | **29 of 30** for both models | 20 |
+| Are Qloo's closing times right? (checked by a person on Google Maps) | | **29 of 30** within 30 minutes | 12 |
+| Which small artists a real listener plays (40 Last.fm listeners) | Ranking by popularity: AUC **0.516** | Qloo's taste graph: AUC **0.841** | 27 |
+| A festival timetable that keeps shared fans apart (10 bills, real listening data) | Built on popularity: **0.043** of the possible gain | Built on Qloo's fan overlap: **0.663** | 28 |
+| Which act really opened for a headliner | Fame: AUC **0.473**, genre: **0.714** | Qloo: AUC **0.875** | 15 |
 
-| Job | Source | Why |
-|---|---|---|
-| **Where to open** | NYC Health Department inspection records and the NYC Storefront Registry | Adding Qloo to the lease score changed nothing (Test 4). |
-| **Who lives and works nearby** | Census and LODES jobs data | Only 2 of 7 Qloo audience tags matched it (Test 6). |
-| **Who the competitors are** | City inspection records | Qloo's own list held 37% of them (Test 10). |
-| **When competitors close, what reviewers mention** | Qloo place records, for the places Qloo holds | City records have none of this. Friday closing times matched Google Maps for 29 of 30 places. Price levels matched for 17 of 27, under our bar, so they are not shown (Test 12). |
-| **A model answering about a real place** | Qloo plus a model | Asked when a named restaurant closes on Friday, two models were right for 0 and 3 of 30 places alone, and 29 of 30 with Qloo's record (Test 20). |
-| **Where else a restaurant's fans go** | Qloo entity affinity | Shown as Qloo's list and labelled "not validated" (Test 11). |
+So Qloo sits where a model is blind: every fact about a specific real place. In the product:
 
-On taste questions (tour openers, tour cities, films, small artists, theme nights, festival clashes) a strong model
-alone did as well as or better than Qloo, or than itself with Qloo (Tests 14 to 18, 21, 24 to 28).
+| Job | Source |
+|---|---|
+| **When rivals close, what their reviewers mention** | Qloo place records, for every competitor Qloo holds, shown on a Friday closing-time timeline |
+| **Hours of any place the founder asks about** | Qloo, through the agent's `place_hours` and `competitor_hours` tools; the agent never states hours from memory |
+| **Where else a restaurant's fans go, and the music and brands they follow** | Qloo entity affinity (scene explorer) |
+| **The brief's local evidence** | Qloo, against a 10-area NYC baseline so only what is distinctive about the area is used |
+| **Where to open** | NYC Health Department inspection records and the NYC Storefront Registry (lease score, Test 4) |
+| **Who lives and works nearby** | Census and LODES jobs data |
+
+All 28 tests, including the ones where Qloo did not help, are listed under [What we tested](#what-we-tested), and the
+reasoning behind every decision is in `PROJECT_LOG.md`.
 
 ---
 
@@ -67,18 +76,18 @@ alone did as well as or better than Qloo, or than itself with Qloo (Tests 14 to 
    - **My addresses**: two to five addresses the founder already has.
 3. **Ranks the storefronts** on city records (the Test 4 lease score: restaurants in the block plus same-cuisine supply
    in and around it).
-4. **Writes a positioning brief** for the top pick, streamed to the page, then checks it in code. Every named business
-   is traced to Qloo, to NYC inspection records near the address, to a business improvement district, or marked
-   unverified. Lines naming a business no source backs up are rewritten or removed.
-5. **Lists local partners and next steps** from city data, with a source link on each.
-6. **Answers follow-up questions** with tools. Numbers in an answer that appear in no tool result are flagged.
+4. **Writes a positioning brief** for the top pick from Qloo's evidence for the area, streamed to the page, then checks
+   it in code. Every named business is traced to Qloo, to NYC inspection records near the address, to a business
+   improvement district, or marked unverified. Lines naming a business no source backs up are rewritten or removed.
+5. **Sizes up the competition with Qloo** as soon as the run finishes: the nearest competitors from city records, each
+   with Qloo's Friday closing time and what its reviewers mention, on a closing-time timeline; places Qloo tags with
+   the cuisine that the city files elsewhere; and the neighbours fans of the cuisine rate highest.
+6. **Lists local partners and next steps** from city data, with a source link on each.
+7. **Answers follow-up questions** with twelve tools, including two Qloo tools for hours (`competitor_hours`,
+   `place_hours`). Numbers in an answer that appear in no tool result are flagged.
 
-Two lookups on the page make no model call:
-
-- **What is around the top pick**: competitors from city records, with Qloo's Friday closing time and review mentions
-  where a place matches.
-- **Where else do their fans go** (scene explorer): name up to three places and see the places Qloo says their fans
-  also go, and the music and brands that crowd follows.
+The scene explorer works on its own: name up to three places your customers love and see the places Qloo says their
+fans also go, and the music and brands that crowd follows. No model is involved.
 
 Coverage: Brooklyn, Queens, Manhattan and the Bronx. Staten Island is not covered.
 
@@ -271,13 +280,15 @@ Follow-ups stream `tool` and `answer` events; `answer` carries `unchecked_number
 | Place in the product | Qloo endpoint use | Shown as |
 |---|---|---|
 | Brief evidence (`positioning.py`) | Insights for places and tags near the lease, against a 10-area NYC baseline for distinctiveness | Highlighted names in the brief, and the "Qloo evidence given to the model" list |
-| What is around the top pick (`around.py`) | Place records for city-record competitors: Friday closing time, review keywords | Pink details beside each competitor |
+| What is around the top pick (`around.py`) | Place records for city-record competitors: Friday closing time, review keywords; places tagged with the cuisine; neighbours fans of the cuisine rate highest | Runs automatically when a run finishes: a Friday closing-time timeline and pink details beside each competitor |
 | Scene explorer (`scene.py`) | Entity search, then places, artists and brands with affinity to 1 to 3 named places | "Where else do their fans go", labelled not validated |
 | Ranking toggle (`engine.taste`) | Cuisine heatmaps by borough (Test 1's signal) | "Qloo taste" order, labelled "not used: weaker in our test" |
-| Follow-up tools (`followup.py`) | Area profiles and business lookups | Each tool call in the thread |
+| Follow-up tools (`followup.py`) | `competitor_hours` (Friday closing times and review mentions of nearby competitors), `place_hours` (any named place's hours, matched by name within 2 km), `area_profile` | Each tool call in the thread; the agent is told never to state hours from memory |
 
 Every Qloo call goes through `qloo.py`, is cached on disk, counts against the monthly reserve and appears in the run's
-trace.
+trace. Responses every server needs (the 10 reference areas, the 25 cuisine heatmaps, the saved runs' top picks) are
+also kept in a private, read-only warm cache, `qloo_warm/`, built by `python warm_cache.py` and shipped only inside
+the server deployment, so a fresh server instance spends no quota on them.
 
 ### Deployment layout
 
@@ -285,8 +296,8 @@ trace.
 |---|---|---|
 | Runtime | One Python function running the FastAPI app (`vercel.json`: framework `fastapi`) | One always-on web service |
 | City data | Uploaded with the deployment (`data/`, minus research datasets; see `.vercelignore`) | Downloaded by `build_data.py` at build time |
-| Qloo cache | `/tmp/qloo-cache`, per instance, cleared on cold start | Private persistent disk `/var/data/qloo-cache` |
-| Saved runs | Public redacted copies (`fixtures/replays`) | Full runs on the private disk (`/var/data/golden`) |
+| Qloo cache | Read-only `qloo_warm/` shipped with the deployment, plus `/tmp/qloo-cache` per instance | Private persistent disk `/var/data/qloo-cache` |
+| Saved runs | Full runs (`golden/`) shipped inside the private deployment, never in git | Full runs on the private disk (`/var/data/golden`) |
 | Rate limits and daily budget | In memory, per instance | In memory, one process |
 
 ---
@@ -299,14 +310,20 @@ trace.
 - **Dark and light modes.** Dark is the default; the round button in the nav switches to light and the choice is
   remembered in the browser. The saved choice is applied and the background painted before the stylesheets load, so
   the page never flashes the wrong colour. Printing (the "founder report" button) always uses the light palette.
-- **Sections:** the scout form, saved runs, a run's results (ranking, partners, what is around, brief, next steps,
+- **Sections:** the scout form, saved runs, "Why Qloo" (model alone against model with Qloo, from Tests 12, 20, 27
+  and 28), a run's results (ranking, partners, what is around with the Friday closing-time timeline, brief, next steps,
   follow-ups) with the map and agent trace beside them, how it works, the scene explorer, and the audit ("How we know")
   with the evidence chart and every test.
-- **Rendering:** scripts are deferred; the map draws its many restaurant dots on one canvas; the audit section, the
+- **Sharing:** Open Graph and Twitter tags with a 1200x630 image (`static/og.png`), a canonical link, `robots.txt`,
+  `sitemap.xml`, an SVG favicon and an Apple touch icon.
+- **Rendering:** scripts are deferred; the map's stylesheet loads without blocking the first paint; versioned assets
+  (`?v=`) are cached for a year; the map draws its many restaurant dots on one canvas; the audit section, the
   heaviest part of the page, is skipped by the browser until it nears the viewport (`content-visibility`); motion is
   turned off for visitors who ask for reduced motion.
-- **Accessibility:** skip link, labelled controls, keyboard support for the ranking (Enter focuses a lease on the
-  map), a table view of the chart, and `aria-live` updates for the run.
+- **Accessibility:** a skip link to the form, labelled controls, arrow keys in the option groups, keyboard support
+  for the ranking (Enter or Space focuses a lease on the map), a table view of the chart, and a status line that
+  announces milestones ("Shortlist ready", "Brief written", "Run finished") instead of every streamed word. Text meets
+  4.5:1 contrast in both themes.
 
 ---
 
@@ -316,6 +333,7 @@ trace.
 |---|---|
 | `GET /` | The page. |
 | `GET /llms.txt` | A plain-text guide to the site for language models. |
+| `GET /robots.txt`, `GET /sitemap.xml`, `GET /favicon.ico` | For search engines and browsers. |
 | `GET /health` | `{ok, spend_today, cap, live}`. `live` says whether this server has the keys for a live run. |
 | `GET /api/stats` | Counts behind the header: active restaurants, vacant storefronts, neighbourhoods, cuisines. |
 | `GET /api/concepts` | The 25 tested cuisines. |
@@ -372,6 +390,7 @@ Rebuild the public copies after any re-record: `python redact_replays.py`.
 | `evidence.py` | The "How we know" panel, read from the committed results files. |
 | `nyc.py`, `storefronts.py`, `census.py`, `transit.py`, `bids.py`, `partners.py`, `next_steps.py` | City data: inspections and neighbourhoods, vacant storefronts, census and jobs, subway ridership, business improvement districts, local partners, next steps. |
 | `build_data.py` | Build step: downloads city data and warms the Qloo cache. |
+| `warm_cache.py` | Copies the Qloo responses every server needs into the private `qloo_warm/` before a deploy. |
 | `lease_model.json` | Fitted lease score coefficients and percentiles. |
 | `static/` | The page, plus `llms.txt` (served at `/llms.txt`). |
 | `fixtures/replays/` | Public, redacted saved runs and their hashes. |
@@ -400,12 +419,13 @@ Rebuild the public copies after any re-record: `python redact_replays.py`.
 | `SPEC.md` | The product spec. |
 | `HANDOFF.md` | Context from the first build conversation: how the team works, decisions, things tried and rejected. |
 | `CLAUDE.md` | Working notes and rules for coding agents. |
+| `SUBMISSION.md` | The hackathon submission text: what the project does and what makes it Qloo-powered. |
 | `LICENSE` | MIT. |
 
 ### Git-ignored, local only
 
-`.env` (keys), `data/` (city data, rebuilt by `build_data.py`), `cache/` (Qloo responses), `golden/` (full saved
-runs), `eval_runs/`, `research_notes/`, per-test detail and state files, logs and `.venv/`. See `.gitignore`.
+`.env` (keys), `data/` (city data, rebuilt by `build_data.py`), `cache/` (Qloo responses), `qloo_warm/` (warm
+cache, rebuilt by `warm_cache.py`), `golden/` (full saved runs), `eval_runs/`, `research_notes/`, per-test detail and state files, logs and `.venv/`. See `.gitignore`.
 
 ---
 
@@ -483,15 +503,20 @@ Live at **<https://whitespace-nyc.vercel.app>** (project `whitespace-nyc`). `llm
 
 ```bash
 vercel link --project whitespace-nyc          # once
+python build_data.py                           # city data into data/ (once)
+python warm_cache.py                           # private warm Qloo cache into qloo_warm/ (after any change to saved runs)
 vercel deploy                                  # preview
 vercel deploy --prod                           # production
 ```
 
 - `vercel.json` sets the framework to FastAPI; Vercel finds `app` in `app.py` and installs `requirements.txt`.
-- `.vercelignore` decides what is uploaded. It keeps out `.env`, the Qloo cache, full saved runs, per-test detail files,
-  logs, the virtual environment and research datasets. It keeps `data/`, because the app reads the city data at
-  runtime and only `/tmp` is writable on Vercel. Build `data/` locally with `python build_data.py` before deploying.
-- On Vercel, `qloo.py` caches Qloo responses in `/tmp/qloo-cache` (set `QLOO_CACHE_DIR` to change it).
+- `.vercelignore` decides what is uploaded. It keeps out `.env`, the full local Qloo cache, per-test detail files,
+  logs, the virtual environment and research datasets. It uploads, on purpose, three git-ignored folders the server
+  reads at runtime: `data/` (public city data), `golden/` (full saved runs, so replays show the real brief) and
+  `qloo_warm/` (the warm Qloo cache). The deployment is private server storage, which Qloo allows; none of the three
+  is in the public repository, and none is served as a file.
+- On Vercel, `qloo.py` reads `qloo_warm/` first and caches new responses in `/tmp/qloo-cache` (set `QLOO_CACHE_DIR`
+  to change it).
 - **Turning on live runs:** add the keys as encrypted environment variables, then redeploy:
 
   ```bash
@@ -531,8 +556,18 @@ The `starter` plan keeps the service awake; free plans sleep when idle. Health c
   keys are present.
 - **Spend is capped.** Live runs are rate limited per visitor, capped by a daily model budget, limited in concurrency,
   and Qloo calls stop at a monthly reserve.
-- **Input is bounded.** Request bodies are validated with Pydantic (lengths, counts, a point inside NYC for lookups),
-  and the follow-up context is capped at 20,000 characters.
+- **Input is bounded.** Request bodies are validated with Pydantic (lengths, counts, one search mode per run, a point
+  inside NYC for lookups). Follow-ups accept at most 4 earlier turns of 300 and 2,000 characters, and the run context
+  is capped at 20,000 characters, so one question cannot carry a huge prompt.
+- **Work stops when the visitor leaves.** If the page closes mid-run, the server stops the run at its next step
+  instead of spending on it. Follow-up questions have their own concurrency cap.
+- **Errors stay on the server.** Visitors see messages written for them; provider and internal errors are logged on
+  the server and shown as a plain line.
+- **Headers.** Every response carries a Content-Security-Policy (scripts only from this site and cdnjs, no framing),
+  `X-Content-Type-Options: nosniff`, a referrer policy and a permissions policy; HTTPS is enforced by Vercel. The API
+  explorer (`/docs`) is turned off.
+- **Rate limits use the address Vercel reports** (`x-vercel-forwarded-for`), which a visitor cannot set; IPv6 visitors
+  are grouped by network. Limits are kept per server instance.
 - **Before every commit**, scan the diff for keys. If a key is ever committed, rotate it at the provider straight
   away; removing it from history is not enough.
 

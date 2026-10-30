@@ -5,7 +5,8 @@ const DEFAULT_LEASES = ["136-20 38th Ave, Queens", "41-08 Bell Blvd, Queens", "3
 const HEADINGS = ["Audience", "Brand voice", "Menu emphasis", "Music and decor", "Launch partners"];
 
 const state = { leases: [], taste: [], mode: "city", panel: null, map: null, layers: null, running: false, calls: [],
-  where: "goal", events: [], history: [], scout: null, live: true, redacted: false, abort: null, pins: new Map() };
+  where: "goal", events: [], history: [], scout: null, live: true, redacted: false, abort: null, pins: new Map(),
+  runId: 0 };   // runId changes on every new run, so late answers from an earlier run are dropped
 const EXAMPLES = [
   { concept: "Korean cafe", goal: "College students on a budget, anywhere in Manhattan or Brooklyn. I'd rather not open next to lots of other Korean places." },
   { concept: "Pizzeria", goal: "Families with young children in Queens. A block with other restaurants and a subway stop nearby." },
@@ -38,6 +39,12 @@ const TESTS = [
   ["20", "Asked when a real NYC restaurant closes on Friday, is a model right more often with Qloo's record than alone?", "Yes, for both models. GPT-6 Astra: 0 of 30 alone, 29 of 30 with Qloo. gemini-3.8-flash: 3 of 30 alone, 29 of 30 with Qloo."],
   ["21", "Is Qloo ahead of the model on lesser-known headliners?", "No: Qloo's AUC minus the model's was -0.098 (-0.224 to -0.009). That half still had Qloo popularity 0.72 to 0.99, so obscure acts are untested."],
   ["22", "Screen: do model-written NYC plans send people to places that are shut, and does Qloo hold hours for enough of the stops to check them?", "Qloo held hours for 0.992 of the stops and flagged a stop in 0.567 of plans, but many flags looked like bad 'closed' records. The check by a person was not run and the idea was dropped."],
+  ["23", "Does Qloo know which comedians share a crowd?", "Not shown on famous package tours: a pair who toured together outscored one who did not 0.612 of the time (0.464 to 0.797). Too few current comedy bills on Ticketmaster to test the rest."],
+  ["24", "Do older acts that young people took up (TikTok trend lists) show a younger crowd in Qloo?", "Not shown: the trended act had the youngest score of three 0.346 of the time (chance 0.333). Model alone 0.663; with Qloo's age scores 0.558, no different."],
+  ["25", "Qloo on its home ground: small acts, brand-new restaurants, steadiness.", "Small acts: too few to say. 120 NYC restaurants opened after April 2026: Qloo held 55%; cuisine right 0.683 for the model alone, 0.658 with Qloo, not shown. Steadiness: model and Qloo both steady."],
+  ["26", "Do MLB theme nights that suit a city's taste draw more people? 2,425 games, 336 theme nights.", "Not shown. Spearman with attendance lift: Qloo 0.051 (-0.055 to 0.156), model alone 0.099, model with Qloo 0.08. Qloo had an affinity for only 35% of the theme nights."],
+  ["27", "On small artists (Last.fm listening data), does Qloo know a real listener's taste?", "Qloo AUC 0.841, far above popularity (0.516). Model alone 0.865, model with Qloo 0.874: no different from Qloo."],
+  ["28", "Does a festival timetable built on Qloo's fan-overlap scores make fewer real fans choose?", "Yes: it reached 0.663 of the possible gain over a random timetable (0.607 to 0.718), against 0.043 for popularity. The model alone (0.669) and with Qloo (0.702) were no different."],
 ];
 const NO_KEYS = "This server has no API keys, so live runs and lookups are off. The saved runs still work.";
 
@@ -83,34 +90,51 @@ async function stream(url, opts) {
   }
 }
 
+function announce(msg) { $("#announce").textContent = msg; }
+
 function reset() {
+  state.runId++;
   state.leases = []; state.taste = []; state.calls = []; state.events = []; state.history = []; state.scout = null;
   $("#thread").innerHTML = ""; $("#ask-panel").hidden = true; $("#repair-note").hidden = true; $("#next-panel").hidden = true;
   $("#steps").innerHTML = ""; $("#call-list").innerHTML = ""; $("#qloo-calls").hidden = true; $("#verdict").hidden = true;
-  $("#credits").textContent = ""; $("#brief-panel").hidden = true; $("#rank-list").innerHTML = "";
+  $("#credits").textContent = ""; $("#credits").classList.remove("bad"); $("#brief-panel").hidden = true; $("#rank-list").innerHTML = "";
   $("#around-panel").hidden = true; $("#around-body").innerHTML = ""; state.cuisine = null;
+  $("#around-go").textContent = "Look it up with Qloo";
   $("#partners-panel").hidden = true; $("#copy-brief").hidden = true; state.brief = null; state.drafting = false;
   $("#app").hidden = false; $("#rank-note").hidden = true; $("#rank-wait").hidden = false;
   $("#run-title").textContent = $("#concept").value.trim() || "Scouting";
   setMode("city", false);
-  ensureMap();
+  if (window.L) ensureMap();
 }
 
 async function go(url, opts) {
   if (state.running) return;
   state.running = true; state.abort = new AbortController(); showError("");
   $("#run").disabled = true; $("#run").classList.add("busy"); $("#stop").hidden = false;
-  reset();
-  startClock();
-  $("#app").scrollIntoView({ behavior: "smooth", block: "start" });
-  try { await stream(url, opts); }
+  try {
+    reset();
+    startClock();
+    $("#app").scrollIntoView({ behavior: "smooth", block: "start" });
+    announce("Run started.");
+    await stream(url, opts);
+  }
   catch (e) {
-    if (e.name === "AbortError") stopped(); else showError(e.message);
+    if (e.name === "AbortError") stopped(); else if (!$("#app").hidden) runError(e.message); else showError(e.message);
   }
   finally {
     state.running = false; state.abort = null; stopClock(); stopSlow();
     $("#run").classList.remove("busy"); $("#stop").hidden = true; setLive();
   }
+}
+
+/* An error ends the run on the page: spinners stop and the message shows beside the results, not only in the form. */
+function runError(msg) {
+  stopSlow();
+  document.querySelectorAll("#steps li.running").forEach(li => { li.className = "error"; $(".ico", li).textContent = "\u2715"; });
+  const t = $("#steps li.thinking"); if (t) t.remove();
+  showError(msg);
+  const c = $("#credits"); c.textContent = msg; c.classList.add("bad");
+  announce("The run stopped: " + msg);
 }
 
 /* Stopping ends what this page shows. A live run already sent to the server finishes there. */
@@ -163,15 +187,17 @@ function handle(e) {
   if (e.type === "scout_result") { state.scout = e.data; return renderLeases(); }
   if (e.type === "qloo") return qcall(e);
   if (e.type === "concept") { state.cuisine = e.data.cuisine; return; }
-  if (e.type === "leases") { state.leases = e.data; showAround(); return renderLeases(); }
+  if (e.type === "leases") { state.leases = e.data; showAround(); announce(`Shortlist ready: ${e.data.length} storefronts.`); return renderLeases(); }
   if (e.type === "taste") { state.taste = e.data; return renderLeases(); }
   if (e.type === "evidence") { state.evidence = e.data; return; }
-  if (e.type === "brief") return renderBrief(e.data);
+  if (e.type === "brief") { announce("Positioning brief written."); return renderBrief(e.data); }
   if (e.type === "brief_delta") return draft(e);
   if (e.type === "saved_followups") return e.data.slice().reverse().forEach(f => replayFollowup(f));
-  if (e.type === "error") { stopSlow(); showError(e.message); return; }
+  if (e.type === "error") { runError(e.message); return; }
   if (e.type === "done") {
     stopSlow();
+    announce("Run finished.");
+    if (state.live) around();
     $("#credits").textContent = e.replay ? "Saved run: replayed with no API calls."
       : e.usd != null ? `Model cost of this run: about $${e.usd.toFixed(2)}.` : `Model cost of this run: ${e.credits} Kie credits.`;
   }
@@ -326,8 +352,8 @@ function renderLeases() {
     li.innerHTML = `<span class="pos">${rankOf(l) ?? "?"}</span>
       <div><span class="addr">${esc(l.address.replace(/, NY, USA$/, ""))}</span>${l.neighbourhood ? `<span class="hood">${esc(l.neighbourhood)}</span>` : ""}</div>
       <ul class="facts">
-        <li class="lead"><b>${l.density}</b> restaurants in its block (busier than ${l.density_percentile}% of blocks)</li>
-        <li class="lead"><b>${l.same_cuisine_area}</b> same cuisine in and around the block</li>
+        <li class="lead"><b>${esc(l.density)}</b> restaurants in its block (busier than ${esc(l.density_percentile)}% of blocks)</li>
+        <li class="lead"><b>${esc(l.same_cuisine_area)}</b> same cuisine in and around the block</li>
         <li><b>${l.same_cuisine_400m.length}</b> within 400 m</li>
         <li><b>${l.openings_800m.length}</b> opened within 800 m since 2024</li>
         ${l.subway ? `<li><b>${l.subway.subway_entries_within_500m.toLocaleString()}</b> weekday subway entries within 500 m</li>` : ""}
@@ -340,9 +366,10 @@ function renderLeases() {
       ${l.bid ? `<p class="nearby">Business improvement district: <a href="${esc(/^https?:/.test(l.bid.website || "") ? l.bid.website : "https://" + (l.bid.website || ""))}" target="_blank" rel="noopener">${esc(l.bid.bid)}</a>${l.bid.phone ? ", " + esc(l.bid.phone) : ""}</p>` : ""}
       ${reasonFor(l) ? `<p class="reason">${esc(reasonFor(l))}</p>` : ""}`;
     li.tabIndex = 0;
+    li.setAttribute("role", "button");
     li.title = "Show this lease on the map";
     li.onclick = ev => { if (!ev.target.closest("a")) focusLease(l.address); };
-    li.onkeydown = ev => { if (ev.key === "Enter" && ev.target === li) focusLease(l.address); };
+    li.onkeydown = ev => { if ((ev.key === "Enter" || ev.key === " ") && ev.target === li) { ev.preventDefault(); focusLease(l.address); } };
     list.append(li);
   }
   list.classList.toggle("qmode", state.mode === "qloo");
@@ -649,7 +676,8 @@ function setWhere(w) {
 function showAsk() {
   $("#ask-panel").hidden = false;
   const top = state.leases[0], second = state.leases[1];
-  const qs = [top && "Who are the competitors within 300 m of the top lease?",
+  const qs = [top && "When do the competitors near the top lease close on Friday?",
+    top && "Who are the competitors within 300 m of the top lease?",
     second && `Why does ${second.address.split(",")[0]} rank lower?`,
     "Find vacant storefronts in a different neighbourhood and compare them",
     "Does Qloo predict where to open?"].filter(Boolean);
@@ -711,11 +739,12 @@ async function ask(q) {
   if (!q || state.asking) return;
   if (!state.live) { const li = followupItem(q, false); $(".a", li).textContent = NO_KEYS; return; }
   state.asking = true; $(".ask-btn").disabled = true;
-  const li = followupItem(q, false), tools = new Map();
+  const li = followupItem(q, false), tools = new Map(), run = state.runId;
   $(".a", li).textContent = "Thinking\u2026";
   try {
     const res = await fetch("/api/ask", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question: q, context: context(), history: state.history }) });
+      body: JSON.stringify({ question: q, context: context(),
+        history: state.history.slice(-4).map(h => ({ q: h.q.slice(0, 300), a: h.a.slice(0, 2000) })) }) });
     if (!res.ok) { let m = `Request failed (${res.status}).`; try { m = (await res.json()).error || m; } catch (_) {} throw new Error(m); }
     const reader = res.body.getReader(), dec = new TextDecoder(); let buf = "";
     for (;;) {
@@ -726,6 +755,7 @@ async function ask(q) {
         const chunk = buf.slice(0, i); buf = buf.slice(i).replace(/^\r?\n\r?\n/, "");
         const data = chunk.split(/\r?\n/).filter(l => l.startsWith("data:")).map(l => l.slice(5).trim()).join("\n");
         if (!data) continue;
+        if (run !== state.runId) return;   // a new run started: this answer belongs to the old one
         followupEvent(li, tools, JSON.parse(data), q);
       }
     }
@@ -746,25 +776,50 @@ function qfacts(q) {
   const bits = [q.closes_friday ? `closes ${esc(q.closes_friday)} Fri` : ""].filter(Boolean);
   return `<span class="qf">${bits.join(", ")}</span>${q.mentions.length ? ` <span class="men">${q.mentions.map(esc).join(", ")}</span>` : ""}`;
 }
+/* The agent's top pick: rank 1 on city records (or the scout's first), whatever order the list is showing. */
+function topLease() { return state.leases.find(l => l.rank === 1) || state.leases[0]; }
+
 function showAround() {
-  const top = state.leases[0];
+  const top = topLease();
   $("#around-panel").hidden = !(top && state.cuisine);
   if (top) $("#around-title").textContent = `What is around ${top.address.replace(/, NY, USA$/, "")}`;
 }
+
+/* Friday closing times from Qloo's place records, on one axis from noon to 4 am. */
+const hourOf = t => { const [h, m] = t.split(":").map(Number); return (h < 6 ? h + 24 : h) + m / 60; };
+function hoursChart(places) {
+  const rows = places.filter(p => p.q && p.q.closes_friday)
+    .map(p => ({ name: p.name, t: p.q.closes_friday, late: p.q.open_late_friday, h: hourOf(p.q.closes_friday) }))
+    .sort((a, b) => a.h - b.h);
+  if (!rows.length) return "";
+  const pct = h => Math.max(0, Math.min(100, (h - 12) / 16 * 100));
+  const late = rows.filter(r => r.late).length;
+  return `<h3>When they close on Friday</h3>
+    <p class="hint">${rows.length} nearby place${rows.length > 1 ? "s" : ""} with hours in Qloo; ${late ? `${late} stay${late > 1 ? "" : "s"} open past 11 pm` : "none of these stays open past 11 pm"}.
+      Qloo's Friday closing times matched Google Maps for 29 of 30 places in our Test 12.</p>
+    <div class="hours" role="img" aria-label="${esc(rows.map(r => `${r.name} closes ${r.t}`).join("; "))}">
+      <div class="hours-axis" aria-hidden="true"><span></span><span class="ticks"><span>noon</span><span>4 pm</span><span>8 pm</span><span>midnight</span><span>4 am</span></span><span></span></div>
+      ${rows.map(r => `<div class="hours-row${r.late ? " late" : ""}"><span class="nm" title="${esc(r.name)}">${esc(r.name)}</span>
+        <span class="lane"><i style="--w:${pct(r.h).toFixed(1)}%"></i></span><b>${esc(r.t)}</b></div>`).join("")}
+    </div>`;
+}
+
 async function around() {
-  const top = order()[0], body = $("#around-body"), btn = $("#around-go");
+  const top = topLease(), body = $("#around-body"), btn = $("#around-go"), run = state.runId;
   if (!top || !state.cuisine) return;
   if (!state.live) { body.innerHTML = `<p class="form-error">${esc(NO_KEYS)}</p>`; return; }
-  btn.disabled = true; body.innerHTML = `<p class="hint">Asking Qloo…</p>`;
+  btn.disabled = true; body.innerHTML = `<p class="hint">Asking Qloo\u2026</p>`;
   try {
     const a = await lookup(`/api/around?concept=${encodeURIComponent(state.cuisine)}&lat=${top.lat}&lon=${top.lon}`);
+    if (run !== state.runId) return;   // a new run started while Qloo answered
     const d = a.among_details;
     const row = (name, q, extra = "") => `<li><b>${esc(name)}</b>${extra} ${qfacts(q)}</li>`;
     body.innerHTML = `
-      <h3>${a.competitors_in_city_records} ${esc(a.concept)} restaurants within 1.5 km in city records</h3>
-      ${a.competitors.length ? `<p class="hint">The ${a.competitors.length} nearest. Qloo holds details for ${a.with_details} of them.</p>
-      <ul class="around-list">${a.competitors.map(c => row(c.name, c.qloo, ` <span class="m">${c.metres} m</span>`)).join("")}</ul>` : ""}
-      ${a.with_details ? `<p class="among">Among the ${a.with_details} with details: ${[d.mentions.length && `reviewers mention most ${d.mentions.map(esc).join(", ")}`,
+      ${hoursChart([...a.competitors.map(c => ({ name: c.name, q: c.qloo })), ...a.also_tagged.map(c => ({ name: c.name, q: c }))])}
+      <h3>${esc(a.competitors_in_city_records)} ${esc(a.concept)} restaurants within 1.5 km in city records</h3>
+      ${a.competitors.length ? `<p class="hint">The ${esc(a.competitors.length)} nearest. Qloo holds details for ${esc(a.with_details)} of them.</p>
+      <ul class="around-list">${a.competitors.map(c => row(c.name, c.qloo, ` <span class="m">${esc(c.metres)} m</span>`)).join("")}</ul>` : ""}
+      ${a.with_details ? `<p class="among">Among the ${esc(a.with_details)} with details: ${[d.mentions.length && `reviewers mention most ${d.mentions.map(esc).join(", ")}`,
         d.latest_friday_close && `latest Friday closing ${esc(d.latest_friday_close)}`].filter(Boolean).join("; ")}.</p>` : ""}
       ${a.also_tagged.length ? `<h3>Also tagged ${esc(a.concept)} by Qloo, filed by the city under another category</h3>
       <ul class="around-list">${a.also_tagged.map(c => row(c.name, c)).join("")}</ul>` : ""}
@@ -772,10 +827,13 @@ async function around() {
       <ul class="around-list">${a.neighbours.map(c => row(c.name, c, c.kind ? ` <span class="m">${esc(c.kind)}</span>` : "")).join("")}</ul>` : ""}
       ${a.unconfirmed.length ? `<p class="hint">Listed by Qloo but not found in city records, so not shown as operating: ${a.unconfirmed.map(esc).join(", ")}.</p>` : ""}
       <ul class="notes">${a.notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul>`;
-    const q = css("--qloo");
-    for (const p of [...a.also_tagged, ...a.neighbours])
-      L.circleMarker([p.lat, p.lon], { radius: 5, color: q, fillColor: q, fillOpacity: .85, weight: 1 }).bindTooltip(esc(p.name)).addTo(state.layers);
-  } catch (e) { body.innerHTML = `<p class="form-error">${esc(e.message)}</p>`; }
+    btn.textContent = "Look it up again";
+    if (window.L && state.layers) {
+      const q = css("--qloo");
+      for (const p of [...a.also_tagged, ...a.neighbours])
+        L.circleMarker([p.lat, p.lon], { radius: 5, color: q, fillColor: q, fillOpacity: .85, weight: 1 }).bindTooltip(esc(p.name)).addTo(state.layers);
+    }
+  } catch (e) { if (run === state.runId) body.innerHTML = `<p class="form-error">${esc(e.message)}</p>`; }
   finally { btn.disabled = false; }
 }
 async function showScene() {
@@ -845,6 +903,7 @@ async function boot() {
   $("#print-report").onclick = () => window.print();
   $("#stop").onclick = () => { if (state.abort) state.abort.abort(); };
   $("#map-fit").onclick = fitMap;
+  $("#tests-count").textContent = `All ${TESTS.length} tests, in order`;
   $("#tests").innerHTML = `<thead><tr><th>Test</th><th>Question</th><th>Result</th></tr></thead><tbody>` +
     TESTS.map(([n, q, r]) => `<tr><td>${esc(n)}</td><td>${esc(q)}</td><td>${esc(r)}</td></tr>`).join("") + "</tbody>";
   $("#entry-filter").oninput = filterEntries;
@@ -876,6 +935,16 @@ async function boot() {
     labelTheme();
     if (state.leases.length) drawMap();   // map dots take their colour from the theme
   };
+  // radio groups: arrow keys move the choice, as screen reader users expect
+  document.querySelectorAll('[role="radiogroup"]').forEach(g => g.addEventListener("keydown", ev => {
+    const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[ev.key];
+    if (!step) return;
+    const opts = [...g.querySelectorAll('[role="radio"]')], i = opts.indexOf(document.activeElement);
+    if (i < 0) return;
+    ev.preventDefault();
+    const next = opts[(i + step + opts.length) % opts.length];
+    next.focus(); next.click();
+  }));
   const toTop = $("#to-top");
   toTop.onclick = () => scrollTo({ top: 0, behavior: "smooth" });
   addEventListener("scroll", () => { toTop.hidden = scrollY < 900; }, { passive: true });
@@ -884,7 +953,7 @@ async function boot() {
     const here = "#" + ({ saved: "top", app: "top" }[e.target.id] || e.target.id);   // saved runs and results belong to Scout
     if (e.isIntersecting) links.forEach(a => a.setAttribute("aria-current", String(a.getAttribute("href") === here)));
   }), { rootMargin: "-40% 0px -55% 0px" });
-  ["top", "saved", "app", "how", "scene", "evidence"].forEach(id => spy.observe(document.getElementById(id)));
+  ["top", "saved", "app", "why", "how", "scene", "evidence"].forEach(id => spy.observe(document.getElementById(id)));
   try {
     const { cuisines } = await (await fetch("/api/concepts")).json();
     for (const c of cuisines) $("#cuisine").insertAdjacentHTML("beforeend", `<option>${esc(c)}</option>`);

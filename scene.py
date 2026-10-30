@@ -23,9 +23,9 @@ def band():
     return json.load(open(path))["band"] if os.path.exists(path) else "specific, not validated"
 
 
-def search(name, lat=None, lon=None, take=5):
+def search(name, lat=None, lon=None, take=5, radius_km=1):
     """Qloo place search by name, near a point if given, else across the city."""
-    where = {"filter.location": f"{lat:.5f},{lon:.5f}", "filter.radius": 1} if lat is not None else \
+    where = {"filter.location": f"{lat:.5f},{lon:.5f}", "filter.radius": radius_km} if lat is not None else \
             {"filter.location": NYC, "filter.radius": 30}
     d = qloo.get("/search", query=name, types="urn:entity:place", take=take, **where)
     return [h for h in d.get("results") or [] if (h.get("location") or {}).get("lat") is not None]

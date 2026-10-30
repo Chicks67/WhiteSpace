@@ -3,11 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Whitespace</title>
-<meta name="description" content="Choose a restaurant lease in New York City with city inspection records, then position the concept with Qloo taste data.">
+<title>Whitespace: restaurant site selection for New York, grounded in Qloo</title>
+<meta name="description" content="An agent that scouts vacant storefronts in New York City and sizes up the competition with Qloo's record of real places: when rivals close, what their reviewers mention, where their fans also go.">
+<link rel="canonical" href="https://whitespace-nyc.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Whitespace">
+<meta property="og:title" content="Whitespace: find the block before you sign the lease">
+<meta property="og:description" content="A site-selection agent for NYC restaurant founders. Asked when 30 real NYC restaurants close on Friday, GPT-6 Astra alone got 0 right; grounded in Qloo, 29.">
+<meta property="og:url" content="https://whitespace-nyc.vercel.app/">
+<meta property="og:image" content="https://whitespace-nyc.vercel.app/static/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Whitespace: find the block before you sign the lease">
+<meta name="twitter:description" content="A site-selection agent for NYC restaurant founders, grounded in Qloo's record of real places.">
+<meta name="twitter:image" content="https://whitespace-nyc.vercel.app/static/og.png">
 <meta name="theme-color" content="#0A0A0B">
 <meta name="color-scheme" content="dark light">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0A0B'/%3E%3Crect x='9' y='9' width='14' height='14' fill='none' stroke='%23fff' stroke-width='2.5'/%3E%3C/svg%3E">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
 <script>
 /* Dark by default. Apply a saved light choice before first paint so the page does not flash. */
 try { if (localStorage.getItem("ws-theme") === "light") document.documentElement.dataset.theme = "light"; } catch (_) {}
@@ -17,16 +31,18 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400..600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-<link rel="stylesheet" href="/static/style.css?v=8">
+<!-- the map only appears after a run, so its stylesheet does not hold up the first paint -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="/static/style.css?v=10">
 </head>
 <body>
-<a class="skip" href="#app">Skip to the tool</a>
+<a class="skip" href="#brief-form">Skip to the tool</a>
 
 <nav class="nav" aria-label="Main">
   <a class="logo" href="#top" aria-label="Whitespace, back to top"><span class="logo-mark" aria-hidden="true"></span>Whitespace</a>
   <div class="nav-links">
     <a href="#top">Scout</a>
+    <a href="#why">Why Qloo</a>
     <a href="#how">How it works</a>
     <a href="#scene">Scene</a>
     <a class="how" href="#evidence">How we know</a>
@@ -45,17 +61,17 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
     <div class="brand">
       <p class="eyebrow">Site selection for independent restaurants <span>New York City</span></p>
       <h1 class="wordmark">Find the block <em>before</em> you sign the lease.</h1>
-      <p class="lede">Find and pick a restaurant lease in New York with
-        <span class="src city">city inspection records</span>, then position the concept with
-        <span class="src qloo">Qloo taste data</span>. Each source is used only where our tests say it works.</p>
+      <p class="lede">An agent that scouts vacant storefronts and sizes up every rival with
+        <span class="src qloo">Qloo's record of real places</span>: when they close on Friday, what their reviewers
+        rave about, where their fans also go. <span class="src city">City inspection records</span> rank the leases.</p>
       <ul class="points">
+        <li><span><b>29 of 30</b> closing times right with Qloo, <b>0 of 30</b> for the model alone</span></li>
         <li>Brooklyn, Queens, Manhattan and the Bronx</li>
-        <li>Every step and every data call shown as it happens</li>
-        <li>Every claim backed by a test written down before its result</li>
+        <li>Every step and every Qloo call shown as it happens</li>
       </ul>
     </div>
 
-    <form id="brief-form" class="panel inputs" autocomplete="off">
+    <form id="brief-form" class="panel inputs" autocomplete="off" tabindex="-1">
       <h2>Scout a location</h2>
       <div class="field-row">
         <div>
@@ -67,7 +83,7 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
           <select id="cuisine" name="cuisine"><option value="">Match automatically</option></select>
         </div>
       </div>
-      <div class="chips examples" id="examples" aria-label="Example concepts"></div>
+      <div class="chips examples" id="examples" role="group" aria-label="Example concepts"></div>
 
       <label id="where-label">Where</label>
       <div class="toggle mode-toggle" role="radiogroup" aria-labelledby="where-label">
@@ -118,7 +134,8 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
   <ul id="golden" class="golden"></ul>
 </section>
 
-<main class="band app" id="app" aria-live="polite" hidden>
+<main class="band app" id="app" hidden>
+  <p id="announce" class="visually-hidden" role="status"></p>
   <div class="band-head">
     <div>
       <p class="kicker big">This run</p>
@@ -205,7 +222,7 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
 
     <aside class="rail">
       <div class="map-wrap">
-        <div id="map" class="map" role="img" aria-label="Map of the lease addresses and nearby restaurants of this cuisine"></div>
+        <div id="map" class="map" role="region" aria-label="Map of the lease addresses and nearby restaurants of this cuisine"></div>
         <button type="button" id="map-fit" class="map-fit" title="Show every lease on the map">Show all</button>
       </div>
       <p class="map-key">
@@ -228,6 +245,54 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
     </aside>
   </div>
 </main>
+
+<section class="band why" id="why">
+  <div class="band-head">
+    <div>
+      <p class="kicker big">Why Qloo</p>
+      <h2>The agent knows real places because Qloo does.</h2>
+    </div>
+    <p class="hint">A language model can reason about a neighbourhood. It cannot know when the place down the block
+      closes tonight. Qloo can, and we measured it before building on it.</p>
+  </div>
+  <div class="why-grid">
+    <figure class="proof proof-main">
+      <figcaption>
+        <span class="tagline">Test 20, pre-registered</span>
+        <strong>"When does this restaurant close on Friday?"</strong>
+        <span>30 real New York restaurants, answers checked against Google Maps.</span>
+      </figcaption>
+      <div class="bars" role="img" aria-label="Correct answers out of 30: GPT-6 Astra alone 0, GPT-6 Astra with Qloo 29, Gemini 3.8 Flash alone 3, Gemini 3.8 Flash with Qloo 29">
+        <div class="bar-row"><span class="who">GPT-6 Astra alone</span><span class="track"><i style="--v:0"></i></span><b>0 / 30</b></div>
+        <div class="bar-row wq"><span class="who">GPT-6 Astra <em>+ Qloo</em></span><span class="track"><i style="--v:29"></i></span><b>29 / 30</b></div>
+        <div class="bar-row"><span class="who">Gemini 3.8 Flash alone</span><span class="track"><i style="--v:3"></i></span><b>3 / 30</b></div>
+        <div class="bar-row wq"><span class="who">Gemini 3.8 Flash <em>+ Qloo</em></span><span class="track"><i style="--v:29"></i></span><b>29 / 30</b></div>
+      </div>
+      <p class="proof-note">Alone, one model declined every time and the other gave 6 confident wrong times.
+        With Qloo's place record, both were right 29 times out of 30. This is why Whitespace answers every hours
+        question from Qloo and never from the model's memory.</p>
+    </figure>
+    <div class="proof-side">
+      <article class="proof">
+        <span class="tagline">Test 12, checked by a person</span>
+        <p class="big-num">29<small> of 30</small></p>
+        <p>Friday closing times in Qloo matched Google Maps, within 30 minutes.</p>
+      </article>
+      <article class="proof">
+        <span class="tagline">Test 27, real listeners</span>
+        <p class="big-num">0.841<small> vs 0.516</small></p>
+        <p>For 40 real listeners, Qloo ranked the small artists each one really plays far ahead of a ranking by popularity (AUC).</p>
+      </article>
+      <article class="proof">
+        <span class="tagline">Test 28, festival schedules</span>
+        <p class="big-num">0.663<small> vs 0.043</small></p>
+        <p>Share of the possible cut in real fan clashes reached by a timetable built on Qloo's fan-overlap scores, against one built on popularity.</p>
+      </article>
+    </div>
+  </div>
+  <p class="hint why-foot">Each number comes from a test whose rules were committed before its result. All 28 tests,
+    including the ones where Qloo did not help, are under <a href="#evidence">How we know</a>.</p>
+</section>
 
 <section class="band how-it" id="how">
   <div class="band-head">
@@ -314,7 +379,7 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
   <p id="entries-none" class="hint" hidden>No test matches that filter.</p>
 
   <div class="entries-head">
-    <h3>All 23 tests, in order</h3>
+    <h3 id="tests-count">Every test, in order</h3>
     <p class="hint">Every test was written down and committed before its code or its result. Most went against Qloo, and they are all here.</p>
   </div>
   <div class="tests-wrap"><table class="data tests" id="tests"></table></div>
@@ -333,6 +398,6 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
 <div id="toast" class="toast" role="status" hidden></div>
 
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script defer src="/static/app.js?v=8"></script>
+<script defer src="/static/app.js?v=10"></script>
 </body>
 </html>

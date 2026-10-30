@@ -14,6 +14,11 @@ CACHE = (os.environ.get("QLOO_CACHE_DIR")  # private server storage only
 # cannot use the month up: below it, uncached calls stop and live runs say so; cached and saved runs still work.
 RESERVE = int(os.environ.get("QLOO_RESERVE", "300"))
 QUOTA = {"remaining": None}
+# Read-only copy of the responses every server needs (reference areas, cuisine heatmaps, saved runs' top picks),
+# shipped inside the private server deployment so a fresh instance does not spend quota on them. Git-ignored:
+# Qloo data never goes in the public repo. Built by warm_cache.py.
+WARM = os.path.join(os.path.dirname(__file__), "qloo_warm")
+USED = set()  # cache files read or written by this process (warm_cache.py collects them)
 
 
 class QuotaLow(RuntimeError):
@@ -58,12 +63,15 @@ def _key():
 def get(path, **params):
     """GET a Qloo endpoint, cached on disk so repeat runs cost no API calls."""
     url = BASE + path + "?" + urllib.parse.urlencode(params)
-    name = os.path.join(CACHE, hashlib.md5(url.encode()).hexdigest() + ".json")
-    if os.path.exists(name):
-        with open(name) as f:
-            data = json.load(f)
-        _report(path, params, data, True)
-        return data
+    base = hashlib.md5(url.encode()).hexdigest() + ".json"
+    name = os.path.join(CACHE, base)
+    for hit in (name, os.path.join(WARM, base)):
+        if os.path.exists(hit):
+            with open(hit) as f:
+                data = json.load(f)
+            USED.add(base)
+            _report(path, params, data, True)
+            return data
     if QUOTA["remaining"] is not None and QUOTA["remaining"] < RESERVE:
         raise QuotaLow(f"Qloo monthly quota low ({QUOTA['remaining']} requests left); live runs are paused")
     req = urllib.request.Request(url, headers={"X-Api-Key": _key()})
@@ -89,8 +97,11 @@ def get(path, **params):
                 return data
             time.sleep(2 ** attempt)
     os.makedirs(CACHE, exist_ok=True)
-    with open(name, "w") as f:
+    tmp = f"{name}.{os.getpid()}.{threading.get_ident()}.tmp"
+    with open(tmp, "w") as f:  # write then rename, so a parallel reader never sees half a file
         json.dump(data, f)
+    os.replace(tmp, name)
+    USED.add(base)
     _report(path, params, data, False)
     return data
 

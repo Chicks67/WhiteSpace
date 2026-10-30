@@ -10,6 +10,7 @@ import json
 import math
 import re
 import os
+import threading
 import urllib.parse
 import urllib.request
 from functools import lru_cache
@@ -240,9 +241,17 @@ def taste(concept, leases):
     return out
 
 
+_city_lock = threading.Lock()
+
+
 @lru_cache(maxsize=1)
-def city():
+def _city():
     return City()
+
+
+def city():
+    with _city_lock:  # the warm-up thread and the first request must not each build the index
+        return _city()
 
 
 def rank(concept, leases, keep_order=False):
