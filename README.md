@@ -495,6 +495,9 @@ as good as Qloo, and Qloo's numbers rarely move it.
 
 ---
 
+An external Kaggle results table (Oct 31, not verified here) is compared row by row with these results in
+[KAGGLE_RESULTS.md](KAGGLE_RESULTS.md). Current status: [PROGRESS.md](PROGRESS.md).
+
 ## Agent reliability
 
 `eval_suite.py` defines cases and expected outcomes **before** running: normal requests, nickname areas, edge cases

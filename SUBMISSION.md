@@ -69,6 +69,11 @@ the block.
 - Hosted on Vercel. Keys stay on the server; live runs are rate limited per visitor with a daily model budget.
 - 28 pre-registered tests, a reliability suite, and a full decision log in the repository.
 
+## Results
+
+Status of every test: PROGRESS.md. An external Kaggle results table, checked row by row against our
+recorded tests: KAGGLE_RESULTS.md.
+
 ## Try it
 
 1. Open https://whitespace-nyc.vercel.app and click a saved run: it replays a recorded live run in seconds.
