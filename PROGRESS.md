@@ -23,7 +23,7 @@ Full table of all tests: README "What we tested" and PROJECT_LOG.md.
 ## External results
 
 A Kaggle results table (Oct 31) is in KAGGLE_RESULTS.md, row by row against this repository. 14 rows match;
-9 contradict the recorded tests (the recorded results stand); 6 have no matching test and are unverified.
+10 contradict the recorded tests (the recorded results stand); 6 have no matching test and are unverified.
 
 ## Open
 

@@ -1231,6 +1231,6 @@ continues there. Test 28's code (backtest28.py) runs from this folder; its proto
 ## Oct 31: external Kaggle results table
 
 A results table from a Kaggle run was added as KAGGLE_RESULTS.md without re-running it. 14 rows match recorded
-tests. 9 rows (S3, S4/S4b, S8, S10, S12, S16, S17, S18, S21) contradict recorded results; the recorded results
+tests. 10 rows (S3, S4/S4b, S8, S10, S12, S16, S17, S18, S21) contradict recorded results; the recorded results
 stand because their data, code and protocol are committed. 6 rows have no matching test and are unverified.
 PROGRESS.md added as a one-page status.
