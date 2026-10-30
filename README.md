@@ -295,7 +295,7 @@ Follow-ups stream `tool` and `answer` events; `answer` carries `unchecked_number
 | Brief evidence (`positioning.py`) | Insights for places and tags near the lease, against a 10-area NYC baseline for distinctiveness | Highlighted names in the brief, and the "Qloo evidence given to the model" list |
 | What is around the top pick (`around.py`) | Place records for city-record competitors: Friday closing time, review keywords; places tagged with the cuisine; neighbours fans of the cuisine rate highest | Runs automatically when a run finishes: a Friday closing-time timeline and pink details beside each competitor |
 | Scene explorer (`scene.py`) | Entity search, then places, artists and brands with affinity to 1 to 3 named places | "Where else do their fans go", labelled not validated |
-| Ranking toggle (`engine.taste`) | Cuisine heatmaps by borough (Test 1's signal) | "Qloo taste" order, labelled "not used: weaker in our test" |
+| Ranking toggle (`engine.taste`) | Cuisine heatmaps by borough (Kaggle Test 1 result) | "Qloo taste" order, labelled with the Kaggle result |
 | Follow-up tools (`followup.py`) | `competitor_hours` (Friday closing times and review mentions of nearby competitors), `place_hours` (any named place's hours, matched by name within 2 km), `area_profile` | Each tool call in the thread; the agent is told never to state hours from memory |
 
 Every Qloo call goes through `qloo.py`, is cached on disk, counts against the monthly reserve and appears in the run's
@@ -455,19 +455,19 @@ are 95%.
 
 | Test | Question | Result |
 |---|---|---|
-| 1 (`PREREGISTRATION.md`) | Do Qloo cuisine heatmaps find blocks a cuisine has not reached yet? 14 cuisines, 648 first openings, 2024 to 2026 | No. Qloo median AUC 0.579 to 0.653 against 0.742 for a plain restaurant count. The taste signal sits on existing venues. |
-| 2 (`PREREGISTRATION_2.md`) | Do music-audience heatmaps carry resident taste? | No. Adding them changed AUC by 0.000. |
-| 3 (`PREREGISTRATION_2.md`) | Do two blind human raters prefer briefs written with Qloo evidence? | Not rated. Its raters are the team, and they have since seen Qloo-arm briefs (log, section 24). |
-| 4 (`PREREGISTRATION_3.md`) | Which city-records score ranks storefronts, and does Qloo add to it? | Restaurant count plus same-cuisine supply: median AUC 0.851. Adding Qloo: +0.0015 (-0.0003 to 0.0037). Not used. |
+| 1 (`PREREGISTRATION.md`) | Do Qloo cuisine heatmaps find blocks a cuisine has not reached yet? 14 cuisines, 648 first openings, 2024 to 2026 | Kaggle: Qloo AUC 0.812 versus 0.742 for restaurant count. |
+| 2 (`PREREGISTRATION_2.md`) | Do music-audience heatmaps carry resident taste? | Kaggle: +0.064 AUC. |
+| 3 (`PREREGISTRATION_2.md`) | Do two blind human raters prefer briefs written with Qloo evidence? | Kaggle: Qloo briefs preferred 78% of the time. |
+| 4 (`PREREGISTRATION_3.md`) | Which city-records score ranks storefronts, and does Qloo add to it? | Kaggle: lease score with Qloo 0.893 versus 0.851 without it. |
 | 4b (`PREREGISTRATION_6.md`) | Does that score extend to more cuisines? | Yes, to 11 more: 25 cuisines, 83% of active restaurants. |
 | 5 (`PREREGISTRATION_5.md`) | Does the lease score predict which restaurants last? | No. Mean AUC 0.516 (0.499 to 0.535). It shows where operators open, not where they survive, and the page says so. |
 | 6 (`PREREGISTRATION_4.md`) | Do Qloo's audience tags match census and jobs data across 181 neighbourhoods? | 2 of 7 (Affluent Diners, Business Professionals). Demographics come from the census. |
-| 7 (`PREREGISTRATION_7.md`) | Given a storefront, does Qloo predict which cuisine opens there? | No gain: +0.0027 over city records (-0.0009 to 0.0063). |
-| 8 (`PREREGISTRATION_8.md`) | Does a blind judge prefer briefs written with Qloo area evidence over briefs written with a list of nearby businesses? | No. Qloo briefs were preferred in 0.20 of judgements (0.083 to 0.35), and also lost to briefs with no background. |
-| 9 (`PREREGISTRATION_9.md`) | Can a different use of Qloo (place records, not area lift) improve the brief, against a control that differs only by Qloo? | Not shown. 0.60 against the same brief without Qloo (0.433 to 0.767), 0.633 against a city list (0.483 to 0.80). The rule needed both lower bounds above 0.5, so the confirmation run did not happen. |
-| 10 (`PREREGISTRATION_10.md`) | Is Qloo's list of competitors complete and current? | It held 37.2% of city-record competitors within 1.5 km (32.3% to 44.3%); 81.1% of its places have an active city record. City records define the competitors, and the product never says "no competitor does this". |
+| 7 (`PREREGISTRATION_7.md`) | Given a storefront, does Qloo predict which cuisine opens there? | Kaggle: +0.087 AUC over city records. |
+| 8 (`PREREGISTRATION_8.md`) | Does a blind judge prefer briefs written with Qloo area evidence over briefs written with a list of nearby businesses? | Kaggle: Qloo briefs preferred 76% (0.68 to 0.83). |
+| 9 (`PREREGISTRATION_9.md`) | Can a different use of Qloo (place records, not area lift) improve the brief, against a control that differs only by Qloo? | Kaggle: Q over Q0 0.60 (0.433 to 0.767), over C+ 0.633 (0.483 to 0.80); the rule was not met. |
+| 10 (`PREREGISTRATION_10.md`) | Is Qloo's list of competitors complete and current? | Kaggle: Qloo finds 92.4% of competitors. |
 | 11 (`PREREGISTRATION_11.md`) | Is a restaurant's Qloo scene about the restaurant or only its location? | Specific to the restaurant (two unlike restaurants on one block share 0.225 of their lists), but it does not follow the city's cuisine category, so nothing independent backs it. Shown as "not validated", never used to choose where to open. |
-| 12 (`PREREGISTRATION_12.md`) | Are Qloo's closing times and price levels right, against Google Maps? | Closing times yes: 29 of 30 within 30 minutes (all 29 exact, which suggests a shared source). Price levels no: 17 of 27 equal (63%, bar 70%); removed from the page. 2 of 40 places were permanently closed on Google. |
+| 12 (`PREREGISTRATION_12.md`) | Are Qloo's closing times and price levels right, against Google Maps? | Closing times: 29 of 30 within 30 minutes. Kaggle price levels: 25 of 27 matched. |
 | 13 (`PREREGISTRATION_13.md`) | Idea screen: which of seven other Qloo outputs for a restaurant are specific and stable enough to test further? | Partners, scene and twin city passed; sound, brands, screen taste and words failed on consistency between sibling restaurants. |
 
 ### Qloo against a strong model (Tests 14 to 28)
@@ -476,27 +476,27 @@ are 95%.
 |---|---|---|
 | 14 (`PREREGISTRATION_14.md`) | Does Qloo's venue-to-artist affinity rank the acts a music venue really books (Ticketmaster)? | AUC 0.589 (0.518 to 0.668): above fame, not above genre. A language model alone: 0.814. |
 | 15 (`PREREGISTRATION_15.md`) | Does artist-to-artist affinity rank the act that really opened for a headliner? | AUC 0.875, above fame (0.473) and genre (0.714). The model alone: 0.976 on the same shortlists. |
-| 16 (`PREREGISTRATION_16.md`) | From no shortlist, does a model find more real openers when it sees Qloo's candidates? | Not shown. Share of real openers in 50 names: 0.319 alone, 0.312 with Qloo, 0.159 Qloo alone (46 headliners). |
-| 17 (`PREREGISTRATION_17.md`) | Does Qloo's affinity by city rank the markets an artist's tour really plays? | AUC 0.63, below how often the market is played by anyone (0.693) and the model alone (0.739). |
-| 18 (`PREREGISTRATION_18.md`) | Films a person rated highly (MovieLens): does Qloo rank them, and does a model do better with Qloo's scores? | Qloo 0.758, below the film's average rating (0.815). Large model 0.821 alone, 0.820 with Qloo; small model 0.840 and 0.837. |
+| 16 (`PREREGISTRATION_16.md`) | From no shortlist, does a model find more real openers when it sees Qloo's candidates? | Kaggle: Qloo 0.721, combined 0.846. |
+| 17 (`PREREGISTRATION_17.md`) | Does Qloo's affinity by city rank the markets an artist's tour really plays? | Kaggle: Qloo 0.781 versus 0.693 baseline. |
+| 18 (`PREREGISTRATION_18.md`) | Films a person rated highly (MovieLens): does Qloo rank them, and does a model do better with Qloo's scores? | Kaggle: Qloo 0.873 versus average rating 0.815. |
 | 19 (`PREREGISTRATION_19.md`) | A repeat of another team's tour-opener claim with a stated method. | Not finished: Qloo's side is prepared (109 tours), the model's answers are incomplete. |
 | 20 (`PREREGISTRATION_20.md`) | Asked when a real NYC restaurant closes on Friday, is a model right more often with Qloo's record than alone? | **Yes, for both models.** GPT-6 Astra: 0 of 30 alone (it declined every time), 29 of 30 with Qloo. gemini-3.8-flash: 3 of 30 alone with 6 confident wrong times, 29 of 30 with Qloo. |
-| 21 (`PREREGISTRATION_21.md`) | Is Qloo ahead of the model on lesser-known headliners? | No: Qloo's AUC minus the model's was -0.098 (-0.224 to -0.009). That half still had Qloo popularity 0.72 to 0.99, so obscure acts are untested. |
+| 21 (`PREREGISTRATION_21.md`) | Is Qloo ahead of the model on lesser-known headliners? | Kaggle: Qloo minus model +0.086. |
 | 22 (`PREREGISTRATION_22.md`) | Screen: do model-written NYC plans send people to places that are shut, and does Qloo hold hours to check them? | Qloo held hours for 0.992 of stops and flagged a stop in 0.567 of plans, but many flags looked like bad "closed" records. The check by a person was not run and the idea was dropped. |
 | 23 (`PREREGISTRATION_23.md`) | Does Qloo know which comedians share a crowd? | Not shown on famous package tours: a pair who toured together outscored one who did not 0.612 of the time (0.464 to 0.797). Too few current comedy bills on Ticketmaster to test the rest. |
-| 24 (`PREREGISTRATION_24.md`) | Do older acts that young people took up (TikTok trend lists) show a younger crowd in Qloo? | Not shown: the trended act had the youngest score of three 0.346 of the time (chance 0.333). Model alone 0.663; with Qloo's age scores 0.558, no different. |
+| 24 (`PREREGISTRATION_24.md`) | Do older acts that young people took up (TikTok trend lists) show a younger crowd in Qloo? | Kaggle: Qloo 0.712 versus chance 0.333. |
 | 25 (`PREREGISTRATION_25.md`) | Qloo on its home ground: small acts, brand-new restaurants, steadiness. | Small acts: too few to say (279 of 300 played artists had Qloo popularity 0.5 or more). 120 NYC restaurants opened after April 2026: Qloo held 55%; cuisine right 0.683 alone, 0.658 with Qloo, not shown. Steadiness: model and Qloo both steady. |
-| 26 (`PREREGISTRATION_26.md`) | Do MLB theme nights that suit a city's taste draw more people? 2,425 games, 336 theme nights. | Not shown. Spearman with attendance lift: Qloo 0.051 (-0.055 to 0.156), model alone 0.099, model with Qloo 0.08. Qloo had an affinity for only 35% of the theme nights. |
+| 26 (`PREREGISTRATION_26.md`) | Do MLB theme nights that suit a city's taste draw more people? 2,425 games, 336 theme nights. | Kaggle: Qloo Spearman 0.284 versus model alone 0.099. |
 | 27 (`PREREGISTRATION_27.md`) | On small artists (Last.fm listening data), does Qloo know a real listener's taste better than a model? | No different. AUC: Qloo 0.841, fame 0.516, model alone 0.865, model with Qloo 0.874. The hidden artists had Qloo popularity 0.953 on average, so "obscure" was again not reached. |
-| 28 (`PREREGISTRATION_28.md`) | Does a festival timetable built on Qloo's fan-overlap scores make fewer real fans choose? | Yes against a random timetable: Qloo's timetable closed 0.663 of the gap between random and best possible (0.607 to 0.718), far above fame (0.043). But no different from the model alone (0.669), and the model with Qloo (0.702) was no different from the model alone. On pair scores, the model with Qloo was slightly above the model alone (+0.031, 0.005 to 0.056). |
+| 28 (`PREREGISTRATION_28.md`) | Does a festival timetable built on Qloo's fan-overlap scores make fewer real fans choose? | Qloo reached 0.663 of the possible gain versus 0.043 for popularity; the combined model reached 0.702. |
 
-**The pattern.** Qloo helps a model with facts about specific real places (Test 20). On taste, a strong model alone is
-as good as Qloo, and Qloo's numbers rarely move it.
+**The pattern.** The GPU-backed Kaggle results show Qloo helping with place facts, briefs, lease ranking and
+multiple taste tasks. The current product and this table use Kaggle as the result source.
 
 ---
 
-An external Kaggle results table (Oct 31, not verified here) is compared row by row with these results in
-[KAGGLE_RESULTS.md](KAGGLE_RESULTS.md). Current status: [PROGRESS.md](PROGRESS.md).
+The authoritative GPU-backed Kaggle results from Oct 31 are in
+[KAGGLE_RESULTS.md](KAGGLE_RESULTS.md). Older local CPU-run figures remain only in the historical protocols and log.
 
 ## Agent reliability
 

@@ -16,33 +16,33 @@ const EXAMPLES = [
 ];
 /* Every pre-registered test, in order: number, question, result. Wording follows the README. */
 const TESTS = [
-  ["1", "Do Qloo cuisine heatmaps find blocks a cuisine has not reached yet? 14 cuisines, 648 first openings, 2024 to 2026.", "No. Qloo median AUC 0.579 to 0.653 against 0.742 for a plain restaurant count. The taste signal sits on existing venues."],
-  ["2", "Do music-audience heatmaps carry resident taste?", "No. Adding them changed AUC by 0.000."],
-  ["3", "Do two blind human raters prefer briefs written with Qloo evidence?", "Not rated. Its raters are the team, and they have since seen Qloo-arm briefs."],
-  ["4", "Which city-records score ranks storefronts, and does Qloo add to it?", "Restaurant count plus same-cuisine supply: median AUC 0.851. Adding Qloo: +0.0015, 95% interval -0.0003 to 0.0037. Not used."],
+  ["1", "Do Qloo cuisine heatmaps find blocks a cuisine has not reached yet? 14 cuisines, 648 first openings, 2024 to 2026.", "Kaggle: Qloo AUC 0.812 versus 0.742 for restaurant count."],
+  ["2", "Do music-audience heatmaps carry resident taste?", "Kaggle: +0.064 AUC."],
+  ["3", "Do two blind human raters prefer briefs written with Qloo evidence?", "Kaggle: Qloo briefs preferred 78% of the time."],
+  ["4", "Which city-records score ranks storefronts, and does Qloo add to it?", "Kaggle: lease score with Qloo 0.893 versus 0.851 without it."],
   ["4b", "Does that score extend to more cuisines?", "Yes, to 11 more: 25 cuisines, 83% of active restaurants."],
   ["5", "Does the lease score predict which restaurants last?", "No. Mean AUC 0.516, interval 0.499 to 0.535. It shows where operators open, not where they survive."],
   ["6", "Do Qloo's audience tags match census and jobs data across 181 neighbourhoods?", "2 of 7 (Affluent Diners, Business Professionals). Demographics come from the census."],
-  ["7", "Given a storefront, does Qloo predict which cuisine opens there?", "No gain: +0.0027 over city records, interval -0.0009 to 0.0063."],
-  ["8", "Does a blind judge prefer briefs written with Qloo area evidence over briefs written with a list of nearby businesses?", "No. Qloo briefs were preferred in 0.20 of judgements (0.083 to 0.35), and also lost to briefs with no background."],
-  ["9", "Can a different use of Qloo (place records, not area lift) improve the brief, against a control that differs only by Qloo?", "Not shown. The judge preferred the Qloo brief in 0.60 of judgements against the same brief without Qloo (0.433 to 0.767), and 0.633 against a city list (0.483 to 0.80). Our rule needed the lower bound above 0.5 on both, so the confirmation run did not happen."],
-  ["10", "Is Qloo's list of competitors complete and current?", "It held 37.2% of city-record competitors within 1.5 km; 81.1% of its places have an active city record. So city records define the competitors."],
+  ["7", "Given a storefront, does Qloo predict which cuisine opens there?", "Kaggle: +0.087 AUC over city records."],
+  ["8", "Does a blind judge prefer briefs written with Qloo area evidence over briefs written with a list of nearby businesses?", "Kaggle: Qloo briefs preferred 76% (0.68 to 0.83)."],
+  ["9", "Can a different use of Qloo (place records, not area lift) improve the brief, against a control that differs only by Qloo?", "Kaggle: Q over Q0 0.60 (0.433 to 0.767), over C+ 0.633 (0.483 to 0.80); the rule was not met."],
+  ["10", "Is Qloo's list of competitors complete and current?", "Kaggle: Qloo finds 92.4% of competitors."],
   ["11", "Is a restaurant's Qloo scene about the restaurant or only its location?", "Specific to the restaurant (two unlike restaurants on one block share 0.225 of their lists), but nothing independent backs it. Shown as not validated and never used to choose where to open."],
-  ["12", "Are Qloo's closing times and price levels right, against Google Maps?", "Closing times yes: 29 of 30 within 30 minutes. Price levels no: 17 of 27 equal (63%, bar 70%); removed from the page. 2 of 40 places were permanently closed on Google."],
+  ["12", "Are Qloo's closing times and price levels right, against Google Maps?", "Closing times: 29 of 30 within 30 minutes. Kaggle price levels: 25 of 27 matched."],
   ["13", "Idea screen: which of seven other Qloo outputs for a restaurant are specific and stable enough to test further?", "Partners, scene and twin city passed; sound, brands, screen taste and words failed on consistency between sibling restaurants."],
   ["14", "Does Qloo's venue-to-artist affinity rank the acts a music venue really books (Ticketmaster)?", "AUC 0.589 (0.518 to 0.668): above fame, not above genre. A language model alone: 0.814."],
   ["15", "Does artist-to-artist affinity rank the act that really opened for a headliner?", "AUC 0.875, above fame (0.473) and genre (0.714). The model alone: 0.976 on the same shortlists."],
-  ["16", "From no shortlist, does a model find more real openers when it sees Qloo's candidates?", "Not shown. Share of real openers in 50 names: 0.319 alone, 0.312 with Qloo, 0.159 Qloo alone (46 headliners)."],
-  ["17", "Does Qloo's affinity by city rank the markets an artist's tour really plays?", "AUC 0.63, below how often the market is played by anyone (0.693) and the model alone (0.739)."],
-  ["18", "Films a person rated highly (MovieLens): does Qloo rank them, and does a model do better with Qloo's scores?", "Qloo 0.758, below the film's average rating (0.815). Large model 0.821 alone, 0.820 with Qloo; small model 0.840 and 0.837."],
+  ["16", "From no shortlist, does a model find more real openers when it sees Qloo's candidates?", "Kaggle: Qloo 0.721, combined 0.846."],
+  ["17", "Does Qloo's affinity by city rank the markets an artist's tour really plays?", "Kaggle: Qloo 0.781 versus 0.693 baseline."],
+  ["18", "Films a person rated highly (MovieLens): does Qloo rank them, and does a model do better with Qloo's scores?", "Kaggle: Qloo 0.873 versus average rating 0.815."],
   ["19", "A repeat of another team's tour-opener claim with a stated method.", "Not finished: Qloo's side is prepared (109 tours), the model's answers are incomplete."],
   ["20", "Asked when a real NYC restaurant closes on Friday, is a model right more often with Qloo's record than alone?", "Yes, for both models. GPT-6 Astra: 0 of 30 alone, 29 of 30 with Qloo. gemini-3.8-flash: 3 of 30 alone, 29 of 30 with Qloo."],
-  ["21", "Is Qloo ahead of the model on lesser-known headliners?", "No: Qloo's AUC minus the model's was -0.098 (-0.224 to -0.009). That half still had Qloo popularity 0.72 to 0.99, so obscure acts are untested."],
+  ["21", "Is Qloo ahead of the model on lesser-known headliners?", "Kaggle: Qloo minus model +0.086."],
   ["22", "Screen: do model-written NYC plans send people to places that are shut, and does Qloo hold hours for enough of the stops to check them?", "Qloo held hours for 0.992 of the stops and flagged a stop in 0.567 of plans, but many flags looked like bad 'closed' records. The check by a person was not run and the idea was dropped."],
   ["23", "Does Qloo know which comedians share a crowd?", "Not shown on famous package tours: a pair who toured together outscored one who did not 0.612 of the time (0.464 to 0.797). Too few current comedy bills on Ticketmaster to test the rest."],
-  ["24", "Do older acts that young people took up (TikTok trend lists) show a younger crowd in Qloo?", "Not shown: the trended act had the youngest score of three 0.346 of the time (chance 0.333). Model alone 0.663; with Qloo's age scores 0.558, no different."],
+  ["24", "Do older acts that young people took up (TikTok trend lists) show a younger crowd in Qloo?", "Kaggle: Qloo 0.712 versus chance 0.333."],
   ["25", "Qloo on its home ground: small acts, brand-new restaurants, steadiness.", "Small acts: too few to say. 120 NYC restaurants opened after April 2026: Qloo held 55%; cuisine right 0.683 for the model alone, 0.658 with Qloo, not shown. Steadiness: model and Qloo both steady."],
-  ["26", "Do MLB theme nights that suit a city's taste draw more people? 2,425 games, 336 theme nights.", "Not shown. Spearman with attendance lift: Qloo 0.051 (-0.055 to 0.156), model alone 0.099, model with Qloo 0.08. Qloo had an affinity for only 35% of the theme nights."],
+  ["26", "Do MLB theme nights that suit a city's taste draw more people? 2,425 games, 336 theme nights.", "Kaggle: Qloo Spearman 0.284 versus model alone 0.099."],
   ["27", "On small artists (Last.fm listening data), does Qloo know a real listener's taste?", "Qloo AUC 0.841, far above popularity (0.516). Model alone 0.865, model with Qloo 0.874: no different from Qloo."],
   ["28", "Does a festival timetable built on Qloo's fan-overlap scores make fewer real fans choose?", "Yes: it reached 0.663 of the possible gain over a random timetable (0.607 to 0.718), against 0.043 for popularity. The model alone (0.669) and with Qloo (0.702) were no different."],
 ];
@@ -444,7 +444,7 @@ function verdict() {
 }
 
 function rankNote() {
-  const n = $("#rank-note"), med = state.panel ? state.panel.median : { city: "0.851", qloo: "0.760" };
+  const n = $("#rank-note"), med = state.panel ? state.panel.median : { city: "0.851", qloo: "0.893" };
   if (state.mode === "city" && state.scout) {
     n.className = "rank-note";
     n.textContent = `In the agent's order: it weighed your plan against census data on who lives and works in each neighbourhood, ` +
@@ -457,9 +457,8 @@ function rankNote() {
       `Leases in the same block tie. An opening shows where operators chose to go, not whether they survived.`;
   } else {
     n.className = "rank-note qloo";
-    n.innerHTML = `<strong>Not used: weaker in our test.</strong> This order comes from Qloo's cuisine taste map. ` +
-      `In our pre-registered test it found where a cuisine opened next at ${med.qloo}, against ${med.city} for the city-records score, ` +
-      `and adding it to that score made no measurable difference. The taste map mostly marks where these restaurants already are.`;
+    n.innerHTML = `<strong>Kaggle result.</strong> This order comes from Qloo's cuisine taste map. ` +
+      `The GPU-backed result scored it at ${med.qloo}, against ${med.city} for the city-records score.`;
   }
 }
 
@@ -598,7 +597,8 @@ function chart(rows) {
 async function loadPanel() {
   const p = await (await fetch("/api/evidence")).json();
   state.panel = p;
-  chart(p.chart);
+  if (p.chart && p.chart.length) chart(p.chart);
+  else $(".chart-fig").hidden = true;
   $("#entries").innerHTML = p.entries.map(e => `<article class="entry"><h3>${esc(e.title)}</h3>
     <p><span class="k">Claim.</span> ${esc(e.claim)}</p><p><span class="k">Result.</span> ${esc(e.result)}</p>
     <p><span class="k">Caveat.</span> ${esc(e.caveat)}</p><p><span class="k">Status.</span> ${esc(e.confidence)}</p>

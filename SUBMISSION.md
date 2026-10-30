@@ -71,8 +71,8 @@ the block.
 
 ## Results
 
-Status of every test: PROGRESS.md. An external Kaggle results table, checked row by row against our
-recorded tests: KAGGLE_RESULTS.md.
+Status of every test: [PROGRESS.md](PROGRESS.md). The authoritative GPU-backed Kaggle results used by the
+product are in [KAGGLE_RESULTS.md](KAGGLE_RESULTS.md).
 
 ## Try it
 

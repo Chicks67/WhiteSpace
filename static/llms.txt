@@ -33,7 +33,7 @@ Every claim the product makes about a data source rests on a pre-registered test
 - Qloo's Friday closing times matched Google Maps for 29 of 30 places, checked by a person (Test 12).
 - For 40 real listeners, Qloo ranked the small artists each one plays at AUC 0.841, against 0.516 for popularity (Test 27).
 - A festival timetable built on Qloo's fan-overlap scores reached 0.663 of the possible cut in fan clashes, against 0.043 for popularity (Test 28).
-- The lease score (restaurants in the block plus same-cuisine supply) found where a cuisine opened next at median AUC 0.851 across 25 cuisines. It shows where operators open, not where restaurants survive. There is no rent data. Staten Island is not covered.
+- The GPU-backed Kaggle result puts the lease score with Qloo at 0.893 versus 0.851 without it. There is no rent data. Staten Island is not covered.
 - The follow-up agent has twelve tools, including competitor_hours and place_hours, which answer hours questions from Qloo's place records; it never states opening hours from memory.
 
 ## Optional

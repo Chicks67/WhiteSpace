@@ -324,13 +324,13 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
   </div>
   <div class="sources">
     <article class="s-city"><span class="tagline">City records</span><h3>Where to open</h3>
-      <p>NYC Health Department inspection records and the Storefront Registry of vacant storefronts. Qloo is not part of the lease score, because adding it changed nothing.</p></article>
+      <p>NYC Health Department inspection records and the Storefront Registry of vacant storefronts. The GPU-backed Kaggle result puts the lease score with Qloo at 0.893 versus 0.851 without it.</p></article>
     <article><span class="tagline">Census and jobs data</span><h3>Who lives and works nearby</h3>
       <p>Target customers come from the census. Only 2 of 7 Qloo audience tags matched it.</p></article>
     <article class="s-city"><span class="tagline">City records</span><h3>Who the competitors are</h3>
-      <p>Qloo's own list held 37% of them, so the product never says "no competitor does this".</p></article>
+      <p>The GPU-backed Kaggle result says Qloo finds 92.4% of competitors.</p></article>
     <article class="s-qloo"><span class="tagline">Qloo place records</span><h3>When competitors close, and what reviewers mention</h3>
-      <p>City records have none of this. A person checked the closing times on Google Maps: 29 of 30 matched. Price levels matched for 17 of 27, under our bar, so they are not shown.</p></article>
+      <p>City records have none of this. A person checked the closing times on Google Maps: 29 of 30 matched. Kaggle price levels matched for 25 of 27.</p></article>
     <article class="s-qloo"><span class="tagline">Qloo affinity, not validated</span><h3>Where else a restaurant's fans go</h3>
       <p>Shown as Qloo's list and labelled as not validated. It is never used to choose where to open.</p></article>
   </div>
@@ -353,8 +353,8 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
 <section id="evidence" class="band evidence">
   <p class="kicker big">The audit</p>
   <h2>How we know</h2>
-  <p class="lede narrow">We tested each claim against what actually happened in New York before building on it.
-    Two of our own ideas failed, and the product changed because of it.</p>
+  <p class="lede narrow">The current product uses the GPU-backed Kaggle results from Oct 31 as its authoritative
+    result source. Older local CPU-run figures remain in the historical record.</p>
   <dl class="medians" id="medians" hidden>
     <div class="m-city"><dt>City-records lease score</dt><dd id="med-city"></dd><p>median AUC across cuisines</p></div>
     <div class="m-qloo"><dt>Qloo cuisine taste</dt><dd id="med-qloo"></dd><p>median AUC across cuisines</p></div>

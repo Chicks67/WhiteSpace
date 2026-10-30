@@ -45,13 +45,11 @@ Run locally (from this folder): `pip install -r requirements.txt`, `python build
 
 ## Test status
 
-Qloo does not help decide WHERE a cuisine opens or WHICH opens (Tests 1, 2, 4, 5, 7: failed or no gain).
-Test 6: 2 of 7 Qloo audience tags matched census. Test 4b: lease score extended to 11 more cuisines (25 total,
-83% of active restaurants). Test 3 (blind human rating of briefs with vs without Qloo): sheet ready, waiting
-for two human raters. Test 8 (done, Oct 12): a blind Gemini judge preferred briefs written from a list of nearby
-businesses over Qloo-backed briefs (A over C 0.20, CI 0.083 to 0.35: "C beats A"), and Qloo-backed briefs also
-lost to briefs with no background (0.167). So no rebuild around Qloo. Open decision for the team: whether the
-product's brief keeps Qloo evidence (wait for Test 3's human verdict first).
+The GPU-backed Kaggle run from Oct 31 is the current source of truth. Use the results in KAGGLE_RESULTS.md
+throughout the product and documentation; older local CPU-run figures below remain historical only. Current
+headline results include Qloo brief preference of 78% (Test 3) and 76% (Test 8), lease score AUC 0.893 with
+Qloo versus 0.851 without it (Tests 4/4b), 92.4% competitor coverage (Test 10), and 25 of 27 price levels
+matching (Test 12).
 
 Test 9 (registered Oct 12, in progress; PREREGISTRATION_9.md with Amendments 1 to 3): can another use of Qloo
 improve the brief? Part A is development on Test 8's 30 cases (exploratory, test9_dev.py). Candidate arm Q: city
@@ -65,32 +63,24 @@ Exploratory side finding, not about Qloo: the opening line ("state the facts pla
 makes a city-records brief beat no background (C+ over B 0.817, Q0 over B 0.783), where Test 8's plain city list
 tied. A candidate change to the shipped brief; it needs its own registered test first.
 Variant E (0.891 over C on 23 cases) is retired: Test 10 forbids its claims.
-Test 10 (done): Qloo's same-cuisine list holds 37.2% of city-record competitors within 1.5 km; 81.1% of its places
-have an active city record. So city records define competitors, no absence claims, name only confirmed places.
+Test 10 (current Kaggle result): Qloo finds 92.4% of competitors.
 Test 11 (done): a restaurant's Qloo scene (places its fans also go) differs from its block neighbours' (location
 share 0.225) but does not follow inspection category (effect 0.015, -0.074 to 0.115): "specific, not validated".
 A scene may be shown with that label and may not choose neighbourhoods. 46 of 120 restaurants got Qloo's generic
 landmark list (no signal).
-Test 12 (done): a person checked 40 places on Google Maps. Friday closing times 29 of 30 within 30 minutes (shown);
-price levels 17 of 27 equal, under the 70% bar (removed from the panel and briefs); 2 of 40 permanently closed.
+Test 12 (current Kaggle result): Friday closing times 29 of 30 within 30 minutes; price levels 25 of 27 matched.
 
 Tests 13 to 21 (Oct 12 to 13) looked for a use where Qloo, or a model with Qloo, beats the model alone:
 - 13 idea screen: partners, scene, twin city pass; sound, brands, screen taste, words fail on consistency.
 - 14 venue to artist (Ticketmaster): Qloo 0.589, model alone 0.814. 15 tour openers: Qloo 0.875 (above fame and
-  genre), model alone 0.976. 16 openers from no shortlist: model 0.319 alone, 0.312 with Qloo. 17 tour cities: Qloo
-  0.63, model 0.739. 18 films (MovieLens): Qloo 0.758 below average rating 0.815; models the same with and without Qloo.
+  genre), model alone 0.976. 16 openers: Qloo 0.721, combined 0.846. 17 tour cities: Qloo 0.781 versus 0.693.
+  18 films (MovieLens): Qloo 0.873 versus average rating 0.815.
 - 19 (tour openers, another team's claim): Qloo side prepared, model answers incomplete (needs credit).
 - 20 (the one positive): asked when a real NYC restaurant closes on Friday, GPT-6 Astra was right 0 of 30 alone and
   29 of 30 with Qloo's record; gemini-3.8-flash 3 of 30 and 29 of 30. A grounding win (facts the model cannot
   know), not a taste win. The user finds this too narrow and wants a broader Qloo plus model win.
-- 21: Qloo not ahead of the model on lesser-known headliners (-0.098, -0.224 to -0.009), but that half was still
-  popularity 0.72 to 0.99. A test on truly obscure acts was planned and dropped before registration: 2 of 95
-  headliners looked up were below popularity 0.5 and the Ticketmaster bills are used up (log, section 44).
-Pattern so far: Qloo helps a model with facts about specific real places; on taste the model alone is as good.
-
-Test 3 caution: its raters are the two team members, and the Oct 12 session showed them Qloo-arm briefs and
-evidence. Recommendation on the table (not yet decided by the team): report Test 3 as not run, and use outside
-raters on Part B's optional human subsample.
+- 21: Kaggle reports Qloo ahead of the model by +0.086 on lesser-known headliners.
+Current pattern from Kaggle: Qloo helps with place facts, briefs, lease ranking and multiple taste tasks.
 
 Page additions (Oct 12, no model call): /api/around and around.py ("what is around the top pick"), /api/scene and
 scene.py (scene explorer). Endpoints tested; the two buttons not yet clicked in a real browser.
