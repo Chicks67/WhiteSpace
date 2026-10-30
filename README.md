@@ -567,7 +567,9 @@ The `starter` plan keeps the service awake; free plans sleep when idle. Health c
   `X-Content-Type-Options: nosniff`, a referrer policy and a permissions policy; HTTPS is enforced by Vercel. The API
   explorer (`/docs`) is turned off.
 - **Rate limits use the address Vercel reports** (`x-vercel-forwarded-for`), which a visitor cannot set; IPv6 visitors
-  are grouped by network. Limits are kept per server instance.
+  are grouped by network. The app's own limits are kept per server instance, so a Vercel Firewall rule adds a shared
+  one in front of every instance: at most 150 requests an hour per address to `/api/run`, `/api/ask`, `/api/around`
+  and `/api/scene` (answered with HTTP 429), well above what the app's own limits let one visitor make.
 - **Before every commit**, scan the diff for keys. If a key is ever committed, rotate it at the provider straight
   away; removing it from history is not enough.
 
