@@ -161,23 +161,25 @@ never a key.
 
 ```mermaid
 flowchart LR
-    U[Founder in the browser] -- POST /api/run --> S[app.py, FastAPI]
-    S -- server-sent events --> U
-    S --> A[agent.py]
-    A --> C[Match concept<br/>engine.CONCEPTS]
-    A --> F{Where}
-    F -- plan --> SC[scout.py<br/>tool loop + code checks]
-    F -- area --> SF[storefronts.py]
-    F -- addresses --> G[engine.py geocoding]
-    SC --> R[engine.py lease score<br/>lease_model.json]
+    U["Founder in the browser"] -->|"POST /api/run"| S["app.py (FastAPI)"]
+    S -->|"server-sent events"| U
+    S --> A["agent.py"]
+    A --> C["Match concept to 25 tested cuisines"]
+    A --> F{"Where"}
+    F -->|"plan"| SC["scout.py: tool loop and code checks"]
+    F -->|"area"| SF["storefronts.py"]
+    F -->|"addresses"| G["engine.py: geocoding"]
+    SC --> R["engine.py: lease score"]
     SF --> R
     G --> R
-    R --> P[positioning.py<br/>brief + name check]
-    P --> N[partners.py, next_steps.py, bids.py]
-    SC -. census.py, transit.py .- R
-    P -. qloo.py, cached .- Q[(Qloo API)]
-    P -. llm.py .- M[(GPT-6 Astra)]
-    U -- POST /api/ask --> FU[followup.py tools]
+    R --> P["positioning.py: brief and name check"]
+    P --> N["partners, next steps, business districts"]
+    D[("City data: census, transit, inspections")] -.-> SC
+    Q[("Qloo API, cached")] -.-> P
+    Q -.-> AR["around.py: rivals' hours and reviews"]
+    M[("GPT-6 Astra")] -.-> P
+    U -->|"POST /api/ask"| FU["followup.py: 12 tools"]
+    Q -.-> FU
 ```
 
 - **One run, streamed.** `POST /api/run` starts `agent.run` in a worker thread. Each step, each scout tool call, each
@@ -234,7 +236,7 @@ sequenceDiagram
     participant SC as scout.py
     participant Q as Qloo (cached)
     participant M as Model
-    B->>S: POST /api/run {concept, goal}
+    B->>S: POST /api/run with concept and plan
     S->>S: rate limit, daily budget, concurrency slot
     S-->>B: event stream opens
     A->>A: match concept to a tested cuisine
@@ -253,8 +255,11 @@ sequenceDiagram
     Q-->>B: qloo (each call, cached or not)
     A->>M: write the brief (streamed)
     M-->>B: brief_delta
-    A->>A: trace every name to Qloo, city records or "unverified"; repair
+    A->>A: trace every name to Qloo or city records, repair the rest
     A-->>B: brief, done (with model cost)
+    B->>S: GET /api/around for the top pick
+    S->>Q: rivals' Friday hours and review mentions
+    S-->>B: closing-time timeline
 ```
 
 ### Events on the stream
