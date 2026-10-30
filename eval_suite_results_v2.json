@@ -1,0 +1,735 @@
+{
+ "date": "2026-10-10",
+ "runs": {
+  "korean-cafe-astoria": {
+   "pass^k": true,
+   "k": 3,
+   "runs": [
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "37-11 35th Avenue, Queens",
+      "30 Steinway Street, Queens",
+      "52-21 Northern Blvd, Queens",
+      "33 30 Avenue, Queens",
+      "34-39 31st Street, Queens"
+     ],
+     "problems": [],
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 163.52,
+     "credits": 1.6,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "37-11 35th Avenue, Queens",
+      "30 Steinway Street, Queens",
+      "52-21 Northern Blvd, Queens",
+      "33 30 Avenue, Queens",
+      "34-39 31st Street, Queens"
+     ],
+     "problems": [],
+     "names": 3,
+     "qloo_names": 3,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 80.95,
+     "credits": 2.71,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "37-11 35th Avenue, Queens",
+      "30 Steinway Street, Queens",
+      "52-21 Northern Blvd, Queens",
+      "33 30 Avenue, Queens",
+      "34-39 31st Street, Queens"
+     ],
+     "problems": [],
+     "names": 3,
+     "qloo_names": 3,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 48.47,
+     "credits": 1.69,
+     "passed": true
+    }
+   ]
+  },
+  "korean-cafe-queens": {
+   "pass^k": true,
+   "k": 3,
+   "runs": [
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "136-20 38 AVENUE, Flushing, NY, USA",
+      "35-01 UNION STREET, Flushing, NY, USA",
+      "41-08 BELL BOULEVARD, Bayside, NY, USA"
+     ],
+     "problems": [],
+     "names": 3,
+     "qloo_names": 3,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 68.49,
+     "credits": 1.88,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "136-20 38 AVENUE, Flushing, NY, USA",
+      "35-01 UNION STREET, Flushing, NY, USA",
+      "41-08 BELL BOULEVARD, Bayside, NY, USA"
+     ],
+     "problems": [],
+     "names": 5,
+     "qloo_names": 5,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 59.41,
+     "credits": 1.89,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "136-20 38 AVENUE, Flushing, NY, USA",
+      "35-01 UNION STREET, Flushing, NY, USA",
+      "41-08 BELL BOULEVARD, Bayside, NY, USA"
+     ],
+     "problems": [],
+     "names": 3,
+     "qloo_names": 3,
+     "city_names": 0,
+     "unverified_before": 2,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "rank",
+      "evidence",
+      "write",
+      "verify",
+      "repair1",
+      "verify_repair1"
+     ],
+     "seconds": 125.54,
+     "credits": 4.66,
+     "passed": true
+    }
+   ]
+  },
+  "ramen-williamsburg": {
+   "pass^k": true,
+   "k": 3,
+   "runs": [
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "556 Driggs Avenue, Brooklyn",
+      "318 Grand Street, Brooklyn",
+      "52 North 11th Street, Brooklyn",
+      "188 Grand Street, Brooklyn",
+      "108 North 6 Street, Brooklyn"
+     ],
+     "problems": [],
+     "names": 4,
+     "qloo_names": 3,
+     "city_names": 1,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 29.62,
+     "credits": 1.42,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "556 Driggs Avenue, Brooklyn",
+      "318 Grand Street, Brooklyn",
+      "52 North 11th Street, Brooklyn",
+      "188 Grand Street, Brooklyn",
+      "108 North 6 Street, Brooklyn"
+     ],
+     "problems": [],
+     "names": 4,
+     "qloo_names": 3,
+     "city_names": 1,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 34.35,
+     "credits": 1.43,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "556 Driggs Avenue, Brooklyn",
+      "318 Grand Street, Brooklyn",
+      "52 North 11th Street, Brooklyn",
+      "188 Grand Street, Brooklyn",
+      "108 North 6 Street, Brooklyn"
+     ],
+     "problems": [],
+     "names": 4,
+     "qloo_names": 3,
+     "city_names": 1,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 41.88,
+     "credits": 1.25,
+     "passed": true
+    }
+   ]
+  },
+  "caribbean-brooklyn-bronx": {
+   "pass^k": true,
+   "k": 3,
+   "runs": [
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "600 NOSTRAND AVENUE, Brooklyn, NY, USA",
+      "3000 WHITE PLNS ROAD, Bronx, NY, USA",
+      "2000 GRAND CONCOURSE, Bronx, NY, USA"
+     ],
+     "problems": [],
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 1,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "rank",
+      "evidence",
+      "write",
+      "verify",
+      "repair1",
+      "verify_repair1"
+     ],
+     "seconds": 207.03,
+     "credits": 3.68,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "600 NOSTRAND AVENUE, Brooklyn, NY, USA",
+      "3000 WHITE PLNS ROAD, Bronx, NY, USA",
+      "2000 GRAND CONCOURSE, Bronx, NY, USA"
+     ],
+     "problems": [],
+     "names": 3,
+     "qloo_names": 2,
+     "city_names": 0,
+     "unverified_before": 1,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "rank",
+      "evidence",
+      "write",
+      "verify",
+      "repair1",
+      "verify_repair1"
+     ],
+     "seconds": 103.75,
+     "credits": 5.0,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "600 NOSTRAND AVENUE, Brooklyn, NY, USA",
+      "3000 WHITE PLNS ROAD, Bronx, NY, USA",
+      "2000 GRAND CONCOURSE, Bronx, NY, USA"
+     ],
+     "problems": [],
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 157.46,
+     "credits": 1.31,
+     "passed": true
+    }
+   ]
+  },
+  "taqueria-jackson-heights": {
+   "pass^k": true,
+   "k": 1,
+   "runs": [
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "3700 Junction Blvd, Queens",
+      "37 74 Street, Queens",
+      "92 Roosevelt Avenue, Queens",
+      "80-19 37th Avenue, Jackson Heights, Queens, Queens",
+      "32-61 85th Street, Queens"
+     ],
+     "problems": [],
+     "names": 4,
+     "qloo_names": 4,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 49.96,
+     "credits": 1.72,
+     "passed": true
+    }
+   ]
+  },
+  "middle-eastern-bay-ridge": {
+   "pass^k": true,
+   "k": 1,
+   "runs": [
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "316 Bay Ridge Parkway, Brooklyn",
+      "8519 4th Avenue, Brooklyn",
+      "180 Bay Ridge Avenue, Brooklyn",
+      "6925 4 Avenue, Brooklyn",
+      "7502 5 Avenue, Brooklyn"
+     ],
+     "problems": [],
+     "names": 4,
+     "qloo_names": 4,
+     "city_names": 0,
+     "unverified_before": 1,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify",
+      "repair1",
+      "verify_repair1"
+     ],
+     "seconds": 100.99,
+     "credits": 4.03,
+     "passed": true
+    }
+   ]
+  },
+  "thai-lic-nickname": {
+   "pass^k": true,
+   "k": 1,
+   "runs": [
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "2717 42nd Road, Queens",
+      "22-44 Jackson Avenue, Queens",
+      "10 48 Avenue, Queens",
+      "28 -30 Jackson Avenue, Queens",
+      "44-37 Vernon Blvd., Queens"
+     ],
+     "problems": [],
+     "names": 4,
+     "qloo_names": 4,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 188.3,
+     "credits": 3.24,
+     "passed": true
+    }
+   ]
+  },
+  "indian-bedstuy-nickname": {
+   "pass^k": true,
+   "k": 1,
+   "runs": [
+    {
+     "error": null,
+     "failed_step": "repair1",
+     "order": [
+      "570 Nostrand Avenue, Brooklyn",
+      "434 Nostrand Avenue, Brooklyn",
+      "346 Jefferson Avenue, Brooklyn",
+      "1542 Fulton Street, Brooklyn",
+      "836 Broadway, Brooklyn"
+     ],
+     "problems": [],
+     "names": 5,
+     "qloo_names": 3,
+     "city_names": 0,
+     "unverified_before": 1,
+     "unverified_after": 1,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 209.65,
+     "credits": 2.73,
+     "passed": true
+    }
+   ]
+  },
+  "italian-ues-nickname": {
+   "pass^k": true,
+   "k": 1,
+   "runs": [
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "785 5 Avenue, Manhattan",
+      "1142 First Avenue, Manhattan",
+      "204 East 76 Street, Manhattan",
+      "1748 2 Avenue, Manhattan",
+      "156 East 64th Street, Manhattan"
+     ],
+     "problems": [],
+     "names": 4,
+     "qloo_names": 4,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 117.03,
+     "credits": 3.07,
+     "passed": true
+    }
+   ]
+  }
+ },
+ "edge": {
+  "untested-cuisine": {
+   "pass^3": false,
+   "errors": [
+    "not completed: {\"code\": 402, \"msg\": \"Credits insufficient : Your current balance isn\\u2019t enough to run this request. Please top up to continue.\", \"data\": null}",
+    "not completed: {\"code\": 402, \"msg\": \"Credits insufficient : Your current balance isn\\u2019t enough to run this request. Please top up to continue.\", \"data\": null}",
+    "not completed: {\"code\": 402, \"msg\": \"Credits insufficient : Your current balance isn\\u2019t enough to run this request. Please top up to continue.\", \"data\": null}"
+   ],
+   "seconds": [
+    0.79,
+    0.85,
+    0.79
+   ]
+  },
+  "outside-nyc-area": {
+   "pass^3": false,
+   "errors": [
+    "not completed: {\"code\": 402, \"msg\": \"Credits insufficient : Your current balance isn\\u2019t enough to run this request. Please top up to continue.\", \"data\": null}",
+    "not completed: {\"code\": 402, \"msg\": \"Credits insufficient : Your current balance isn\\u2019t enough to run this request. Please top up to continue.\", \"data\": null}",
+    "not completed: {\"code\": 402, \"msg\": \"Credits insufficient : Your current balance isn\\u2019t enough to run this request. Please top up to continue.\", \"data\": null}"
+   ],
+   "seconds": [
+    0.52,
+    0.49,
+    0.53
+   ]
+  },
+  "prompt-injection": {
+   "pass^3": false,
+   "errors": [
+    "not completed: {\"code\": 402, \"msg\": \"Credits insufficient : Your current balance isn\\u2019t enough to run this request. Please top up to continue.\", \"data\": null}",
+    "not completed: {\"code\": 402, \"msg\": \"Credits insufficient : Your current balance isn\\u2019t enough to run this request. Please top up to continue.\", \"data\": null}",
+    "not completed: {\"code\": 402, \"msg\": \"Credits insufficient : Your current balance isn\\u2019t enough to run this request. Please top up to continue.\", \"data\": null}"
+   ],
+   "seconds": [
+    0.48,
+    0.48,
+    0.78
+   ]
+  }
+ },
+ "followups": {
+  "competitors": {
+   "pass^3": false,
+   "runs": [
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "not completed: {\"code\": 402, \"msg\": \"Credits insufficient : Your current balance isn\\u2019t enough to run this request. Please top up to continue.\", \"data\": null}",
+     "seconds": 0.3,
+     "passed": false
+    },
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "not completed: {\"code\": 429, \"msg\": \"Your call frequency is too high. Please try again later.\", \"data\": null}",
+     "seconds": 0.3,
+     "passed": false
+    },
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "not completed: {\"code\": 402, \"msg\": \"Credits insufficient : Your current balance isn\\u2019t enough to run this request. Please top up to continue.\", \"data\": null}",
+     "seconds": 0.3,
+     "passed": false
+    }
+   ]
+  },
+  "other-area": {
+   "pass^3": false,
+   "runs": [
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "not completed: {\"code\": 429, \"msg\": \"Your call frequency is too high. Please try again later.\", \"data\": null}",
+     "seconds": 0.2,
+     "passed": false
+    },
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "not completed: {\"code\": 429, \"msg\": \"Your call frequency is too high. Please try again later.\", \"data\": null}",
+     "seconds": 0.2,
+     "passed": false
+    },
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "not completed: {\"code\": 429, \"msg\": \"Your call frequency is too high. Please try again later.\", \"data\": null}",
+     "seconds": 0.3,
+     "passed": false
+    }
+   ]
+  },
+  "qloo-predicts": {
+   "pass^3": false,
+   "runs": [
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "not completed: {\"code\": 429, \"msg\": \"Your call frequency is too high. Please try again later.\", \"data\": null}",
+     "seconds": 0.2,
+     "passed": false
+    },
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "not completed: {\"code\": 429, \"msg\": \"Your call frequency is too high. Please try again later.\", \"data\": null}",
+     "seconds": 0.2,
+     "passed": false
+    },
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "not completed: {\"code\": 429, \"msg\": \"Your call frequency is too high. Please try again later.\", \"data\": null}",
+     "seconds": 0.2,
+     "passed": false
+    }
+   ]
+  },
+  "partner-check": {
+   "pass^3": false,
+   "runs": [
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "not completed: {\"code\": 429, \"msg\": \"Your call frequency is too high. Please try again later.\", \"data\": null}",
+     "seconds": 0.3,
+     "passed": false
+    },
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "not completed: {\"code\": 429, \"msg\": \"Your call frequency is too high. Please try again later.\", \"data\": null}",
+     "seconds": 0.2,
+     "passed": false
+    },
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "not completed: {\"code\": 429, \"msg\": \"Your call frequency is too high. Please try again later.\", \"data\": null}",
+     "seconds": 0.2,
+     "passed": false
+    }
+   ]
+  },
+  "area-audience": {
+   "pass^3": false,
+   "runs": [
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "not completed: {\"code\": 429, \"msg\": \"Your call frequency is too high. Please try again later.\", \"data\": null}",
+     "seconds": 0.2,
+     "passed": false
+    },
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "not completed: {\"code\": 429, \"msg\": \"Your call frequency is too high. Please try again later.\", \"data\": null}",
+     "seconds": 0.2,
+     "passed": false
+    },
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "not completed: {\"code\": 429, \"msg\": \"Your call frequency is too high. Please try again later.\", \"data\": null}",
+     "seconds": 0.2,
+     "passed": false
+    }
+   ]
+  }
+ },
+ "runs_per_case": {
+  "korean-cafe-astoria": 3,
+  "korean-cafe-queens": 3,
+  "ramen-williamsburg": 3,
+  "caribbean-brooklyn-bronx": 3,
+  "taqueria-jackson-heights": 1,
+  "middle-eastern-bay-ridge": 1,
+  "thai-lic-nickname": 1,
+  "indian-bedstuy-nickname": 1,
+  "italian-ues-nickname": 1
+ }
+}

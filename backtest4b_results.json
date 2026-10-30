@@ -1,0 +1,415 @@
+{
+ "rule": {
+  "min_positives": 50,
+  "min_auc": 0.75,
+  "min_lower": 0.7
+ },
+ "candidates": {
+  "American": {
+   "blocks": 911,
+   "positives": 350,
+   "auc_DS": 0.809,
+   "ci95": [
+    0.759,
+    0.848
+   ],
+   "auc_D": 0.802,
+   "passes": true
+  },
+  "Chicken": {
+   "blocks": 911,
+   "positives": 180,
+   "auc_DS": 0.76,
+   "ci95": [
+    0.715,
+    0.805
+   ],
+   "auc_D": 0.741,
+   "passes": true
+  },
+  "Juice, Smoothies, Fruit Salads": {
+   "blocks": 911,
+   "positives": 137,
+   "auc_DS": 0.828,
+   "ci95": [
+    0.772,
+    0.871
+   ],
+   "auc_D": 0.831,
+   "passes": true
+  },
+  "Donuts": {
+   "blocks": 911,
+   "positives": 46,
+   "auc_DS": 0.756,
+   "ci95": [
+    0.668,
+    0.832
+   ],
+   "auc_D": 0.765,
+   "passes": false
+  },
+  "Hamburgers": {
+   "blocks": 911,
+   "positives": 85,
+   "auc_DS": 0.814,
+   "ci95": [
+    0.77,
+    0.854
+   ],
+   "auc_D": 0.819,
+   "passes": true
+  },
+  "Asian/Asian Fusion": {
+   "blocks": 911,
+   "positives": 102,
+   "auc_DS": 0.885,
+   "ci95": [
+    0.856,
+    0.914
+   ],
+   "auc_D": 0.885,
+   "passes": true
+  },
+  "Spanish": {
+   "blocks": 911,
+   "positives": 108,
+   "auc_DS": 0.819,
+   "ci95": [
+    0.768,
+    0.866
+   ],
+   "auc_D": 0.737,
+   "passes": true
+  },
+  "Sandwiches": {
+   "blocks": 911,
+   "positives": 69,
+   "auc_DS": 0.858,
+   "ci95": [
+    0.777,
+    0.906
+   ],
+   "auc_D": 0.864,
+   "passes": true
+  },
+  "Frozen Desserts": {
+   "blocks": 911,
+   "positives": 96,
+   "auc_DS": 0.831,
+   "ci95": [
+    0.781,
+    0.87
+   ],
+   "auc_D": 0.834,
+   "passes": true
+  },
+  "Jewish/Kosher": {
+   "blocks": 911,
+   "positives": 42,
+   "auc_DS": 0.914,
+   "ci95": [
+    0.848,
+    0.966
+   ],
+   "auc_D": 0.691,
+   "passes": false
+  },
+  "Tex-Mex": {
+   "blocks": 911,
+   "positives": 49,
+   "auc_DS": 0.75,
+   "ci95": [
+    0.694,
+    0.809
+   ],
+   "auc_D": 0.761,
+   "passes": false
+  },
+  "French": {
+   "blocks": 911,
+   "positives": 47,
+   "auc_DS": 0.926,
+   "ci95": [
+    0.862,
+    0.959
+   ],
+   "auc_D": 0.891,
+   "passes": false
+  },
+  "Seafood": {
+   "blocks": 911,
+   "positives": 56,
+   "auc_DS": 0.805,
+   "ci95": [
+    0.749,
+    0.856
+   ],
+   "auc_D": 0.813,
+   "passes": true
+  },
+  "Bagels/Pretzels": {
+   "blocks": 911,
+   "positives": 59,
+   "auc_DS": 0.875,
+   "ci95": [
+    0.797,
+    0.924
+   ],
+   "auc_D": 0.883,
+   "passes": true
+  },
+  "New American": {
+   "blocks": 911,
+   "positives": 50,
+   "auc_DS": 0.925,
+   "ci95": [
+    0.857,
+    0.965
+   ],
+   "auc_D": 0.913,
+   "passes": true
+  },
+  "Irish": {
+   "blocks": 911,
+   "positives": 14,
+   "auc_DS": 0.798,
+   "ci95": [
+    0.629,
+    0.93
+   ],
+   "auc_D": 0.832,
+   "passes": false
+  },
+  "Sandwiches/Salads/Mixed Buffet": {
+   "blocks": 911,
+   "positives": 43,
+   "auc_DS": 0.798,
+   "ci95": [
+    0.703,
+    0.871
+   ],
+   "auc_D": 0.807,
+   "passes": false
+  },
+  "Greek": {
+   "blocks": 911,
+   "positives": 33,
+   "auc_DS": 0.854,
+   "ci95": [
+    0.751,
+    0.925
+   ],
+   "auc_D": 0.875,
+   "passes": false
+  },
+  "Eastern European": {
+   "blocks": 911,
+   "positives": 38,
+   "auc_DS": 0.829,
+   "ci95": [
+    0.728,
+    0.913
+   ],
+   "auc_D": 0.716,
+   "passes": false
+  },
+  "Salads": {
+   "blocks": 911,
+   "positives": 26,
+   "auc_DS": 0.9,
+   "ci95": [
+    0.779,
+    0.96
+   ],
+   "auc_D": 0.915,
+   "passes": false
+  },
+  "Southeast Asian": {
+   "blocks": 911,
+   "positives": 26,
+   "auc_DS": 0.903,
+   "ci95": [
+    0.861,
+    0.943
+   ],
+   "auc_D": 0.914,
+   "passes": false
+  },
+  "Fusion": {
+   "blocks": 911,
+   "positives": 46,
+   "auc_DS": 0.811,
+   "ci95": [
+    0.727,
+    0.886
+   ],
+   "auc_D": 0.813,
+   "passes": false
+  },
+  "Steakhouse": {
+   "blocks": 911,
+   "positives": 21,
+   "auc_DS": 0.834,
+   "ci95": [
+    0.69,
+    0.917
+   ],
+   "auc_D": 0.85,
+   "passes": false
+  },
+  "Peruvian": {
+   "blocks": 911,
+   "positives": 26,
+   "auc_DS": 0.846,
+   "ci95": [
+    0.751,
+    0.942
+   ],
+   "auc_D": 0.834,
+   "passes": false
+  }
+ },
+ "tested_14_on_all_blocks": {
+  "Korean": {
+   "blocks": 911,
+   "positives": 67,
+   "auc_DS": 0.895,
+   "ci95": [
+    0.842,
+    0.926
+   ],
+   "auc_D": 0.814
+  },
+  "Mexican": {
+   "blocks": 911,
+   "positives": 209,
+   "auc_DS": 0.844,
+   "ci95": [
+    0.808,
+    0.874
+   ],
+   "auc_D": 0.827
+  },
+  "Japanese": {
+   "blocks": 911,
+   "positives": 169,
+   "auc_DS": 0.861,
+   "ci95": [
+    0.805,
+    0.904
+   ],
+   "auc_D": 0.857
+  },
+  "Thai": {
+   "blocks": 911,
+   "positives": 76,
+   "auc_DS": 0.88,
+   "ci95": [
+    0.831,
+    0.911
+   ],
+   "auc_D": 0.864
+  },
+  "Indian": {
+   "blocks": 911,
+   "positives": 71,
+   "auc_DS": 0.852,
+   "ci95": [
+    0.792,
+    0.903
+   ],
+   "auc_D": 0.811
+  },
+  "Caribbean": {
+   "blocks": 911,
+   "positives": 108,
+   "auc_DS": 0.857,
+   "ci95": [
+    0.785,
+    0.904
+   ],
+   "auc_D": 0.601
+  },
+  "Coffee/Tea": {
+   "blocks": 911,
+   "positives": 243,
+   "auc_DS": 0.872,
+   "ci95": [
+    0.834,
+    0.905
+   ],
+   "auc_D": 0.862
+  },
+  "Bakery Products/Desserts": {
+   "blocks": 911,
+   "positives": 161,
+   "auc_DS": 0.834,
+   "ci95": [
+    0.78,
+    0.875
+   ],
+   "auc_D": 0.836
+  },
+  "Chinese": {
+   "blocks": 911,
+   "positives": 269,
+   "auc_DS": 0.782,
+   "ci95": [
+    0.736,
+    0.82
+   ],
+   "auc_D": 0.771
+  },
+  "Pizza": {
+   "blocks": 911,
+   "positives": 267,
+   "auc_DS": 0.8,
+   "ci95": [
+    0.752,
+    0.842
+   ],
+   "auc_D": 0.801
+  },
+  "Italian": {
+   "blocks": 911,
+   "positives": 93,
+   "auc_DS": 0.897,
+   "ci95": [
+    0.839,
+    0.944
+   ],
+   "auc_D": 0.873
+  },
+  "Mediterranean": {
+   "blocks": 911,
+   "positives": 69,
+   "auc_DS": 0.851,
+   "ci95": [
+    0.793,
+    0.892
+   ],
+   "auc_D": 0.841
+  },
+  "Latin American": {
+   "blocks": 911,
+   "positives": 173,
+   "auc_DS": 0.795,
+   "ci95": [
+    0.742,
+    0.84
+   ],
+   "auc_D": 0.744
+  },
+  "Middle Eastern": {
+   "blocks": 911,
+   "positives": 85,
+   "auc_DS": 0.828,
+   "ci95": [
+    0.776,
+    0.863
+   ],
+   "auc_D": 0.81
+  }
+ }
+}

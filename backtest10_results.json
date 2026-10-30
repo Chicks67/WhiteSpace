@@ -1,0 +1,411 @@
+{
+ "cases": 30,
+ "coverage": {
+  "share": 0.372,
+  "matched": 519,
+  "of": 1396,
+  "ci95": [
+   0.323,
+   0.443
+  ]
+ },
+ "existence": {
+  "share": 0.811,
+  "matched": 813,
+  "of": 1002,
+  "ci95": [
+   0.784,
+   0.837
+  ]
+ },
+ "coverage_band": "under 50%",
+ "existence_band": "under 90%",
+ "search_sample": {
+  "unmatched_city_sampled": 40,
+  "qloo_has_it_under_another_tag": 22
+ },
+ "by_cuisine": {
+  "Bakery": {
+   "coverage": 0.364,
+   "existence": 0.8,
+   "city": 11,
+   "qloo": 15
+  },
+  "Caribbean": {
+   "coverage": 0.167,
+   "existence": 0.75,
+   "city": 18,
+   "qloo": 8
+  },
+  "Chinese": {
+   "coverage": 0.357,
+   "existence": 0.846,
+   "city": 129,
+   "qloo": 78
+  },
+  "Coffee shop": {
+   "coverage": 0.261,
+   "existence": 0.84,
+   "city": 460,
+   "qloo": 275
+  },
+  "Indian": {
+   "coverage": 0.544,
+   "existence": 0.868,
+   "city": 57,
+   "qloo": 38
+  },
+  "Italian": {
+   "coverage": null,
+   "existence": 0.0,
+   "city": 0,
+   "qloo": 2
+  },
+  "Japanese": {
+   "coverage": 0.419,
+   "existence": 0.82,
+   "city": 93,
+   "qloo": 61
+  },
+  "Korean": {
+   "coverage": 0.406,
+   "existence": 0.8,
+   "city": 261,
+   "qloo": 155
+  },
+  "Latin American": {
+   "coverage": 0.316,
+   "existence": 0.917,
+   "city": 19,
+   "qloo": 12
+  },
+  "Mediterranean": {
+   "coverage": 0.432,
+   "existence": 0.752,
+   "city": 88,
+   "qloo": 113
+  },
+  "Mexican": {
+   "coverage": 0.493,
+   "existence": 0.778,
+   "city": 69,
+   "qloo": 72
+  },
+  "Middle Eastern": {
+   "coverage": 0.22,
+   "existence": 0.794,
+   "city": 41,
+   "qloo": 34
+  },
+  "Pizza": {
+   "coverage": 0.533,
+   "existence": 0.8,
+   "city": 92,
+   "qloo": 95
+  },
+  "Thai": {
+   "coverage": 0.586,
+   "existence": 0.818,
+   "city": 58,
+   "qloo": 44
+  }
+ },
+ "by_borough": {
+  "Bronx": {
+   "coverage": 0.167,
+   "existence": 0.667,
+   "city": 12,
+   "qloo": 12
+  },
+  "Brooklyn": {
+   "coverage": 0.344,
+   "existence": 0.864,
+   "city": 32,
+   "qloo": 22
+  },
+  "Manhattan": {
+   "coverage": 0.375,
+   "existence": 0.814,
+   "city": 1349,
+   "qloo": 963
+  },
+  "Queens": {
+   "coverage": 0.0,
+   "existence": 0.4,
+   "city": 3,
+   "qloo": 5
+  }
+ },
+ "per_case": [
+  {
+   "id": 1,
+   "concept": "Korean",
+   "borough": "Manhattan",
+   "city": 26,
+   "city_matched": 9,
+   "qloo": 13,
+   "qloo_matched": 12
+  },
+  {
+   "id": 2,
+   "concept": "Mexican",
+   "borough": "Manhattan",
+   "city": 15,
+   "city_matched": 10,
+   "qloo": 25,
+   "qloo_matched": 23
+  },
+  {
+   "id": 3,
+   "concept": "Japanese",
+   "borough": "Queens",
+   "city": 3,
+   "city_matched": 0,
+   "qloo": 3,
+   "qloo_matched": 2
+  },
+  {
+   "id": 4,
+   "concept": "Thai",
+   "borough": "Manhattan",
+   "city": 22,
+   "city_matched": 12,
+   "qloo": 16,
+   "qloo_matched": 13
+  },
+  {
+   "id": 5,
+   "concept": "Indian",
+   "borough": "Manhattan",
+   "city": 45,
+   "city_matched": 25,
+   "qloo": 30,
+   "qloo_matched": 27
+  },
+  {
+   "id": 6,
+   "concept": "Caribbean",
+   "borough": "Brooklyn",
+   "city": 9,
+   "city_matched": 1,
+   "qloo": 3,
+   "qloo_matched": 3
+  },
+  {
+   "id": 7,
+   "concept": "Coffee shop",
+   "borough": "Manhattan",
+   "city": 208,
+   "city_matched": 54,
+   "qloo": 133,
+   "qloo_matched": 117
+  },
+  {
+   "id": 8,
+   "concept": "Bakery",
+   "borough": "Manhattan",
+   "city": 8,
+   "city_matched": 4,
+   "qloo": 8,
+   "qloo_matched": 7
+  },
+  {
+   "id": 9,
+   "concept": "Chinese",
+   "borough": "Manhattan",
+   "city": 101,
+   "city_matched": 36,
+   "qloo": 61,
+   "qloo_matched": 51
+  },
+  {
+   "id": 10,
+   "concept": "Pizza",
+   "borough": "Manhattan",
+   "city": 65,
+   "city_matched": 34,
+   "qloo": 62,
+   "qloo_matched": 50
+  },
+  {
+   "id": 11,
+   "concept": "Italian",
+   "borough": "Queens",
+   "city": 0,
+   "city_matched": 0,
+   "qloo": 2,
+   "qloo_matched": 0
+  },
+  {
+   "id": 12,
+   "concept": "Mediterranean",
+   "borough": "Manhattan",
+   "city": 46,
+   "city_matched": 21,
+   "qloo": 60,
+   "qloo_matched": 47
+  },
+  {
+   "id": 13,
+   "concept": "Latin American",
+   "borough": "Brooklyn",
+   "city": 10,
+   "city_matched": 5,
+   "qloo": 9,
+   "qloo_matched": 9
+  },
+  {
+   "id": 14,
+   "concept": "Middle Eastern",
+   "borough": "Manhattan",
+   "city": 22,
+   "city_matched": 3,
+   "qloo": 21,
+   "qloo_matched": 15
+  },
+  {
+   "id": 15,
+   "concept": "Korean",
+   "borough": "Manhattan",
+   "city": 115,
+   "city_matched": 48,
+   "qloo": 69,
+   "qloo_matched": 56
+  },
+  {
+   "id": 16,
+   "concept": "Mexican",
+   "borough": "Manhattan",
+   "city": 41,
+   "city_matched": 19,
+   "qloo": 37,
+   "qloo_matched": 26
+  },
+  {
+   "id": 17,
+   "concept": "Japanese",
+   "borough": "Manhattan",
+   "city": 90,
+   "city_matched": 39,
+   "qloo": 58,
+   "qloo_matched": 48
+  },
+  {
+   "id": 18,
+   "concept": "Thai",
+   "borough": "Manhattan",
+   "city": 36,
+   "city_matched": 22,
+   "qloo": 28,
+   "qloo_matched": 23
+  },
+  {
+   "id": 19,
+   "concept": "Indian",
+   "borough": "Manhattan",
+   "city": 12,
+   "city_matched": 6,
+   "qloo": 8,
+   "qloo_matched": 6
+  },
+  {
+   "id": 20,
+   "concept": "Caribbean",
+   "borough": "Bronx",
+   "city": 9,
+   "city_matched": 2,
+   "qloo": 5,
+   "qloo_matched": 3
+  },
+  {
+   "id": 21,
+   "concept": "Coffee shop",
+   "borough": "Manhattan",
+   "city": 252,
+   "city_matched": 66,
+   "qloo": 142,
+   "qloo_matched": 114
+  },
+  {
+   "id": 22,
+   "concept": "Bakery",
+   "borough": "Bronx",
+   "city": 3,
+   "city_matched": 0,
+   "qloo": 7,
+   "qloo_matched": 5
+  },
+  {
+   "id": 23,
+   "concept": "Chinese",
+   "borough": "Manhattan",
+   "city": 28,
+   "city_matched": 10,
+   "qloo": 17,
+   "qloo_matched": 15
+  },
+  {
+   "id": 24,
+   "concept": "Pizza",
+   "borough": "Manhattan",
+   "city": 27,
+   "city_matched": 15,
+   "qloo": 33,
+   "qloo_matched": 26
+  },
+  {
+   "id": 25,
+   "concept": "Italian",
+   "borough": "Brooklyn",
+   "city": 0,
+   "city_matched": 0,
+   "qloo": 0,
+   "qloo_matched": 0
+  },
+  {
+   "id": 26,
+   "concept": "Mediterranean",
+   "borough": "Manhattan",
+   "city": 42,
+   "city_matched": 17,
+   "qloo": 53,
+   "qloo_matched": 38
+  },
+  {
+   "id": 27,
+   "concept": "Latin American",
+   "borough": "Manhattan",
+   "city": 9,
+   "city_matched": 1,
+   "qloo": 3,
+   "qloo_matched": 2
+  },
+  {
+   "id": 28,
+   "concept": "Middle Eastern",
+   "borough": "Manhattan",
+   "city": 19,
+   "city_matched": 6,
+   "qloo": 13,
+   "qloo_matched": 12
+  },
+  {
+   "id": 29,
+   "concept": "Korean",
+   "borough": "Manhattan",
+   "city": 120,
+   "city_matched": 49,
+   "qloo": 73,
+   "qloo_matched": 56
+  },
+  {
+   "id": 30,
+   "concept": "Mexican",
+   "borough": "Brooklyn",
+   "city": 13,
+   "city_matched": 5,
+   "qloo": 10,
+   "qloo_matched": 7
+  }
+ ]
+}

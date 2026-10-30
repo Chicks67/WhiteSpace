@@ -1,0 +1,44 @@
+# Render blueprint. Secrets are set in the Render dashboard, never in this file.
+services:
+  - type: web
+    name: whitespace
+    runtime: python
+    plan: starter            # keeps the service awake through judging; free plans sleep when idle
+    # The persistent disk is not mounted while building, so the build warms the Qloo cache into ./cache (inside the
+    # private build, never the repo) and the start command copies it onto the disk once.
+    buildCommand: pip install -r requirements.txt && QLOO_CACHE_DIR=./cache python build_data.py
+    startCommand: mkdir -p /var/data/qloo-cache /var/data/golden && cp -n cache/* /var/data/qloo-cache/ 2>/dev/null; uvicorn app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    # Private persistent disk: saved runs and the Qloo response cache live here, never in the public repo
+    # (Qloo: private server-side caching is fine; Qloo data in a public repo is not). Upload golden/ once.
+    disk:
+      name: whitespace-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.1
+      - key: QLOO_API_KEY
+        sync: false
+      - key: CENSUS_API_KEY    # the build step fetches neighbourhood profiles from the US Census API
+        sync: false
+      - key: LLM_PROVIDER
+        value: comet
+      - key: COMET_API_KEY
+        sync: false
+      - key: KIE_API_KEY
+        sync: false
+      - key: GOLDEN_DIR
+        value: /var/data/golden
+      - key: QLOO_CACHE_DIR
+        value: /var/data/qloo-cache
+      - key: DAILY_CREDITS
+        value: "600"
+      - key: RUNS_PER_HOUR
+        value: "4"
+      - key: ASKS_PER_HOUR
+        value: "15"
+      - key: LOOKUPS_PER_HOUR   # the two Qloo lookups (no model call)
+        value: "30"
+      - key: REPO_URL
+        sync: false

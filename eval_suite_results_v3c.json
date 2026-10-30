@@ -1,0 +1,110 @@
+{
+ "date": "2026-10-11",
+ "runs": {},
+ "edge": {},
+ "followups": {
+  "partner-check": {
+   "pass^3": true,
+   "runs": [
+    {
+     "tools": [
+      [
+       "lookup_business",
+       "done"
+      ]
+     ],
+     "answer": "Yes. Kung Fu Tea appears in NYC inspection records 46 metres from the top lease, 136-20 38 Avenue in Flushing. That confirms a nearby listing, not a partnership or current operating status.",
+     "unchecked": [],
+     "error": null,
+     "seconds": 6.5,
+     "passed": true
+    },
+    {
+     "tools": [
+      [
+       "lookup_business",
+       "done"
+      ]
+     ],
+     "answer": "Yes. Kung Fu Tea appears in NYC inspection records approximately 46 metres from the top lease at 136-20 38 Avenue, Flushing. This confirms a nearby listing, not a partnership or willingness to cross-promote.",
+     "unchecked": [],
+     "error": null,
+     "seconds": 8.1,
+     "passed": true
+    },
+    {
+     "tools": [
+      [
+       "lookup_business",
+       "done"
+      ]
+     ],
+     "answer": "Yes. Kung Fu Tea appears in NYC inspection records 46 metres from the top lease, 136-20 38 Avenue in Flushing. That confirms a nearby listing, not a launch partnership or current operating status.",
+     "unchecked": [],
+     "error": null,
+     "seconds": 6.8,
+     "passed": true
+    }
+   ]
+  },
+  "area-audience": {
+   "pass^3": true,
+   "runs": [
+    {
+     "tools": [
+      [
+       "area_profile",
+       "done"
+      ]
+     ],
+     "answer": "Qloo\u2019s profile around 35-01 Union Street in Flushing highlights \u201cLocals,\u201d \u201cGroups of Friends,\u201d \u201cBusiness Professionals,\u201d and \u201cTourists\u201d among tags that over-index versus NYC overall. Other tags include \u201cBraggadocio,\u201d \u201cnew york,\u201d and \u201cTraditional American restaurant.\u201d\n\nAmong people nearby who like Korean cuisine, the standout brand affinities are New York Yankees and Queens Museum.\n\nFor your Korean caf\u00e9, these are prompts to explore a welcoming, social atmosphere and locally rooted messaging\u2014not proof of specific customer demographics or demand for particular menu items. This profile doesn\u2019t substantiate the earlier brief\u2019s student targeting or named launch partners.\n\nQloo describes audience affinities; it does not establish whether this is a good lease or affect the city-records lease ranking.",
+     "unchecked": [],
+     "error": null,
+     "seconds": 9.0,
+     "passed": true
+    },
+    {
+     "tools": [
+      [
+       "area_profile",
+       "done"
+      ]
+     ],
+     "answer": "Qloo\u2019s audience profile around 35-01 Union Street in Flushing shows:\n\n\u2022 Over-indexing tags versus NYC: \u201cLocals,\u201d \u201cTourists,\u201d \u201cGroups of Friends,\u201d \u201cBusiness Professionals,\u201d \u201cTraditional American restaurant,\u201d \u201cBraggadocio,\u201d and \u201cnew york.\u201d\n\u2022 Brand affinities among nearby people who like Korean cuisine: New York Yankees and Queens Museum.\n\nFor your Korean caf\u00e9, these suggest possible messaging to test: a neighborhood gathering spot, casual meetups, and workday coffee breaks, with a Queens-local identity. They don\u2019t establish customer demographics or demand for particular menu items.\n\nQloo is descriptive\u2014not evidence that you should choose this lease. It also doesn\u2019t substantiate the earlier brief\u2019s claims about students or specific ethnic audiences.",
+     "unchecked": [],
+     "error": null,
+     "seconds": 10.1,
+     "passed": true
+    },
+    {
+     "tools": [
+      [
+       "area_profile",
+       "done"
+      ]
+     ],
+     "answer": "Qloo\u2019s profile around 35-01 Union Street highlights \u201cLocals,\u201d \u201cTourists,\u201d \u201cGroups of Friends,\u201d and \u201cBusiness Professionals.\u201d Other over-indexing tags include \u201cTraditional American restaurant,\u201d \u201cnew york,\u201d and \u201cBraggadocio.\u201d\n\nAmong people nearby who like Korean cuisine, brand affinities over-index for the New York Yankees and Queens Museum.\n\nFor your Korean caf\u00e9, these are prompts to explore a welcoming neighborhood identity and a format suited to friends and workday visits\u2014not proof of customer demographics or demand for particular menu items.\n\nThese signals are relative to NYC overall. Qloo describes audience affinities; it does not establish whether this is a good lease or support the earlier brief\u2019s specific claims about students or ethnic audiences.",
+     "unchecked": [],
+     "error": null,
+     "seconds": 12.6,
+     "passed": true
+    }
+   ]
+  }
+ },
+ "runs_per_case": {
+  "korean-cafe-astoria": 3,
+  "korean-cafe-queens": 3,
+  "ramen-williamsburg": 3,
+  "caribbean-brooklyn-bronx": 3,
+  "taqueria-jackson-heights": 3,
+  "coffee-bronx": 3,
+  "caribbean-crown-heights": 3,
+  "pizza-bushwick": 3,
+  "bakery-park-slope": 3,
+  "middle-eastern-bay-ridge": 3,
+  "thai-lic-nickname": 3,
+  "indian-bedstuy-nickname": 3,
+  "italian-ues-nickname": 3
+ }
+}

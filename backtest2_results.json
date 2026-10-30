@@ -1,0 +1,457 @@
+{
+  "per_cuisine": {
+    "Korean": {
+      "tags_used": 2,
+      "h1_cells": 753,
+      "first_openings": 28,
+      "A_presence_auc": {
+        "audience": {
+          "0": 0.86,
+          "500": 0.664
+        },
+        "cuisine": {
+          "0": 0.893,
+          "500": 0.693
+        }
+      },
+      "A_retention": {
+        "audience": 0.456,
+        "cuisine": 0.491,
+        "tie": false
+      },
+      "B_auc": {
+        "base": 0.808,
+        "full": 0.807,
+        "audience_alone": 0.635,
+        "B1": 0.715
+      },
+      "B_delong_alone_vs_B1": {
+        "diff": -0.08,
+        "p": 0.1815
+      },
+      "B_precision@20": {
+        "full": 0.25,
+        "base": 0.3
+      },
+      "B_boyce": {
+        "full": 0.82,
+        "base": 0.8
+      }
+    },
+    "Indian": {
+      "tags_used": 2,
+      "h1_cells": 748,
+      "first_openings": 32,
+      "A_presence_auc": {
+        "audience": {
+          "0": 0.701,
+          "500": 0.525
+        },
+        "cuisine": {
+          "0": 0.783,
+          "500": 0.585
+        }
+      },
+      "A_retention": {
+        "audience": 0.122,
+        "cuisine": 0.301,
+        "tie": false
+      },
+      "B_auc": {
+        "base": 0.796,
+        "full": 0.797,
+        "audience_alone": 0.627,
+        "B1": 0.774
+      },
+      "B_delong_alone_vs_B1": {
+        "diff": -0.147,
+        "p": 0.0027
+      },
+      "B_precision@20": {
+        "full": 0.25,
+        "base": 0.3
+      },
+      "B_boyce": {
+        "full": 0.88,
+        "base": 0.9
+      }
+    },
+    "Japanese": {
+      "tags_used": 2,
+      "h1_cells": 663,
+      "first_openings": 57,
+      "A_presence_auc": {
+        "audience": {
+          "0": 0.62,
+          "500": 0.488
+        },
+        "cuisine": {
+          "0": 0.787,
+          "500": 0.597
+        }
+      },
+      "A_retention": {
+        "audience": -0.103,
+        "cuisine": 0.338,
+        "tie": false
+      },
+      "B_auc": {
+        "base": 0.704,
+        "full": 0.703,
+        "audience_alone": 0.505,
+        "B1": 0.721
+      },
+      "B_delong_alone_vs_B1": {
+        "diff": -0.216,
+        "p": 0.0
+      },
+      "B_precision@20": {
+        "full": 0.15,
+        "base": 0.2
+      },
+      "B_boyce": {
+        "full": 0.91,
+        "base": 0.93
+      }
+    },
+    "Mexican": {
+      "tags_used": 2,
+      "h1_cells": 508,
+      "first_openings": 62,
+      "A_presence_auc": {
+        "audience": {
+          "0": 0.576,
+          "500": 0.495
+        },
+        "cuisine": {
+          "0": 0.724,
+          "500": 0.521
+        }
+      },
+      "A_retention": {
+        "audience": -0.064,
+        "cuisine": 0.095,
+        "tie": false
+      },
+      "B_auc": {
+        "base": 0.776,
+        "full": 0.776,
+        "audience_alone": 0.509,
+        "B1": 0.74
+      },
+      "B_delong_alone_vs_B1": {
+        "diff": -0.232,
+        "p": 0.0
+      },
+      "B_precision@20": {
+        "full": 0.3,
+        "base": 0.35
+      },
+      "B_boyce": {
+        "full": 0.98,
+        "base": 0.98
+      }
+    },
+    "Caribbean": {
+      "tags_used": 2,
+      "h1_cells": 652,
+      "first_openings": 30,
+      "A_presence_auc": {
+        "audience": {
+          "0": 0.79,
+          "500": 0.605
+        },
+        "cuisine": {
+          "0": 0.814,
+          "500": 0.635
+        }
+      },
+      "A_retention": {
+        "audience": 0.363,
+        "cuisine": 0.43,
+        "tie": false
+      },
+      "B_auc": {
+        "base": 0.805,
+        "full": 0.806,
+        "audience_alone": 0.711,
+        "B1": 0.58
+      },
+      "B_delong_alone_vs_B1": {
+        "diff": 0.132,
+        "p": 0.0556
+      },
+      "B_precision@20": {
+        "full": 0.25,
+        "base": 0.25
+      },
+      "B_boyce": {
+        "full": 0.93,
+        "base": 0.74
+      }
+    },
+    "Chinese": {
+      "tags_used": 1,
+      "h1_cells": 325,
+      "first_openings": 57,
+      "A_presence_auc": {
+        "audience": {
+          "0": 0.519,
+          "500": 0.467
+        },
+        "cuisine": {
+          "0": 0.57,
+          "500": 0.453
+        }
+      },
+      "A_retention": {
+        "audience": -1.693,
+        "cuisine": -0.669,
+        "tie": true
+      },
+      "B_auc": {
+        "base": 0.752,
+        "full": 0.752,
+        "audience_alone": 0.491,
+        "B1": 0.73
+      },
+      "B_delong_alone_vs_B1": {
+        "diff": -0.24,
+        "p": 0.0
+      },
+      "B_precision@20": {
+        "full": 0.5,
+        "base": 0.5
+      },
+      "B_boyce": {
+        "full": 0.94,
+        "base": 0.9
+      }
+    },
+    "Thai": {
+      "tags_used": 1,
+      "h1_cells": 502,
+      "first_openings": 26,
+      "A_presence_auc": {
+        "audience": {
+          "0": 0.564,
+          "500": 0.558
+        },
+        "cuisine": {
+          "0": 0.797,
+          "500": 0.632
+        }
+      },
+      "A_retention": {
+        "audience": 0.898,
+        "cuisine": 0.444,
+        "tie": false
+      },
+      "B_auc": {
+        "base": 0.749,
+        "full": 0.756,
+        "audience_alone": 0.589,
+        "B1": 0.762
+      },
+      "B_delong_alone_vs_B1": {
+        "diff": -0.173,
+        "p": 0.0028
+      },
+      "B_precision@20": {
+        "full": 0.15,
+        "base": 0.15
+      },
+      "B_boyce": {
+        "full": 0.81,
+        "base": 0.82
+      }
+    },
+    "Middle Eastern": {
+      "tags_used": 2,
+      "h1_cells": 729,
+      "first_openings": 46,
+      "A_presence_auc": {
+        "audience": {
+          "0": 0.616,
+          "500": 0.574
+        },
+        "cuisine": {
+          "0": 0.744,
+          "500": 0.627
+        }
+      },
+      "A_retention": {
+        "audience": 0.635,
+        "cuisine": 0.518,
+        "tie": false
+      },
+      "B_auc": {
+        "base": 0.751,
+        "full": 0.75,
+        "audience_alone": 0.612,
+        "B1": 0.749
+      },
+      "B_delong_alone_vs_B1": {
+        "diff": -0.138,
+        "p": 0.0058
+      },
+      "B_precision@20": {
+        "full": 0.25,
+        "base": 0.25
+      },
+      "B_boyce": {
+        "full": 0.98,
+        "base": 0.88
+      }
+    },
+    "Latin American": {
+      "tags_used": 2,
+      "h1_cells": 602,
+      "first_openings": 65,
+      "A_presence_auc": {
+        "audience": {
+          "0": 0.723,
+          "500": 0.515
+        },
+        "cuisine": {
+          "0": 0.7,
+          "500": 0.519
+        }
+      },
+      "A_retention": {
+        "audience": 0.069,
+        "cuisine": 0.097,
+        "tie": false
+      },
+      "B_auc": {
+        "base": 0.695,
+        "full": 0.694,
+        "audience_alone": 0.538,
+        "B1": 0.689
+      },
+      "B_delong_alone_vs_B1": {
+        "diff": -0.152,
+        "p": 0.0005
+      },
+      "B_precision@20": {
+        "full": 0.3,
+        "base": 0.35
+      },
+      "B_boyce": {
+        "full": 0.92,
+        "base": 0.87
+      }
+    },
+    "Italian": {
+      "tags_used": 2,
+      "h1_cells": 667,
+      "first_openings": 23,
+      "A_presence_auc": {
+        "audience": {
+          "0": 0.633,
+          "500": 0.508
+        },
+        "cuisine": {
+          "0": 0.783,
+          "500": 0.609
+        }
+      },
+      "A_retention": {
+        "audience": 0.058,
+        "cuisine": 0.386,
+        "tie": false
+      },
+      "B_auc": {
+        "base": 0.746,
+        "full": 0.748,
+        "audience_alone": 0.579,
+        "B1": 0.738
+      },
+      "B_delong_alone_vs_B1": {
+        "diff": -0.159,
+        "p": 0.0492
+      },
+      "B_precision@20": {
+        "full": 0.1,
+        "base": 0.1
+      },
+      "B_boyce": {
+        "full": 0.88,
+        "base": 0.91
+      }
+    },
+    "Mediterranean": {
+      "tags_used": 1,
+      "h1_cells": 501,
+      "first_openings": 30,
+      "A_presence_auc": {
+        "audience": {
+          "0": 0.59,
+          "500": 0.53
+        },
+        "cuisine": {
+          "0": 0.803,
+          "500": 0.561
+        }
+      },
+      "A_retention": {
+        "audience": 0.328,
+        "cuisine": 0.201,
+        "tie": false
+      },
+      "B_auc": {
+        "base": 0.769,
+        "full": 0.766,
+        "audience_alone": 0.527,
+        "B1": 0.773
+      },
+      "B_delong_alone_vs_B1": {
+        "diff": -0.246,
+        "p": 0.0
+      },
+      "B_precision@20": {
+        "full": 0.2,
+        "base": 0.2
+      },
+      "B_boyce": {
+        "full": 0.7,
+        "base": 0.59
+      }
+    }
+  },
+  "A_mechanism": {
+    "median_retention_audience": 0.122,
+    "median_retention_cuisine": 0.338,
+    "sign_test": {
+      "audience_wins": 3,
+      "counted": 10,
+      "p_one_sided": 0.9453
+    },
+    "supported": false
+  },
+  "B_usefulness": {
+    "pooled_auc": {
+      "base": 0.785,
+      "full": 0.786,
+      "alone": 0.56,
+      "B1": 0.69
+    },
+    "full_minus_base": {
+      "diff": 0.0,
+      "ci95": [
+        -0.001,
+        0.001
+      ]
+    },
+    "alone_minus_B1": {
+      "diff": -0.13,
+      "ci95": [
+        -0.17,
+        -0.087
+      ]
+    },
+    "rows": 6650,
+    "positives": 456,
+    "supported": false
+  }
+}

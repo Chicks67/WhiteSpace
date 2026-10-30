@@ -1,0 +1,1509 @@
+{
+ "title": "Ramen shop: find storefronts in Williamsburg",
+ "request": {
+  "concept": "Ramen shop",
+  "area": "Williamsburg, Brooklyn"
+ },
+ "recorded": "2026-10-11",
+ "events": [
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "resolve",
+    "label": "Match concept to a tested cuisine",
+    "status": "running"
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "resolve",
+    "label": "Match concept to a tested cuisine",
+    "status": "done",
+    "seconds": 0.0,
+    "detail": "keyword match"
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "concept",
+    "data": {
+     "cuisine": "Japanese",
+     "label": "Ramen shop",
+     "reason": "matched by keyword to Japanese"
+    }
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "area",
+    "label": "Match the area to city neighbourhoods",
+    "status": "running"
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "area",
+    "label": "Match the area to city neighbourhoods",
+    "status": "done",
+    "seconds": 0.0,
+    "detail": "name match: Williamsburg"
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "find",
+    "label": "Find vacant storefronts in NYC's Storefront Registry",
+    "status": "running"
+   }
+  ],
+  [
+   0.02,
+   {
+    "type": "step",
+    "id": "find",
+    "label": "Find vacant storefronts in NYC's Storefront Registry",
+    "status": "done",
+    "seconds": 0.0,
+    "detail": "131 vacant storefronts reported across 9 blocks; kept the best-scoring one per block"
+   }
+  ],
+  [
+   0.02,
+   {
+    "type": "storefronts",
+    "data": {
+     "area": "Williamsburg, Brooklyn",
+     "places": [
+      [
+       "Williamsburg",
+       "Brooklyn"
+      ]
+     ]
+    }
+   }
+  ],
+  [
+   0.02,
+   {
+    "type": "step",
+    "id": "rank",
+    "label": "Rank leases on city inspection records",
+    "status": "running"
+   }
+  ],
+  [
+   0.03,
+   {
+    "type": "step",
+    "id": "rank",
+    "label": "Rank leases on city inspection records",
+    "status": "done",
+    "seconds": 0.0,
+    "detail": "5 leases scored"
+   }
+  ],
+  [
+   0.03,
+   {
+    "type": "leases",
+    "data": [
+     {
+      "address": "556 Driggs Avenue, Brooklyn",
+      "borough": "Brooklyn",
+      "neighbourhood": "Williamsburg",
+      "lat": 40.71708530000001,
+      "lon": -73.956762,
+      "storefront": {
+       "reported": "June 30, 2025",
+       "last_use": "Food Services",
+       "area": "Williamsburg",
+       "bbl": "3023280018"
+      },
+      "block": "dr5rth",
+      "density": 139,
+      "density_percentile": 97,
+      "same_cuisine_in_block": 5,
+      "same_cuisine_area": 41,
+      "score": 2.377,
+      "score_percentile": 97,
+      "same_cuisine_400m": [
+       {
+        "name": "Ako Japanese Restaurant",
+        "cuisine": "Japanese",
+        "metres": 151,
+        "opened": null,
+        "lat": 40.717040733646,
+        "lon": -73.958554756661
+       },
+       {
+        "name": "Kijitora",
+        "cuisine": "Japanese",
+        "metres": 154,
+        "opened": "2026-06-08",
+        "lat": 40.71805337724,
+        "lon": -73.958070727566
+       },
+       {
+        "name": "Glaze",
+        "cuisine": "Japanese",
+        "metres": 239,
+        "opened": null,
+        "lat": 40.715981483455,
+        "lon": -73.959197522151
+       },
+       {
+        "name": "Bondi Sushi",
+        "cuisine": "Japanese",
+        "metres": 241,
+        "opened": "2024-03-27",
+        "lat": 40.715967764747,
+        "lon": -73.959211959888
+       },
+       {
+        "name": "Poke Burrito Williamsburg",
+        "cuisine": "Japanese",
+        "metres": 298,
+        "opened": "2025-12-10",
+        "lat": 40.714735094504,
+        "lon": -73.9584624071
+       },
+       {
+        "name": "Sushi Ajjo",
+        "cuisine": "Japanese",
+        "metres": 313,
+        "opened": "2026-01-16",
+        "lat": 40.714270596596,
+        "lon": -73.956752868517
+       }
+      ],
+      "openings_800m": [
+       {
+        "name": "Kijitora",
+        "cuisine": "Japanese",
+        "metres": 154,
+        "opened": "2026-06-08",
+        "lat": 40.71805337724,
+        "lon": -73.958070727566
+       },
+       {
+        "name": "Bondi Sushi",
+        "cuisine": "Japanese",
+        "metres": 241,
+        "opened": "2024-03-27",
+        "lat": 40.715967764747,
+        "lon": -73.959211959888
+       },
+       {
+        "name": "Poke Burrito Williamsburg",
+        "cuisine": "Japanese",
+        "metres": 298,
+        "opened": "2025-12-10",
+        "lat": 40.714735094504,
+        "lon": -73.9584624071
+       },
+       {
+        "name": "Sushi Ajjo",
+        "cuisine": "Japanese",
+        "metres": 313,
+        "opened": "2026-01-16",
+        "lat": 40.714270596596,
+        "lon": -73.956752868517
+       },
+       {
+        "name": "Nem'S Japandi Bistro / Koi Ba",
+        "cuisine": "Japanese",
+        "metres": 442,
+        "opened": "2024-09-06",
+        "lat": 40.719105750868,
+        "lon": -73.961277127961
+       },
+       {
+        "name": "Mido Omakase Room",
+        "cuisine": "Japanese",
+        "metres": 499,
+        "opened": "2024-08-09",
+        "lat": 40.712956711403,
+        "lon": -73.959094773167
+       },
+       {
+        "name": "Nozomi",
+        "cuisine": "Japanese",
+        "metres": 538,
+        "opened": "2026-01-16",
+        "lat": 40.714980773426,
+        "lon": -73.962509613777
+       },
+       {
+        "name": "Afuri Ramen & Dumpling",
+        "cuisine": "Japanese",
+        "metres": 582,
+        "opened": "2024-08-05",
+        "lat": 40.722115850118,
+        "lon": -73.958667033538
+       },
+       {
+        "name": "Sushi On Me",
+        "cuisine": "Japanese",
+        "metres": 601,
+        "opened": "2026-06-03",
+        "lat": 40.712559268894,
+        "lon": -73.960664124573
+       },
+       {
+        "name": "Sushi Shiro",
+        "cuisine": "Japanese",
+        "metres": 650,
+        "opened": "2025-11-19",
+        "lat": 40.71405108991,
+        "lon": -73.950173437293
+       }
+      ],
+      "all_400m": 149,
+      "rank": 1,
+      "subway": {
+       "subway_entries_within_500m": 29776,
+       "stations": [
+        {
+         "station": "Bedford Av (L)",
+         "metres": 26,
+         "weekday_entries": 29776
+        }
+       ]
+      },
+      "bid": null,
+      "partners": {
+       "bids": [],
+       "complements": [
+        {
+         "name": "Kijitora Coffee",
+         "kind": "coffee or tea",
+         "metres": 82
+        },
+        {
+         "name": "Bagelsmith",
+         "kind": "bagels",
+         "metres": 116
+        },
+        {
+         "name": "Doughnut Plant",
+         "kind": "donuts",
+         "metres": 128
+        },
+        {
+         "name": "Barry's Williamsburg",
+         "kind": "juice bar",
+         "metres": 151
+        },
+        {
+         "name": "Tipsy Scoop",
+         "kind": "dessert",
+         "metres": 299
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: Kijitora Coffee (coffee or tea, 82 m); Bagelsmith (bagels, 116 m); Doughnut Plant (donuts, 128 m); Barry's Williamsburg (juice bar, 151 m); Tipsy Scoop (dessert, 299 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "The last reported use was food service. Ask the landlord what kitchen equipment, venting and grease trap remain, and check the Certificate of Occupancy covers your use.",
+        "source": "https://data.cityofnewyork.us/d/92iy-9c3n",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     },
+     {
+      "address": "318 Grand Street, Brooklyn",
+      "borough": "Brooklyn",
+      "neighbourhood": "Williamsburg",
+      "lat": 40.7123973,
+      "lon": -73.9567217,
+      "storefront": {
+       "reported": "June 30, 2025",
+       "last_use": "Food Services",
+       "area": "Williamsburg",
+       "bbl": "3023960001"
+      },
+      "block": "dr5rt5",
+      "density": 135,
+      "density_percentile": 96,
+      "same_cuisine_in_block": 8,
+      "same_cuisine_area": 33,
+      "score": 2.232,
+      "score_percentile": 96,
+      "same_cuisine_400m": [
+       {
+        "name": "Iwak",
+        "cuisine": "Japanese",
+        "metres": 48,
+        "opened": "2023-07-20",
+        "lat": 40.712502742386,
+        "lon": -73.956166056381
+       },
+       {
+        "name": "Bozu",
+        "cuisine": "Japanese",
+        "metres": 90,
+        "opened": null,
+        "lat": 40.712978079064,
+        "lon": -73.957471536068
+       },
+       {
+        "name": "Sushi Ajjo",
+        "cuisine": "Japanese",
+        "metres": 208,
+        "opened": "2026-01-16",
+        "lat": 40.714270596596,
+        "lon": -73.956752868517
+       },
+       {
+        "name": "Mido Omakase Room",
+        "cuisine": "Japanese",
+        "metres": 209,
+        "opened": "2024-08-09",
+        "lat": 40.712956711403,
+        "lon": -73.959094773167
+       },
+       {
+        "name": "Poke Burrito Williamsburg",
+        "cuisine": "Japanese",
+        "metres": 298,
+        "opened": "2025-12-10",
+        "lat": 40.714735094504,
+        "lon": -73.9584624071
+       },
+       {
+        "name": "Sushi On Me",
+        "cuisine": "Japanese",
+        "metres": 333,
+        "opened": "2026-06-03",
+        "lat": 40.712559268894,
+        "lon": -73.960664124573
+       },
+       {
+        "name": "Samurai Mama",
+        "cuisine": "Japanese",
+        "metres": 356,
+        "opened": null,
+        "lat": 40.714096213797,
+        "lon": -73.960298884315
+       },
+       {
+        "name": "The Residence Of Mr. Moto",
+        "cuisine": "Japanese",
+        "metres": 398,
+        "opened": null,
+        "lat": 40.714263799887,
+        "lon": -73.960749688373
+       }
+      ],
+      "openings_800m": [
+       {
+        "name": "Sushi Ajjo",
+        "cuisine": "Japanese",
+        "metres": 208,
+        "opened": "2026-01-16",
+        "lat": 40.714270596596,
+        "lon": -73.956752868517
+       },
+       {
+        "name": "Mido Omakase Room",
+        "cuisine": "Japanese",
+        "metres": 209,
+        "opened": "2024-08-09",
+        "lat": 40.712956711403,
+        "lon": -73.959094773167
+       },
+       {
+        "name": "Poke Burrito Williamsburg",
+        "cuisine": "Japanese",
+        "metres": 298,
+        "opened": "2025-12-10",
+        "lat": 40.714735094504,
+        "lon": -73.9584624071
+       },
+       {
+        "name": "Sushi On Me",
+        "cuisine": "Japanese",
+        "metres": 333,
+        "opened": "2026-06-03",
+        "lat": 40.712559268894,
+        "lon": -73.960664124573
+       },
+       {
+        "name": "Bondi Sushi",
+        "cuisine": "Japanese",
+        "metres": 449,
+        "opened": "2024-03-27",
+        "lat": 40.715967764747,
+        "lon": -73.959211959888
+       },
+       {
+        "name": "Mamasushi Williamsburg",
+        "cuisine": "Japanese",
+        "metres": 460,
+        "opened": "2025-04-09",
+        "lat": 40.710417764385,
+        "lon": -73.951929178023
+       },
+       {
+        "name": "Nozomi",
+        "cuisine": "Japanese",
+        "metres": 566,
+        "opened": "2026-01-16",
+        "lat": 40.714980773426,
+        "lon": -73.962509613777
+       },
+       {
+        "name": "Sushi Shiro",
+        "cuisine": "Japanese",
+        "metres": 582,
+        "opened": "2025-11-19",
+        "lat": 40.71405108991,
+        "lon": -73.950173437293
+       },
+       {
+        "name": "Kijitora",
+        "cuisine": "Japanese",
+        "metres": 639,
+        "opened": "2026-06-08",
+        "lat": 40.71805337724,
+        "lon": -73.958070727566
+       },
+       {
+        "name": "Okonomi / Yuji Ramen",
+        "cuisine": "Japanese",
+        "metres": 679,
+        "opened": "2024-01-29",
+        "lat": 40.71264235865,
+        "lon": -73.948666707287
+       },
+       {
+        "name": "The Last Call",
+        "cuisine": "Japanese",
+        "metres": 721,
+        "opened": "2025-12-06",
+        "lat": 40.711209427329,
+        "lon": -73.948307108225
+       }
+      ],
+      "all_400m": 105,
+      "rank": 2,
+      "subway": {
+       "subway_entries_within_500m": 10726,
+       "stations": [
+        {
+         "station": "Marcy Av (M,J,Z)",
+         "metres": 457,
+         "weekday_entries": 10726
+        }
+       ]
+      },
+      "bid": null,
+      "partners": {
+       "bids": [
+        {
+         "bid": "Grand Street",
+         "website": "https://www.grandstreetbk.org/",
+         "phone": "(718) 218-8836",
+         "email": "info@grandstreetbk.org",
+         "boundary": "Grand Street from Bushwick Avenue to Union Avenue",
+         "metres": 497
+        }
+       ],
+       "complements": [
+        {
+         "name": "Salad & Bread",
+         "kind": "juice bar",
+         "metres": 50
+        },
+        {
+         "name": "Coffee Stain",
+         "kind": "coffee or tea",
+         "metres": 75
+        },
+        {
+         "name": "Ppl Coffee",
+         "kind": "coffee or tea",
+         "metres": 142
+        },
+        {
+         "name": "Cafe Bureau",
+         "kind": "coffee or tea",
+         "metres": 205
+        },
+        {
+         "name": "Tipsy Scoop",
+         "kind": "dessert",
+         "metres": 294
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "The nearest business improvement district, Grand Street, is about 497 m away. Its staff know the street and run local events; contact (718) 218-8836, info@grandstreetbk.org.",
+        "source": "https://www.grandstreetbk.org/",
+        "specific": true
+       },
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: Salad & Bread (juice bar, 50 m); Coffee Stain (coffee or tea, 75 m); Ppl Coffee (coffee or tea, 142 m); Cafe Bureau (coffee or tea, 205 m); Tipsy Scoop (dessert, 294 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "The last reported use was food service. Ask the landlord what kitchen equipment, venting and grease trap remain, and check the Certificate of Occupancy covers your use.",
+        "source": "https://data.cityofnewyork.us/d/92iy-9c3n",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     },
+     {
+      "address": "52 North 11th Street, Brooklyn",
+      "borough": "Brooklyn",
+      "neighbourhood": "Williamsburg",
+      "lat": 40.7222107,
+      "lon": -73.9591433,
+      "storefront": {
+       "reported": "June 30, 2025",
+       "last_use": "Food Services",
+       "area": "Williamsburg",
+       "bbl": "3022950008"
+      },
+      "block": "dr5rtj",
+      "density": 108,
+      "density_percentile": 95,
+      "same_cuisine_in_block": 10,
+      "same_cuisine_area": 28,
+      "score": 1.874,
+      "score_percentile": 95,
+      "same_cuisine_400m": [
+       {
+        "name": "Afuri Ramen & Dumpling",
+        "cuisine": "Japanese",
+        "metres": 41,
+        "opened": "2024-08-05",
+        "lat": 40.722115850118,
+        "lon": -73.958667033538
+       },
+       {
+        "name": "Sugarfish",
+        "cuisine": "Japanese",
+        "metres": 370,
+        "opened": "2023-06-21",
+        "lat": 40.719135790172,
+        "lon": -73.96082617309
+       },
+       {
+        "name": "Nem'S Japandi Bistro / Koi Ba",
+        "cuisine": "Japanese",
+        "metres": 389,
+        "opened": "2024-09-06",
+        "lat": 40.719105750868,
+        "lon": -73.961277127961
+       }
+      ],
+      "openings_800m": [
+       {
+        "name": "Afuri Ramen & Dumpling",
+        "cuisine": "Japanese",
+        "metres": 41,
+        "opened": "2024-08-05",
+        "lat": 40.722115850118,
+        "lon": -73.958667033538
+       },
+       {
+        "name": "Nem'S Japandi Bistro / Koi Ba",
+        "cuisine": "Japanese",
+        "metres": 389,
+        "opened": "2024-09-06",
+        "lat": 40.719105750868,
+        "lon": -73.961277127961
+       },
+       {
+        "name": "Kijitora",
+        "cuisine": "Japanese",
+        "metres": 471,
+        "opened": "2026-06-08",
+        "lat": 40.71805337724,
+        "lon": -73.958070727566
+       },
+       {
+        "name": "Cafe O'Te By House Brooklyn",
+        "cuisine": "Japanese",
+        "metres": 506,
+        "opened": "2026-01-17",
+        "lat": 40.724650265888,
+        "lon": -73.954069120233
+       },
+       {
+        "name": "Dashi Okume",
+        "cuisine": "Japanese",
+        "metres": 546,
+        "opened": "2026-05-27",
+        "lat": 40.724792819543,
+        "lon": -73.953636084842
+       },
+       {
+        "name": "Uzuki",
+        "cuisine": "Japanese",
+        "metres": 558,
+        "opened": "2024-04-11",
+        "lat": 40.724422098814,
+        "lon": -73.953199801617
+       },
+       {
+        "name": "Acre",
+        "cuisine": "Japanese",
+        "metres": 594,
+        "opened": "2025-07-22",
+        "lat": 40.726396216645,
+        "lon": -73.954771451464
+       },
+       {
+        "name": "Bondi Sushi",
+        "cuisine": "Japanese",
+        "metres": 694,
+        "opened": "2024-03-27",
+        "lat": 40.715967764747,
+        "lon": -73.959211959888
+       },
+       {
+        "name": "Sapporo Ichiban Sushi",
+        "cuisine": "Japanese",
+        "metres": 733,
+        "opened": "2024-09-10",
+        "lat": 40.723460341295,
+        "lon": -73.950602911138
+       }
+      ],
+      "all_400m": 61,
+      "rank": 3,
+      "subway": {
+       "subway_entries_within_500m": 0,
+       "stations": []
+      },
+      "bid": null,
+      "partners": {
+       "bids": [],
+       "complements": [
+        {
+         "name": "The Apartment / Hox Coffee Shop",
+         "kind": "coffee or tea",
+         "metres": 134
+        },
+        {
+         "name": "Kith Treats",
+         "kind": "dessert",
+         "metres": 144
+        },
+        {
+         "name": "Marcy & Myrtle",
+         "kind": "coffee or tea",
+         "metres": 201
+        },
+        {
+         "name": "Bakeri",
+         "kind": "bakery",
+         "metres": 261
+        },
+        {
+         "name": "Butler",
+         "kind": "coffee or tea",
+         "metres": 281
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: The Apartment / Hox Coffee Shop (coffee or tea, 134 m); Kith Treats (dessert, 144 m); Marcy & Myrtle (coffee or tea, 201 m); Bakeri (bakery, 261 m); Butler (coffee or tea, 281 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "The last reported use was food service. Ask the landlord what kitchen equipment, venting and grease trap remain, and check the Certificate of Occupancy covers your use.",
+        "source": "https://data.cityofnewyork.us/d/92iy-9c3n",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     },
+     {
+      "address": "188 Grand Street, Brooklyn",
+      "borough": "Brooklyn",
+      "neighbourhood": "Williamsburg",
+      "lat": 40.714084,
+      "lon": -73.9608365,
+      "storefront": {
+       "reported": "June 30, 2025",
+       "last_use": "Food Services",
+       "area": "Williamsburg",
+       "bbl": "3023930017"
+      },
+      "block": "dr5rsg",
+      "density": 109,
+      "density_percentile": 95,
+      "same_cuisine_in_block": 6,
+      "same_cuisine_area": 24,
+      "score": 1.809,
+      "score_percentile": 95,
+      "same_cuisine_400m": [
+       {
+        "name": "The Residence Of Mr. Moto",
+        "cuisine": "Japanese",
+        "metres": 21,
+        "opened": null,
+        "lat": 40.714263799887,
+        "lon": -73.960749688373
+       },
+       {
+        "name": "Samurai Mama",
+        "cuisine": "Japanese",
+        "metres": 45,
+        "opened": null,
+        "lat": 40.714096213797,
+        "lon": -73.960298884315
+       },
+       {
+        "name": "Salt + Charcoal",
+        "cuisine": "Japanese",
+        "metres": 80,
+        "opened": null,
+        "lat": 40.714593427657,
+        "lon": -73.961503409183
+       },
+       {
+        "name": "Mizu Sushi",
+        "cuisine": "Japanese",
+        "metres": 128,
+        "opened": null,
+        "lat": 40.713352961881,
+        "lon": -73.962012741414
+       },
+       {
+        "name": "Sushi On Me",
+        "cuisine": "Japanese",
+        "metres": 170,
+        "opened": "2026-06-03",
+        "lat": 40.712559268894,
+        "lon": -73.960664124573
+       },
+       {
+        "name": "Nozomi",
+        "cuisine": "Japanese",
+        "metres": 173,
+        "opened": "2026-01-16",
+        "lat": 40.714980773426,
+        "lon": -73.962509613777
+       },
+       {
+        "name": "Mido Omakase Room",
+        "cuisine": "Japanese",
+        "metres": 193,
+        "opened": "2024-08-09",
+        "lat": 40.712956711403,
+        "lon": -73.959094773167
+       },
+       {
+        "name": "Poke Burrito Williamsburg",
+        "cuisine": "Japanese",
+        "metres": 213,
+        "opened": "2025-12-10",
+        "lat": 40.714735094504,
+        "lon": -73.9584624071
+       },
+       {
+        "name": "Bondi Sushi",
+        "cuisine": "Japanese",
+        "metres": 250,
+        "opened": "2024-03-27",
+        "lat": 40.715967764747,
+        "lon": -73.959211959888
+       },
+       {
+        "name": "Glaze",
+        "cuisine": "Japanese",
+        "metres": 252,
+        "opened": null,
+        "lat": 40.715981483455,
+        "lon": -73.959197522151
+       },
+       {
+        "name": "Monarch Izakaya",
+        "cuisine": "Japanese",
+        "metres": 255,
+        "opened": null,
+        "lat": 40.71610879153,
+        "lon": -73.962260070771
+       },
+       {
+        "name": "Tonchin Brooklyn",
+        "cuisine": "Japanese",
+        "metres": 304,
+        "opened": "2023-07-20",
+        "lat": 40.716690566674,
+        "lon": -73.961909825586
+       },
+       {
+        "name": "Bozu",
+        "cuisine": "Japanese",
+        "metres": 309,
+        "opened": null,
+        "lat": 40.712978079064,
+        "lon": -73.957471536068
+       },
+       {
+        "name": "Sushi Ajjo",
+        "cuisine": "Japanese",
+        "metres": 345,
+        "opened": "2026-01-16",
+        "lat": 40.714270596596,
+        "lon": -73.956752868517
+       },
+       {
+        "name": "Ako Japanese Restaurant",
+        "cuisine": "Japanese",
+        "metres": 381,
+        "opened": null,
+        "lat": 40.717040733646,
+        "lon": -73.958554756661
+       }
+      ],
+      "openings_800m": [
+       {
+        "name": "Sushi On Me",
+        "cuisine": "Japanese",
+        "metres": 170,
+        "opened": "2026-06-03",
+        "lat": 40.712559268894,
+        "lon": -73.960664124573
+       },
+       {
+        "name": "Nozomi",
+        "cuisine": "Japanese",
+        "metres": 173,
+        "opened": "2026-01-16",
+        "lat": 40.714980773426,
+        "lon": -73.962509613777
+       },
+       {
+        "name": "Mido Omakase Room",
+        "cuisine": "Japanese",
+        "metres": 193,
+        "opened": "2024-08-09",
+        "lat": 40.712956711403,
+        "lon": -73.959094773167
+       },
+       {
+        "name": "Poke Burrito Williamsburg",
+        "cuisine": "Japanese",
+        "metres": 213,
+        "opened": "2025-12-10",
+        "lat": 40.714735094504,
+        "lon": -73.9584624071
+       },
+       {
+        "name": "Bondi Sushi",
+        "cuisine": "Japanese",
+        "metres": 250,
+        "opened": "2024-03-27",
+        "lat": 40.715967764747,
+        "lon": -73.959211959888
+       },
+       {
+        "name": "Sushi Ajjo",
+        "cuisine": "Japanese",
+        "metres": 345,
+        "opened": "2026-01-16",
+        "lat": 40.714270596596,
+        "lon": -73.956752868517
+       },
+       {
+        "name": "Kijitora",
+        "cuisine": "Japanese",
+        "metres": 499,
+        "opened": "2026-06-08",
+        "lat": 40.71805337724,
+        "lon": -73.958070727566
+       },
+       {
+        "name": "Nem'S Japandi Bistro / Koi Ba",
+        "cuisine": "Japanese",
+        "metres": 560,
+        "opened": "2024-09-06",
+        "lat": 40.719105750868,
+        "lon": -73.961277127961
+       }
+      ],
+      "all_400m": 167,
+      "rank": 4,
+      "subway": {
+       "subway_entries_within_500m": 29776,
+       "stations": [
+        {
+         "station": "Bedford Av (L)",
+         "metres": 490,
+         "weekday_entries": 29776
+        }
+       ]
+      },
+      "bid": null,
+      "partners": {
+       "bids": [],
+       "complements": [
+        {
+         "name": "Taiyaki Nyc",
+         "kind": "dessert",
+         "metres": 55
+        },
+        {
+         "name": "Partea Xp Williamsburg",
+         "kind": "coffee or tea",
+         "metres": 56
+        },
+        {
+         "name": "Black Brick",
+         "kind": "coffee or tea",
+         "metres": 59
+        },
+        {
+         "name": "Tipsy Scoop",
+         "kind": "dessert",
+         "metres": 216
+        },
+        {
+         "name": "Salad & Bread",
+         "kind": "juice bar",
+         "metres": 375
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: Taiyaki Nyc (dessert, 55 m); Partea Xp Williamsburg (coffee or tea, 56 m); Black Brick (coffee or tea, 59 m); Tipsy Scoop (dessert, 216 m); Salad & Bread (juice bar, 375 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "The last reported use was food service. Ask the landlord what kitchen equipment, venting and grease trap remain, and check the Certificate of Occupancy covers your use.",
+        "source": "https://data.cityofnewyork.us/d/92iy-9c3n",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     },
+     {
+      "address": "96 North 6th Street, Brooklyn",
+      "borough": "Brooklyn",
+      "neighbourhood": "Williamsburg",
+      "lat": 40.7184762,
+      "lon": -73.9606956,
+      "storefront": {
+       "reported": "June 30, 2025",
+       "last_use": "Educational Services",
+       "area": "Williamsburg",
+       "bbl": "3023340111"
+      },
+      "block": "dr5rsu",
+      "density": 48,
+      "density_percentile": 86,
+      "same_cuisine_in_block": 5,
+      "same_cuisine_area": 40,
+      "score": 1.053,
+      "score_percentile": 92,
+      "same_cuisine_400m": [
+       {
+        "name": "Sugarfish",
+        "cuisine": "Japanese",
+        "metres": 74,
+        "opened": "2023-06-21",
+        "lat": 40.719135790172,
+        "lon": -73.96082617309
+       },
+       {
+        "name": "Nem'S Japandi Bistro / Koi Ba",
+        "cuisine": "Japanese",
+        "metres": 85,
+        "opened": "2024-09-06",
+        "lat": 40.719105750868,
+        "lon": -73.961277127961
+       },
+       {
+        "name": "Tonchin Brooklyn",
+        "cuisine": "Japanese",
+        "metres": 223,
+        "opened": "2023-07-20",
+        "lat": 40.716690566674,
+        "lon": -73.961909825586
+       },
+       {
+        "name": "Kijitora",
+        "cuisine": "Japanese",
+        "metres": 226,
+        "opened": "2026-06-08",
+        "lat": 40.71805337724,
+        "lon": -73.958070727566
+       },
+       {
+        "name": "Ako Japanese Restaurant",
+        "cuisine": "Japanese",
+        "metres": 241,
+        "opened": null,
+        "lat": 40.717040733646,
+        "lon": -73.958554756661
+       },
+       {
+        "name": "Monarch Izakaya",
+        "cuisine": "Japanese",
+        "metres": 294,
+        "opened": null,
+        "lat": 40.71610879153,
+        "lon": -73.962260070771
+       },
+       {
+        "name": "Glaze",
+        "cuisine": "Japanese",
+        "metres": 305,
+        "opened": null,
+        "lat": 40.715981483455,
+        "lon": -73.959197522151
+       },
+       {
+        "name": "Bondi Sushi",
+        "cuisine": "Japanese",
+        "metres": 306,
+        "opened": "2024-03-27",
+        "lat": 40.715967764747,
+        "lon": -73.959211959888
+       }
+      ],
+      "openings_800m": [
+       {
+        "name": "Nem'S Japandi Bistro / Koi Ba",
+        "cuisine": "Japanese",
+        "metres": 85,
+        "opened": "2024-09-06",
+        "lat": 40.719105750868,
+        "lon": -73.961277127961
+       },
+       {
+        "name": "Kijitora",
+        "cuisine": "Japanese",
+        "metres": 226,
+        "opened": "2026-06-08",
+        "lat": 40.71805337724,
+        "lon": -73.958070727566
+       },
+       {
+        "name": "Bondi Sushi",
+        "cuisine": "Japanese",
+        "metres": 306,
+        "opened": "2024-03-27",
+        "lat": 40.715967764747,
+        "lon": -73.959211959888
+       },
+       {
+        "name": "Nozomi",
+        "cuisine": "Japanese",
+        "metres": 418,
+        "opened": "2026-01-16",
+        "lat": 40.714980773426,
+        "lon": -73.962509613777
+       },
+       {
+        "name": "Afuri Ramen & Dumpling",
+        "cuisine": "Japanese",
+        "metres": 439,
+        "opened": "2024-08-05",
+        "lat": 40.722115850118,
+        "lon": -73.958667033538
+       },
+       {
+        "name": "Poke Burrito Williamsburg",
+        "cuisine": "Japanese",
+        "metres": 457,
+        "opened": "2025-12-10",
+        "lat": 40.714735094504,
+        "lon": -73.9584624071
+       },
+       {
+        "name": "Sushi Ajjo",
+        "cuisine": "Japanese",
+        "metres": 574,
+        "opened": "2026-01-16",
+        "lat": 40.714270596596,
+        "lon": -73.956752868517
+       },
+       {
+        "name": "Mido Omakase Room",
+        "cuisine": "Japanese",
+        "metres": 628,
+        "opened": "2024-08-09",
+        "lat": 40.712956711403,
+        "lon": -73.959094773167
+       },
+       {
+        "name": "Sushi On Me",
+        "cuisine": "Japanese",
+        "metres": 658,
+        "opened": "2026-06-03",
+        "lat": 40.712559268894,
+        "lon": -73.960664124573
+       }
+      ],
+      "all_400m": 123,
+      "rank": 5,
+      "subway": {
+       "subway_entries_within_500m": 29776,
+       "stations": [
+        {
+         "station": "Bedford Av (L)",
+         "metres": 348,
+         "weekday_entries": 29776
+        }
+       ]
+      },
+      "bid": null,
+      "partners": {
+       "bids": [],
+       "complements": [
+        {
+         "name": "Work Cafe",
+         "kind": "coffee or tea",
+         "metres": 30
+        },
+        {
+         "name": "The Le Labo Cafe Of Williamsburg Brooklyn N.Y.C",
+         "kind": "coffee or tea",
+         "metres": 84
+        },
+        {
+         "name": "Bakeri",
+         "kind": "bakery",
+         "metres": 174
+        },
+        {
+         "name": "Doughnut Plant",
+         "kind": "donuts",
+         "metres": 241
+        },
+        {
+         "name": "Bagelsmith",
+         "kind": "bagels",
+         "metres": 251
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: Work Cafe (coffee or tea, 30 m); The Le Labo Cafe Of Williamsburg Brooklyn N.Y.C (coffee or tea, 84 m); Bakeri (bakery, 174 m); Doughnut Plant (donuts, 241 m); Bagelsmith (bagels, 251 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  [
+   0.24,
+   {
+    "type": "step",
+    "id": "evidence",
+    "label": "Fetch Qloo audience evidence for Williamsburg, Brooklyn",
+    "status": "running"
+   }
+  ],
+  [
+   0.26,
+   {
+    "type": "step",
+    "id": "evidence",
+    "label": "Fetch Qloo audience evidence for Williamsburg, Brooklyn",
+    "status": "done",
+    "seconds": 0.0,
+    "detail": {
+     "tags": 8,
+     "brands": 7,
+     "concept_brands": 8
+    }
+   }
+  ],
+  [
+   0.26,
+   {
+    "type": "step",
+    "id": "write",
+    "label": "Write positioning brief (GPT-6 Astra)",
+    "status": "running"
+   }
+  ],
+  [
+   11.97,
+   {
+    "type": "step",
+    "id": "write",
+    "label": "Write positioning brief (GPT-6 Astra)",
+    "status": "done",
+    "seconds": 11.7,
+    "detail": "11.7 s"
+   }
+  ],
+  [
+   11.97,
+   {
+    "type": "step",
+    "id": "verify",
+    "label": "Verify brief",
+    "status": "running"
+   }
+  ],
+  [
+   16.14,
+   {
+    "type": "step",
+    "id": "verify",
+    "label": "Verify brief",
+    "status": "done",
+    "seconds": 4.2,
+    "detail": "passed"
+   }
+  ],
+  [
+   16.14,
+   {
+    "type": "brief",
+    "data": {
+     "lease": "556 Driggs Avenue, Brooklyn",
+     "area": "Williamsburg, Brooklyn",
+     "problems": [],
+     "name_check": "done",
+     "names_traced_to_city_records": [
+      "Brooklyn",
+      "Brooklyn Brewery"
+     ],
+     "names_traced_to_qloo": 2,
+     "replaced_unverified_names": [],
+     "unverified_names_left": [],
+     "text": "[brief written from Qloo evidence; on the live site only]"
+    }
+   }
+  ],
+  [
+   16.14,
+   {
+    "type": "done",
+    "credits": 1.12,
+    "provider": "comet",
+    "usd": 0.02
+   }
+  ]
+ ],
+ "followups": [
+  {
+   "q": "Who are the ramen and Japanese competitors within 400 m of the top storefront?",
+   "tools": [
+    "nearby_restaurants"
+   ],
+   "unchecked_numbers": [],
+   "answer": "NYC inspection records list 6 Japanese-category competitors within 400 m of 556 Driggs Avenue:\n\n- Ako Japanese Restaurant \u2014 151 m\n- Kijitora \u2014 154 m\n- Glaze \u2014 239 m\n- Bondi Sushi \u2014 241 m\n- Poke Burrito Williamsburg \u2014 298 m\n- Sushi Ajjo \u2014 313 m\n\nThe records don\u2019t distinguish ramen specialists or show menus, so I can\u2019t confirm which serve ramen. This is the nearby Japanese-category competition list, not a verified ramen-only list."
+  },
+  {
+   "q": "What does Qloo say about the audience around the top storefront?",
+   "tools": [
+    "area_profile"
+   ],
+   "unchecked_numbers": [],
+   "answer": "[drew on Qloo data; on the live site only]"
+  }
+ ]
+}

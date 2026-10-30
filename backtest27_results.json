@@ -1,0 +1,91 @@
+{
+ "users_tried": 48,
+ "users_kept": 40,
+ "pool": 252,
+ "stopped": null,
+ "auc": {
+  "qloo": {
+   "mean": 0.841,
+   "ci95": [
+    0.8,
+    0.879
+   ],
+   "n": 40
+  },
+  "fame": {
+   "mean": 0.516,
+   "ci95": [
+    0.456,
+    0.58
+   ],
+   "n": 40
+  },
+  "model_alone": {
+   "mean": 0.865,
+   "ci95": [
+    0.827,
+    0.901
+   ],
+   "n": 40
+  },
+  "model_with_qloo": {
+   "mean": 0.874,
+   "ci95": [
+    0.84,
+    0.906
+   ],
+   "n": 40
+  }
+ },
+ "qloo_minus_model_alone": {
+  "mean": -0.024,
+  "ci95": [
+   -0.052,
+   0.006
+  ],
+  "n": 40
+ },
+ "with_qloo_minus_alone": {
+  "mean": 0.01,
+  "ci95": [
+   -0.001,
+   0.022
+  ],
+  "n": 40
+ },
+ "qloo_minus_fame": {
+  "mean": 0.324,
+  "ci95": [
+   0.264,
+   0.385
+  ],
+  "n": 40
+ },
+ "share_scored_by_qloo": {
+  "mean": 0.993,
+  "ci95": [
+   0.99,
+   0.997
+  ],
+  "n": 40
+ },
+ "artists_model_said_unknown_per_user": {
+  "mean": 2.475,
+  "ci95": [
+   1.925,
+   3.125
+  ],
+  "n": 40
+ },
+ "positive_popularity": {
+  "mean": 0.953,
+  "ci95": [
+   0.936,
+   0.966
+  ],
+  "n": 40
+ },
+ "reading_1": "no different",
+ "reading_2_model_with_qloo_against_alone": "no different",
+ "reading_3_qloo_against_fame": "above"
+}

@@ -1,0 +1,158 @@
+{
+ "units": 181,
+ "pairs": {
+  "affluent": {
+   "n": 181,
+   "rho": 0.405,
+   "ci95": [
+    0.178,
+    0.581
+   ],
+   "validated": true,
+   "own_tag_rank": 1
+  },
+  "young_adults": {
+   "n": 181,
+   "rho": 0.008,
+   "ci95": [
+    -0.152,
+    0.169
+   ],
+   "validated": false,
+   "own_tag_rank": 5
+  },
+  "college": {
+   "n": 181,
+   "rho": -0.152,
+   "ci95": [
+    -0.322,
+    0.027
+   ],
+   "validated": false,
+   "own_tag_rank": 6
+  },
+  "families": {
+   "n": 181,
+   "rho": -0.169,
+   "ci95": [
+    -0.313,
+    -0.018
+   ],
+   "validated": false,
+   "own_tag_rank": 3
+  },
+  "seniors": {
+   "n": 178,
+   "rho": 0.065,
+   "ci95": [
+    -0.076,
+    0.208
+   ],
+   "validated": false,
+   "own_tag_rank": 4
+  },
+  "business": {
+   "n": 181,
+   "rho": 0.378,
+   "ci95": [
+    0.171,
+    0.548
+   ],
+   "validated": true,
+   "own_tag_rank": 2
+  },
+  "tourists": {
+   "n": 181,
+   "rho": 0.024,
+   "ci95": [
+    -0.126,
+    0.177
+   ],
+   "validated": false,
+   "own_tag_rank": 7
+  }
+ },
+ "rho_matrix_tag_by_measure": {
+  "affluent": {
+   "affluent": 0.405,
+   "young_adults": 0.143,
+   "college": -0.187,
+   "families": -0.57,
+   "seniors": 0.156,
+   "business": 0.483,
+   "tourists": 0.312
+  },
+  "young_adults": {
+   "affluent": -0.051,
+   "young_adults": 0.008,
+   "college": -0.091,
+   "families": -0.13,
+   "seniors": -0.058,
+   "business": 0.201,
+   "tourists": 0.119
+  },
+  "college": {
+   "affluent": 0.359,
+   "young_adults": 0.158,
+   "college": -0.152,
+   "families": -0.461,
+   "seniors": 0.092,
+   "business": 0.337,
+   "tourists": 0.248
+  },
+  "families": {
+   "affluent": 0.024,
+   "young_adults": -0.04,
+   "college": -0.06,
+   "families": -0.169,
+   "seniors": 0.029,
+   "business": 0.179,
+   "tourists": 0.103
+  },
+  "seniors": {
+   "affluent": 0.112,
+   "young_adults": 0.06,
+   "college": -0.09,
+   "families": -0.253,
+   "seniors": 0.065,
+   "business": 0.235,
+   "tourists": 0.171
+  },
+  "business": {
+   "affluent": 0.173,
+   "young_adults": 0.036,
+   "college": -0.077,
+   "families": -0.371,
+   "seniors": 0.135,
+   "business": 0.378,
+   "tourists": 0.238
+  },
+  "tourists": {
+   "affluent": -0.083,
+   "young_adults": -0.091,
+   "college": -0.013,
+   "families": -0.074,
+   "seniors": 0.028,
+   "business": 0.1,
+   "tourists": 0.024
+  }
+ },
+ "validated": 2,
+ "band": "2 to 4 validated",
+ "tract_equivalency_columns": [
+  "borocode",
+  "boroct2020",
+  "boroname",
+  "cdtacode",
+  "cdtaname",
+  "cdtatype",
+  "countyfips",
+  "ct2020",
+  "ctlabel",
+  "geoid",
+  "ntaabbrev",
+  "ntacode",
+  "ntaname",
+  "ntatype"
+ ]
+}

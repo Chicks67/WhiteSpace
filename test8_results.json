@@ -1,0 +1,49 @@
+{
+ "primary_A_over_C": {
+  "mean": 0.2,
+  "ci95": [
+   0.083,
+   0.35
+  ],
+  "cases": 30
+ },
+ "band": "C beats A",
+ "A_over_B": {
+  "mean": 0.167,
+  "ci95": [
+   0.033,
+   0.3
+  ],
+  "cases": 30
+ },
+ "C_over_B": {
+  "mean": 0.483,
+  "ci95": [
+   0.317,
+   0.65
+  ],
+  "cases": 30
+ },
+ "rubric_means": {
+  "A": {
+   "specificity": 3.38,
+   "grounding": 3.42,
+   "distinctiveness": 3.0,
+   "actionability": 3.6
+  },
+  "B": {
+   "specificity": 3.95,
+   "grounding": 4.45,
+   "distinctiveness": 4.0,
+   "actionability": 4.28
+  },
+  "C": {
+   "specificity": 3.88,
+   "grounding": 4.43,
+   "distinctiveness": 3.93,
+   "actionability": 4.47
+  }
+ },
+ "top_choice_disagreement_between_orders": 0.167,
+ "dropped_cases": []
+}

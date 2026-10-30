@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Whitespace</title>
+<meta name="description" content="Choose a restaurant lease in New York City with city inspection records, then position the concept with Qloo taste data.">
+<meta name="theme-color" content="#0A0A0B">
+<meta name="color-scheme" content="dark light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0A0B'/%3E%3Crect x='9' y='9' width='14' height='14' fill='none' stroke='%23fff' stroke-width='2.5'/%3E%3C/svg%3E">
+<script>
+/* Dark by default. Apply a saved light choice before first paint so the page does not flash. */
+try { if (localStorage.getItem("ws-theme") === "light") document.documentElement.dataset.theme = "light"; } catch (_) {}
+</script>
+<!-- Paint the right background before the stylesheets arrive. -->
+<style>html { background: #0A0A0B; color: #F5F5F2; } html[data-theme="light"] { background: #F4F4F2; color: #0A0A0B; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400..600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="/static/style.css?v=8">
+</head>
+<body>
+<a class="skip" href="#app">Skip to the tool</a>
+
+<nav class="nav" aria-label="Main">
+  <a class="logo" href="#top" aria-label="Whitespace, back to top"><span class="logo-mark" aria-hidden="true"></span>Whitespace</a>
+  <div class="nav-links">
+    <a href="#top">Scout</a>
+    <a href="#how">How it works</a>
+    <a href="#scene">Scene</a>
+    <a class="how" href="#evidence">How we know</a>
+  </div>
+  <div class="nav-tools">
+    <span id="live-pill" class="pill" hidden></span>
+    <button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch to light mode" title="Switch to light mode">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg>
+    </button>
+  </div>
+</nav>
+
+<header class="top" id="top">
+  <div class="grid-art" aria-hidden="true"></div>
+  <div class="hero">
+    <div class="brand">
+      <p class="eyebrow">Site selection for independent restaurants <span>New York City</span></p>
+      <h1 class="wordmark">Find the block <em>before</em> you sign the lease.</h1>
+      <p class="lede">Find and pick a restaurant lease in New York with
+        <span class="src city">city inspection records</span>, then position the concept with
+        <span class="src qloo">Qloo taste data</span>. Each source is used only where our tests say it works.</p>
+      <ul class="points">
+        <li>Brooklyn, Queens, Manhattan and the Bronx</li>
+        <li>Every step and every data call shown as it happens</li>
+        <li>Every claim backed by a test written down before its result</li>
+      </ul>
+    </div>
+
+    <form id="brief-form" class="panel inputs" autocomplete="off">
+      <h2>Scout a location</h2>
+      <div class="field-row">
+        <div>
+          <label for="concept">Concept</label>
+          <input id="concept" name="concept" maxlength="60" value="Korean cafe" required>
+        </div>
+        <div>
+          <label for="cuisine">Cuisine we tested it as</label>
+          <select id="cuisine" name="cuisine"><option value="">Match automatically</option></select>
+        </div>
+      </div>
+      <div class="chips examples" id="examples" aria-label="Example concepts"></div>
+
+      <label id="where-label">Where</label>
+      <div class="toggle mode-toggle" role="radiogroup" aria-labelledby="where-label">
+        <button type="button" role="radio" aria-checked="true" data-where="goal">Describe your plan</button>
+        <button type="button" role="radio" aria-checked="false" data-where="area">Search an area</button>
+        <button type="button" role="radio" aria-checked="false" data-where="leases">My addresses</button>
+      </div>
+      <div id="where-goal">
+        <label for="goal">Who are your customers, and where would you consider? <span id="goal-count" class="count"></span></label>
+        <textarea id="goal" name="goal" maxlength="400" rows="3">College students on a budget, anywhere in Manhattan or Brooklyn. I'd rather not open next to lots of other Korean places.</textarea>
+        <p class="hint">The agent picks neighbourhoods from census data on who lives and works there, searches vacant storefronts in several, checks competition, and shortlists.</p>
+      </div>
+      <div id="where-area" hidden>
+        <label for="area">Neighbourhood or borough</label>
+        <input id="area" name="area" maxlength="80" value="Astoria, Queens">
+        <p class="hint">The agent searches NYC's Storefront Registry for storefronts reported vacant and scores each block.</p>
+      </div>
+      <div id="where-leases" hidden>
+        <p class="hint">Two to five addresses in Brooklyn, Queens, Manhattan or the Bronx.</p>
+        <ol id="leases" class="leases"></ol>
+        <button type="button" id="add-lease" class="quiet small">Add an address</button>
+      </div>
+
+      <div class="run-row">
+        <button type="submit" id="run" class="primary">Run live (about a minute)</button>
+        <button type="button" id="stop" class="quiet" hidden>Stop</button>
+      </div>
+      <p class="hint run-hint" id="run-hint">Saved runs below replay instantly. Ctrl or Cmd and Enter also runs.</p>
+      <p id="form-error" class="form-error" role="alert" hidden></p>
+    </form>
+  </div>
+  <dl class="stats" id="stats" aria-label="The city data behind this page">
+    <div><dt>Active restaurants</dt><dd data-stat="restaurants">&nbsp;</dd></div>
+    <div><dt>Vacant storefronts</dt><dd data-stat="storefronts">&nbsp;</dd></div>
+    <div><dt>Neighbourhoods</dt><dd data-stat="neighbourhoods">&nbsp;</dd></div>
+    <div><dt>Cuisines tested</dt><dd data-stat="cuisines">&nbsp;</dd></div>
+  </dl>
+</header>
+
+<section class="band saved" id="saved">
+  <div class="band-head">
+    <div>
+      <p class="kicker big">Saved runs</p>
+      <h2>Replay a recorded run</h2>
+    </div>
+    <p class="hint" id="golden-hint">Recorded live runs. They replay instantly and make no API calls.</p>
+  </div>
+  <ul id="golden" class="golden"></ul>
+</section>
+
+<main class="band app" id="app" aria-live="polite" hidden>
+  <div class="band-head">
+    <div>
+      <p class="kicker big">This run</p>
+      <h2 id="run-title">Scouting</h2>
+    </div>
+    <p id="credits" class="credits"></p>
+  </div>
+  <p id="verdict" class="verdict" hidden></p>
+
+  <div class="cols">
+    <div class="main">
+      <section class="panel ranking">
+        <div class="rank-head">
+          <h3 class="ph">Lease ranking</h3>
+          <div class="toggle" role="radiogroup" aria-label="Rank leases by">
+            <button type="button" role="radio" aria-checked="true" data-mode="city">City records</button>
+            <button type="button" role="radio" aria-checked="false" data-mode="qloo">Qloo taste</button>
+          </div>
+        </div>
+        <p id="rank-note" class="rank-note" hidden></p>
+        <ol id="rank-list" class="rank-list"></ol>
+        <p id="rank-wait" class="wait">The shortlist appears here as soon as the agent has scored the storefronts.</p>
+      </section>
+
+      <section class="panel partners" id="partners-panel" hidden>
+        <h3 class="ph" id="partners-title">Local partners</h3>
+        <p class="hint">From <span class="src city">city records</span>: the business improvement districts nearest the top pick,
+          and independent neighbours that serve the same customers at another moment of the day.</p>
+        <div id="partners-body" class="partners-body"></div>
+      </section>
+
+      <section class="panel around" id="around-panel" hidden>
+        <div class="rank-head">
+          <h3 class="ph" id="around-title">What is around the top pick</h3>
+          <button type="button" class="quiet small" id="around-go">Look it up with Qloo</button>
+        </div>
+        <p class="hint">Who the competitors are comes from <span class="src city">city inspection records</span>. When they
+          close and what their reviewers mention comes from <span class="src qloo">Qloo place data</span>,
+          for the places Qloo holds. A live lookup; it makes no model call.</p>
+        <div id="around-body"></div>
+      </section>
+
+      <section class="panel brief" id="brief-panel" hidden>
+        <div class="rank-head">
+          <h3 class="ph" id="brief-title">Positioning brief</h3>
+          <button type="button" class="quiet small" id="copy-brief" hidden>Copy the brief</button>
+        </div>
+        <p id="sources-line" class="sources-line" hidden></p>
+        <p class="brief-legend" id="brief-legend">
+          <span class="q">Highlighted</span>: from Qloo for this area.
+          <span class="c">Underlined</span>: found in NYC records near the lease (restaurant inspections or business improvement districts).
+          <span class="u">Dotted</span>: the model's own suggestion, not found in either; check before use.
+        </p>
+        <div id="brief-body"></div>
+        <p id="repair-note" class="repair-note" hidden></p>
+        <details class="evidence-used" id="evidence-used">
+          <summary>Qloo evidence given to the model</summary>
+          <div id="evidence-list"></div>
+        </details>
+      </section>
+
+      <section class="panel steps-next" id="next-panel" hidden>
+        <div class="rank-head">
+          <h3 class="ph" id="next-title">Next steps</h3>
+          <button type="button" class="quiet small" id="print-report">Print or save the founder report</button>
+        </div>
+        <p class="hint">Specific to this address first, then what every new NYC restaurant needs. Each step links to its source.</p>
+        <ol id="next-list" class="next-list"></ol>
+      </section>
+
+      <section class="panel ask" id="ask-panel" hidden>
+        <h3 class="ph">Ask a follow-up</h3>
+        <p class="hint">The agent answers with the same tools: storefront search, lease scoring, nearby restaurants,
+          Qloo area profiles, business lookups and our test results. Each tool call is shown.</p>
+        <div class="chips" id="chips"></div>
+        <form id="ask-form" class="ask-form" autocomplete="off">
+          <label for="question" class="visually-hidden">Your question</label>
+          <input id="question" maxlength="300" placeholder="For example: who are the competitors near the top lease?">
+          <button type="submit" class="primary ask-btn">Ask</button>
+        </form>
+        <ol id="thread" class="thread"></ol>
+      </section>
+    </div>
+
+    <aside class="rail">
+      <div class="map-wrap">
+        <div id="map" class="map" role="img" aria-label="Map of the lease addresses and nearby restaurants of this cuisine"></div>
+        <button type="button" id="map-fit" class="map-fit" title="Show every lease on the map">Show all</button>
+      </div>
+      <p class="map-key">
+        <span><span class="key-lease">1</span> lease, by rank</span>
+        <span><span class="key-dot"></span> same cuisine today</span>
+        <span><span class="key-ring"></span> opened since 2024</span>
+      </p>
+      <section class="panel trace">
+        <div class="rank-head">
+          <h3 class="ph">What the agent is doing</h3>
+          <span id="elapsed" class="elapsed" hidden></span>
+        </div>
+        <div class="bar" id="bar" hidden><i></i></div>
+        <ol id="steps" class="steps"><li class="idle">Waiting for a run.</li></ol>
+        <details id="qloo-calls" class="calls" hidden>
+          <summary id="qloo-count"></summary>
+          <ol id="call-list"></ol>
+        </details>
+      </section>
+    </aside>
+  </div>
+</main>
+
+<section class="band how-it" id="how">
+  <div class="band-head">
+    <div>
+      <p class="kicker big">How it works</p>
+      <h2>What the agent does</h2>
+    </div>
+    <p class="hint">Six steps, in this order, on every run. Each one is shown on the page as it happens.</p>
+  </div>
+  <ol class="flow">
+    <li><h3>Match the concept</h3><p>Your concept is matched to one of 25 cuisines the lease score was tested on. A cuisine we did not test stops with a plain message.</p></li>
+    <li><h3>Find storefronts</h3><p>Describe your plan and the agent picks neighbourhoods from census data, then searches vacant storefronts in several. Or search one area, or bring two to five addresses of your own.</p></li>
+    <li><h3>Rank on city records</h3><p>Each storefront is scored by how busy its block is and how much of the same cuisine is in and around it, from NYC inspection records.</p></li>
+    <li><h3>Write the brief, then check it</h3><p>A positioning brief for the top pick. Every business it names is traced to Qloo, to city records near the address, or marked unverified. Lines no source backs up are rewritten or removed.</p></li>
+    <li><h3>Partners and next steps</h3><p>The nearest business improvement district, independent neighbours for cross-promotion, and the permits and checks ahead, each with a source link.</p></li>
+    <li><h3>Answer follow-ups</h3><p>Ask anything about the shortlist. The agent answers with the same tools, and numbers that appear in no tool result are flagged.</p></li>
+  </ol>
+
+  <div class="band-head second">
+    <div>
+      <p class="kicker big">Sources</p>
+      <h2>What each source does</h2>
+    </div>
+    <p class="hint">Each source is used only for the job a test says it does well.</p>
+  </div>
+  <div class="sources">
+    <article class="s-city"><span class="tagline">City records</span><h3>Where to open</h3>
+      <p>NYC Health Department inspection records and the Storefront Registry of vacant storefronts. Qloo is not part of the lease score, because adding it changed nothing.</p></article>
+    <article><span class="tagline">Census and jobs data</span><h3>Who lives and works nearby</h3>
+      <p>Target customers come from the census. Only 2 of 7 Qloo audience tags matched it.</p></article>
+    <article class="s-city"><span class="tagline">City records</span><h3>Who the competitors are</h3>
+      <p>Qloo's own list held 37% of them, so the product never says "no competitor does this".</p></article>
+    <article class="s-qloo"><span class="tagline">Qloo place records</span><h3>When competitors close, and what reviewers mention</h3>
+      <p>City records have none of this. A person checked the closing times on Google Maps: 29 of 30 matched. Price levels matched for 17 of 27, under our bar, so they are not shown.</p></article>
+    <article class="s-qloo"><span class="tagline">Qloo affinity, not validated</span><h3>Where else a restaurant's fans go</h3>
+      <p>Shown as Qloo's list and labelled as not validated. It is never used to choose where to open.</p></article>
+  </div>
+</section>
+
+<section id="scene" class="band evidence scene">
+  <p class="kicker big">Scene explorer</p>
+  <h2>Where else do their fans go?</h2>
+  <p class="lede narrow">Name up to three places your customers already love. <span class="src qloo">Qloo</span> returns
+    the places their fans also go, and the music and brands that crowd follows. No model is involved.</p>
+  <form id="scene-form" class="ask-form scene-form" autocomplete="off">
+    <label for="anchors" class="visually-hidden">Places your customers love, separated by commas</label>
+    <input id="anchors" maxlength="200" value="Thai Diner" placeholder="For example: Thai Diner, Win Son">
+    <button type="submit" class="primary ask-btn" id="scene-go">Show the scene</button>
+  </form>
+  <p id="scene-error" class="form-error" role="alert" hidden></p>
+  <div id="scene-body" class="scene-body"></div>
+</section>
+
+<section id="evidence" class="band evidence">
+  <p class="kicker big">The audit</p>
+  <h2>How we know</h2>
+  <p class="lede narrow">We tested each claim against what actually happened in New York before building on it.
+    Two of our own ideas failed, and the product changed because of it.</p>
+  <dl class="medians" id="medians" hidden>
+    <div class="m-city"><dt>City-records lease score</dt><dd id="med-city"></dd><p>median AUC across cuisines</p></div>
+    <div class="m-qloo"><dt>Qloo cuisine taste</dt><dd id="med-qloo"></dd><p>median AUC across cuisines</p></div>
+    <div><dt>Both together</dt><dd id="med-both"></dd><p>adding Qloo to the lease score</p></div>
+  </dl>
+  <figure class="chart-fig">
+    <figcaption>
+      <strong>Which signal found the blocks where each cuisine opened next, 2024 to 2026</strong>
+      <span>AUC within each cuisine, all restaurant blocks in four boroughs. 0.5 is a coin flip, 1 is perfect.</span>
+    </figcaption>
+    <div class="legend">
+      <span><i class="sw city"></i>City-records lease score</span>
+      <span><i class="sw qloo"></i>Qloo cuisine taste</span>
+      <button type="button" id="table-toggle" class="quiet small">Show as table</button>
+    </div>
+    <div id="chart" class="chart"></div>
+    <div id="chart-table" hidden></div>
+    <div id="tip" class="tip" role="status" hidden></div>
+  </figure>
+  <div class="entries-head">
+    <h3>Every test, with its caveat</h3>
+    <label for="entry-filter" class="visually-hidden">Filter the tests</label>
+    <input id="entry-filter" type="search" placeholder="Filter the tests">
+  </div>
+  <div id="entries" class="entries"></div>
+  <p id="entries-none" class="hint" hidden>No test matches that filter.</p>
+
+  <div class="entries-head">
+    <h3>All 23 tests, in order</h3>
+    <p class="hint">Every test was written down and committed before its code or its result. Most went against Qloo, and they are all here.</p>
+  </div>
+  <div class="tests-wrap"><table class="data tests" id="tests"></table></div>
+</section>
+
+<footer class="foot">
+  <a class="logo" href="#top"><span class="logo-mark" aria-hidden="true"></span>Whitespace</a>
+  <p>Built for the Qloo Agentic Hackathon 2026.</p>
+  <p>Data: NYC Department of Health restaurant inspections (active restaurants only), NYC Storefront Registry (owner-reported vacancies; a storefront may have been leased since its report), Qloo Insights API,
+    NYC Planning GeoSearch. Positioning text by GPT-6 Astra. Map data by OpenStreetMap contributors.</p>
+</footer>
+
+<button type="button" id="to-top" class="to-top" aria-label="Back to top" hidden>
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+<div id="toast" class="toast" role="status" hidden></div>
+
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script defer src="/static/app.js?v=8"></script>
+</body>
+</html>

@@ -1,0 +1,854 @@
+{
+ "title": "Korean cafe: compare three Queens addresses",
+ "request": {
+  "concept": "Korean cafe",
+  "leases": [
+   {
+    "address": "136-20 38th Ave, Queens"
+   },
+   {
+    "address": "35-01 Union St, Queens"
+   },
+   {
+    "address": "41-08 Bell Blvd, Queens"
+   }
+  ]
+ },
+ "recorded": "2026-10-11",
+ "events": [
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "resolve",
+    "label": "Match concept to a tested cuisine",
+    "status": "running"
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "resolve",
+    "label": "Match concept to a tested cuisine",
+    "status": "done",
+    "seconds": 0.0,
+    "detail": "keyword match"
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "concept",
+    "data": {
+     "cuisine": "Korean",
+     "label": "Korean cafe",
+     "reason": "matched by keyword to Korean"
+    }
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "rank",
+    "label": "Rank leases on city inspection records",
+    "status": "running"
+   }
+  ],
+  [
+   0.92,
+   {
+    "type": "step",
+    "id": "rank",
+    "label": "Rank leases on city inspection records",
+    "status": "done",
+    "seconds": 0.9,
+    "detail": "3 leases scored"
+   }
+  ],
+  [
+   0.92,
+   {
+    "type": "leases",
+    "data": [
+     {
+      "address": "136-20 38 AVENUE, Flushing, NY, USA",
+      "borough": "Queens",
+      "neighbourhood": "Flushing",
+      "lat": 40.76069,
+      "lon": -73.829658,
+      "storefront": {
+       "bbl": "4049787501"
+      },
+      "block": "dr5rzu",
+      "density": 208,
+      "density_percentile": 98,
+      "same_cuisine_in_block": 8,
+      "same_cuisine_area": 19,
+      "score": 1.007,
+      "score_percentile": 97,
+      "same_cuisine_400m": [
+       {
+        "name": "Tofu House",
+        "cuisine": "Korean",
+        "metres": 44,
+        "opened": null,
+        "lat": 40.760330552591,
+        "lon": -73.82987293105
+       },
+       {
+        "name": "Shun Mama Food",
+        "cuisine": "Korean",
+        "metres": 106,
+        "opened": null,
+        "lat": 40.759791642744,
+        "lon": -73.829242612573
+       },
+       {
+        "name": "Eight Beautitudes",
+        "cuisine": "Korean",
+        "metres": 107,
+        "opened": null,
+        "lat": 40.759777908235,
+        "lon": -73.829235428489
+       },
+       {
+        "name": "Woodam",
+        "cuisine": "Korean",
+        "metres": 146,
+        "opened": "2025-12-03",
+        "lat": 40.76197659503,
+        "lon": -73.829323625379
+       },
+       {
+        "name": "Bunsik",
+        "cuisine": "Korean",
+        "metres": 146,
+        "opened": "2023-08-10",
+        "lat": 40.761976600399,
+        "lon": -73.8293272352
+       },
+       {
+        "name": "Friendship Bbq",
+        "cuisine": "Korean",
+        "metres": 150,
+        "opened": null,
+        "lat": 40.760818897585,
+        "lon": -73.82788269469
+       },
+       {
+        "name": "Hangukgwan",
+        "cuisine": "Korean",
+        "metres": 237,
+        "opened": "2026-04-27",
+        "lat": 40.761514832923,
+        "lon": -73.827061462571
+       },
+       {
+        "name": "Chung Moo Roll Rice & Donga",
+        "cuisine": "Korean",
+        "metres": 241,
+        "opened": null,
+        "lat": 40.760971007155,
+        "lon": -73.826821024756
+       },
+       {
+        "name": "Kimganae Restaurant",
+        "cuisine": "Korean",
+        "metres": 242,
+        "opened": null,
+        "lat": 40.760935292682,
+        "lon": -73.826799459304
+       },
+       {
+        "name": "Jangtur",
+        "cuisine": "Korean",
+        "metres": 319,
+        "opened": "2025-08-07",
+        "lat": 40.76324535096,
+        "lon": -73.827937768444
+       },
+       {
+        "name": "Thaihee",
+        "cuisine": "Korean",
+        "metres": 336,
+        "opened": null,
+        "lat": 40.760605063291,
+        "lon": -73.833640816461
+       },
+       {
+        "name": "Hu Tong Bbq",
+        "cuisine": "Korean",
+        "metres": 337,
+        "opened": null,
+        "lat": 40.763462348708,
+        "lon": -73.828045503163
+       }
+      ],
+      "openings_800m": [
+       {
+        "name": "Woodam",
+        "cuisine": "Korean",
+        "metres": 146,
+        "opened": "2025-12-03",
+        "lat": 40.76197659503,
+        "lon": -73.829323625379
+       },
+       {
+        "name": "Hangukgwan",
+        "cuisine": "Korean",
+        "metres": 237,
+        "opened": "2026-04-27",
+        "lat": 40.761514832923,
+        "lon": -73.827061462571
+       },
+       {
+        "name": "Jangtur",
+        "cuisine": "Korean",
+        "metres": 319,
+        "opened": "2025-08-07",
+        "lat": 40.76324535096,
+        "lon": -73.827937768444
+       },
+       {
+        "name": "Yangjichon",
+        "cuisine": "Korean",
+        "metres": 420,
+        "opened": "2026-01-17",
+        "lat": 40.764151165244,
+        "lon": -73.831668110665
+       }
+      ],
+      "all_400m": 331,
+      "rank": 1,
+      "subway": {
+       "subway_entries_within_500m": 49610,
+       "stations": [
+        {
+         "station": "Flushing-Main St (7)",
+         "metres": 125,
+         "weekday_entries": 49610
+        }
+       ]
+      },
+      "bid": {
+       "bid": "Downtown Flushing Transit Hub",
+       "website": "https://www.flushingbid.com/",
+       "phone": "(718) 888-1805",
+       "email": "flushingbid@gmail.com",
+       "boundary": "Main Street from Northern Boulevard to Sanford Avenue; Roosevelt Avenue from Union Street to Prince Street; 40th Road from Main Street  to Prince Street; 39th Avenue from Main Street to College Point Boulevard; Kissena Boulevard from Main Street to Sanford Avenue"
+      },
+      "partners": {
+       "bids": [
+        {
+         "bid": "Downtown Flushing Transit Hub",
+         "website": "https://www.flushingbid.com/",
+         "phone": "(718) 888-1805",
+         "email": "flushingbid@gmail.com",
+         "boundary": "Main Street from Northern Boulevard to Sanford Avenue; Roosevelt Avenue from Union Street to Prince Street; 40th Road from Main Street  to Prince Street; 39th Avenue from Main Street to College Point Boulevard; Kissena Boulevard from Main Street to Sanford Avenue",
+         "metres": 0
+        }
+       ],
+       "complements": [
+        {
+         "name": "Sundaes Best",
+         "kind": "dessert",
+         "metres": 44
+        },
+        {
+         "name": "Mr. Tu Bakery",
+         "kind": "bakery",
+         "metres": 108
+        },
+        {
+         "name": "Tai Pan Bakery",
+         "kind": "bakery",
+         "metres": 119
+        },
+        {
+         "name": "Maxin Bakery",
+         "kind": "bakery",
+         "metres": 143
+        },
+        {
+         "name": "Mamie's Yogurt",
+         "kind": "dessert",
+         "metres": 336
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "Call the Downtown Flushing Transit Hub business improvement district: ask about the space, local foot traffic and opening events. Contact: (718) 888-1805, flushingbid@gmail.com.",
+        "source": "https://www.flushingbid.com/",
+        "specific": true
+       },
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: Sundaes Best (dessert, 44 m); Mr. Tu Bakery (bakery, 108 m); Tai Pan Bakery (bakery, 119 m); Maxin Bakery (bakery, 143 m); Mamie's Yogurt (dessert, 336 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     },
+     {
+      "address": "35-01 UNION STREET, Flushing, NY, USA",
+      "borough": "Queens",
+      "neighbourhood": "Flushing",
+      "lat": 40.764958,
+      "lon": -73.826584,
+      "storefront": {
+       "bbl": "4050020001"
+      },
+      "block": "dr5xbj",
+      "density": 19,
+      "density_percentile": 63,
+      "same_cuisine_in_block": 2,
+      "same_cuisine_area": 72,
+      "score": 0.946,
+      "score_percentile": 97,
+      "same_cuisine_400m": [
+       {
+        "name": "Xin La Gong Fu",
+        "cuisine": "Korean",
+        "metres": 122,
+        "opened": null,
+        "lat": 40.764713885371,
+        "lon": -73.827995329686
+       },
+       {
+        "name": "Hu Tong Bbq",
+        "cuisine": "Korean",
+        "metres": 207,
+        "opened": null,
+        "lat": 40.763462348708,
+        "lon": -73.828045503163
+       },
+       {
+        "name": "Jangtur",
+        "cuisine": "Korean",
+        "metres": 222,
+        "opened": "2025-08-07",
+        "lat": 40.76324535096,
+        "lon": -73.827937768444
+       },
+       {
+        "name": "Hangukgwan",
+        "cuisine": "Korean",
+        "metres": 385,
+        "opened": "2026-04-27",
+        "lat": 40.761514832923,
+        "lon": -73.827061462571
+       }
+      ],
+      "openings_800m": [
+       {
+        "name": "Jangtur",
+        "cuisine": "Korean",
+        "metres": 222,
+        "opened": "2025-08-07",
+        "lat": 40.76324535096,
+        "lon": -73.827937768444
+       },
+       {
+        "name": "Hangukgwan",
+        "cuisine": "Korean",
+        "metres": 385,
+        "opened": "2026-04-27",
+        "lat": 40.761514832923,
+        "lon": -73.827061462571
+       },
+       {
+        "name": "Woodam",
+        "cuisine": "Korean",
+        "metres": 404,
+        "opened": "2025-12-03",
+        "lat": 40.76197659503,
+        "lon": -73.829323625379
+       },
+       {
+        "name": "Yangjichon",
+        "cuisine": "Korean",
+        "metres": 437,
+        "opened": "2026-01-17",
+        "lat": 40.764151165244,
+        "lon": -73.831668110665
+       },
+       {
+        "name": "Meat Me",
+        "cuisine": "Korean",
+        "metres": 754,
+        "opened": "2026-02-06",
+        "lat": 40.771735606445,
+        "lon": -73.826583522573
+       }
+      ],
+      "all_400m": 37,
+      "rank": 2,
+      "subway": {
+       "subway_entries_within_500m": 0,
+       "stations": []
+      },
+      "bid": null,
+      "partners": {
+       "bids": [
+        {
+         "bid": "Downtown Flushing Transit Hub",
+         "website": "https://www.flushingbid.com/",
+         "phone": "(718) 888-1805",
+         "email": "flushingbid@gmail.com",
+         "boundary": "Main Street from Northern Boulevard to Sanford Avenue; Roosevelt Avenue from Union Street to Prince Street; 40th Road from Main Street  to Prince Street; 39th Avenue from Main Street to College Point Boulevard; Kissena Boulevard from Main Street to Sanford Avenue",
+         "metres": 261
+        }
+       ],
+       "complements": [
+        {
+         "name": "Oh! Bagel",
+         "kind": "bagels",
+         "metres": 148
+        },
+        {
+         "name": "Canaan Bakery & Cafe",
+         "kind": "bakery",
+         "metres": 226
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "This building is an individual landmark (Flushing High School): storefront or sign changes need Landmarks Preservation Commission approval before work starts.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": true
+       },
+       {
+        "step": "The nearest business improvement district, Downtown Flushing Transit Hub, is about 261 m away. Its staff know the street and run local events; contact (718) 888-1805, flushingbid@gmail.com.",
+        "source": "https://www.flushingbid.com/",
+        "specific": true
+       },
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: Oh! Bagel (bagels, 148 m); Canaan Bakery & Cafe (bakery, 226 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     },
+     {
+      "address": "41-08 BELL BOULEVARD, Bayside, NY, USA",
+      "borough": "Queens",
+      "neighbourhood": "Bayside",
+      "lat": 40.763279,
+      "lon": -73.771108,
+      "storefront": {
+       "bbl": "4062270305"
+      },
+      "block": "dr5xck",
+      "density": 68,
+      "density_percentile": 91,
+      "same_cuisine_in_block": 9,
+      "same_cuisine_area": 20,
+      "score": 0.392,
+      "score_percentile": 96,
+      "same_cuisine_400m": [
+       {
+        "name": "Seoul Pocha",
+        "cuisine": "Korean",
+        "metres": 95,
+        "opened": "2026-05-06",
+        "lat": 40.764123480307,
+        "lon": -73.771241161342
+       },
+       {
+        "name": "Mad For Chicken",
+        "cuisine": "Korean",
+        "metres": 215,
+        "opened": null,
+        "lat": 40.765137434963,
+        "lon": -73.771811657184
+       },
+       {
+        "name": "Okdongsik",
+        "cuisine": "Korean",
+        "metres": 250,
+        "opened": "2026-06-02",
+        "lat": 40.761252388973,
+        "lon": -73.769836018267
+       }
+      ],
+      "openings_800m": [
+       {
+        "name": "Seoul Pocha",
+        "cuisine": "Korean",
+        "metres": 95,
+        "opened": "2026-05-06",
+        "lat": 40.764123480307,
+        "lon": -73.771241161342
+       },
+       {
+        "name": "Okdongsik",
+        "cuisine": "Korean",
+        "metres": 250,
+        "opened": "2026-06-02",
+        "lat": 40.761252388973,
+        "lon": -73.769836018267
+       },
+       {
+        "name": "Pelicana Chicken",
+        "cuisine": "Korean",
+        "metres": 428,
+        "opened": "2024-02-27",
+        "lat": 40.759541882033,
+        "lon": -73.772329040377
+       },
+       {
+        "name": "Blacksmith",
+        "cuisine": "Korean",
+        "metres": 440,
+        "opened": "2026-04-21",
+        "lat": 40.760108313892,
+        "lon": -73.774229428852
+       },
+       {
+        "name": "Ju Bang Jang",
+        "cuisine": "Korean",
+        "metres": 454,
+        "opened": "2024-09-25",
+        "lat": 40.760544227678,
+        "lon": -73.767109494341
+       },
+       {
+        "name": "K Cafe Terrace",
+        "cuisine": "Korean",
+        "metres": 617,
+        "opened": "2026-07-29",
+        "lat": 40.758746319925,
+        "lon": -73.775327791372
+       },
+       {
+        "name": "Sam Won Gahk",
+        "cuisine": "Korean",
+        "metres": 735,
+        "opened": "2025-01-09",
+        "lat": 40.761268240402,
+        "lon": -73.762793239274
+       }
+      ],
+      "all_400m": 73,
+      "rank": 3,
+      "subway": {
+       "subway_entries_within_500m": 0,
+       "stations": []
+      },
+      "bid": {
+       "bid": "Bayside Village",
+       "website": "http://baysidevillagebid.com/",
+       "phone": "(718) 423-2434",
+       "email": "info@baysidevillagebid.com",
+       "boundary": "Bell Boulevard from Northern Boulevard to 35th Avenue; 41st Avenue from 214th Place to 213th Street"
+      },
+      "partners": {
+       "bids": [
+        {
+         "bid": "Bayside Village",
+         "website": "http://baysidevillagebid.com/",
+         "phone": "(718) 423-2434",
+         "email": "info@baysidevillagebid.com",
+         "boundary": "Bell Boulevard from Northern Boulevard to 35th Avenue; 41st Avenue from 214th Place to 213th Street",
+         "metres": 0
+        }
+       ],
+       "complements": [
+        {
+         "name": "Tropical Smoothie Cafe",
+         "kind": "juice bar",
+         "metres": 43
+        },
+        {
+         "name": "Spin Bagel",
+         "kind": "bagels",
+         "metres": 88
+        },
+        {
+         "name": "Meet Fresh",
+         "kind": "dessert",
+         "metres": 361
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "Call the Bayside Village business improvement district: ask about the space, local foot traffic and opening events. Contact: (718) 423-2434, info@baysidevillagebid.com.",
+        "source": "http://baysidevillagebid.com/",
+        "specific": true
+       },
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: Tropical Smoothie Cafe (juice bar, 43 m); Spin Bagel (bagels, 88 m); Meet Fresh (dessert, 361 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  [
+   0.92,
+   {
+    "type": "step",
+    "id": "evidence",
+    "label": "Fetch Qloo audience evidence for Flushing, Queens",
+    "status": "running"
+   }
+  ],
+  [
+   1.04,
+   {
+    "type": "step",
+    "id": "evidence",
+    "label": "Fetch Qloo audience evidence for Flushing, Queens",
+    "status": "done",
+    "seconds": 0.1,
+    "detail": {
+     "tags": 8,
+     "brands": 8,
+     "concept_brands": 8
+    }
+   }
+  ],
+  [
+   1.04,
+   {
+    "type": "step",
+    "id": "write",
+    "label": "Write positioning brief (GPT-6 Astra)",
+    "status": "running"
+   }
+  ],
+  [
+   35.48,
+   {
+    "type": "step",
+    "id": "write",
+    "label": "Write positioning brief (GPT-6 Astra)",
+    "status": "done",
+    "seconds": 34.4,
+    "detail": "34.4 s"
+   }
+  ],
+  [
+   35.48,
+   {
+    "type": "step",
+    "id": "verify",
+    "label": "Verify brief",
+    "status": "running"
+   }
+  ],
+  [
+   37.74,
+   {
+    "type": "step",
+    "id": "verify",
+    "label": "Verify brief",
+    "status": "done",
+    "seconds": 2.3,
+    "detail": "passed"
+   }
+  ],
+  [
+   37.74,
+   {
+    "type": "step",
+    "id": "repair1",
+    "label": "Replace names no source backs up",
+    "status": "running"
+   }
+  ],
+  [
+   51.57,
+   {
+    "type": "step",
+    "id": "repair1",
+    "label": "Replace names no source backs up",
+    "status": "done",
+    "seconds": 13.8,
+    "detail": "replaced Flushing BID, Queens Public Library\u2019s Flushing branch, Korean Community Services of Metropolitan New York"
+   }
+  ],
+  [
+   51.57,
+   {
+    "type": "step",
+    "id": "verify_repair1",
+    "label": "Verify repaired brief",
+    "status": "running"
+   }
+  ],
+  [
+   57.09,
+   {
+    "type": "step",
+    "id": "verify_repair1",
+    "label": "Verify repaired brief",
+    "status": "done",
+    "seconds": 5.5,
+    "detail": "passed"
+   }
+  ],
+  [
+   57.09,
+   {
+    "type": "brief",
+    "data": {
+     "lease": "136-20 38 AVENUE, Flushing, NY, USA",
+     "area": "Flushing, Queens",
+     "problems": [],
+     "name_check": "done",
+     "names_traced_to_city_records": [],
+     "names_traced_to_qloo": 3,
+     "replaced_unverified_names": [
+      "Flushing BID",
+      "Queens Public Library\u2019s Flushing branch",
+      "Korean Community Services of Metropolitan New York"
+     ],
+     "unverified_names_left": [],
+     "text": "[brief written from Qloo evidence; on the live site only]"
+    }
+   }
+  ],
+  [
+   57.09,
+   {
+    "type": "done",
+    "credits": 3.88,
+    "provider": "comet",
+    "usd": 0.06
+   }
+  ]
+ ],
+ "followups": [
+  {
+   "q": "Why does 41-08 Bell Blvd rank last when Qloo taste puts it first?",
+   "tools": [
+    "test_results"
+   ],
+   "unchecked_numbers": [],
+   "answer": "Bell Boulevard ranks last only within this shortlist\u2014not poorly across NYC. Its Korean lease-score percentile is 96, versus 97 for both Flushing addresses.\n\nThe rankings measure different things:\n\u2022 The lease score uses city-record restaurant counts in the block and Korean restaurant supply in and around it.\n\u2022 Qloo describes audience tastes; it isn\u2019t evidence of where to open and doesn\u2019t enter the lease score.\n\nFor Korean specifically, the tested city-record score predicted subsequent openings better than Qloo taste: AUC 0.889 versus 0.820. Adding Qloo to the city score yielded 0.887, not an improvement.\n\nSo even if Bell leads on taste, that doesn\u2019t override its city-record ranking. It remains a strong candidate to investigate. These scores predict where operators open\u2014not profitability or survival\u2014and exclude rent."
+  },
+  {
+   "q": "Is Kung Fu Tea near the top lease in city records?",
+   "tools": [
+    "lookup_business"
+   ],
+   "unchecked_numbers": [],
+   "answer": "Yes. NYC inspection records list Kung Fu Tea 46 metres from the top lease, 136-20 38 Avenue in Flushing. That confirms a nearby recorded business\u2014not an existing partnership or willingness to cross-promote."
+  }
+ ]
+}

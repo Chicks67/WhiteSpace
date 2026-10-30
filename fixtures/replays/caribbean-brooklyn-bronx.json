@@ -1,0 +1,660 @@
+{
+ "title": "Caribbean restaurant: compare Brooklyn and Bronx",
+ "request": {
+  "concept": "Caribbean restaurant",
+  "leases": [
+   {
+    "address": "600 Nostrand Ave, Brooklyn"
+   },
+   {
+    "address": "2000 Grand Concourse, Bronx"
+   },
+   {
+    "address": "3000 White Plains Rd, Bronx"
+   }
+  ]
+ },
+ "recorded": "2026-10-11",
+ "events": [
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "resolve",
+    "label": "Match concept to a tested cuisine",
+    "status": "running"
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "resolve",
+    "label": "Match concept to a tested cuisine",
+    "status": "done",
+    "seconds": 0.0,
+    "detail": "keyword match"
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "concept",
+    "data": {
+     "cuisine": "Caribbean",
+     "label": "Caribbean restaurant",
+     "reason": "matched by keyword to Caribbean"
+    }
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "rank",
+    "label": "Rank leases on city inspection records",
+    "status": "running"
+   }
+  ],
+  [
+   0.75,
+   {
+    "type": "step",
+    "id": "rank",
+    "label": "Rank leases on city inspection records",
+    "status": "done",
+    "seconds": 0.8,
+    "detail": "3 leases scored"
+   }
+  ],
+  [
+   0.76,
+   {
+    "type": "leases",
+    "data": [
+     {
+      "address": "600 NOSTRAND AVENUE, Brooklyn, NY, USA",
+      "borough": "Brooklyn",
+      "neighbourhood": "Crown Heights",
+      "lat": 40.677905,
+      "lon": -73.949958,
+      "storefront": {
+       "bbl": "3012000050"
+      },
+      "block": "dr5rmj",
+      "density": 74,
+      "density_percentile": 92,
+      "same_cuisine_in_block": 9,
+      "same_cuisine_area": 33,
+      "score": 1.108,
+      "score_percentile": 98,
+      "same_cuisine_400m": [
+       {
+        "name": "Royal Bakery & Roti",
+        "cuisine": "Caribbean",
+        "metres": 45,
+        "opened": null,
+        "lat": 40.677526221341,
+        "lon": -73.949768202736
+       },
+       {
+        "name": "Footprints",
+        "cuisine": "Caribbean",
+        "metres": 83,
+        "opened": null,
+        "lat": 40.678618605491,
+        "lon": -73.949684454882
+       },
+       {
+        "name": "Trini Girl West Indian Cuisine",
+        "cuisine": "Caribbean",
+        "metres": 103,
+        "opened": null,
+        "lat": 40.676982788983,
+        "lon": -73.949844323041
+       },
+       {
+        "name": "Mi Dawta Dem Kitchin",
+        "cuisine": "Caribbean",
+        "metres": 113,
+        "opened": "2025-02-26",
+        "lat": 40.678895808772,
+        "lon": -73.949640981165
+       },
+       {
+        "name": "Lovelane",
+        "cuisine": "Caribbean",
+        "metres": 270,
+        "opened": "2023-09-19",
+        "lat": 40.675473223896,
+        "lon": -73.949986062676
+       },
+       {
+        "name": "Hunter'S Spice Grill",
+        "cuisine": "Caribbean",
+        "metres": 277,
+        "opened": null,
+        "lat": 40.680394574354,
+        "lon": -73.94991024965
+       },
+       {
+        "name": "Juici Patties",
+        "cuisine": "Caribbean",
+        "metres": 281,
+        "opened": "2025-05-20",
+        "lat": 40.68037782984,
+        "lon": -73.949282923664
+       },
+       {
+        "name": "Ali'S Roti Shop",
+        "cuisine": "Caribbean",
+        "metres": 288,
+        "opened": null,
+        "lat": 40.680449776483,
+        "lon": -73.950616866077
+       },
+       {
+        "name": "A & A Bake And Double Shop",
+        "cuisine": "Caribbean",
+        "metres": 312,
+        "opened": null,
+        "lat": 40.68031140629,
+        "lon": -73.948057141523
+       },
+       {
+        "name": "Jamaican Flavors",
+        "cuisine": "Caribbean",
+        "metres": 326,
+        "opened": "2024-02-29",
+        "lat": 40.680828135027,
+        "lon": -73.949650332589
+       },
+       {
+        "name": "Nzuri Bar & Lounge",
+        "cuisine": "Caribbean",
+        "metres": 367,
+        "opened": "2018-10-21",
+        "lat": 40.680560382282,
+        "lon": -73.952545675094
+       },
+       {
+        "name": "Yummy'S",
+        "cuisine": "Caribbean",
+        "metres": 376,
+        "opened": "2023-06-17",
+        "lat": 40.674526313997,
+        "lon": -73.950073297353
+       },
+       {
+        "name": "Peppa'S Jerk Chicken",
+        "cuisine": "Caribbean",
+        "metres": 400,
+        "opened": null,
+        "lat": 40.674342638983,
+        "lon": -73.950592564999
+       }
+      ],
+      "openings_800m": [
+       {
+        "name": "Mi Dawta Dem Kitchin",
+        "cuisine": "Caribbean",
+        "metres": 113,
+        "opened": "2025-02-26",
+        "lat": 40.678895808772,
+        "lon": -73.949640981165
+       },
+       {
+        "name": "Juici Patties",
+        "cuisine": "Caribbean",
+        "metres": 281,
+        "opened": "2025-05-20",
+        "lat": 40.68037782984,
+        "lon": -73.949282923664
+       },
+       {
+        "name": "Jamaican Flavors",
+        "cuisine": "Caribbean",
+        "metres": 326,
+        "opened": "2024-02-29",
+        "lat": 40.680828135027,
+        "lon": -73.949650332589
+       },
+       {
+        "name": "Original Ricky'S",
+        "cuisine": "Caribbean",
+        "metres": 747,
+        "opened": "2024-09-23",
+        "lat": 40.679956924731,
+        "lon": -73.941517274608
+       },
+       {
+        "name": "Rick'S Restaurant",
+        "cuisine": "Caribbean",
+        "metres": 747,
+        "opened": "2026-10-05",
+        "lat": 40.679956924731,
+        "lon": -73.941517274608
+       }
+      ],
+      "all_400m": 64,
+      "rank": 1,
+      "subway": {
+       "subway_entries_within_500m": 14968,
+       "stations": [
+        {
+         "station": "Nostrand Av (A,C)",
+         "metres": 285,
+         "weekday_entries": 14968
+        }
+       ]
+      },
+      "bid": null,
+      "partners": {
+       "bids": [
+        {
+         "bid": "Bed-Stuy Gateway",
+         "website": "https://thebedstuybid.org/",
+         "phone": "(718) 872-3400",
+         "email": "info@thebedstuybid.org",
+         "boundary": "Fulton Street, from Classon to Troy avenues and on Nostrand Avenue, from Halsey Street to Atlantic Avenue",
+         "metres": 82
+        }
+       ],
+       "complements": [
+        {
+         "name": "Furman's Coffee",
+         "kind": "coffee or tea",
+         "metres": 98
+        },
+        {
+         "name": "Cotton Bean",
+         "kind": "coffee or tea",
+         "metres": 205
+        },
+        {
+         "name": "Island Pops",
+         "kind": "dessert",
+         "metres": 260
+        },
+        {
+         "name": "Tea Spot",
+         "kind": "coffee or tea",
+         "metres": 277
+        },
+        {
+         "name": "Miss Bagel",
+         "kind": "bagels",
+         "metres": 347
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "The nearest business improvement district, Bed-Stuy Gateway, is about 82 m away. Its staff know the street and run local events; contact (718) 872-3400, info@thebedstuybid.org.",
+        "source": "https://thebedstuybid.org/",
+        "specific": true
+       },
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: Furman's Coffee (coffee or tea, 98 m); Cotton Bean (coffee or tea, 205 m); Island Pops (dessert, 260 m); Tea Spot (coffee or tea, 277 m); Miss Bagel (bagels, 347 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     },
+     {
+      "address": "3000 WHITE PLNS ROAD, Bronx, NY, USA",
+      "borough": "Bronx",
+      "neighbourhood": "Williamsbridge",
+      "lat": 40.87005,
+      "lon": -73.866849,
+      "storefront": {
+       "bbl": "2045680008"
+      },
+      "block": "dr72x0",
+      "density": 14,
+      "density_percentile": 53,
+      "same_cuisine_in_block": 4,
+      "same_cuisine_area": 15,
+      "score": -0.496,
+      "score_percentile": 87,
+      "same_cuisine_400m": [
+       {
+        "name": "Feroza'S Roti Bar",
+        "cuisine": "Caribbean",
+        "metres": 155,
+        "opened": null,
+        "lat": 40.871414964881,
+        "lon": -73.866490452719
+       },
+       {
+        "name": "Up Top Grill",
+        "cuisine": "Caribbean",
+        "metres": 263,
+        "opened": null,
+        "lat": 40.872409300263,
+        "lon": -73.86713206988
+       },
+       {
+        "name": "Lash West Indian & American Cuisine",
+        "cuisine": "Caribbean",
+        "metres": 340,
+        "opened": null,
+        "lat": 40.871358933648,
+        "lon": -73.863189346603
+       }
+      ],
+      "openings_800m": [],
+      "all_400m": 15,
+      "rank": 2,
+      "subway": {
+       "subway_entries_within_500m": 1941,
+       "stations": [
+        {
+         "station": "Burke Av (2,5)",
+         "metres": 148,
+         "weekday_entries": 1941
+        }
+       ]
+      },
+      "bid": null,
+      "partners": {
+       "bids": [],
+       "complements": [
+        {
+         "name": "Lash Sweet And Tings",
+         "kind": "juice bar",
+         "metres": 359
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: Lash Sweet And Tings (juice bar, 359 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     },
+     {
+      "address": "2000 GRAND CONCOURSE, Bronx, NY, USA",
+      "borough": "Bronx",
+      "neighbourhood": "Mount Hope",
+      "lat": 40.851172,
+      "lon": -73.90418,
+      "storefront": {
+       "bbl": "2028120011"
+      },
+      "block": "dr72qk",
+      "density": 26,
+      "density_percentile": 73,
+      "same_cuisine_in_block": 0,
+      "same_cuisine_area": 4,
+      "score": -1.904,
+      "score_percentile": 65,
+      "same_cuisine_400m": [],
+      "openings_800m": [],
+      "all_400m": 23,
+      "rank": 3,
+      "subway": {
+       "subway_entries_within_500m": 13215,
+       "stations": [
+        {
+         "station": "Tremont Av (B,D)",
+         "metres": 122,
+         "weekday_entries": 6146
+        },
+        {
+         "station": "Burnside Av (4)",
+         "metres": 389,
+         "weekday_entries": 7069
+        }
+       ]
+      },
+      "bid": null,
+      "partners": {
+       "bids": [],
+       "complements": [
+        {
+         "name": "Victor's Bakery & Coffee Shop",
+         "kind": "bakery",
+         "metres": 91
+        },
+        {
+         "name": "Don Villa Bakery",
+         "kind": "bakery",
+         "metres": 162
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: Victor's Bakery & Coffee Shop (bakery, 91 m); Don Villa Bakery (bakery, 162 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  [
+   0.96,
+   {
+    "type": "step",
+    "id": "evidence",
+    "label": "Fetch Qloo audience evidence for Crown Heights, Brooklyn",
+    "status": "running"
+   }
+  ],
+  [
+   1.1,
+   {
+    "type": "step",
+    "id": "evidence",
+    "label": "Fetch Qloo audience evidence for Crown Heights, Brooklyn",
+    "status": "done",
+    "seconds": 0.1,
+    "detail": {
+     "tags": 8,
+     "brands": 8,
+     "concept_brands": 8
+    }
+   }
+  ],
+  [
+   1.1,
+   {
+    "type": "step",
+    "id": "write",
+    "label": "Write positioning brief (GPT-6 Astra)",
+    "status": "running"
+   }
+  ],
+  [
+   12.83,
+   {
+    "type": "step",
+    "id": "write",
+    "label": "Write positioning brief (GPT-6 Astra)",
+    "status": "done",
+    "seconds": 11.7,
+    "detail": "11.7 s"
+   }
+  ],
+  [
+   12.83,
+   {
+    "type": "step",
+    "id": "verify",
+    "label": "Verify brief",
+    "status": "running"
+   }
+  ],
+  [
+   16.71,
+   {
+    "type": "step",
+    "id": "verify",
+    "label": "Verify brief",
+    "status": "done",
+    "seconds": 3.9,
+    "detail": "passed"
+   }
+  ],
+  [
+   16.71,
+   {
+    "type": "brief",
+    "data": {
+     "lease": "600 NOSTRAND AVENUE, Brooklyn, NY, USA",
+     "area": "Crown Heights, Brooklyn",
+     "problems": [],
+     "name_check": "done",
+     "names_traced_to_city_records": [
+      "MoCADA"
+     ],
+     "names_traced_to_qloo": 2,
+     "replaced_unverified_names": [],
+     "unverified_names_left": [],
+     "text": "[brief written from Qloo evidence; on the live site only]"
+    }
+   }
+  ],
+  [
+   16.71,
+   {
+    "type": "done",
+    "credits": 1.12,
+    "provider": "comet",
+    "usd": 0.02
+   }
+  ]
+ ],
+ "followups": [
+  {
+   "q": "Find vacant storefronts in Flatbush and compare them with 600 Nostrand Ave.",
+   "tools": [
+    "find_storefronts"
+   ],
+   "unchecked_numbers": [],
+   "answer": "Found 30 reported vacant storefronts across 9 Flatbush blocks. Top candidates, one per block:\n\n\u2022 850 Flatbush Avenue: NYC Caribbean lease-score percentile 100 versus 98 at 600 Nostrand. Has 8 Caribbean restaurants within 400m versus Nostrand\u2019s 13; nearby weekday subway entries are 16,586 versus 14,968. Vacancy reported December 31, 2024.\n\n\u2022 944 Flatbush Ave: percentile 100; 8 Caribbean restaurants within 400m; 11,646 subway entries. Previously Food Services; vacancy reported June 30, 2025.\n\n\u2022 2318 Avenue D: percentile 97; 9 Caribbean restaurants within 400m; no subway entries within 500m. Previously Retail; vacancy reported June 30, 2025.\n\nPrioritize viewing 850 and 944: both score above Nostrand on city records. Subway counts are context, not ranking evidence. These are reported vacancies, not confirmed current availability; verify availability, rent, ventilation and permitted use before choosing."
+  },
+  {
+   "q": "Does Qloo predict where a Caribbean restaurant should open?",
+   "tools": [
+    "test_results",
+    "test_results"
+   ],
+   "unchecked_numbers": [],
+   "answer": "Not reliably enough to tell you where to open. Qloo describes an area\u2019s audience; we don\u2019t use it to rank leases.\n\nFor Caribbean specifically, our pre-registered tests found:\n\u2022 On blocks without Caribbean restaurants, Qloo taste scored 0.684\u20130.688 AUC, below nearby Caribbean supply at 0.807.\n\u2022 Across all blocks, the city-records lease score achieved 0.855 versus Qloo\u2019s 0.785. Adding Qloo raised it only to 0.860.\n\nAUC measures predictive discrimination, not a restaurant\u2019s probability of success.\n\nSo the Flatbush-versus-Nostrand decision should rest on city-records rankings and practical lease checks\u2014not Qloo. Use Qloo for audience-informed positioning and ideas to test, not proof of unmet demand."
+  }
+ ]
+}

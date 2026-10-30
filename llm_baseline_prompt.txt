@@ -1,0 +1,5 @@
+It is December 2023. You are advising a founder who wants to open a new {cuisine} restaurant in New York City, in Brooklyn, Queens, Manhattan or the Bronx.
+
+List the 20 neighborhoods where a new {cuisine} restaurant has the best opportunity: strong local appetite for {cuisine} food, while not already crowded with {cuisine} restaurants.
+
+Use official NYC Neighborhood Tabulation Area names where possible. Return only a JSON array of 20 neighborhood names, best first, with no other text.

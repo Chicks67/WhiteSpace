@@ -1,0 +1,24 @@
+{
+ "blocks": 627,
+ "rows": 8778,
+ "mean_block_auc": {
+  "CITY": 0.7841,
+  "CITY+Q": 0.7867,
+  "CITY+Qown": 0.784,
+  "Q_alone": 0.7481
+ },
+ "top3_hit_rate": {
+  "CITY": 0.81,
+  "CITY+Q": 0.802,
+  "CITY+Qown": 0.807,
+  "Q_alone": 0.78
+ },
+ "primary_diff": 0.0027,
+ "ci95": [
+  -0.0009,
+  0.0063
+ ],
+ "permutation_p": 0.0,
+ "permutation_mean": -0.0002,
+ "supported": false
+}

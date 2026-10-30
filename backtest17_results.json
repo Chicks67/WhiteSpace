@@ -1,0 +1,547 @@
+{
+ "artists": 60,
+ "eligible_artists": 132,
+ "auc": {
+  "qloo": {
+   "mean": 0.63,
+   "ci95": [
+    0.593,
+    0.67
+   ],
+   "venues": 60
+  },
+  "size": {
+   "mean": 0.66,
+   "ci95": [
+    0.611,
+    0.707
+   ],
+   "venues": 60
+  },
+  "draw": {
+   "mean": 0.693,
+   "ci95": [
+    0.653,
+    0.731
+   ],
+   "venues": 60
+  },
+  "model": {
+   "mean": 0.739,
+   "ci95": [
+    0.702,
+    0.777
+   ],
+   "venues": 60
+  }
+ },
+ "gain_over_size": {
+  "mean": -0.03,
+  "ci95": [
+   -0.081,
+   0.022
+  ],
+  "venues": 60
+ },
+ "gain_over_draw": {
+  "mean": -0.063,
+  "ci95": [
+   -0.109,
+   -0.018
+  ],
+  "venues": 60
+ },
+ "gain_over_model": {
+  "mean": -0.109,
+  "ci95": [
+   -0.144,
+   -0.075
+  ],
+  "venues": 60
+ },
+ "mean_markets_played": 7.7,
+ "mean_markets_scored_by_qloo": 32.0,
+ "per_artist": [
+  {
+   "qloo": 0.5,
+   "size": 0.8266666666666668,
+   "draw": 0.8133333333333332,
+   "model": 0.8533333333333334,
+   "markets_played": 10,
+   "markets_scored_by_qloo": 0
+  },
+  {
+   "qloo": 0.9607843137254902,
+   "size": 0.8137254901960785,
+   "draw": 0.8823529411764706,
+   "model": 0.9632352941176472,
+   "markets_played": 6,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.36,
+   "size": 0.6742857142857143,
+   "draw": 0.7542857142857143,
+   "model": 0.7028571428571428,
+   "markets_played": 5,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.3476702508960574,
+   "size": 0.6648745519713262,
+   "draw": 0.6612903225806451,
+   "model": 0.41935483870967744,
+   "markets_played": 9,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.6702508960573477,
+   "size": 0.8727598566308244,
+   "draw": 0.8620071684587813,
+   "model": 0.8225806451612903,
+   "markets_played": 9,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.5,
+   "size": 0.2186147186147186,
+   "draw": 0.2727272727272727,
+   "model": 0.4069264069264069,
+   "markets_played": 7,
+   "markets_scored_by_qloo": 0
+  },
+  {
+   "qloo": 0.7005208333333334,
+   "size": 0.8229166666666667,
+   "draw": 0.8984375,
+   "model": 0.8151041666666667,
+   "markets_played": 16,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.7794117647058824,
+   "size": 0.8946078431372548,
+   "draw": 0.8357843137254902,
+   "model": 0.8676470588235293,
+   "markets_played": 6,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.7999999999999999,
+   "size": 0.8485714285714286,
+   "draw": 0.78,
+   "model": 0.8714285714285714,
+   "markets_played": 5,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.5,
+   "size": 0.7114695340501792,
+   "draw": 0.7956989247311828,
+   "model": 0.7921146953405018,
+   "markets_played": 9,
+   "markets_scored_by_qloo": 0
+  },
+  {
+   "qloo": 0.5316666666666667,
+   "size": 0.7066666666666668,
+   "draw": 0.79,
+   "model": 0.7333333333333334,
+   "markets_played": 10,
+   "markets_scored_by_qloo": 2
+  },
+  {
+   "qloo": 0.5942857142857143,
+   "size": 0.28571428571428575,
+   "draw": 0.4285714285714286,
+   "model": 0.5885714285714286,
+   "markets_played": 5,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.5599999999999999,
+   "size": 0.28571428571428575,
+   "draw": 0.4285714285714286,
+   "model": 0.7000000000000001,
+   "markets_played": 5,
+   "markets_scored_by_qloo": 17
+  },
+  {
+   "qloo": 0.76,
+   "size": 0.8616666666666667,
+   "draw": 0.8233333333333333,
+   "model": 0.8233333333333334,
+   "markets_played": 10,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.49609375,
+   "size": 0.51953125,
+   "draw": 0.5078125,
+   "model": 0.61328125,
+   "markets_played": 8,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.6190476190476191,
+   "size": 0.5714285714285715,
+   "draw": 0.5773809523809523,
+   "model": 0.5967261904761905,
+   "markets_played": 12,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.4050179211469534,
+   "size": 0.6953405017921148,
+   "draw": 0.7365591397849462,
+   "model": 0.8405017921146953,
+   "markets_played": 9,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.6640625,
+   "size": 0.646484375,
+   "draw": 0.65234375,
+   "model": 0.654296875,
+   "markets_played": 8,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.3485714285714286,
+   "size": 0.6742857142857143,
+   "draw": 0.7542857142857143,
+   "model": 0.5371428571428571,
+   "markets_played": 5,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.5343137254901961,
+   "size": 0.7230392156862745,
+   "draw": 0.6617647058823529,
+   "model": 0.5024509803921569,
+   "markets_played": 6,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.5956112852664577,
+   "size": 0.6692789968652038,
+   "draw": 0.6410658307210032,
+   "model": 0.6410658307210031,
+   "markets_played": 11,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.5,
+   "size": 0.7546666666666666,
+   "draw": 0.6586666666666666,
+   "model": 0.7746666666666666,
+   "markets_played": 15,
+   "markets_scored_by_qloo": 0
+  },
+  {
+   "qloo": 0.4675324675324675,
+   "size": 0.2186147186147186,
+   "draw": 0.2727272727272727,
+   "model": 0.30303030303030304,
+   "markets_played": 7,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.5,
+   "size": 0.28571428571428575,
+   "draw": 0.4285714285714286,
+   "model": 0.7,
+   "markets_played": 5,
+   "markets_scored_by_qloo": 0
+  },
+  {
+   "qloo": 0.6381766381766383,
+   "size": 0.7207977207977209,
+   "draw": 0.7478632478632479,
+   "model": 0.8945868945868946,
+   "markets_played": 13,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.7142857142857143,
+   "size": 0.562857142857143,
+   "draw": 0.7342857142857143,
+   "model": 0.6657142857142858,
+   "markets_played": 5,
+   "markets_scored_by_qloo": 36
+  },
+  {
+   "qloo": 0.7099567099567099,
+   "size": 0.7467532467532467,
+   "draw": 0.8549783549783551,
+   "model": 0.8549783549783551,
+   "markets_played": 7,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.59375,
+   "size": 0.693359375,
+   "draw": 0.732421875,
+   "model": 0.580078125,
+   "markets_played": 8,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.8057142857142857,
+   "size": 0.40285714285714286,
+   "draw": 0.5857142857142857,
+   "model": 0.6857142857142857,
+   "markets_played": 5,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.5376344086021505,
+   "size": 0.6648745519713262,
+   "draw": 0.6612903225806451,
+   "model": 0.6415770609318996,
+   "markets_played": 9,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.828125,
+   "size": 0.83984375,
+   "draw": 0.87890625,
+   "model": 0.85546875,
+   "markets_played": 8,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.5612535612535613,
+   "size": 0.774928774928775,
+   "draw": 0.8532763532763533,
+   "model": 0.7763532763532763,
+   "markets_played": 13,
+   "markets_scored_by_qloo": 37
+  },
+  {
+   "qloo": 0.83984375,
+   "size": 0.69921875,
+   "draw": 0.734375,
+   "model": 0.89453125,
+   "markets_played": 8,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.5,
+   "size": 0.8885714285714286,
+   "draw": 0.8314285714285714,
+   "model": 0.8200000000000001,
+   "markets_played": 5,
+   "markets_scored_by_qloo": 0
+  },
+  {
+   "qloo": 0.5771428571428572,
+   "size": 0.562857142857143,
+   "draw": 0.7342857142857143,
+   "model": 0.6657142857142857,
+   "markets_played": 5,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.5542857142857143,
+   "size": 0.562857142857143,
+   "draw": 0.7342857142857143,
+   "model": 0.6,
+   "markets_played": 5,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.5942857142857143,
+   "size": 0.7314285714285714,
+   "draw": 0.8028571428571428,
+   "model": 0.7828571428571429,
+   "markets_played": 5,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.7371428571428572,
+   "size": 0.562857142857143,
+   "draw": 0.7342857142857143,
+   "model": 0.6228571428571429,
+   "markets_played": 5,
+   "markets_scored_by_qloo": 37
+  },
+  {
+   "qloo": 0.5078125,
+   "size": 0.5104166666666666,
+   "draw": 0.6041666666666666,
+   "model": 0.5677083333333334,
+   "markets_played": 16,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.9028571428571429,
+   "size": 0.9428571428571428,
+   "draw": 0.8628571428571429,
+   "model": 0.9142857142857144,
+   "markets_played": 5,
+   "markets_scored_by_qloo": 29
+  },
+  {
+   "qloo": 0.8,
+   "size": 0.8971428571428571,
+   "draw": 0.8200000000000001,
+   "model": 0.9199999999999999,
+   "markets_played": 5,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.696969696969697,
+   "size": 0.7467532467532467,
+   "draw": 0.8549783549783551,
+   "model": 0.8701298701298701,
+   "markets_played": 7,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.8382352941176471,
+   "size": 0.4803921568627451,
+   "draw": 0.4950980392156863,
+   "model": 0.9705882352941176,
+   "markets_played": 6,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.6685714285714286,
+   "size": 0.28571428571428575,
+   "draw": 0.4285714285714286,
+   "model": 0.64,
+   "markets_played": 5,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.7578125,
+   "size": 0.7421875,
+   "draw": 0.662109375,
+   "model": 0.736328125,
+   "markets_played": 8,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.8324175824175825,
+   "size": 0.815934065934066,
+   "draw": 0.8255494505494506,
+   "model": 0.9423076923076923,
+   "markets_played": 14,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.5,
+   "size": 0.8137254901960785,
+   "draw": 0.8823529411764706,
+   "model": 0.9215686274509803,
+   "markets_played": 6,
+   "markets_scored_by_qloo": 0
+  },
+  {
+   "qloo": 0.5,
+   "size": 0.28571428571428575,
+   "draw": 0.4285714285714286,
+   "model": 0.78,
+   "markets_played": 5,
+   "markets_scored_by_qloo": 0
+  },
+  {
+   "qloo": 0.7450980392156863,
+   "size": 0.7303921568627452,
+   "draw": 0.6299019607843137,
+   "model": 0.7745098039215687,
+   "markets_played": 6,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.5783475783475784,
+   "size": 0.7207977207977209,
+   "draw": 0.7478632478632479,
+   "model": 0.7621082621082621,
+   "markets_played": 13,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.7843137254901961,
+   "size": 0.4803921568627451,
+   "draw": 0.4950980392156863,
+   "model": 0.9264705882352942,
+   "markets_played": 6,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.87890625,
+   "size": 0.69921875,
+   "draw": 0.734375,
+   "model": 0.888671875,
+   "markets_played": 8,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.5,
+   "size": 0.8946078431372548,
+   "draw": 0.8357843137254902,
+   "model": 0.8186274509803921,
+   "markets_played": 6,
+   "markets_scored_by_qloo": 0
+  },
+  {
+   "qloo": 0.53515625,
+   "size": 0.587890625,
+   "draw": 0.58984375,
+   "model": 0.587890625,
+   "markets_played": 8,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.9019607843137256,
+   "size": 0.8333333333333334,
+   "draw": 0.8014705882352942,
+   "model": 0.9387254901960784,
+   "markets_played": 6,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.7058823529411764,
+   "size": 0.7303921568627452,
+   "draw": 0.6299019607843137,
+   "model": 0.7769607843137255,
+   "markets_played": 6,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.5974025974025974,
+   "size": 0.6277056277056277,
+   "draw": 0.5930735930735931,
+   "model": 0.6233766233766234,
+   "markets_played": 7,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.5686274509803921,
+   "size": 0.7205882352941176,
+   "draw": 0.7279411764705882,
+   "model": 0.6544117647058824,
+   "markets_played": 6,
+   "markets_scored_by_qloo": 40
+  },
+  {
+   "qloo": 0.5,
+   "size": 0.6796875,
+   "draw": 0.744140625,
+   "model": 0.78515625,
+   "markets_played": 8,
+   "markets_scored_by_qloo": 0
+  },
+  {
+   "qloo": 0.6127450980392156,
+   "size": 0.7083333333333334,
+   "draw": 0.6200980392156863,
+   "model": 0.6887254901960784,
+   "markets_played": 6,
+   "markets_scored_by_qloo": 40
+  }
+ ],
+ "outcome": "not above market size"
+}

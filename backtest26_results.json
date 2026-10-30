@@ -1,0 +1,130 @@
+{
+ "games": 2425,
+ "promotion_names": 2159,
+ "themed_names": 390,
+ "theme_nights": 336,
+ "all_theme_nights": {
+  "qloo": {
+   "value": 0.051,
+   "ci95": [
+    -0.055,
+    0.156
+   ],
+   "n": 336
+  },
+  "fame": {
+   "value": -0.031,
+   "ci95": [
+    -0.145,
+    0.082
+   ],
+   "n": 336
+  },
+  "model_alone": {
+   "value": 0.099,
+   "ci95": [
+    -0.002,
+    0.205
+   ],
+   "n": 336
+  },
+  "model_with_qloo": {
+   "value": 0.08,
+   "ci95": [
+    -0.022,
+    0.192
+   ],
+   "n": 336
+  },
+  "qloo_minus_fame": {
+   "value": 0.082,
+   "ci95": [
+    -0.024,
+    0.188
+   ],
+   "n": 336
+  },
+  "with_minus_alone": {
+   "value": -0.019,
+   "ci95": [
+    -0.078,
+    0.038
+   ],
+   "n": 336
+  },
+  "qloo_minus_model_alone": {
+   "value": -0.048,
+   "ci95": [
+    -0.166,
+    0.077
+   ],
+   "n": 336
+  },
+  "share_with_qloo_affinity": 0.351,
+  "mean_outcome": 0.039
+ },
+ "without_near_sellouts": {
+  "qloo": {
+   "value": 0.045,
+   "ci95": [
+    -0.072,
+    0.154
+   ],
+   "n": 322
+  },
+  "fame": {
+   "value": -0.02,
+   "ci95": [
+    -0.133,
+    0.089
+   ],
+   "n": 322
+  },
+  "model_alone": {
+   "value": 0.103,
+   "ci95": [
+    -0.002,
+    0.209
+   ],
+   "n": 322
+  },
+  "model_with_qloo": {
+   "value": 0.089,
+   "ci95": [
+    -0.021,
+    0.205
+   ],
+   "n": 322
+  },
+  "qloo_minus_fame": {
+   "value": 0.065,
+   "ci95": [
+    -0.046,
+    0.172
+   ],
+   "n": 322
+  },
+  "with_minus_alone": {
+   "value": -0.014,
+   "ci95": [
+    -0.076,
+    0.046
+   ],
+   "n": 322
+  },
+  "qloo_minus_model_alone": {
+   "value": -0.058,
+   "ci95": [
+    -0.191,
+    0.078
+   ],
+   "n": 322
+  },
+  "share_with_qloo_affinity": 0.348,
+  "mean_outcome": 0.029
+ },
+ "reading_1": "not shown",
+ "reading_2_beyond_fame": false,
+ "reading_3_model_with_qloo_against_alone": "no different",
+ "reading_3_qloo_against_model_alone": "no different"
+}

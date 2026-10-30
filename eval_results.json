@@ -1,0 +1,188 @@
+{
+ "korean-cafe-queens": {
+  "pass^3": true,
+  "runs": [
+   {
+    "error": null,
+    "order": [
+     "136-20 38 AVENUE, Flushing, NY, USA",
+     "35-01 UNION STREET, Flushing, NY, USA",
+     "41-08 BELL BOULEVARD, Bayside, NY, USA"
+    ],
+    "problems": [],
+    "names": 1,
+    "qloo_names": 1,
+    "city_names": 0,
+    "unverified": 0,
+    "rewrite": false,
+    "recovered": [],
+    "seconds": 25.17,
+    "credits": 1.15,
+    "fallback": false,
+    "passed": true
+   },
+   {
+    "error": null,
+    "order": [
+     "136-20 38 AVENUE, Flushing, NY, USA",
+     "35-01 UNION STREET, Flushing, NY, USA",
+     "41-08 BELL BOULEVARD, Bayside, NY, USA"
+    ],
+    "problems": [],
+    "names": 4,
+    "qloo_names": 4,
+    "city_names": 0,
+    "unverified": 0,
+    "rewrite": false,
+    "recovered": [],
+    "seconds": 79.51,
+    "credits": 2.79,
+    "fallback": false,
+    "passed": true
+   },
+   {
+    "error": null,
+    "order": [
+     "136-20 38 AVENUE, Flushing, NY, USA",
+     "35-01 UNION STREET, Flushing, NY, USA",
+     "41-08 BELL BOULEVARD, Bayside, NY, USA"
+    ],
+    "problems": [],
+    "names": 2,
+    "qloo_names": 1,
+    "city_names": 0,
+    "unverified": 1,
+    "rewrite": false,
+    "recovered": [],
+    "seconds": 30.85,
+    "credits": 1.17,
+    "fallback": false,
+    "passed": true
+   }
+  ]
+ },
+ "ramen-brooklyn": {
+  "pass^3": true,
+  "runs": [
+   {
+    "error": null,
+    "order": [
+     "700 MANHATTAN AVENUE, Brooklyn, NY, USA",
+     "1000 FULTON STREET, Brooklyn, NY, USA",
+     "620 VANDERBILT AVENUE, Brooklyn, NY, USA"
+    ],
+    "problems": [],
+    "names": 3,
+    "qloo_names": 3,
+    "city_names": 0,
+    "unverified": 0,
+    "rewrite": false,
+    "recovered": [],
+    "seconds": 32.27,
+    "credits": 1.31,
+    "fallback": false,
+    "passed": true
+   },
+   {
+    "error": null,
+    "order": [
+     "700 MANHATTAN AVENUE, Brooklyn, NY, USA",
+     "1000 FULTON STREET, Brooklyn, NY, USA",
+     "620 VANDERBILT AVENUE, Brooklyn, NY, USA"
+    ],
+    "problems": [],
+    "names": 2,
+    "qloo_names": 2,
+    "city_names": 0,
+    "unverified": 0,
+    "rewrite": false,
+    "recovered": [],
+    "seconds": 30.33,
+    "credits": 1.28,
+    "fallback": false,
+    "passed": true
+   },
+   {
+    "error": null,
+    "order": [
+     "700 MANHATTAN AVENUE, Brooklyn, NY, USA",
+     "1000 FULTON STREET, Brooklyn, NY, USA",
+     "620 VANDERBILT AVENUE, Brooklyn, NY, USA"
+    ],
+    "problems": [],
+    "names": 2,
+    "qloo_names": 2,
+    "city_names": 0,
+    "unverified": 0,
+    "rewrite": false,
+    "recovered": [],
+    "seconds": 26.8,
+    "credits": 1.19,
+    "fallback": false,
+    "passed": true
+   }
+  ]
+ },
+ "caribbean-brooklyn-bronx": {
+  "pass^3": true,
+  "runs": [
+   {
+    "error": null,
+    "order": [
+     "600 NOSTRAND AVENUE, Brooklyn, NY, USA",
+     "3000 WHITE PLNS ROAD, Bronx, NY, USA",
+     "2000 GRAND CONCOURSE, Bronx, NY, USA"
+    ],
+    "problems": [],
+    "names": 3,
+    "qloo_names": 2,
+    "city_names": 0,
+    "unverified": 0,
+    "rewrite": false,
+    "recovered": [],
+    "seconds": 25.05,
+    "credits": 1.25,
+    "fallback": false,
+    "passed": true
+   },
+   {
+    "error": null,
+    "order": [
+     "600 NOSTRAND AVENUE, Brooklyn, NY, USA",
+     "3000 WHITE PLNS ROAD, Bronx, NY, USA",
+     "2000 GRAND CONCOURSE, Bronx, NY, USA"
+    ],
+    "problems": [],
+    "names": 4,
+    "qloo_names": 2,
+    "city_names": 0,
+    "unverified": 1,
+    "rewrite": false,
+    "recovered": [],
+    "seconds": 29.61,
+    "credits": 1.36,
+    "fallback": false,
+    "passed": true
+   },
+   {
+    "error": null,
+    "order": [
+     "600 NOSTRAND AVENUE, Brooklyn, NY, USA",
+     "3000 WHITE PLNS ROAD, Bronx, NY, USA",
+     "2000 GRAND CONCOURSE, Bronx, NY, USA"
+    ],
+    "problems": [],
+    "names": 3,
+    "qloo_names": 2,
+    "city_names": 0,
+    "unverified": 0,
+    "rewrite": false,
+    "recovered": [],
+    "seconds": 35.03,
+    "credits": 1.36,
+    "fallback": false,
+    "passed": true
+   }
+  ]
+ }
+}

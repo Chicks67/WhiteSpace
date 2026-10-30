@@ -1,0 +1,154 @@
+{
+ "models_scored": [
+  "large",
+  "small"
+ ],
+ "decision_sample": {
+  "large_alone": {
+   "correct": {
+    "share": 0.0,
+    "count": 0,
+    "n": 30,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "declined": 30,
+   "confident_wrong": 0
+  },
+  "large_with_qloo": {
+   "correct": {
+    "share": 0.967,
+    "count": 29,
+    "n": 30,
+    "ci95": [
+     0.9,
+     1.0
+    ]
+   },
+   "declined": 0,
+   "confident_wrong": 1
+  },
+  "small_alone": {
+   "correct": {
+    "share": 0.1,
+    "count": 3,
+    "n": 30,
+    "ci95": [
+     0.0,
+     0.233
+    ]
+   },
+   "declined": 21,
+   "confident_wrong": 6
+  },
+  "small_with_qloo": {
+   "correct": {
+    "share": 0.967,
+    "count": 29,
+    "n": 30,
+    "ci95": [
+     0.9,
+     1.0
+    ]
+   },
+   "declined": 0,
+   "confident_wrong": 1
+  },
+  "large_with_minus_alone": {
+   "share": 0.967,
+   "count": 29,
+   "n": 30,
+   "ci95": [
+    0.9,
+    1.0
+   ]
+  },
+  "large_reading": "with Qloo above alone",
+  "small_with_minus_alone": {
+   "share": 0.867,
+   "count": 26,
+   "n": 30,
+   "ci95": [
+    0.7,
+    1.0
+   ]
+  },
+  "small_reading": "with Qloo above alone"
+ },
+ "all_places": {
+  "large_alone": {
+   "correct": {
+    "share": 0.0,
+    "count": 0,
+    "n": 36,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "declined": 36,
+   "confident_wrong": 0
+  },
+  "large_with_qloo": {
+   "correct": {
+    "share": 0.972,
+    "count": 35,
+    "n": 36,
+    "ci95": [
+     0.917,
+     1.0
+    ]
+   },
+   "declined": 0,
+   "confident_wrong": 1
+  },
+  "small_alone": {
+   "correct": {
+    "share": 0.111,
+    "count": 4,
+    "n": 36,
+    "ci95": [
+     0.028,
+     0.222
+    ]
+   },
+   "declined": 24,
+   "confident_wrong": 8
+  },
+  "small_with_qloo": {
+   "correct": {
+    "share": 0.972,
+    "count": 35,
+    "n": 36,
+    "ci95": [
+     0.917,
+     1.0
+    ]
+   },
+   "declined": 0,
+   "confident_wrong": 1
+  },
+  "large_with_minus_alone": {
+   "share": 0.972,
+   "count": 35,
+   "n": 36,
+   "ci95": [
+    0.917,
+    1.0
+   ]
+  },
+  "large_reading": "with Qloo above alone",
+  "small_with_minus_alone": {
+   "share": 0.861,
+   "count": 31,
+   "n": 36,
+   "ci95": [
+    0.694,
+    0.972
+   ]
+  },
+  "small_reading": "with Qloo above alone"
+ }
+}

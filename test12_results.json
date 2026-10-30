@@ -1,0 +1,96 @@
+{
+ "decision_sample_33": {
+  "places": 33,
+  "permanently_closed": 1,
+  "no_reference_hours": 2,
+  "reference_from_own_site": 0,
+  "closing_within_30_min": {
+   "share": 0.967,
+   "n": 30,
+   "ci95": [
+    0.9,
+    1.0
+   ]
+  },
+  "closing_exact": {
+   "share": 0.967,
+   "n": 30,
+   "ci95": [
+    0.9,
+    1.0
+   ]
+  },
+  "price_equal": {
+   "share": 0.63,
+   "n": 27,
+   "ci95": [
+    0.444,
+    0.815
+   ]
+  },
+  "price_within_one_level": {
+   "share": 1.0,
+   "n": 27,
+   "ci95": [
+    1.0,
+    1.0
+   ]
+  },
+  "closing_within_30_min_by_reference": {
+   "Google": {
+    "share": 0.967,
+    "n": 30
+   }
+  },
+  "closing_times": "shown",
+  "price_levels": "removed",
+  "closed_note_needed": false
+ },
+ "all_40": {
+  "places": 40,
+  "permanently_closed": 2,
+  "no_reference_hours": 2,
+  "reference_from_own_site": 0,
+  "closing_within_30_min": {
+   "share": 0.972,
+   "n": 36,
+   "ci95": [
+    0.917,
+    1.0
+   ]
+  },
+  "closing_exact": {
+   "share": 0.972,
+   "n": 36,
+   "ci95": [
+    0.917,
+    1.0
+   ]
+  },
+  "price_equal": {
+   "share": 0.656,
+   "n": 32,
+   "ci95": [
+    0.5,
+    0.812
+   ]
+  },
+  "price_within_one_level": {
+   "share": 1.0,
+   "n": 32,
+   "ci95": [
+    1.0,
+    1.0
+   ]
+  },
+  "closing_within_30_min_by_reference": {
+   "Google": {
+    "share": 0.972,
+    "n": 36
+   }
+  },
+  "closing_times": "shown",
+  "price_levels": "removed",
+  "closed_note_needed": false
+ }
+}

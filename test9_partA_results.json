@@ -1,0 +1,189 @@
+{
+ "note": "Test 9 Part A, 30 development cases (Test 8 cases). Exploratory by registration. Judge gemini-3.8-flash on CometAPI for every judgement.",
+ "Q_vs_Cp": {
+  "Q_over_C+": {
+   "mean": 0.633,
+   "ci95": [
+    0.483,
+    0.8
+   ],
+   "cases": 30
+  },
+  "Q_over_B": {
+   "mean": 0.8,
+   "ci95": [
+    0.667,
+    0.933
+   ],
+   "cases": 30
+  },
+  "C+_over_B": {
+   "mean": 0.817,
+   "ci95": [
+    0.683,
+    0.933
+   ],
+   "cases": 30
+  },
+  "rubric_means": {
+   "Q": {
+    "specificity": 4.58,
+    "grounding": 4.5,
+    "distinctiveness": 4.43,
+    "actionability": 4.42
+   },
+   "B": {
+    "specificity": 3.53,
+    "grounding": 3.97,
+    "distinctiveness": 3.37,
+    "actionability": 3.77
+   },
+   "C+": {
+    "specificity": 4.43,
+    "grounding": 4.28,
+    "distinctiveness": 4.12,
+    "actionability": 4.2
+   }
+  }
+ },
+ "Q_vs_Q0": {
+  "Q_over_Q0": {
+   "mean": 0.6,
+   "ci95": [
+    0.433,
+    0.767
+   ],
+   "cases": 30
+  },
+  "Q_over_B": {
+   "mean": 0.783,
+   "ci95": [
+    0.633,
+    0.917
+   ],
+   "cases": 30
+  },
+  "Q0_over_B": {
+   "mean": 0.783,
+   "ci95": [
+    0.65,
+    0.9
+   ],
+   "cases": 30
+  },
+  "rubric_means": {
+   "Q": {
+    "specificity": 4.62,
+    "grounding": 4.42,
+    "distinctiveness": 4.4,
+    "actionability": 4.42
+   },
+   "B": {
+    "specificity": 3.55,
+    "grounding": 4.02,
+    "distinctiveness": 3.42,
+    "actionability": 3.83
+   },
+   "Q0": {
+    "specificity": 4.38,
+    "grounding": 4.42,
+    "distinctiveness": 4.17,
+    "actionability": 4.25
+   }
+  }
+ },
+ "Qn_vs_Q0": {
+  "Qn_over_Q0": {
+   "mean": 0.333,
+   "ci95": [
+    0.2,
+    0.483
+   ],
+   "cases": 30
+  },
+  "Qn_over_B": {
+   "mean": 0.6,
+   "ci95": [
+    0.45,
+    0.75
+   ],
+   "cases": 30
+  },
+  "Q0_over_B": {
+   "mean": 0.683,
+   "ci95": [
+    0.533,
+    0.817
+   ],
+   "cases": 30
+  },
+  "rubric_means": {
+   "Qn": {
+    "specificity": 4.27,
+    "grounding": 4.1,
+    "distinctiveness": 3.9,
+    "actionability": 4.03
+   },
+   "B": {
+    "specificity": 3.73,
+    "grounding": 4.2,
+    "distinctiveness": 3.65,
+    "actionability": 4.02
+   },
+   "Q0": {
+    "specificity": 4.52,
+    "grounding": 4.52,
+    "distinctiveness": 4.1,
+    "actionability": 4.32
+   }
+  }
+ },
+ "Qm_vs_Q0": {
+  "Qm_over_Q0": {
+   "mean": 0.617,
+   "ci95": [
+    0.483,
+    0.75
+   ],
+   "cases": 30
+  },
+  "Qm_over_B": {
+   "mean": 0.833,
+   "ci95": [
+    0.7,
+    0.95
+   ],
+   "cases": 30
+  },
+  "Q0_over_B": {
+   "mean": 0.8,
+   "ci95": [
+    0.667,
+    0.917
+   ],
+   "cases": 30
+  },
+  "rubric_means": {
+   "Qm": {
+    "specificity": 4.65,
+    "grounding": 4.37,
+    "distinctiveness": 4.37,
+    "actionability": 4.48
+   },
+   "B": {
+    "specificity": 3.58,
+    "grounding": 4.02,
+    "distinctiveness": 3.38,
+    "actionability": 3.9
+   },
+   "Q0": {
+    "specificity": 4.37,
+    "grounding": 4.37,
+    "distinctiveness": 4.08,
+    "actionability": 4.23
+   }
+  }
+ },
+ "go_or_stop": "stop",
+ "outcome": "neither"
+}

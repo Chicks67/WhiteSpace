@@ -1,0 +1,733 @@
+{
+ "people": 50,
+ "eligible_people": 233,
+ "auc": {
+  "qloo": {
+   "mean": 0.758,
+   "ci95": [
+    0.717,
+    0.796
+   ],
+   "venues": 50
+  },
+  "avg_rating": {
+   "mean": 0.815,
+   "ci95": [
+    0.777,
+    0.852
+   ],
+   "venues": 50
+  },
+  "popularity": {
+   "mean": 0.687,
+   "ci95": [
+    0.642,
+    0.73
+   ],
+   "venues": 50
+  },
+  "genre": {
+   "mean": 0.578,
+   "ci95": [
+    0.532,
+    0.625
+   ],
+   "venues": 50
+  },
+  "model_alone": {
+   "mean": 0.821,
+   "ci95": [
+    0.781,
+    0.862
+   ],
+   "venues": 50
+  },
+  "model_with_qloo": {
+   "mean": 0.82,
+   "ci95": [
+    0.782,
+    0.856
+   ],
+   "venues": 50
+  },
+  "small_alone": {
+   "mean": 0.84,
+   "ci95": [
+    0.806,
+    0.873
+   ],
+   "venues": 50
+  },
+  "small_with_qloo": {
+   "mean": 0.837,
+   "ci95": [
+    0.802,
+    0.872
+   ],
+   "venues": 50
+  }
+ },
+ "small_with_qloo_minus_small_alone": {
+  "mean": -0.003,
+  "ci95": [
+   -0.017,
+   0.01
+  ],
+  "venues": 50
+ },
+ "small_with_qloo_minus_large_alone": {
+  "mean": 0.016,
+  "ci95": [
+   -0.002,
+   0.033
+  ],
+  "venues": 50
+ },
+ "qloo_minus_avg_rating": {
+  "mean": -0.057,
+  "ci95": [
+   -0.109,
+   -0.008
+  ],
+  "venues": 50
+ },
+ "qloo_minus_popularity": {
+  "mean": 0.071,
+  "ci95": [
+   0.018,
+   0.122
+  ],
+  "venues": 50
+ },
+ "qloo_minus_genre": {
+  "mean": 0.179,
+  "ci95": [
+   0.124,
+   0.23
+  ],
+  "venues": 50
+ },
+ "model_with_qloo_minus_model_alone": {
+  "mean": -0.001,
+  "ci95": [
+   -0.019,
+   0.016
+  ],
+  "venues": 50
+ },
+ "model_alone_minus_qloo": {
+  "mean": 0.063,
+  "ci95": [
+   0.026,
+   0.108
+  ],
+  "venues": 50
+ },
+ "share_of_candidates_scored_by_qloo": 0.996,
+ "per_person": [
+  {
+   "qloo": 0.40625,
+   "small_alone": 0.65625,
+   "small_with_qloo": 0.46875,
+   "avg_rating": 0.984375,
+   "popularity": 0.5546875,
+   "genre": 0.484375,
+   "model_alone": 0.484375,
+   "model_with_qloo": 0.359375,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.78125,
+   "small_alone": 0.90625,
+   "small_with_qloo": 0.921875,
+   "avg_rating": 0.875,
+   "popularity": 0.671875,
+   "genre": 0.671875,
+   "model_alone": 0.96875,
+   "model_with_qloo": 0.9375,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.515625,
+   "small_alone": 0.5390625,
+   "small_with_qloo": 0.546875,
+   "avg_rating": 0.6875,
+   "popularity": 0.21875,
+   "genre": 0.6953125,
+   "model_alone": 0.4296875,
+   "model_with_qloo": 0.640625,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.578125,
+   "small_alone": 0.625,
+   "small_with_qloo": 0.640625,
+   "avg_rating": 0.890625,
+   "popularity": 0.5390625,
+   "genre": 0.0625,
+   "model_alone": 0.59375,
+   "model_with_qloo": 0.578125,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.625,
+   "small_alone": 0.859375,
+   "small_with_qloo": 0.734375,
+   "avg_rating": 0.875,
+   "popularity": 0.6328125,
+   "genre": 0.609375,
+   "model_alone": 0.578125,
+   "model_with_qloo": 0.625,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.6875,
+   "small_alone": 0.8125,
+   "small_with_qloo": 0.78125,
+   "avg_rating": 0.6640625,
+   "popularity": 0.4609375,
+   "genre": 0.7109375,
+   "model_alone": 0.765625,
+   "model_with_qloo": 0.828125,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.625,
+   "small_alone": 0.703125,
+   "small_with_qloo": 0.65625,
+   "avg_rating": 0.921875,
+   "popularity": 0.6953125,
+   "genre": 0.6015625,
+   "model_alone": 0.71875,
+   "model_with_qloo": 0.734375,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.90625,
+   "small_alone": 0.84375,
+   "small_with_qloo": 0.890625,
+   "avg_rating": 1.0,
+   "popularity": 0.75,
+   "genre": 0.3203125,
+   "model_alone": 0.90625,
+   "model_with_qloo": 0.875,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.65625,
+   "small_alone": 0.71875,
+   "small_with_qloo": 0.71875,
+   "avg_rating": 0.96875,
+   "popularity": 0.625,
+   "genre": 0.5625,
+   "model_alone": 0.890625,
+   "model_with_qloo": 0.78125,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.765625,
+   "small_alone": 0.796875,
+   "small_with_qloo": 0.828125,
+   "avg_rating": 0.75,
+   "popularity": 0.515625,
+   "genre": 0.7734375,
+   "model_alone": 0.875,
+   "model_with_qloo": 0.90625,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 1.0,
+   "small_alone": 1.0,
+   "small_with_qloo": 1.0,
+   "avg_rating": 0.859375,
+   "popularity": 0.859375,
+   "genre": 0.6171875,
+   "model_alone": 0.921875,
+   "model_with_qloo": 1.0,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.890625,
+   "small_alone": 0.9375,
+   "small_with_qloo": 0.953125,
+   "avg_rating": 0.71875,
+   "popularity": 0.53125,
+   "genre": 0.75,
+   "model_alone": 0.984375,
+   "model_with_qloo": 0.984375,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.953125,
+   "small_alone": 0.9375,
+   "small_with_qloo": 0.96875,
+   "avg_rating": 0.5390625,
+   "popularity": 0.5390625,
+   "genre": 0.7890625,
+   "model_alone": 0.90625,
+   "model_with_qloo": 0.875,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.65625,
+   "small_alone": 0.859375,
+   "small_with_qloo": 0.890625,
+   "avg_rating": 0.609375,
+   "popularity": 0.7578125,
+   "genre": 0.6015625,
+   "model_alone": 0.828125,
+   "model_with_qloo": 0.859375,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.671875,
+   "small_alone": 0.6953125,
+   "small_with_qloo": 0.6875,
+   "avg_rating": 0.609375,
+   "popularity": 0.515625,
+   "genre": 0.5,
+   "model_alone": 0.609375,
+   "model_with_qloo": 0.703125,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.640625,
+   "small_alone": 0.5,
+   "small_with_qloo": 0.546875,
+   "avg_rating": 0.71875,
+   "popularity": 0.625,
+   "genre": 0.546875,
+   "model_alone": 0.46875,
+   "model_with_qloo": 0.53125,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.53125,
+   "small_alone": 0.9375,
+   "small_with_qloo": 0.90625,
+   "avg_rating": 0.65625,
+   "popularity": 0.6328125,
+   "genre": 0.296875,
+   "model_alone": 0.953125,
+   "model_with_qloo": 0.84375,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.859375,
+   "small_alone": 0.734375,
+   "small_with_qloo": 0.78125,
+   "avg_rating": 0.828125,
+   "popularity": 0.625,
+   "genre": 0.59375,
+   "model_alone": 0.6875,
+   "model_with_qloo": 0.765625,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.78125,
+   "small_alone": 0.90625,
+   "small_with_qloo": 0.90625,
+   "avg_rating": 0.734375,
+   "popularity": 0.65625,
+   "genre": 0.734375,
+   "model_alone": 0.90625,
+   "model_with_qloo": 0.8125,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.6875,
+   "small_alone": 0.890625,
+   "small_with_qloo": 0.859375,
+   "avg_rating": 0.859375,
+   "popularity": 0.6875,
+   "genre": 0.6484375,
+   "model_alone": 0.75,
+   "model_with_qloo": 0.75,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.90625,
+   "small_alone": 0.921875,
+   "small_with_qloo": 0.90625,
+   "avg_rating": 0.875,
+   "popularity": 0.8671875,
+   "genre": 0.640625,
+   "model_alone": 0.90625,
+   "model_with_qloo": 0.890625,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.796875,
+   "small_alone": 0.84375,
+   "small_with_qloo": 0.859375,
+   "avg_rating": 0.8125,
+   "popularity": 0.6875,
+   "genre": 0.5,
+   "model_alone": 0.8125,
+   "model_with_qloo": 0.8125,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.5625,
+   "small_alone": 1.0,
+   "small_with_qloo": 0.96875,
+   "avg_rating": 0.875,
+   "popularity": 0.90625,
+   "genre": 0.71875,
+   "model_alone": 0.953125,
+   "model_with_qloo": 0.921875,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.75,
+   "small_alone": 0.84375,
+   "small_with_qloo": 0.859375,
+   "avg_rating": 0.484375,
+   "popularity": 0.7578125,
+   "genre": 0.8125,
+   "model_alone": 0.6875,
+   "model_with_qloo": 0.796875,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.953125,
+   "small_alone": 0.9375,
+   "small_with_qloo": 0.96875,
+   "avg_rating": 0.859375,
+   "popularity": 0.75,
+   "genre": 0.671875,
+   "model_alone": 0.953125,
+   "model_with_qloo": 0.96875,
+   "candidates_scored_by_qloo": 14,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.84375,
+   "small_alone": 0.875,
+   "small_with_qloo": 0.875,
+   "avg_rating": 0.78125,
+   "popularity": 0.8046875,
+   "genre": 0.6015625,
+   "model_alone": 0.921875,
+   "model_with_qloo": 0.90625,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.59375,
+   "small_alone": 0.8125,
+   "small_with_qloo": 0.71875,
+   "avg_rating": 0.84375,
+   "popularity": 0.4296875,
+   "genre": 0.4765625,
+   "model_alone": 0.7265625,
+   "model_with_qloo": 0.828125,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.828125,
+   "small_alone": 0.78125,
+   "small_with_qloo": 0.78125,
+   "avg_rating": 0.71875,
+   "popularity": 0.3984375,
+   "genre": 0.6796875,
+   "model_alone": 0.640625,
+   "model_with_qloo": 0.671875,
+   "candidates_scored_by_qloo": 15,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.84375,
+   "small_alone": 0.96875,
+   "small_with_qloo": 0.96875,
+   "avg_rating": 0.921875,
+   "popularity": 0.8984375,
+   "genre": 0.71875,
+   "model_alone": 0.984375,
+   "model_with_qloo": 0.96875,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.953125,
+   "small_alone": 0.96875,
+   "small_with_qloo": 0.984375,
+   "avg_rating": 0.921875,
+   "popularity": 0.765625,
+   "genre": 0.5625,
+   "model_alone": 0.96875,
+   "model_with_qloo": 0.953125,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.796875,
+   "small_alone": 0.921875,
+   "small_with_qloo": 0.90625,
+   "avg_rating": 0.96875,
+   "popularity": 0.5390625,
+   "genre": 0.59375,
+   "model_alone": 0.84375,
+   "model_with_qloo": 0.859375,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.625,
+   "small_alone": 0.671875,
+   "small_with_qloo": 0.671875,
+   "avg_rating": 0.65625,
+   "popularity": 0.7265625,
+   "genre": 0.6015625,
+   "model_alone": 0.6875,
+   "model_with_qloo": 0.671875,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.96875,
+   "small_alone": 0.890625,
+   "small_with_qloo": 0.890625,
+   "avg_rating": 0.921875,
+   "popularity": 0.71875,
+   "genre": 0.4375,
+   "model_alone": 0.9375,
+   "model_with_qloo": 0.9921875,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.5535714285714286,
+   "small_alone": 0.9464285714285715,
+   "small_with_qloo": 0.9107142857142858,
+   "avg_rating": 0.9464285714285714,
+   "popularity": 0.7321428571428572,
+   "genre": 0.6428571428571429,
+   "model_alone": 1.0,
+   "model_with_qloo": 0.9285714285714286,
+   "candidates_scored_by_qloo": 15,
+   "candidates": 15
+  },
+  {
+   "qloo": 0.921875,
+   "small_alone": 1.0,
+   "small_with_qloo": 0.984375,
+   "avg_rating": 0.90625,
+   "popularity": 0.53125,
+   "genre": 0.6015625,
+   "model_alone": 1.0,
+   "model_with_qloo": 0.96875,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.6875,
+   "small_alone": 0.84375,
+   "small_with_qloo": 0.796875,
+   "avg_rating": 0.9375,
+   "popularity": 0.625,
+   "genre": 0.6171875,
+   "model_alone": 0.84375,
+   "model_with_qloo": 0.71875,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.96875,
+   "small_alone": 0.828125,
+   "small_with_qloo": 0.890625,
+   "avg_rating": 0.953125,
+   "popularity": 0.875,
+   "genre": 0.4453125,
+   "model_alone": 0.859375,
+   "model_with_qloo": 0.9375,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.609375,
+   "small_alone": 0.90625,
+   "small_with_qloo": 0.875,
+   "avg_rating": 0.765625,
+   "popularity": 0.6796875,
+   "genre": 0.5859375,
+   "model_alone": 0.9375,
+   "model_with_qloo": 0.859375,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.515625,
+   "small_alone": 0.9375,
+   "small_with_qloo": 0.921875,
+   "avg_rating": 0.984375,
+   "popularity": 1.0,
+   "genre": 0.640625,
+   "model_alone": 0.90625,
+   "model_with_qloo": 0.890625,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.890625,
+   "small_alone": 0.953125,
+   "small_with_qloo": 0.953125,
+   "avg_rating": 0.875,
+   "popularity": 0.796875,
+   "genre": 0.4375,
+   "model_alone": 0.953125,
+   "model_with_qloo": 0.921875,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 1.0,
+   "small_alone": 0.984375,
+   "small_with_qloo": 1.0,
+   "avg_rating": 1.0,
+   "popularity": 1.0,
+   "genre": 0.9375,
+   "model_alone": 0.984375,
+   "model_with_qloo": 0.984375,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.96875,
+   "small_alone": 0.90625,
+   "small_with_qloo": 0.953125,
+   "avg_rating": 0.9453125,
+   "popularity": 0.65625,
+   "genre": 0.75,
+   "model_alone": 0.90625,
+   "model_with_qloo": 0.921875,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.734375,
+   "small_alone": 0.875,
+   "small_with_qloo": 0.890625,
+   "avg_rating": 0.875,
+   "popularity": 0.765625,
+   "genre": 0.328125,
+   "model_alone": 0.890625,
+   "model_with_qloo": 0.890625,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.84375,
+   "small_alone": 0.75,
+   "small_with_qloo": 0.828125,
+   "avg_rating": 0.8125,
+   "popularity": 0.734375,
+   "genre": 0.4375,
+   "model_alone": 0.78125,
+   "model_with_qloo": 0.828125,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.78125,
+   "small_alone": 0.921875,
+   "small_with_qloo": 0.875,
+   "avg_rating": 0.921875,
+   "popularity": 1.0,
+   "genre": 0.2421875,
+   "model_alone": 0.9375,
+   "model_with_qloo": 0.859375,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.640625,
+   "small_alone": 0.78125,
+   "small_with_qloo": 0.703125,
+   "avg_rating": 0.671875,
+   "popularity": 0.640625,
+   "genre": 0.328125,
+   "model_alone": 0.671875,
+   "model_with_qloo": 0.625,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.78125,
+   "small_alone": 0.640625,
+   "small_with_qloo": 0.734375,
+   "avg_rating": 0.75,
+   "popularity": 0.7578125,
+   "genre": 0.4453125,
+   "model_alone": 0.6875,
+   "model_with_qloo": 0.6875,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.78125,
+   "small_alone": 0.6875,
+   "small_with_qloo": 0.75,
+   "avg_rating": 0.421875,
+   "popularity": 0.65625,
+   "genre": 0.7109375,
+   "model_alone": 0.75,
+   "model_with_qloo": 0.6640625,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.75,
+   "small_alone": 0.890625,
+   "small_with_qloo": 0.875,
+   "avg_rating": 0.828125,
+   "popularity": 0.609375,
+   "genre": 0.4375,
+   "model_alone": 0.859375,
+   "model_with_qloo": 0.84375,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  },
+  {
+   "qloo": 0.828125,
+   "small_alone": 0.859375,
+   "small_with_qloo": 0.875,
+   "avg_rating": 0.78125,
+   "popularity": 0.921875,
+   "genre": 0.75,
+   "model_alone": 0.828125,
+   "model_with_qloo": 0.828125,
+   "candidates_scored_by_qloo": 16,
+   "candidates": 16
+  }
+ ],
+ "outcome": "Qloo not above average rating",
+ "small_model_reading": [
+  "small model with Qloo not below the large model alone"
+ ]
+}

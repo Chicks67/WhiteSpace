@@ -1,0 +1,1052 @@
+{
+ "title": "Korean cafe for students: the agent scouts Manhattan and Brooklyn",
+ "request": {
+  "concept": "Korean cafe",
+  "goal": "College students on a budget, anywhere in Manhattan or Brooklyn. I'd rather not open next to lots of other Korean places."
+ },
+ "recorded": "2026-10-10",
+ "events": [
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "resolve",
+    "label": "Match concept to a tested cuisine",
+    "status": "running"
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "resolve",
+    "label": "Match concept to a tested cuisine",
+    "status": "done",
+    "seconds": 0.0,
+    "detail": "keyword match"
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "concept",
+    "data": {
+     "cuisine": "Korean",
+     "label": "Korean cafe",
+     "reason": "matched by keyword to Korean"
+    }
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "scout",
+    "label": "Scout neighbourhoods and storefronts for your plan",
+    "status": "running"
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "scout_think",
+    "n": 1
+   }
+  ],
+  [
+   5.64,
+   {
+    "type": "scout_turn",
+    "n": 1,
+    "seconds": 5.6,
+    "retried": false,
+    "calls": [
+     "list_neighbourhoods"
+    ],
+    "credits": 1.1,
+    "model": "gpt-6-astra"
+   }
+  ],
+  [
+   5.64,
+   {
+    "type": "scout",
+    "status": "running",
+    "name": "list_neighbourhoods",
+    "args": {
+     "boroughs": [
+      "Manhattan",
+      "Brooklyn"
+     ],
+     "cuisine": "Korean",
+     "min_vacant_storefronts": 0,
+     "rank_by": "balanced",
+     "target": "students",
+     "top": 10
+    },
+    "n": 1
+   }
+  ],
+  [
+   5.83,
+   {
+    "type": "scout",
+    "status": "done",
+    "name": "list_neighbourhoods",
+    "args": {
+     "boroughs": [
+      "Manhattan",
+      "Brooklyn"
+     ],
+     "cuisine": "Korean",
+     "min_vacant_storefronts": 0,
+     "rank_by": "balanced",
+     "target": "students",
+     "top": 10
+    },
+    "n": 1,
+    "seconds": 0.2,
+    "summary": "ranked by average of share of residents enrolled in college or graduate school percentile and median cuisine-fit percentile: Greenwich Village (22.3), Gramercy (15.2), East Village (14.8)"
+   }
+  ],
+  [
+   5.83,
+   {
+    "type": "scout_think",
+    "n": 2
+   }
+  ],
+  [
+   9.77,
+   {
+    "type": "scout_turn",
+    "n": 2,
+    "seconds": 3.9,
+    "retried": false,
+    "calls": [
+     "find_storefronts",
+     "find_storefronts",
+     "find_storefronts",
+     "find_storefronts"
+    ],
+    "credits": 1.89,
+    "model": "gpt-6-astra"
+   }
+  ],
+  [
+   9.77,
+   {
+    "type": "scout",
+    "status": "running",
+    "name": "find_storefronts",
+    "args": {
+     "cuisine": "Korean",
+     "area": "Clinton Hill",
+     "top": 3
+    },
+    "n": 2
+   }
+  ],
+  [
+   9.77,
+   {
+    "type": "scout",
+    "status": "done",
+    "name": "find_storefronts",
+    "args": {
+     "cuisine": "Korean",
+     "area": "Clinton Hill",
+     "top": 3
+    },
+    "n": 2,
+    "seconds": 0.0,
+    "summary": "15 vacant storefronts in Clinton Hill; best: 555 Waverly Avenue, Brooklyn, 435 Dekalb Avenue, Brooklyn, 810 Fulton Street, Brooklyn"
+   }
+  ],
+  [
+   9.77,
+   {
+    "type": "scout",
+    "status": "running",
+    "name": "find_storefronts",
+    "args": {
+     "cuisine": "Korean",
+     "area": "Upper West Side-Manhattan Valley",
+     "top": 3
+    },
+    "n": 3
+   }
+  ],
+  [
+   9.78,
+   {
+    "type": "scout",
+    "status": "done",
+    "name": "find_storefronts",
+    "args": {
+     "cuisine": "Korean",
+     "area": "Upper West Side-Manhattan Valley",
+     "top": 3
+    },
+    "n": 3,
+    "seconds": 0.0,
+    "summary": "39 vacant storefronts in Upper West Side-Manhattan Valley; best: 960 Amsterdam Avenue, Manhattan, 2810 Broadway, Manhattan, 2644 Broadway, Manhattan"
+   }
+  ],
+  [
+   9.78,
+   {
+    "type": "scout",
+    "status": "running",
+    "name": "find_storefronts",
+    "args": {
+     "cuisine": "Korean",
+     "area": "Greenwich Village",
+     "top": 3
+    },
+    "n": 4
+   }
+  ],
+  [
+   9.8,
+   {
+    "type": "scout",
+    "status": "done",
+    "name": "find_storefronts",
+    "args": {
+     "cuisine": "Korean",
+     "area": "Greenwich Village",
+     "top": 3
+    },
+    "n": 4,
+    "seconds": 0.0,
+    "summary": "109 vacant storefronts in Greenwich Village; best: 772 Broadway, Manhattan, 57 Bond Street, Manhattan, 250 Mercer Street, Manhattan"
+   }
+  ],
+  [
+   9.8,
+   {
+    "type": "scout",
+    "status": "running",
+    "name": "find_storefronts",
+    "args": {
+     "cuisine": "Korean",
+     "area": "Brooklyn Heights",
+     "top": 3
+    },
+    "n": 5
+   }
+  ],
+  [
+   9.81,
+   {
+    "type": "scout",
+    "status": "done",
+    "name": "find_storefronts",
+    "args": {
+     "cuisine": "Korean",
+     "area": "Brooklyn Heights",
+     "top": 3
+    },
+    "n": 5,
+    "seconds": 0.0,
+    "summary": "44 vacant storefronts in Brooklyn Heights; best: 110 Court Street, Brooklyn, 160 Montague Street, Brooklyn, 99 Atlantic Avenue, Brooklyn"
+   }
+  ],
+  [
+   9.81,
+   {
+    "type": "scout_think",
+    "n": 3
+   }
+  ],
+  [
+   27.08,
+   {
+    "type": "scout_turn",
+    "n": 3,
+    "seconds": 17.3,
+    "retried": false,
+    "calls": [
+     "submit_shortlist"
+    ],
+    "credits": 3.73,
+    "model": "gpt-6-astra"
+   }
+  ],
+  [
+   27.08,
+   {
+    "type": "scout",
+    "status": "done",
+    "name": "submit_shortlist",
+    "summary": "4 storefronts shortlisted"
+   }
+  ],
+  [
+   27.08,
+   {
+    "type": "step",
+    "id": "scout",
+    "label": "Scout neighbourhoods and storefronts for your plan",
+    "status": "done",
+    "seconds": 27.1,
+    "detail": "4 storefronts shortlisted"
+   }
+  ],
+  [
+   27.08,
+   {
+    "type": "scout_result",
+    "data": {
+     "summary": "Prioritize student concentration, strong Korean opening-pattern fit, and few immediate competitors. Clinton Hill leads; Manhattan Valley offers cleaner competitive whitespace. Subway counts and street activity support access, not proven demand. Rents and build-out costs are unavailable, so affordability for a budget-priced menu still needs verification.",
+     "picks": [
+      {
+       "address": "555 Waverly Avenue, Brooklyn",
+       "neighbourhood": "Clinton Hill",
+       "reason": "Strong student concentration, Korean fit at the 89th percentile, and 0 Korean restaurants within 400m. Busy street with subway access; broader-area competition remains, and rent is unverified."
+      },
+      {
+       "address": "960 Amsterdam Avenue, Manhattan",
+       "neighbourhood": "Upper West Side-Manhattan Valley",
+       "reason": "Student-heavy neighbourhood with no recorded Korean competition nearby and strong subway access. Fit is at the 76th percentile: convincing whitespace, but weaker cuisine fit than Clinton Hill; rent is unverified."
+      },
+      {
+       "address": "810 Fulton Street, Brooklyn",
+       "neighbourhood": "Clinton Hill",
+       "reason": "Same strong student catchment with 0 Korean restaurants within 400m and fit at the 87th percentile. Less busy than Waverly, with comparable subway access; broader-area competitors remain."
+      },
+      {
+       "address": "110 Court Street, Brooklyn",
+       "neighbourhood": "Brooklyn Heights",
+       "reason": "Fit at the 96th percentile and 0 Korean restaurants within 400m, with substantial subway activity. Trade-off: lower student concentration and more broader-area Korean competition than Clinton Hill."
+      }
+     ]
+    }
+   }
+  ],
+  [
+   27.08,
+   {
+    "type": "step",
+    "id": "rank",
+    "label": "Rank leases on city inspection records",
+    "status": "running"
+   }
+  ],
+  [
+   27.08,
+   {
+    "type": "step",
+    "id": "rank",
+    "label": "Rank leases on city inspection records",
+    "status": "done",
+    "seconds": 0.0,
+    "detail": "4 leases scored"
+   }
+  ],
+  [
+   27.08,
+   {
+    "type": "leases",
+    "data": [
+     {
+      "address": "555 Waverly Avenue, Brooklyn",
+      "borough": "Brooklyn",
+      "neighbourhood": "Clinton Hill",
+      "lat": 40.6818701,
+      "lon": -73.965319,
+      "storefront": {
+       "reported": "June 30, 2025",
+       "last_use": null,
+       "area": "Clinton Hill",
+       "bbl": "3020120001"
+      },
+      "block": "dr5rkv",
+      "density": 77,
+      "density_percentile": 93,
+      "same_cuisine_in_block": 0,
+      "same_cuisine_area": 4,
+      "score": -1.029,
+      "score_percentile": 89,
+      "same_cuisine_400m": [],
+      "openings_800m": [
+       {
+        "name": "Yoribox",
+        "cuisine": "Korean",
+        "metres": 784,
+        "opened": "2025-04-24",
+        "lat": 40.685782111462,
+        "lon": -73.97305830594
+       }
+      ],
+      "all_400m": 66,
+      "rank": 1,
+      "subway": {
+       "subway_entries_within_500m": 7017,
+       "stations": [
+        {
+         "station": "Clinton-Washington Avs (C)",
+         "metres": 161,
+         "weekday_entries": 7017
+        }
+       ]
+      },
+      "bid": null,
+      "partners": {
+       "bids": [
+        {
+         "bid": "Fulton Area Business (FAB) Alliance",
+         "website": "http://www.fabfulton.org/",
+         "phone": "(718) 928-3322",
+         "email": "contactus@faballiance.org",
+         "boundary": "Fulton Street, from Rockwell Place to Classon Avenue",
+         "metres": 44
+        },
+        {
+         "bid": "Bed-Stuy Gateway",
+         "website": "https://thebedstuybid.org/",
+         "phone": "(718) 872-3400",
+         "email": "info@thebedstuybid.org",
+         "boundary": "Fulton Street, from Classon to Troy avenues and on Nostrand Avenue, from Halsey Street to Atlantic Avenue",
+         "metres": 575
+        }
+       ],
+       "complements": [
+        {
+         "name": "Bergen Bagels",
+         "kind": "bagels",
+         "metres": 139
+        },
+        {
+         "name": "Energy Fuel Fulton",
+         "kind": "juice bar",
+         "metres": 158
+        },
+        {
+         "name": "The Bakery On Bergen",
+         "kind": "bakery",
+         "metres": 378
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "The nearest business improvement district, Fulton Area Business (FAB) Alliance, is about 44 m away. Its staff know the street and run local events; contact (718) 928-3322, contactus@faballiance.org.",
+        "source": "http://www.fabfulton.org/",
+        "specific": true
+       },
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: Bergen Bagels (bagels, 139 m); Energy Fuel Fulton (juice bar, 158 m); The Bakery On Bergen (bakery, 378 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     },
+     {
+      "address": "960 Amsterdam Avenue, Manhattan",
+      "borough": "Manhattan",
+      "neighbourhood": "Upper West Side",
+      "lat": 40.80137109999999,
+      "lon": -73.96543370000002,
+      "storefront": {
+       "reported": "June 30, 2025",
+       "last_use": "Food Services",
+       "area": "Upper West Side-Manhattan Valley",
+       "bbl": "1018790029"
+      },
+      "block": "dr72hg",
+      "density": 115,
+      "density_percentile": 95,
+      "same_cuisine_in_block": 0,
+      "same_cuisine_area": 0,
+      "score": -2.466,
+      "score_percentile": 76,
+      "same_cuisine_400m": [],
+      "openings_800m": [],
+      "all_400m": 113,
+      "rank": 2,
+      "subway": {
+       "subway_entries_within_500m": 19974,
+       "stations": [
+        {
+         "station": "Cathedral Pkwy (110 St) (1)",
+         "metres": 312,
+         "weekday_entries": 10075
+        },
+        {
+         "station": "103 St (1)",
+         "metres": 327,
+         "weekday_entries": 9899
+        }
+       ]
+      },
+      "bid": {
+       "bid": "Columbus Amsterdam",
+       "website": "https://columbusamsterdambid.org/",
+       "phone": "(212) 666-9774",
+       "email": "info@columbusamsterdambid.org",
+       "boundary": "Columbus Avenue and Amsterdam Avenue between West 96th and West 110th Streets"
+      },
+      "partners": {
+       "bids": [
+        {
+         "bid": "Columbus Amsterdam",
+         "website": "https://columbusamsterdambid.org/",
+         "phone": "(212) 666-9774",
+         "email": "info@columbusamsterdambid.org",
+         "boundary": "Columbus Avenue and Amsterdam Avenue between West 96th and West 110th Streets",
+         "metres": 0
+        }
+       ],
+       "complements": [
+        {
+         "name": "D'Lioz Bakery",
+         "kind": "bakery",
+         "metres": 153
+        },
+        {
+         "name": "Bagels And Cream",
+         "kind": "bagels",
+         "metres": 161
+        },
+        {
+         "name": "2788 Bagels",
+         "kind": "bagels",
+         "metres": 232
+        },
+        {
+         "name": "Cloud Touch",
+         "kind": "donuts",
+         "metres": 250
+        },
+        {
+         "name": "Ben & Jerry's",
+         "kind": "dessert",
+         "metres": 271
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "Call the Columbus Amsterdam business improvement district: ask about the space, local foot traffic and opening events. Contact: (212) 666-9774, info@columbusamsterdambid.org.",
+        "source": "https://columbusamsterdambid.org/",
+        "specific": true
+       },
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: D'Lioz Bakery (bakery, 153 m); Bagels And Cream (bagels, 161 m); 2788 Bagels (bagels, 232 m); Cloud Touch (donuts, 250 m); Ben & Jerry's (dessert, 271 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "The last reported use was food service. Ask the landlord what kitchen equipment, venting and grease trap remain, and check the Certificate of Occupancy covers your use.",
+        "source": "https://data.cityofnewyork.us/d/92iy-9c3n",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     },
+     {
+      "address": "810 Fulton Street, Brooklyn",
+      "borough": "Brooklyn",
+      "neighbourhood": "Clinton Hill",
+      "lat": 40.683488,
+      "lon": -73.968462,
+      "storefront": {
+       "reported": "June 30, 2025",
+       "last_use": null,
+       "area": "Clinton Hill",
+       "bbl": "3020091001"
+      },
+      "block": "dr5rky",
+      "density": 40,
+      "density_percentile": 83,
+      "same_cuisine_in_block": 0,
+      "same_cuisine_area": 4,
+      "score": -1.415,
+      "score_percentile": 87,
+      "same_cuisine_400m": [],
+      "openings_800m": [
+       {
+        "name": "Yoribox",
+        "cuisine": "Korean",
+        "metres": 464,
+        "opened": "2025-04-24",
+        "lat": 40.685782111462,
+        "lon": -73.97305830594
+       }
+      ],
+      "all_400m": 46,
+      "rank": 3,
+      "subway": {
+       "subway_entries_within_500m": 7017,
+       "stations": [
+        {
+         "station": "Clinton-Washington Avs (C)",
+         "metres": 223,
+         "weekday_entries": 7017
+        }
+       ]
+      },
+      "bid": null,
+      "partners": {
+       "bids": [
+        {
+         "bid": "Fulton Area Business (FAB) Alliance",
+         "website": "http://www.fabfulton.org/",
+         "phone": "(718) 928-3322",
+         "email": "contactus@faballiance.org",
+         "boundary": "Fulton Street, from Rockwell Place to Classon Avenue",
+         "metres": 3
+        },
+        {
+         "bid": "MetroTech",
+         "website": "https://www.downtownbrooklyn.com/about/metrotech-bid",
+         "phone": "(718) 403-1600",
+         "email": "info@downtownbrooklyn.com",
+         "boundary": "Area generally bounded by Adams Street to the west, Tillary Street to the north, Flatbush Avenue Extension to the east, Fulton Mall to the south",
+         "metres": 464
+        }
+       ],
+       "complements": [
+        {
+         "name": "Bergen Bagels",
+         "kind": "bagels",
+         "metres": 282
+        },
+        {
+         "name": "Energy Fuel Fulton",
+         "kind": "juice bar",
+         "metres": 385
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "The nearest business improvement district, Fulton Area Business (FAB) Alliance, is about 3 m away. Its staff know the street and run local events; contact (718) 928-3322, contactus@faballiance.org.",
+        "source": "http://www.fabfulton.org/",
+        "specific": true
+       },
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: Bergen Bagels (bagels, 282 m); Energy Fuel Fulton (juice bar, 385 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     },
+     {
+      "address": "110 Court Street, Brooklyn",
+      "borough": "Brooklyn",
+      "neighbourhood": "Brooklyn Heights",
+      "lat": 40.6907325,
+      "lon": -73.9921823,
+      "storefront": {
+       "reported": "June 30, 2025",
+       "last_use": null,
+       "area": "Brooklyn Heights",
+       "bbl": "3002700001"
+      },
+      "block": "dr5rkr",
+      "density": 188,
+      "density_percentile": 98,
+      "same_cuisine_in_block": 6,
+      "same_cuisine_area": 11,
+      "score": 0.415,
+      "score_percentile": 96,
+      "same_cuisine_400m": [],
+      "openings_800m": [
+       {
+        "name": "Hana House / Bokki",
+        "cuisine": "Korean",
+        "metres": 411,
+        "opened": "2024-02-05",
+        "lat": 40.69283324638,
+        "lon": -73.988175696975
+       },
+       {
+        "name": "Bk Gangnam",
+        "cuisine": "Korean",
+        "metres": 736,
+        "opened": "2025-07-02",
+        "lat": 40.690826232689,
+        "lon": -73.98345224546
+       }
+      ],
+      "all_400m": 104,
+      "rank": 4,
+      "subway": {
+       "subway_entries_within_500m": 60967,
+       "stations": [
+        {
+         "station": "Borough Hall/Court St (2,3,4,5,R)",
+         "metres": 308,
+         "weekday_entries": 25963
+        },
+        {
+         "station": "Jay St-MetroTech (A,C,F,R)",
+         "metres": 497,
+         "weekday_entries": 35004
+        }
+       ]
+      },
+      "bid": {
+       "bid": "Court-Livingston-Schermerhorn",
+       "website": "https://downtownbrooklyn.com/about/court-livingston-schermerhorn-bid",
+       "phone": "(718) 403-1600",
+       "email": "info@downtownbrooklyn.com",
+       "boundary": "Area generally bounded by Court Street on the west, Flatbush Avenue on the east, Atlantic Avenue and Schermerhorn Street on the south,  Joralemon Street and Livingston Street on the north"
+      },
+      "partners": {
+       "bids": [
+        {
+         "bid": "Court-Livingston-Schermerhorn",
+         "website": "https://downtownbrooklyn.com/about/court-livingston-schermerhorn-bid",
+         "phone": "(718) 403-1600",
+         "email": "info@downtownbrooklyn.com",
+         "boundary": "Area generally bounded by Court Street on the west, Flatbush Avenue on the east, Atlantic Avenue and Schermerhorn Street on the south,  Joralemon Street and Livingston Street on the north",
+         "metres": 0
+        },
+        {
+         "bid": "Atlantic Avenue",
+         "website": "http://www.atlanticavebid.org/",
+         "phone": "(929) 283-5989",
+         "email": "info@atlanticavebid.org",
+         "boundary": "Atlantic Avenue generally bounded by the Brooklyn-Queens Expressway to west and 4th Avenue to east",
+         "metres": 68
+        }
+       ],
+       "complements": [
+        {
+         "name": "Dinah",
+         "kind": "bagels",
+         "metres": 182
+        },
+        {
+         "name": "Court Street Bagels",
+         "kind": "bagels",
+         "metres": 315
+        },
+        {
+         "name": "Barry's Brooklyn Heights",
+         "kind": "juice bar",
+         "metres": 363
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "This building is in the Brooklyn Heights historic district: storefront or sign changes need Landmarks Preservation Commission approval before work starts.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": true
+       },
+       {
+        "step": "Call the Court-Livingston-Schermerhorn business improvement district: ask about the space, local foot traffic and opening events. Contact: (718) 403-1600, info@downtownbrooklyn.com.",
+        "source": "https://downtownbrooklyn.com/about/court-livingston-schermerhorn-bid",
+        "specific": true
+       },
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: Dinah (bagels, 182 m); Court Street Bagels (bagels, 315 m); Barry's Brooklyn Heights (juice bar, 363 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  [
+   27.12,
+   {
+    "type": "step",
+    "id": "evidence",
+    "label": "Fetch Qloo audience evidence for Clinton Hill, Brooklyn",
+    "status": "running"
+   }
+  ],
+  [
+   27.14,
+   {
+    "type": "step",
+    "id": "evidence",
+    "label": "Fetch Qloo audience evidence for Clinton Hill, Brooklyn",
+    "status": "done",
+    "seconds": 0.0,
+    "detail": {
+     "tags": 8,
+     "brands": 8,
+     "concept_brands": 8
+    }
+   }
+  ],
+  [
+   27.14,
+   {
+    "type": "step",
+    "id": "write",
+    "label": "Write positioning brief (GPT-6 Astra)",
+    "status": "running"
+   }
+  ],
+  [
+   35.43,
+   {
+    "type": "step",
+    "id": "write",
+    "label": "Write positioning brief (GPT-6 Astra)",
+    "status": "done",
+    "seconds": 8.3,
+    "detail": "8.3 s"
+   }
+  ],
+  [
+   35.43,
+   {
+    "type": "step",
+    "id": "verify",
+    "label": "Verify brief",
+    "status": "running"
+   }
+  ],
+  [
+   39.95,
+   {
+    "type": "step",
+    "id": "verify",
+    "label": "Verify brief",
+    "status": "done",
+    "seconds": 4.5,
+    "detail": "passed"
+   }
+  ],
+  [
+   39.95,
+   {
+    "type": "step",
+    "id": "repair1",
+    "label": "Replace names no source backs up",
+    "status": "running"
+   }
+  ],
+  [
+   47.27,
+   {
+    "type": "step",
+    "id": "repair1",
+    "label": "Replace names no source backs up",
+    "status": "done",
+    "seconds": 7.3,
+    "detail": "replaced Parlor Coffee"
+   }
+  ],
+  [
+   47.27,
+   {
+    "type": "step",
+    "id": "verify_repair1",
+    "label": "Verify repaired brief",
+    "status": "running"
+   }
+  ],
+  [
+   51.65,
+   {
+    "type": "step",
+    "id": "verify_repair1",
+    "label": "Verify repaired brief",
+    "status": "done",
+    "seconds": 4.4,
+    "detail": "passed"
+   }
+  ],
+  [
+   51.65,
+   {
+    "type": "brief",
+    "data": {
+     "lease": "555 Waverly Avenue, Brooklyn",
+     "area": "Clinton Hill, Brooklyn",
+     "problems": [],
+     "name_check": "done",
+     "names_traced_to_city_records": [
+      "Pratt"
+     ],
+     "names_traced_to_qloo": 0,
+     "replaced_unverified_names": [
+      "Parlor Coffee"
+     ],
+     "unverified_names_left": [],
+     "text": "[brief written from Qloo evidence; on the live site only]"
+    }
+   }
+  ],
+  [
+   51.65,
+   {
+    "type": "done",
+    "credits": 8.96
+   }
+  ]
+ ],
+ "followups": [
+  {
+   "q": "Who could I partner with for cross-promotion near the top storefront?",
+   "tools": [
+    "local_partners"
+   ],
+   "unchecked_numbers": [],
+   "answer": "Near 555 Waverly Avenue, start with:\n\n\u2022 Fulton Area Business (FAB) Alliance \u2014 its district boundary is 48 m away. Ask for introductions to independent shops and opportunities for a joint opening-week promotion. Contact: contactus@faballiance.org or (718) 928-3322.\n\n\u2022 Energy Fuel Fulton \u2014 juice bar, 162 m away. Propose reciprocal receipts or flyers to introduce customers to your Korean lunch and tea menu.\n\n\u2022 Bergen Bagels \u2014 144 m away. Explore neighborhood welcome offers, while checking overlap with your breakfast menu.\n\n\u2022 The Bakery On Bergen \u2014 375 m away. Consider a guest-pastry collaboration if it complements rather than duplicates your own pastries.\n\nThese are nearby businesses identified in NYC Open Data, not confirmed willing partners. FAB is the best first outreach for broader neighborhood introductions."
+  },
+  {
+   "q": "Why is the top pick better than a storefront in Morningside Heights, where the student share is highest?",
+   "tools": [
+    "neighbourhood_profile",
+    "find_storefronts"
+   ],
+   "unchecked_numbers": [],
+   "answer": "555 Waverly is stronger on the city-records lease score\u2014not necessarily better for your student-focused concept.\n\nMorningside Heights\u2019 college share is 43.7%, at the 99th NYC percentile. That supports your argument, although it doesn\u2019t establish that students will visit a particular storefront.\n\nIts highest-scoring reported vacancy, 11 Hancock Place, compares with Waverly as follows:\n\u2022 Korean lease-score percentile: 68 versus 89.\n\u2022 Korean competitors within 400 m: zero at both.\n\u2022 Korean openings within 800 m since 2024: zero versus one.\n\u2022 Nearby weekday subway entries: 21,733 versus 7,017\u2014an access proxy, not proven demand.\n\nSo Waverly leads on recorded Korean opening-pattern fit; Hancock offers stronger neighborhood student concentration and subway access. The original shortlist doesn\u2019t establish an overall winner. I\u2019d tour both and verify campus walking routes, rent, and build-out costs before choosing."
+  }
+ ]
+}

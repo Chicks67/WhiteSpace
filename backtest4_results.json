@@ -1,0 +1,512 @@
+{
+ "primary": {
+  "per_cuisine": {
+   "Korean": {
+    "blocks": 846,
+    "positives": 67,
+    "auc": {
+     "D": 0.803,
+     "S": 0.866,
+     "DS": 0.889,
+     "DSQ": 0.887,
+     "M1": 0.82
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": -0.0013,
+     "se": 0.0047,
+     "p": 0.7793
+    }
+   },
+   "Mexican": {
+    "blocks": 906,
+    "positives": 209,
+    "auc": {
+     "D": 0.825,
+     "S": 0.794,
+     "DS": 0.843,
+     "DSQ": 0.843,
+     "M1": 0.691
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": -0.0,
+     "se": 0.0003,
+     "p": 0.8754
+    }
+   },
+   "Japanese": {
+    "blocks": 905,
+    "positives": 169,
+    "auc": {
+     "D": 0.856,
+     "S": 0.802,
+     "DS": 0.86,
+     "DSQ": 0.863,
+     "M1": 0.775
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": 0.0033,
+     "se": 0.0021,
+     "p": 0.1195
+    }
+   },
+   "Thai": {
+    "blocks": 893,
+    "positives": 76,
+    "auc": {
+     "D": 0.861,
+     "S": 0.834,
+     "DS": 0.875,
+     "DSQ": 0.883,
+     "M1": 0.807
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": 0.0076,
+     "se": 0.0042,
+     "p": 0.0683
+    }
+   },
+   "Indian": {
+    "blocks": 867,
+    "positives": 69,
+    "auc": {
+     "D": 0.819,
+     "S": 0.814,
+     "DS": 0.855,
+     "DSQ": 0.862,
+     "M1": 0.787
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": 0.007,
+     "se": 0.0052,
+     "p": 0.1782
+    }
+   },
+   "Caribbean": {
+    "blocks": 896,
+    "positives": 108,
+    "auc": {
+     "D": 0.594,
+     "S": 0.857,
+     "DS": 0.855,
+     "DSQ": 0.86,
+     "M1": 0.785
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": 0.0049,
+     "se": 0.0035,
+     "p": 0.1578
+    }
+   },
+   "Coffee/Tea": {
+    "blocks": 907,
+    "positives": 243,
+    "auc": {
+     "D": 0.862,
+     "S": 0.814,
+     "DS": 0.872,
+     "DSQ": 0.873,
+     "M1": 0.746
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": 0.0007,
+     "se": 0.0013,
+     "p": 0.6083
+    }
+   },
+   "Bakery Products/Desserts": {
+    "blocks": 906,
+    "positives": 161,
+    "auc": {
+     "D": 0.835,
+     "S": 0.765,
+     "DS": 0.833,
+     "DSQ": 0.836,
+     "M1": 0.742
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": 0.0032,
+     "se": 0.0022,
+     "p": 0.1484
+    }
+   },
+   "Chinese": {
+    "blocks": 906,
+    "positives": 269,
+    "auc": {
+     "D": 0.77,
+     "S": 0.718,
+     "DS": 0.781,
+     "DSQ": 0.777,
+     "M1": 0.62
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": -0.0031,
+     "se": 0.001,
+     "p": 0.0017
+    }
+   },
+   "Pizza": {
+    "blocks": 909,
+    "positives": 267,
+    "auc": {
+     "D": 0.8,
+     "S": 0.704,
+     "DS": 0.799,
+     "DSQ": 0.797,
+     "M1": 0.618
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": -0.0017,
+     "se": 0.0007,
+     "p": 0.0214
+    }
+   },
+   "Italian": {
+    "blocks": 906,
+    "positives": 93,
+    "auc": {
+     "D": 0.872,
+     "S": 0.874,
+     "DS": 0.895,
+     "DSQ": 0.895,
+     "M1": 0.789
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": 0.0001,
+     "se": 0.002,
+     "p": 0.9443
+    }
+   },
+   "Mediterranean": {
+    "blocks": 907,
+    "positives": 69,
+    "auc": {
+     "D": 0.84,
+     "S": 0.814,
+     "DS": 0.846,
+     "DSQ": 0.846,
+     "M1": 0.773
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": -0.0003,
+     "se": 0.0025,
+     "p": 0.9132
+    }
+   },
+   "Latin American": {
+    "blocks": 899,
+    "positives": 173,
+    "auc": {
+     "D": 0.74,
+     "S": 0.774,
+     "DS": 0.793,
+     "DSQ": 0.795,
+     "M1": 0.695
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": 0.0012,
+     "se": 0.0018,
+     "p": 0.5051
+    }
+   },
+   "Middle Eastern": {
+    "blocks": 854,
+    "positives": 84,
+    "auc": {
+     "D": 0.802,
+     "S": 0.738,
+     "DS": 0.809,
+     "DSQ": 0.809,
+     "M1": 0.725
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": 0.0004,
+     "se": 0.0016,
+     "p": 0.8136
+    }
+   }
+  },
+  "median_auc": {
+   "D": 0.822,
+   "S": 0.808,
+   "DS": 0.851,
+   "DSQ": 0.853,
+   "M1": 0.76
+  },
+  "q1_winner": "DS",
+  "q1_sign_tests": {
+   "D": {
+    "wins": 12,
+    "losses": 2,
+    "p_two_sided": 0.0129
+   },
+   "S": {
+    "wins": 13,
+    "losses": 1,
+    "p_two_sided": 0.0018
+   }
+  },
+  "q2_mean_DSQ_minus_DS": 0.0015,
+  "q2_ci95": [
+   -0.0003,
+   0.0037
+  ],
+  "q2_resamples_used": 2000,
+  "q2_supported": false
+ },
+ "secondary_excluding_replacements": {
+  "per_cuisine": {
+   "Korean": {
+    "blocks": 846,
+    "positives": 42,
+    "auc": {
+     "D": 0.827,
+     "S": 0.907,
+     "DS": 0.919,
+     "DSQ": 0.916,
+     "M1": 0.844
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": -0.0035,
+     "se": 0.0045,
+     "p": 0.4458
+    }
+   },
+   "Mexican": {
+    "blocks": 906,
+    "positives": 150,
+    "auc": {
+     "D": 0.806,
+     "S": 0.784,
+     "DS": 0.825,
+     "DSQ": 0.825,
+     "M1": 0.678
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": 0.0,
+     "se": 0.0008,
+     "p": 0.982
+    }
+   },
+   "Japanese": {
+    "blocks": 905,
+    "positives": 114,
+    "auc": {
+     "D": 0.883,
+     "S": 0.849,
+     "DS": 0.89,
+     "DSQ": 0.89,
+     "M1": 0.776
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": -0.0003,
+     "se": 0.0005,
+     "p": 0.4796
+    }
+   },
+   "Thai": {
+    "blocks": 893,
+    "positives": 46,
+    "auc": {
+     "D": 0.842,
+     "S": 0.862,
+     "DS": 0.87,
+     "DSQ": 0.87,
+     "M1": 0.776
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": -0.0005,
+     "se": 0.0024,
+     "p": 0.8478
+    }
+   },
+   "Indian": {
+    "blocks": 867,
+    "positives": 46,
+    "auc": {
+     "D": 0.806,
+     "S": 0.803,
+     "DS": 0.827,
+     "DSQ": 0.834,
+     "M1": 0.772
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": 0.0072,
+     "se": 0.0042,
+     "p": 0.0901
+    }
+   },
+   "Caribbean": {
+    "blocks": 896,
+    "positives": 91,
+    "auc": {
+     "D": 0.581,
+     "S": 0.87,
+     "DS": 0.864,
+     "DSQ": 0.867,
+     "M1": 0.782
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": 0.003,
+     "se": 0.0026,
+     "p": 0.2494
+    }
+   },
+   "Coffee/Tea": {
+    "blocks": 907,
+    "positives": 206,
+    "auc": {
+     "D": 0.853,
+     "S": 0.824,
+     "DS": 0.868,
+     "DSQ": 0.867,
+     "M1": 0.74
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": -0.0004,
+     "se": 0.0008,
+     "p": 0.662
+    }
+   },
+   "Bakery Products/Desserts": {
+    "blocks": 906,
+    "positives": 114,
+    "auc": {
+     "D": 0.81,
+     "S": 0.758,
+     "DS": 0.812,
+     "DSQ": 0.819,
+     "M1": 0.746
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": 0.0063,
+     "se": 0.0034,
+     "p": 0.0625
+    }
+   },
+   "Chinese": {
+    "blocks": 906,
+    "positives": 196,
+    "auc": {
+     "D": 0.762,
+     "S": 0.737,
+     "DS": 0.781,
+     "DSQ": 0.777,
+     "M1": 0.627
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": -0.0036,
+     "se": 0.0012,
+     "p": 0.0026
+    }
+   },
+   "Pizza": {
+    "blocks": 909,
+    "positives": 201,
+    "auc": {
+     "D": 0.782,
+     "S": 0.731,
+     "DS": 0.782,
+     "DSQ": 0.781,
+     "M1": 0.607
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": -0.0014,
+     "se": 0.0012,
+     "p": 0.2403
+    }
+   },
+   "Italian": {
+    "blocks": 906,
+    "positives": 73,
+    "auc": {
+     "D": 0.871,
+     "S": 0.91,
+     "DS": 0.917,
+     "DSQ": 0.916,
+     "M1": 0.794
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": -0.0006,
+     "se": 0.0018,
+     "p": 0.7515
+    }
+   },
+   "Mediterranean": {
+    "blocks": 907,
+    "positives": 49,
+    "auc": {
+     "D": 0.813,
+     "S": 0.828,
+     "DS": 0.832,
+     "DSQ": 0.832,
+     "M1": 0.781
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": -0.0,
+     "se": 0.0034,
+     "p": 0.9944
+    }
+   },
+   "Latin American": {
+    "blocks": 899,
+    "positives": 128,
+    "auc": {
+     "D": 0.705,
+     "S": 0.761,
+     "DS": 0.765,
+     "DSQ": 0.767,
+     "M1": 0.678
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": 0.0025,
+     "se": 0.0022,
+     "p": 0.2584
+    }
+   },
+   "Middle Eastern": {
+    "blocks": 854,
+    "positives": 57,
+    "auc": {
+     "D": 0.799,
+     "S": 0.722,
+     "DS": 0.781,
+     "DSQ": 0.78,
+     "M1": 0.713
+    },
+    "delong_DSQ_vs_DS": {
+     "diff": -0.0012,
+     "se": 0.0019,
+     "p": 0.5355
+    }
+   }
+  },
+  "median_auc": {
+   "D": 0.808,
+   "S": 0.814,
+   "DS": 0.829,
+   "DSQ": 0.833,
+   "M1": 0.759
+  },
+  "q1_winner": "DS",
+  "q1_sign_tests": {
+   "D": {
+    "wins": 12,
+    "losses": 1,
+    "p_two_sided": 0.0034
+   },
+   "S": {
+    "wins": 13,
+    "losses": 1,
+    "p_two_sided": 0.0018
+   }
+  },
+  "q2_mean_DSQ_minus_DS": 0.0006,
+  "q2_ci95": [
+   -0.001,
+   0.002
+  ],
+  "q2_resamples_used": 2000,
+  "q2_supported": false
+ }
+}

@@ -1,0 +1,1334 @@
+{
+ "date": "2026-10-10",
+ "runs": {
+  "korean-cafe-astoria": {
+   "pass^k": true,
+   "k": 3,
+   "runs": [
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "37-11 35th Avenue, Queens",
+      "30-94 Steinway Street, Queens",
+      "52-21 Northern Blvd, Queens",
+      "30-01 30th Avenue, Queens",
+      "34-39 31st Street, Queens"
+     ],
+     "problems": [],
+     "names": 3,
+     "qloo_names": 2,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 23.32,
+     "credits": 1.16,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "37-11 35th Avenue, Queens",
+      "30-94 Steinway Street, Queens",
+      "52-21 Northern Blvd, Queens",
+      "30-01 30th Avenue, Queens",
+      "34-39 31st Street, Queens"
+     ],
+     "problems": [],
+     "names": 1,
+     "qloo_names": 1,
+     "city_names": 0,
+     "unverified_before": 2,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify",
+      "repair1",
+      "verify_repair1"
+     ],
+     "seconds": 51.75,
+     "credits": 4.15,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "37-11 35th Avenue, Queens",
+      "30-94 Steinway Street, Queens",
+      "52-21 Northern Blvd, Queens",
+      "30-01 30th Avenue, Queens",
+      "34-39 31st Street, Queens"
+     ],
+     "problems": [],
+     "names": 1,
+     "qloo_names": 1,
+     "city_names": 0,
+     "unverified_before": 1,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify",
+      "repair1",
+      "verify_repair1"
+     ],
+     "seconds": 64.95,
+     "credits": 2.79,
+     "passed": true
+    }
+   ]
+  },
+  "korean-cafe-queens": {
+   "pass^k": true,
+   "k": 3,
+   "runs": [
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "136-20 38 AVENUE, Flushing, NY, USA",
+      "35-01 UNION STREET, Flushing, NY, USA",
+      "41-08 BELL BOULEVARD, Bayside, NY, USA"
+     ],
+     "problems": [],
+     "names": 1,
+     "qloo_names": 1,
+     "city_names": 0,
+     "unverified_before": 1,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "rank",
+      "evidence",
+      "write",
+      "verify",
+      "repair1",
+      "verify_repair1"
+     ],
+     "seconds": 32.05,
+     "credits": 2.55,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "136-20 38 AVENUE, Flushing, NY, USA",
+      "35-01 UNION STREET, Flushing, NY, USA",
+      "41-08 BELL BOULEVARD, Bayside, NY, USA"
+     ],
+     "problems": [],
+     "names": 3,
+     "qloo_names": 3,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 18.54,
+     "credits": 1.53,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "136-20 38 AVENUE, Flushing, NY, USA",
+      "35-01 UNION STREET, Flushing, NY, USA",
+      "41-08 BELL BOULEVARD, Bayside, NY, USA"
+     ],
+     "problems": [],
+     "names": 1,
+     "qloo_names": 1,
+     "city_names": 0,
+     "unverified_before": 1,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "rank",
+      "evidence",
+      "write",
+      "verify",
+      "repair1",
+      "verify_repair1"
+     ],
+     "seconds": 93.07,
+     "credits": 2.35,
+     "passed": true
+    }
+   ]
+  },
+  "ramen-williamsburg": {
+   "pass^k": true,
+   "k": 3,
+   "runs": [
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "556 Driggs Avenue, Brooklyn",
+      "318 Grand Street, Brooklyn",
+      "52 North 11th Street, Brooklyn",
+      "188 Grand Street, Brooklyn",
+      "96 North 6th Street, Brooklyn"
+     ],
+     "problems": [],
+     "names": 2,
+     "qloo_names": 1,
+     "city_names": 1,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 28.7,
+     "credits": 1.5,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "556 Driggs Avenue, Brooklyn",
+      "318 Grand Street, Brooklyn",
+      "52 North 11th Street, Brooklyn",
+      "188 Grand Street, Brooklyn",
+      "96 North 6th Street, Brooklyn"
+     ],
+     "problems": [],
+     "names": 5,
+     "qloo_names": 5,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 21.25,
+     "credits": 1.81,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "556 Driggs Avenue, Brooklyn",
+      "318 Grand Street, Brooklyn",
+      "52 North 11th Street, Brooklyn",
+      "188 Grand Street, Brooklyn",
+      "96 North 6th Street, Brooklyn"
+     ],
+     "problems": [],
+     "names": 5,
+     "qloo_names": 5,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 18.61,
+     "credits": 3.17,
+     "passed": true
+    }
+   ]
+  },
+  "caribbean-brooklyn-bronx": {
+   "pass^k": true,
+   "k": 3,
+   "runs": [
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "600 NOSTRAND AVENUE, Brooklyn, NY, USA",
+      "3000 WHITE PLNS ROAD, Bronx, NY, USA",
+      "2000 GRAND CONCOURSE, Bronx, NY, USA"
+     ],
+     "problems": [],
+     "names": 3,
+     "qloo_names": 2,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 28.28,
+     "credits": 1.08,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "600 NOSTRAND AVENUE, Brooklyn, NY, USA",
+      "3000 WHITE PLNS ROAD, Bronx, NY, USA",
+      "2000 GRAND CONCOURSE, Bronx, NY, USA"
+     ],
+     "problems": [],
+     "names": 4,
+     "qloo_names": 4,
+     "city_names": 0,
+     "unverified_before": 1,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "rank",
+      "evidence",
+      "write",
+      "verify",
+      "repair1",
+      "verify_repair1"
+     ],
+     "seconds": 49.73,
+     "credits": 4.75,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "600 NOSTRAND AVENUE, Brooklyn, NY, USA",
+      "3000 WHITE PLNS ROAD, Bronx, NY, USA",
+      "2000 GRAND CONCOURSE, Bronx, NY, USA"
+     ],
+     "problems": [],
+     "names": 3,
+     "qloo_names": 2,
+     "city_names": 0,
+     "unverified_before": 1,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "rank",
+      "evidence",
+      "write",
+      "verify",
+      "repair1",
+      "verify_repair1"
+     ],
+     "seconds": 40.59,
+     "credits": 3.84,
+     "passed": true
+    }
+   ]
+  },
+  "taqueria-jackson-heights": {
+   "pass^k": true,
+   "k": 3,
+   "runs": [
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "3700 Junction Blvd, Queens",
+      "37-19 73rd Street, Queens",
+      "92-05 Roosevelt Avenue, Queens",
+      "80-19 37th Avenue, Queens",
+      "32-61 85th Street, Queens"
+     ],
+     "problems": [],
+     "names": 4,
+     "qloo_names": 4,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 31.63,
+     "credits": 2.6,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "3700 Junction Blvd, Queens",
+      "37-19 73rd Street, Queens",
+      "92-05 Roosevelt Avenue, Queens",
+      "80-19 37th Avenue, Queens",
+      "32-61 85th Street, Queens"
+     ],
+     "problems": [],
+     "names": 1,
+     "qloo_names": 1,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 14.96,
+     "credits": 1.07,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "3700 Junction Blvd, Queens",
+      "37-19 73rd Street, Queens",
+      "92-05 Roosevelt Avenue, Queens",
+      "80-19 37th Avenue, Queens",
+      "32-61 85th Street, Queens"
+     ],
+     "problems": [],
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 17.1,
+     "credits": 1.88,
+     "passed": true
+    }
+   ]
+  },
+  "coffee-bronx": {
+   "pass^k": true,
+   "k": 3,
+   "runs": [
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "2345 Washington Avenue, Bronx",
+      "2460 Valentine Avenue, Bronx",
+      "619 East Fordham Road, Bronx",
+      "1301 Castle Hill Avenue, Bronx",
+      "332 East 149th Street, Bronx"
+     ],
+     "problems": [],
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 19.71,
+     "credits": 2.18,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "2345 Washington Avenue, Bronx",
+      "2460 Valentine Avenue, Bronx",
+      "619 East Fordham Road, Bronx",
+      "1301 Castle Hill Avenue, Bronx",
+      "332 East 149th Street, Bronx"
+     ],
+     "problems": [],
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 2,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify",
+      "repair1",
+      "verify_repair1"
+     ],
+     "seconds": 32.5,
+     "credits": 3.44,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "2345 Washington Avenue, Bronx",
+      "2460 Valentine Avenue, Bronx",
+      "619 East Fordham Road, Bronx",
+      "1301 Castle Hill Avenue, Bronx",
+      "332 East 149th Street, Bronx"
+     ],
+     "problems": [],
+     "names": 4,
+     "qloo_names": 2,
+     "city_names": 2,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 18.03,
+     "credits": 1.62,
+     "passed": true
+    }
+   ]
+  },
+  "caribbean-crown-heights": {
+   "pass^k": true,
+   "k": 3,
+   "runs": [
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "142 Rogers Avenue, Brooklyn",
+      "1362 St Johns St, Brooklyn",
+      "101 Kingston Avenue, Brooklyn",
+      "979 Pacific Street, Brooklyn",
+      "1000 Dean St, Brooklyn"
+     ],
+     "problems": [],
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 11.27,
+     "credits": 0.88,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "142 Rogers Avenue, Brooklyn",
+      "1362 St Johns St, Brooklyn",
+      "101 Kingston Avenue, Brooklyn",
+      "979 Pacific Street, Brooklyn",
+      "1000 Dean St, Brooklyn"
+     ],
+     "problems": [],
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 73.47,
+     "credits": 0.88,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "142 Rogers Avenue, Brooklyn",
+      "1362 St Johns St, Brooklyn",
+      "101 Kingston Avenue, Brooklyn",
+      "979 Pacific Street, Brooklyn",
+      "1000 Dean St, Brooklyn"
+     ],
+     "problems": [],
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 12.36,
+     "credits": 0.85,
+     "passed": true
+    }
+   ]
+  },
+  "pizza-bushwick": {
+   "pass^k": false,
+   "k": 3,
+   "runs": [
+    {
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.024980, need: \uff040.062184 (request id: 20261011064007691278852ghXkVyLR)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+     "failed_step": "write",
+     "order": [
+      "1529 Gates Avenue, Brooklyn",
+      "187 Wyckoff Avenue, Brooklyn",
+      "79 Wyckoff Avenue, Brooklyn",
+      "897 Broadway, Brooklyn",
+      "781 Broadway, Brooklyn"
+     ],
+     "problems": null,
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence"
+     ],
+     "seconds": 1.17,
+     "credits": null,
+     "passed": false
+    },
+    {
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.024980, need: \uff040.062184 (request id: 20261011064008633008495mubSxamy)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+     "failed_step": "write",
+     "order": [
+      "1529 Gates Avenue, Brooklyn",
+      "187 Wyckoff Avenue, Brooklyn",
+      "79 Wyckoff Avenue, Brooklyn",
+      "897 Broadway, Brooklyn",
+      "781 Broadway, Brooklyn"
+     ],
+     "problems": null,
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence"
+     ],
+     "seconds": 0.96,
+     "credits": null,
+     "passed": false
+    },
+    {
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.024980, need: \uff040.062184 (request id: 20261011064009607366075lffIEJBe)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+     "failed_step": "write",
+     "order": [
+      "1529 Gates Avenue, Brooklyn",
+      "187 Wyckoff Avenue, Brooklyn",
+      "79 Wyckoff Avenue, Brooklyn",
+      "897 Broadway, Brooklyn",
+      "781 Broadway, Brooklyn"
+     ],
+     "problems": null,
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence"
+     ],
+     "seconds": 0.97,
+     "credits": null,
+     "passed": false
+    }
+   ]
+  },
+  "bakery-park-slope": {
+   "pass^k": false,
+   "k": 3,
+   "runs": [
+    {
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.024980, need: \uff040.062368 (request id: 20261011064010860383889eHPkEjou)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+     "failed_step": "write",
+     "order": [
+      "18 Sixth Ave, Brooklyn",
+      "82 5th Avenue, Brooklyn",
+      "485 4th Avenue, Brooklyn",
+      "358 Flatbush Avenue, Brooklyn",
+      "382 7th Avenue, Brooklyn"
+     ],
+     "problems": null,
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence"
+     ],
+     "seconds": 1.25,
+     "credits": null,
+     "passed": false
+    },
+    {
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.024980, need: \uff040.062368 (request id: 20261011064011820989634JnWGVZOm)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+     "failed_step": "write",
+     "order": [
+      "18 Sixth Ave, Brooklyn",
+      "82 5th Avenue, Brooklyn",
+      "485 4th Avenue, Brooklyn",
+      "358 Flatbush Avenue, Brooklyn",
+      "382 7th Avenue, Brooklyn"
+     ],
+     "problems": null,
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence"
+     ],
+     "seconds": 0.94,
+     "credits": null,
+     "passed": false
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "18 Sixth Ave, Brooklyn",
+      "82 5th Avenue, Brooklyn",
+      "485 4th Avenue, Brooklyn",
+      "358 Flatbush Avenue, Brooklyn",
+      "382 7th Avenue, Brooklyn"
+     ],
+     "problems": [],
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence",
+      "write",
+      "verify"
+     ],
+     "seconds": 15.05,
+     "credits": 0.89,
+     "passed": true
+    }
+   ]
+  },
+  "middle-eastern-bay-ridge": {
+   "pass^k": false,
+   "k": 3,
+   "runs": [
+    {
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.012860, need: \uff040.062496 (request id: 20261011064013741597412aWYtAYJW)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+     "failed_step": "write",
+     "order": [
+      "316 Bay Ridge Parkway, Brooklyn",
+      "8519 4th Avenue, Brooklyn",
+      "180 Bay Ridge Avenue, Brooklyn",
+      "6925 4th Avenue, Brooklyn",
+      "7502 5th Avenue, Brooklyn"
+     ],
+     "problems": null,
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence"
+     ],
+     "seconds": 1.17,
+     "credits": null,
+     "passed": false
+    },
+    {
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.012860, need: \uff040.062496 (request id: 20261011064014942288489LKNIrDsQ)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+     "failed_step": "write",
+     "order": [
+      "316 Bay Ridge Parkway, Brooklyn",
+      "8519 4th Avenue, Brooklyn",
+      "180 Bay Ridge Avenue, Brooklyn",
+      "6925 4th Avenue, Brooklyn",
+      "7502 5th Avenue, Brooklyn"
+     ],
+     "problems": null,
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence"
+     ],
+     "seconds": 1.18,
+     "credits": null,
+     "passed": false
+    },
+    {
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.012860, need: \uff040.062496 (request id: 20261011064015880803498GADunhMm)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+     "failed_step": "write",
+     "order": [
+      "316 Bay Ridge Parkway, Brooklyn",
+      "8519 4th Avenue, Brooklyn",
+      "180 Bay Ridge Avenue, Brooklyn",
+      "6925 4th Avenue, Brooklyn",
+      "7502 5th Avenue, Brooklyn"
+     ],
+     "problems": null,
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "area",
+      "find",
+      "rank",
+      "evidence"
+     ],
+     "seconds": 0.97,
+     "credits": null,
+     "passed": false
+    }
+   ]
+  },
+  "thai-lic-nickname": {
+   "pass^k": false,
+   "k": 3,
+   "runs": [
+    {
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.012860, need: \uff040.174448 (request id: 20261011064016504232591tOWmsYOk)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+     "failed_step": "area",
+     "order": [],
+     "problems": null,
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve"
+     ],
+     "seconds": 0.59,
+     "credits": null,
+     "passed": false
+    },
+    {
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.012860, need: \uff040.174448 (request id: 20261011064017169176271fXnJSSPe)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+     "failed_step": "area",
+     "order": [],
+     "problems": null,
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve"
+     ],
+     "seconds": 0.66,
+     "credits": null,
+     "passed": false
+    },
+    {
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.012860, need: \uff040.174448 (request id: 20261011064017762697504EbJWKrOa)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+     "failed_step": "area",
+     "order": [],
+     "problems": null,
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve"
+     ],
+     "seconds": 0.6,
+     "credits": null,
+     "passed": false
+    }
+   ]
+  },
+  "indian-bedstuy-nickname": {
+   "pass^k": false,
+   "k": 3,
+   "runs": [
+    {
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.012860, need: \uff040.174464 (request id: 20261011064018437131118mtGqHEGJ)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+     "failed_step": "area",
+     "order": [],
+     "problems": null,
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve"
+     ],
+     "seconds": 0.67,
+     "credits": null,
+     "passed": false
+    },
+    {
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.012860, need: \uff040.174464 (request id: 2026101106401975727836dGqZVCpq)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+     "failed_step": "area",
+     "order": [],
+     "problems": null,
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve"
+     ],
+     "seconds": 0.64,
+     "credits": null,
+     "passed": false
+    },
+    {
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.012860, need: \uff040.174464 (request id: 20261011064019705248723RSqEtmtZ)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+     "failed_step": "area",
+     "order": [],
+     "problems": null,
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve"
+     ],
+     "seconds": 0.64,
+     "credits": null,
+     "passed": false
+    }
+   ]
+  },
+  "italian-ues-nickname": {
+   "pass^k": false,
+   "k": 3,
+   "runs": [
+    {
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.012860, need: \uff040.174456 (request id: 20261011064020421098032UYDCejfU)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+     "failed_step": "area",
+     "order": [],
+     "problems": null,
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve"
+     ],
+     "seconds": 0.7,
+     "credits": null,
+     "passed": false
+    },
+    {
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.012860, need: \uff040.174456 (request id: 2026101106402130672433ywyWKUBi)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+     "failed_step": "area",
+     "order": [],
+     "problems": null,
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve"
+     ],
+     "seconds": 0.63,
+     "credits": null,
+     "passed": false
+    },
+    {
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.012860, need: \uff040.174456 (request id: 20261011064021666718957imshRFNq)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+     "failed_step": "area",
+     "order": [],
+     "problems": null,
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 0,
+     "unverified_after": 0,
+     "steps": [
+      "resolve"
+     ],
+     "seconds": 0.62,
+     "credits": null,
+     "passed": false
+    }
+   ]
+  }
+ },
+ "edge": {
+  "staten-island": {
+   "pass^3": true,
+   "errors": [
+    "2655 RICHMOND AVENUE, Staten Island, NY, USA: Staten Island was not covered by our tests (Brooklyn, Queens, Manhattan, Bronx only)",
+    "2655 RICHMOND AVENUE, Staten Island, NY, USA: Staten Island was not covered by our tests (Brooklyn, Queens, Manhattan, Bronx only)",
+    "2655 RICHMOND AVENUE, Staten Island, NY, USA: Staten Island was not covered by our tests (Brooklyn, Queens, Manhattan, Bronx only)"
+   ],
+   "seconds": [
+    0.59,
+    0.57,
+    0.49
+   ]
+  },
+  "untested-cuisine": {
+   "pass^3": false,
+   "errors": [
+    "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.062540, need: \uff040.161016 (request id: 20261011064107114968267xRWaxduu)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+    "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.062540, need: \uff040.161016 (request id: 20261011064107194570629CaEPOuuS)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+    "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.062540, need: \uff040.161016 (request id: 20261011064107259956238JjgTEaqR)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}"
+   ],
+   "seconds": [
+    0.65,
+    0.64,
+    0.67
+   ]
+  },
+  "bad-address": {
+   "pass^3": true,
+   "errors": [
+    "address not found: zzqx nowhere lane",
+    "address not found: zzqx nowhere lane",
+    "address not found: zzqx nowhere lane"
+   ],
+   "seconds": [
+    0.2,
+    0.22,
+    0.18
+   ]
+  },
+  "outside-nyc-area": {
+   "pass^3": false,
+   "errors": [
+    "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.062540, need: \uff040.174456 (request id: 20261011064107940472294mCDBjVvS)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+    "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.062540, need: \uff040.174456 (request id: 2026101106410845280071IaUFaFXs)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+    "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.062540, need: \uff040.174456 (request id: 2026101106410861640686ytqNomfO)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}"
+   ],
+   "seconds": [
+    0.6,
+    0.62,
+    0.63
+   ]
+  },
+  "prompt-injection": {
+   "pass^3": false,
+   "errors": [
+    "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.062540, need: \uff040.161048 (request id: 20261011064108572711652EWQDMHXE)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+    "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.062540, need: \uff040.161048 (request id: 20261011064108728854143bVylJknu)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}",
+    "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.062540, need: \uff040.161048 (request id: 20261011064108722195522dIVmTBBF)\",\"type\":\"cometapi_error\",\"param\":\"\",\"code\":\"insufficient_user_quota\"}}"
+   ],
+   "seconds": [
+    0.62,
+    0.67,
+    0.65
+   ]
+  }
+ },
+ "followups": {
+  "competitors": {
+   "pass^3": false,
+   "runs": [
+    {
+     "tools": [
+      [
+       "nearby_restaurants",
+       "done"
+      ]
+     ],
+     "answer": null,
+     "unchecked": null,
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.019126, need: \uff040.076112 (request id: 20261011064137476812839GfaxVMOc)\",\"type\":\"cometapi_err",
+     "seconds": 28.8,
+     "passed": false
+    },
+    {
+     "tools": [
+      [
+       "nearby_restaurants",
+       "done"
+      ]
+     ],
+     "answer": "NYC inspection records list 9 Korean restaurants within 300 m of the top lease, 136-20 38 Avenue:\n\n\u2022 Tofu House \u2014 44 m\n\u2022 Shun Mama Food \u2014 106 m\n\u2022 Eight Beautitudes \u2014 107 m\n\u2022 Woodam \u2014 146 m\n\u2022 Bunsik \u2014 146 m\n\u2022 Friendship Bbq \u2014 150 m\n\u2022 Hangukgwan \u2014 237 m\n\u2022 Chung Moo Roll Rice & Donga \u2014 241 m\n\u2022 Kimganae Restaurant \u2014 242 m\n\nThese are cuisine-category competitors, not necessarily direct Korean cafe competitors. The records don\u2019t establish their current menus or whether they\u2019re operating today.",
+     "unchecked": [],
+     "error": null,
+     "seconds": 6.9,
+     "passed": true
+    },
+    {
+     "tools": [
+      [
+       "nearby_restaurants",
+       "done"
+      ]
+     ],
+     "answer": "NYC inspection records list 9 Korean restaurants within 300 m of your top lease, 136-20 38 Avenue:\n\n\u2022 Tofu House \u2014 44 m\n\u2022 Shun Mama Food \u2014 106 m\n\u2022 Eight Beautitudes \u2014 107 m\n\u2022 Woodam \u2014 146 m\n\u2022 Bunsik \u2014 146 m\n\u2022 Friendship Bbq \u2014 150 m\n\u2022 Hangukgwan \u2014 237 m\n\u2022 Chung Moo Roll Rice & Donga \u2014 241 m\n\u2022 Kimganae Restaurant \u2014 242 m\n\nThese are cuisine-category competitors, not necessarily direct Korean cafe competitors. Inspection records alone don\u2019t confirm their current operating status or menu overlap.",
+     "unchecked": [],
+     "error": null,
+     "seconds": 11.8,
+     "passed": true
+    }
+   ]
+  },
+  "other-area": {
+   "pass^3": false,
+   "runs": [
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.003450, need: \uff040.076152 (request id: 20261011064119213745952wVvFCZTS)\",\"type\":\"cometapi_err",
+     "seconds": 3.6,
+     "passed": false
+    },
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.053588, need: \uff040.076152 (request id: 20261011064122847285069oezVWKZF)\",\"type\":\"cometapi_err",
+     "seconds": 3.6,
+     "passed": false
+    },
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.053588, need: \uff040.076152 (request id: 20261011064124205755689yFRtyAXp)\",\"type\":\"cometapi_err",
+     "seconds": 3.7,
+     "passed": false
+    }
+   ]
+  },
+  "qloo-predicts": {
+   "pass^3": false,
+   "runs": [
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.053588, need: \uff040.076104 (request id: 20261011064126498555853kyWihgAZ)\",\"type\":\"cometapi_err",
+     "seconds": 3.7,
+     "passed": false
+    },
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.053588, need: \uff040.076104 (request id: 20261011064127851729159PtwmVRty)\",\"type\":\"cometapi_err",
+     "seconds": 3.6,
+     "passed": false
+    },
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.053588, need: \uff040.076104 (request id: 20261011064130116269108ZVdrGKXH)\",\"type\":\"cometapi_err",
+     "seconds": 3.6,
+     "passed": false
+    }
+   ]
+  },
+  "partner-check": {
+   "pass^3": false,
+   "runs": [
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.053588, need: \uff040.076104 (request id: 20261011064131473309381sNUMhQDQ)\",\"type\":\"cometapi_err",
+     "seconds": 3.6,
+     "passed": false
+    },
+    {
+     "tools": [
+      [
+       "lookup_business",
+       "done"
+      ]
+     ],
+     "answer": "Yes. Kung Fu Tea appears in NYC inspection records 46 metres from your top lease, 136-20 38 Avenue in Flushing.",
+     "unchecked": [],
+     "error": null,
+     "seconds": 8.8,
+     "passed": true
+    },
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.034982, need: \uff040.076104 (request id: 2026101106413597548906TeFpxaWp)\",\"type\":\"cometapi_erro",
+     "seconds": 3.6,
+     "passed": false
+    }
+   ]
+  },
+  "area-audience": {
+   "pass^3": false,
+   "runs": [
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.034982, need: \uff040.076144 (request id: 20261011064135404024503AGsqFYzw)\",\"type\":\"cometapi_err",
+     "seconds": 0.3,
+     "passed": false
+    },
+    {
+     "tools": [
+      [
+       "area_profile",
+       "done"
+      ]
+     ],
+     "answer": null,
+     "unchecked": null,
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.043478, need: \uff040.076144 (request id: 20261011064149796375295WlkXMeGy)\",\"type\":\"cometapi_err",
+     "seconds": 14.4,
+     "passed": false
+    },
+    {
+     "tools": [],
+     "answer": null,
+     "unchecked": null,
+     "error": "HTTP 403: {\"error\":{\"message\":\"pre-consume quota failed, organization and owner combined remaining quota: \uff040.000182, need: \uff040.076144 (request id: 20261011064141149595882ukrRkJDE)\",\"type\":\"cometapi_err",
+     "seconds": 3.7,
+     "passed": false
+    }
+   ]
+  }
+ },
+ "runs_per_case": {
+  "korean-cafe-astoria": 3,
+  "korean-cafe-queens": 3,
+  "ramen-williamsburg": 3,
+  "caribbean-brooklyn-bronx": 3,
+  "taqueria-jackson-heights": 3,
+  "coffee-bronx": 3,
+  "caribbean-crown-heights": 3,
+  "pizza-bushwick": 3,
+  "bakery-park-slope": 3,
+  "middle-eastern-bay-ridge": 3,
+  "thai-lic-nickname": 3,
+  "indian-bedstuy-nickname": 3,
+  "italian-ues-nickname": 3
+ }
+}

@@ -1,0 +1,1001 @@
+{
+ "title": "Pizzeria for families: the agent scouts Queens",
+ "request": {
+  "concept": "Pizzeria",
+  "goal": "Families with kids in Queens, ideally close to a subway stop."
+ },
+ "recorded": "2026-10-10",
+ "events": [
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "resolve",
+    "label": "Match concept to a tested cuisine",
+    "status": "running"
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "resolve",
+    "label": "Match concept to a tested cuisine",
+    "status": "done",
+    "seconds": 0.0,
+    "detail": "keyword match"
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "concept",
+    "data": {
+     "cuisine": "Pizza",
+     "label": "Pizzeria",
+     "reason": "matched by keyword to Pizza"
+    }
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "scout",
+    "label": "Scout neighbourhoods and storefronts for your plan",
+    "status": "running"
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "scout_think",
+    "n": 1
+   }
+  ],
+  [
+   5.47,
+   {
+    "type": "scout_turn",
+    "n": 1,
+    "seconds": 5.5,
+    "retried": false,
+    "calls": [
+     "list_neighbourhoods"
+    ],
+    "credits": 0.98,
+    "model": "gpt-6-astra"
+   }
+  ],
+  [
+   5.47,
+   {
+    "type": "scout",
+    "status": "running",
+    "name": "list_neighbourhoods",
+    "args": {
+     "boroughs": [
+      "Queens"
+     ],
+     "cuisine": "Pizza",
+     "min_vacant_storefronts": 1,
+     "rank_by": "balanced",
+     "target": "families",
+     "top": 8
+    },
+    "n": 1
+   }
+  ],
+  [
+   5.78,
+   {
+    "type": "scout",
+    "status": "done",
+    "name": "list_neighbourhoods",
+    "args": {
+     "boroughs": [
+      "Queens"
+     ],
+     "cuisine": "Pizza",
+     "min_vacant_storefronts": 1,
+     "rank_by": "balanced",
+     "target": "families",
+     "top": 8
+    },
+    "n": 1,
+    "seconds": 0.3,
+    "summary": "ranked by average of share of households with children percentile and median cuisine-fit percentile: Corona (37.0), North Corona (43.6), Jamaica (36.9)"
+   }
+  ],
+  [
+   5.78,
+   {
+    "type": "scout_think",
+    "n": 2
+   }
+  ],
+  [
+   14.51,
+   {
+    "type": "scout_turn",
+    "n": 2,
+    "seconds": 8.7,
+    "retried": false,
+    "calls": [
+     "find_storefronts",
+     "find_storefronts",
+     "find_storefronts",
+     "find_storefronts"
+    ],
+    "credits": 2.03,
+    "model": "gpt-6-astra"
+   }
+  ],
+  [
+   14.51,
+   {
+    "type": "scout",
+    "status": "running",
+    "name": "find_storefronts",
+    "args": {
+     "cuisine": "Pizza",
+     "area": "Corona",
+     "top": 8
+    },
+    "n": 2
+   }
+  ],
+  [
+   14.64,
+   {
+    "type": "scout",
+    "status": "done",
+    "name": "find_storefronts",
+    "args": {
+     "cuisine": "Pizza",
+     "area": "Corona",
+     "top": 8
+    },
+    "n": 2,
+    "seconds": 0.1,
+    "summary": "18 vacant storefronts in Corona; best: 41-02 102nd Street, Queens, 96-08 57th Avenue, Queens, 46-10 th Street, Queens"
+   }
+  ],
+  [
+   14.64,
+   {
+    "type": "scout",
+    "status": "running",
+    "name": "find_storefronts",
+    "args": {
+     "cuisine": "Pizza",
+     "area": "North Corona",
+     "top": 8
+    },
+    "n": 3
+   }
+  ],
+  [
+   14.65,
+   {
+    "type": "scout",
+    "status": "done",
+    "name": "find_storefronts",
+    "args": {
+     "cuisine": "Pizza",
+     "area": "North Corona",
+     "top": 8
+    },
+    "n": 3,
+    "seconds": 0.0,
+    "summary": "15 vacant storefronts in North Corona; best: 37-53 Junction Boulevard, Queens, 111-29 Roosevelt Avenue, Queens, 106-04 Northern Boulevard, Queens"
+   }
+  ],
+  [
+   14.65,
+   {
+    "type": "scout",
+    "status": "running",
+    "name": "find_storefronts",
+    "args": {
+     "cuisine": "Pizza",
+     "area": "Jamaica",
+     "top": 8
+    },
+    "n": 4
+   }
+  ],
+  [
+   14.66,
+   {
+    "type": "scout",
+    "status": "done",
+    "name": "find_storefronts",
+    "args": {
+     "cuisine": "Pizza",
+     "area": "Jamaica",
+     "top": 8
+    },
+    "n": 4,
+    "seconds": 0.0,
+    "summary": "66 vacant storefronts in Jamaica; best: 89-59 164th Street, Queens, 89-17 139th Street, Queens, 165-09 Jamaica Avenue, Queens"
+   }
+  ],
+  [
+   14.66,
+   {
+    "type": "scout",
+    "status": "running",
+    "name": "find_storefronts",
+    "args": {
+     "cuisine": "Pizza",
+     "area": "Elmhurst",
+     "top": 8
+    },
+    "n": 5
+   }
+  ],
+  [
+   14.67,
+   {
+    "type": "scout",
+    "status": "done",
+    "name": "find_storefronts",
+    "args": {
+     "cuisine": "Pizza",
+     "area": "Elmhurst",
+     "top": 8
+    },
+    "n": 5,
+    "seconds": 0.0,
+    "summary": "51 vacant storefronts in Elmhurst; best: 41-53 77th Street, Queens, 95-28 Roosevelt Avenue, Queens, 92-10 Roosevelt Avenue, Queens"
+   }
+  ],
+  [
+   14.67,
+   {
+    "type": "scout_think",
+    "n": 3
+   }
+  ],
+  [
+   32.43,
+   {
+    "type": "scout_turn",
+    "n": 3,
+    "seconds": 17.8,
+    "retried": false,
+    "calls": [
+     "submit_shortlist"
+    ],
+    "credits": 5.08,
+    "model": "gpt-6-astra"
+   }
+  ],
+  [
+   32.43,
+   {
+    "type": "scout",
+    "status": "done",
+    "name": "submit_shortlist",
+    "summary": "4 storefronts shortlisted"
+   }
+  ],
+  [
+   32.43,
+   {
+    "type": "step",
+    "id": "scout",
+    "label": "Scout neighbourhoods and storefronts for your plan",
+    "status": "done",
+    "seconds": 32.4,
+    "detail": "4 storefronts shortlisted"
+   }
+  ],
+  [
+   32.43,
+   {
+    "type": "scout_result",
+    "data": {
+     "summary": "Prioritized family density, then pizza lease fit, limited nearby competition, and subway access. North Corona and Corona best match the customer profile; Jamaica and Elmhurst trade some family fit for stronger transit and street activity.",
+     "picks": [
+      {
+       "address": "111-29 Roosevelt Avenue, Queens",
+       "neighbourhood": "North Corona",
+       "reason": "Strong family-market fit: North Corona ranks at the 97th NYC percentile for households with children. The site has a 79th-percentile pizza lease score, 2 nearby same-cuisine restaurants, and 12,587 subway entries within 500m. Trade-off: less street activity than the strongest alternatives (79th percentile)."
+      },
+      {
+       "address": "46-10 th Street, Queens",
+       "neighbourhood": "Corona",
+       "reason": "Corona combines a 90th-percentile family measure with a 74th-percentile pizza lease score. Only 1 same-cuisine restaurant is within 400m, with 17,132 subway entries and a 75th-percentile street. Trade-off: lower cuisine fit than the top sites."
+      },
+      {
+       "address": "89-17 139th Street, Queens",
+       "neighbourhood": "Jamaica",
+       "reason": "Jamaica ranks at the 89th percentile for households with children; this site offers an 84th-percentile pizza lease score, 2 nearby same-cuisine restaurants, 31,862 subway entries, and an 85th-percentile street. Trade-off: more direct competition than the leanest options."
+      },
+      {
+       "address": "83-25 Broadway, Queens",
+       "neighbourhood": "Elmhurst",
+       "reason": "High-visibility Elmhurst site with a 90th-percentile pizza lease score, 1 same-cuisine restaurant within 400m, 26,256 subway entries, and a 91st-percentile street. Trade-off: Elmhurst's family measure is lower, at the 68th percentile."
+      }
+     ]
+    }
+   }
+  ],
+  [
+   32.43,
+   {
+    "type": "step",
+    "id": "rank",
+    "label": "Rank leases on city inspection records",
+    "status": "running"
+   }
+  ],
+  [
+   32.43,
+   {
+    "type": "step",
+    "id": "rank",
+    "label": "Rank leases on city inspection records",
+    "status": "done",
+    "seconds": 0.0,
+    "detail": "4 leases scored"
+   }
+  ],
+  [
+   32.51,
+   {
+    "type": "leases",
+    "data": [
+     {
+      "address": "111-29 Roosevelt Avenue, Queens",
+      "borough": "Queens",
+      "neighbourhood": "North Corona",
+      "lat": 40.7521267,
+      "lon": -73.8548855,
+      "storefront": {
+       "reported": "Dec 31, 2024",
+       "last_use": null,
+       "area": "North Corona",
+       "bbl": "4017840020"
+      },
+      "block": "dr5rz6",
+      "density": 33,
+      "density_percentile": 79,
+      "same_cuisine_in_block": 2,
+      "same_cuisine_area": 10,
+      "score": 0.22,
+      "score_percentile": 79,
+      "same_cuisine_400m": [
+       {
+        "name": "Taste Of Dolly'S",
+        "cuisine": "Pizza",
+        "metres": 106,
+        "opened": null,
+        "lat": 40.751440034446,
+        "lon": -73.855756074866
+       },
+       {
+        "name": "Little Ceasars",
+        "cuisine": "Pizza",
+        "metres": 317,
+        "opened": "2024-03-08",
+        "lat": 40.750850279459,
+        "lon": -73.858254942112
+       }
+      ],
+      "openings_800m": [
+       {
+        "name": "Little Ceasars",
+        "cuisine": "Pizza",
+        "metres": 317,
+        "opened": "2024-03-08",
+        "lat": 40.750850279459,
+        "lon": -73.858254942112
+       }
+      ],
+      "all_400m": 27,
+      "rank": 1,
+      "subway": {
+       "subway_entries_within_500m": 12587,
+       "stations": [
+        {
+         "station": "111 St (7)",
+         "metres": 58,
+         "weekday_entries": 12587
+        }
+       ]
+      },
+      "bid": null,
+      "partners": {
+       "bids": [],
+       "complements": [
+        {
+         "name": "Bogatis",
+         "kind": "dessert",
+         "metres": 319
+        },
+        {
+         "name": "Salud Es Vida (Hebalife)",
+         "kind": "juice bar",
+         "metres": 364
+        },
+        {
+         "name": "Magic Nutrition",
+         "kind": "juice bar",
+         "metres": 365
+        },
+        {
+         "name": "Pan De Casa Bakery",
+         "kind": "bakery",
+         "metres": 366
+        },
+        {
+         "name": "Magico Amanecer",
+         "kind": "juice bar",
+         "metres": 366
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: Bogatis (dessert, 319 m); Salud Es Vida (Hebalife) (juice bar, 364 m); Magic Nutrition (juice bar, 365 m); Pan De Casa Bakery (bakery, 366 m); Magico Amanecer (juice bar, 366 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     },
+     {
+      "address": "46-10 th Street, Queens",
+      "borough": "Queens",
+      "neighbourhood": "Corona",
+      "lat": 40.74603969999999,
+      "lon": -73.86003060000002,
+      "storefront": {
+       "reported": "Dec 31, 2024",
+       "last_use": null,
+       "area": "Corona",
+       "bbl": "4019810028"
+      },
+      "block": "dr5rz3",
+      "density": 28,
+      "density_percentile": 75,
+      "same_cuisine_in_block": 1,
+      "same_cuisine_area": 11,
+      "score": 0.049,
+      "score_percentile": 74,
+      "same_cuisine_400m": [
+       {
+        "name": "Papa John'S Pizza",
+        "cuisine": "Pizza",
+        "metres": 326,
+        "opened": null,
+        "lat": 40.746753546645,
+        "lon": -73.863778250687
+       }
+      ],
+      "openings_800m": [
+       {
+        "name": "Little Ceasars",
+        "cuisine": "Pizza",
+        "metres": 555,
+        "opened": "2024-03-08",
+        "lat": 40.750850279459,
+        "lon": -73.858254942112
+       }
+      ],
+      "all_400m": 37,
+      "rank": 2,
+      "subway": {
+       "subway_entries_within_500m": 17132,
+       "stations": [
+        {
+         "station": "103 St-Corona Plaza (7)",
+         "metres": 481,
+         "weekday_entries": 17132
+        }
+       ]
+      },
+      "bid": null,
+      "partners": {
+       "bids": [],
+       "complements": [
+        {
+         "name": "Our Backyard Cafe",
+         "kind": "bakery",
+         "metres": 27
+        },
+        {
+         "name": "Yogurt Magico",
+         "kind": "dessert",
+         "metres": 80
+        },
+        {
+         "name": "Mio Rivera's Bakery",
+         "kind": "bakery",
+         "metres": 92
+        },
+        {
+         "name": "Corona Corner Coffee",
+         "kind": "coffee or tea",
+         "metres": 192
+        },
+        {
+         "name": "Wonder World Nutrition (Herbalife)",
+         "kind": "juice bar",
+         "metres": 226
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: Our Backyard Cafe (bakery, 27 m); Yogurt Magico (dessert, 80 m); Mio Rivera's Bakery (bakery, 92 m); Corona Corner Coffee (coffee or tea, 192 m); Wonder World Nutrition (Herbalife) (juice bar, 226 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     },
+     {
+      "address": "89-17 139th Street, Queens",
+      "borough": "Queens",
+      "neighbourhood": "Jamaica",
+      "lat": 40.7021714,
+      "lon": -73.8126458,
+      "storefront": {
+       "reported": "June 30, 2025",
+       "last_use": null,
+       "area": "Jamaica",
+       "bbl": "4099760030"
+      },
+      "block": "dr5x83",
+      "density": 45,
+      "density_percentile": 85,
+      "same_cuisine_in_block": 3,
+      "same_cuisine_area": 10,
+      "score": 0.566,
+      "score_percentile": 84,
+      "same_cuisine_400m": [
+       {
+        "name": "Little Caesars",
+        "cuisine": "Pizza",
+        "metres": 335,
+        "opened": null,
+        "lat": 40.701806134552,
+        "lon": -73.808704453493
+       },
+       {
+        "name": "Geo'S Pizzeria",
+        "cuisine": "Pizza",
+        "metres": 397,
+        "opened": null,
+        "lat": 40.702407605793,
+        "lon": -73.817344129752
+       }
+      ],
+      "openings_800m": [
+       {
+        "name": "Jamaica Hot Pizza",
+        "cuisine": "Pizza",
+        "metres": 403,
+        "opened": "2025-06-11",
+        "lat": 40.701593479281,
+        "lon": -73.807922443787
+       },
+       {
+        "name": "Domenick`S Pizza",
+        "cuisine": "Pizza",
+        "metres": 427,
+        "opened": "2026-02-12",
+        "lat": 40.705125749847,
+        "lon": -73.809412633195
+       }
+      ],
+      "all_400m": 39,
+      "rank": 3,
+      "subway": {
+       "subway_entries_within_500m": 31862,
+       "stations": [
+        {
+         "station": "Jamaica-Van Wyck (E)",
+         "metres": 358,
+         "weekday_entries": 4017
+        },
+        {
+         "station": "Sutphin Blvd (F)",
+         "metres": 400,
+         "weekday_entries": 3361
+        },
+        {
+         "station": "Sutphin Blvd-Archer Av-JFK Airport (E,J,Z)",
+         "metres": 436,
+         "weekday_entries": 24484
+        }
+       ]
+      },
+      "bid": null,
+      "partners": {
+       "bids": [
+        {
+         "bid": "Downtown Jamaica",
+         "website": "https://jamaica.nyc/news/",
+         "phone": "(718) 526-2422",
+         "email": "info@downtownjamaica.org",
+         "boundary": null,
+         "metres": 327
+        }
+       ],
+       "complements": [],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "The nearest business improvement district, Downtown Jamaica, is about 327 m away. Its staff know the street and run local events; contact (718) 526-2422, info@downtownjamaica.org.",
+        "source": "https://jamaica.nyc/news/",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     },
+     {
+      "address": "83-25 Broadway, Queens",
+      "borough": "Queens",
+      "neighbourhood": "Elmhurst",
+      "lat": 40.7408161,
+      "lon": -73.87917119999999,
+      "storefront": {
+       "reported": "June 30, 2025",
+       "last_use": "Other",
+       "area": "Elmhurst",
+       "bbl": "4015800005"
+      },
+      "block": "dr5ryb",
+      "density": 68,
+      "density_percentile": 91,
+      "same_cuisine_in_block": 3,
+      "same_cuisine_area": 15,
+      "score": 1.073,
+      "score_percentile": 90,
+      "same_cuisine_400m": [
+       {
+        "name": "Elmhurst Famous Pizza",
+        "cuisine": "Pizza",
+        "metres": 59,
+        "opened": null,
+        "lat": 40.740971805259,
+        "lon": -73.879841567041
+       }
+      ],
+      "openings_800m": [
+       {
+        "name": "Cafe Pizza 2000 Express",
+        "cuisine": "Pizza",
+        "metres": 404,
+        "opened": "2025-12-13",
+        "lat": 40.743053080264,
+        "lon": -73.875391754832
+       }
+      ],
+      "all_400m": 48,
+      "rank": 4,
+      "subway": {
+       "subway_entries_within_500m": 26256,
+       "stations": [
+        {
+         "station": "Elmhurst Av (M,R)",
+         "metres": 301,
+         "weekday_entries": 10947
+        },
+        {
+         "station": "Grand Av-Newtown (M,R)",
+         "metres": 454,
+         "weekday_entries": 15309
+        }
+       ]
+      },
+      "bid": null,
+      "partners": {
+       "bids": [
+        {
+         "bid": "82nd Street Partnership",
+         "website": "http://www.82ndstreet.org/",
+         "phone": "(718) 335-9421",
+         "email": "info@82ndstreet.org",
+         "boundary": "82nd Street from 37th Avenue to Baxter Avenue",
+         "metres": 709
+        }
+       ],
+       "complements": [
+        {
+         "name": "Elm Roastery",
+         "kind": "coffee or tea",
+         "metres": 50
+        },
+        {
+         "name": "Dubois Pastry",
+         "kind": "bakery",
+         "metres": 127
+        },
+        {
+         "name": "88 Bakery & Cafe",
+         "kind": "bakery",
+         "metres": 154
+        },
+        {
+         "name": "Double Rainbow",
+         "kind": "bakery",
+         "metres": 230
+        },
+        {
+         "name": "Rainbow Bakery",
+         "kind": "bakery",
+         "metres": 349
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "The nearest business improvement district, 82nd Street Partnership, is about 709 m away. Its staff know the street and run local events; contact (718) 335-9421, info@82ndstreet.org.",
+        "source": "http://www.82ndstreet.org/",
+        "specific": true
+       },
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: Elm Roastery (coffee or tea, 50 m); Dubois Pastry (bakery, 127 m); 88 Bakery & Cafe (bakery, 154 m); Double Rainbow (bakery, 230 m); Rainbow Bakery (bakery, 349 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  [
+   33.23,
+   {
+    "type": "step",
+    "id": "evidence",
+    "label": "Fetch Qloo audience evidence for North Corona, Queens",
+    "status": "running"
+   }
+  ],
+  [
+   33.38,
+   {
+    "type": "step",
+    "id": "evidence",
+    "label": "Fetch Qloo audience evidence for North Corona, Queens",
+    "status": "done",
+    "seconds": 0.1,
+    "detail": {
+     "tags": 8,
+     "brands": 8,
+     "concept_brands": 8
+    }
+   }
+  ],
+  [
+   33.38,
+   {
+    "type": "step",
+    "id": "write",
+    "label": "Write positioning brief (GPT-6 Astra)",
+    "status": "running"
+   }
+  ],
+  [
+   44.78,
+   {
+    "type": "step",
+    "id": "write",
+    "label": "Write positioning brief (GPT-6 Astra)",
+    "status": "done",
+    "seconds": 11.4,
+    "detail": "11.4 s"
+   }
+  ],
+  [
+   44.78,
+   {
+    "type": "step",
+    "id": "verify",
+    "label": "Verify brief",
+    "status": "running"
+   }
+  ],
+  [
+   87.49,
+   {
+    "type": "step",
+    "id": "verify",
+    "label": "Verify brief",
+    "status": "done",
+    "seconds": 42.7,
+    "detail": "passed"
+   }
+  ],
+  [
+   87.49,
+   {
+    "type": "brief",
+    "data": {
+     "lease": "111-29 Roosevelt Avenue, Queens",
+     "area": "North Corona, Queens",
+     "problems": [],
+     "name_check": "done",
+     "names_traced_to_city_records": [],
+     "names_traced_to_qloo": 1,
+     "replaced_unverified_names": [],
+     "unverified_names_left": [],
+     "text": "[brief written from Qloo evidence; on the live site only]"
+    }
+   }
+  ],
+  [
+   87.49,
+   {
+    "type": "done",
+    "credits": 9.14
+   }
+  ]
+ ],
+ "followups": [
+  {
+   "q": "How many pizzerias are within 400 m of the top storefront, and which opened recently?",
+   "tools": [
+    "nearby_restaurants"
+   ],
+   "unchecked_numbers": [],
+   "answer": "NYC inspection records list 2 pizzerias within 400 m of 111-29 Roosevelt Avenue:\n\n- Taste Of Dolly'S \u2014 105 m away; no new-opening inspection date recorded.\n- Little Ceasars \u2014 317 m away; first inspected as new on March 8, 2024.\n\nLittle Ceasars is the recent opening indicated by these records; the inspection date isn\u2019t necessarily its exact opening date."
+  },
+  {
+   "q": "Find vacant storefronts in Forest Hills and compare the best one with our top pick.",
+   "tools": [
+    "find_storefronts"
+   ],
+   "unchecked_numbers": [],
+   "answer": "The best city-records match in Forest Hills is 108-18 Queens Boulevard, among 61 reported vacant storefronts across 12 blocks.\n\nCompared with your top pick, 111-29 Roosevelt Avenue:\n- Pizza lease-score percentile: 91 versus 79. The Forest Hills block scores above 91% of NYC restaurant blocks for Pizza.\n- Restaurants on the block: 72 versus 33.\n- Pizzerias within 400 m: 3 versus 2.\n- Weekday subway entries within 500 m: 23,908 versus 12,587\u2014a foot-traffic proxy, not a tested predictor.\n\nForest Hills wins on the city-records lease score, despite more nearby pizza competition. Its vacancy was reported June 30, 2025, with last use listed as Educational Services.\n\nI\u2019d prioritize checking its current availability and restaurant conversion feasibility before choosing it over Roosevelt Avenue. The records don\u2019t establish current availability, rent, or kitchen readiness."
+  }
+ ]
+}

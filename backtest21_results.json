@@ -1,0 +1,70 @@
+{
+ "primary_test15_qloo_auc_minus_model_auc": {
+  "median_popularity": 0.99,
+  "lesser_known": {
+   "mean": -0.098,
+   "ci95": [
+    -0.224,
+    -0.009
+   ],
+   "n": 20,
+   "popularity_range": [
+    0.72,
+    0.99
+   ]
+  },
+  "better_known": {
+   "mean": -0.088,
+   "ci95": [
+    -0.207,
+    -0.015
+   ],
+   "n": 20,
+   "popularity_range": [
+    0.99,
+    1.0
+   ]
+  }
+ },
+ "trend_test15": {
+  "spearman": -0.115,
+  "ci95": [
+   -0.402,
+   0.19
+  ],
+  "n": 40
+ },
+ "reading": "Qloo not ahead of the model on lesser-known headliners either",
+ "secondary_test16_recall_with_qloo_minus_alone": {
+  "median_popularity": 0.994,
+  "lesser_known": {
+   "mean": 0.014,
+   "ci95": [
+    -0.196,
+    0.232
+   ],
+   "n": 23,
+   "popularity_range": [
+    0.02,
+    0.99
+   ]
+  },
+  "better_known": {
+   "mean": -0.029,
+   "ci95": [
+    -0.072,
+    0.0
+   ],
+   "n": 23,
+   "popularity_range": [
+    0.99,
+    1.0
+   ]
+  }
+ },
+ "secondary_reading": "not shown",
+ "test15_means": {
+  "affinity_s": 0.879,
+  "model_s": 0.977
+ }
+}

@@ -1,0 +1,250 @@
+{
+ "meta": {
+  "snapshot_restaurants": 29697,
+  "located_in_4_boroughs": 28086,
+  "today_camis": 31516
+ },
+ "cohort_total": 4136,
+ "survival_rate_total": 0.496,
+ "cuisines_used": [
+  "Korean",
+  "Mexican",
+  "Japanese",
+  "Thai",
+  "Indian",
+  "Caribbean",
+  "Coffee shop",
+  "Bakery",
+  "Chinese",
+  "Pizza",
+  "Italian",
+  "Mediterranean",
+  "Latin American",
+  "Middle Eastern"
+ ],
+ "per_cuisine": {
+  "Korean": {
+   "cohort": 119,
+   "survived": 60,
+   "closed": 59,
+   "survival_rate": 0.504,
+   "auc": {
+    "lease": 0.625,
+    "D": 0.618,
+    "S": 0.546,
+    "near400": 0.622,
+    "qloo_alone": 0.568,
+    "DS_oof": 0.619,
+    "DSQ_oof": 0.62
+   }
+  },
+  "Mexican": {
+   "cohort": 262,
+   "survived": 136,
+   "closed": 126,
+   "survival_rate": 0.519,
+   "auc": {
+    "lease": 0.485,
+    "D": 0.491,
+    "S": 0.481,
+    "near400": 0.475,
+    "qloo_alone": 0.474,
+    "DS_oof": 0.407,
+    "DSQ_oof": 0.41
+   }
+  },
+  "Japanese": {
+   "cohort": 254,
+   "survived": 114,
+   "closed": 140,
+   "survival_rate": 0.449,
+   "auc": {
+    "lease": 0.502,
+    "D": 0.494,
+    "S": 0.521,
+    "near400": 0.529,
+    "qloo_alone": 0.5,
+    "DS_oof": 0.497,
+    "DSQ_oof": 0.477
+   }
+  },
+  "Thai": {
+   "cohort": 110,
+   "survived": 46,
+   "closed": 64,
+   "survival_rate": 0.418,
+   "auc": {
+    "lease": 0.547,
+    "D": 0.542,
+    "S": 0.528,
+    "near400": 0.477,
+    "qloo_alone": 0.558,
+    "DS_oof": 0.455,
+    "DSQ_oof": 0.43
+   }
+  },
+  "Indian": {
+   "cohort": 92,
+   "survived": 37,
+   "closed": 55,
+   "survival_rate": 0.402,
+   "auc": {
+    "lease": 0.578,
+    "D": 0.631,
+    "S": 0.523,
+    "near400": 0.588,
+    "qloo_alone": 0.597,
+    "DS_oof": 0.533,
+    "DSQ_oof": 0.539
+   }
+  },
+  "Caribbean": {
+   "cohort": 243,
+   "survived": 110,
+   "closed": 133,
+   "survival_rate": 0.453,
+   "auc": {
+    "lease": 0.498,
+    "D": 0.504,
+    "S": 0.497,
+    "near400": 0.509,
+    "qloo_alone": 0.617,
+    "DS_oof": 0.401,
+    "DSQ_oof": 0.544
+   }
+  },
+  "Coffee shop": {
+   "cohort": 791,
+   "survived": 397,
+   "closed": 394,
+   "survival_rate": 0.502,
+   "auc": {
+    "lease": 0.461,
+    "D": 0.459,
+    "S": 0.465,
+    "near400": 0.46,
+    "qloo_alone": 0.48,
+    "DS_oof": 0.502,
+    "DSQ_oof": 0.497
+   }
+  },
+  "Bakery": {
+   "cohort": 300,
+   "survived": 183,
+   "closed": 117,
+   "survival_rate": 0.61,
+   "auc": {
+    "lease": 0.517,
+    "D": 0.514,
+    "S": 0.511,
+    "near400": 0.514,
+    "qloo_alone": 0.479,
+    "DS_oof": 0.405,
+    "DSQ_oof": 0.437
+   }
+  },
+  "Chinese": {
+   "cohort": 791,
+   "survived": 329,
+   "closed": 462,
+   "survival_rate": 0.416,
+   "auc": {
+    "lease": 0.439,
+    "D": 0.454,
+    "S": 0.428,
+    "near400": 0.419,
+    "qloo_alone": 0.459,
+    "DS_oof": 0.542,
+    "DSQ_oof": 0.536
+   }
+  },
+  "Pizza": {
+   "cohort": 577,
+   "survived": 321,
+   "closed": 256,
+   "survival_rate": 0.556,
+   "auc": {
+    "lease": 0.468,
+    "D": 0.469,
+    "S": 0.456,
+    "near400": 0.46,
+    "qloo_alone": 0.478,
+    "DS_oof": 0.524,
+    "DSQ_oof": 0.524
+   }
+  },
+  "Italian": {
+   "cohort": 225,
+   "survived": 126,
+   "closed": 99,
+   "survival_rate": 0.56,
+   "auc": {
+    "lease": 0.469,
+    "D": 0.456,
+    "S": 0.485,
+    "near400": 0.496,
+    "qloo_alone": 0.532,
+    "DS_oof": 0.501,
+    "DSQ_oof": 0.525
+   }
+  },
+  "Mediterranean": {
+   "cohort": 80,
+   "survived": 41,
+   "closed": 39,
+   "survival_rate": 0.512,
+   "auc": {
+    "lease": 0.556,
+    "D": 0.561,
+    "S": 0.535,
+    "near400": 0.539,
+    "qloo_alone": 0.553,
+    "DS_oof": 0.449,
+    "DSQ_oof": 0.45
+   }
+  },
+  "Latin American": {
+   "cohort": 222,
+   "survived": 121,
+   "closed": 101,
+   "survival_rate": 0.545,
+   "auc": {
+    "lease": 0.553,
+    "D": 0.609,
+    "S": 0.529,
+    "near400": 0.574,
+    "qloo_alone": 0.634,
+    "DS_oof": 0.51,
+    "DSQ_oof": 0.548
+   }
+  },
+  "Middle Eastern": {
+   "cohort": 70,
+   "survived": 30,
+   "closed": 40,
+   "survival_rate": 0.429,
+   "auc": {
+    "lease": 0.528,
+    "D": 0.462,
+    "S": 0.619,
+    "near400": 0.547,
+    "qloo_alone": 0.495,
+    "DS_oof": 0.636,
+    "DSQ_oof": 0.629
+   }
+  }
+ },
+ "resamples_used": 2000,
+ "q1_mean_auc_lease_score": 0.5161,
+ "q1_ci95": [
+  0.499,
+  0.5352
+ ],
+ "q1_outcome": "no evidence either way",
+ "q2_mean_auc_gain_qloo": 0.0132,
+ "q2_ci95": [
+  0.0025,
+  0.0209
+ ],
+ "q2_supported": true
+}

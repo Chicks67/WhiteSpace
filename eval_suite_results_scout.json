@@ -1,0 +1,402 @@
+{
+ "date": "2026-10-10",
+ "scout": {
+  "scout-students": {
+   "runs": [
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "555 Waverly Avenue, Brooklyn",
+      "175 Avenue C, Manhattan",
+      "347 1st Avenue, Manhattan",
+      "250 Mercer Street, Manhattan"
+     ],
+     "problems": [],
+     "names": 1,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 3,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "scout",
+      "rank",
+      "evidence",
+      "write",
+      "verify",
+      "repair1",
+      "verify_repair1"
+     ],
+     "seconds": 289.1,
+     "credits": 16.47,
+     "targets": [
+      "students"
+     ],
+     "boroughs": [
+      "Brooklyn",
+      "Manhattan",
+      "Manhattan",
+      "Manhattan"
+     ],
+     "neighbourhoods": [
+      "Clinton Hill",
+      "East Village",
+      "Gramercy",
+      "Greenwich Village"
+     ],
+     "rejected_shortlists": 0,
+     "picks": 4,
+     "actual_credits": 13.52,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "555 Waverly Avenue, Brooklyn",
+      "960 Amsterdam Avenue, Manhattan",
+      "160 Montague Street, Brooklyn",
+      "435 Dekalb Avenue, Brooklyn"
+     ],
+     "problems": [],
+     "names": 2,
+     "qloo_names": 0,
+     "city_names": 1,
+     "unverified_before": 3,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "scout",
+      "rank",
+      "evidence",
+      "write",
+      "verify",
+      "repair1",
+      "verify_repair1"
+     ],
+     "seconds": 223.1,
+     "credits": 17.97,
+     "targets": [
+      "students"
+     ],
+     "boroughs": [
+      "Brooklyn",
+      "Manhattan",
+      "Brooklyn",
+      "Brooklyn"
+     ],
+     "neighbourhoods": [
+      "Brooklyn Heights",
+      "Clinton Hill",
+      "Upper West Side"
+     ],
+     "rejected_shortlists": 0,
+     "picks": 4,
+     "actual_credits": 13.14,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "555 Waverly Avenue, Brooklyn",
+      "810 Fulton Street, Brooklyn",
+      "64 Henry Street, Brooklyn",
+      "200 Liberty Street, Manhattan"
+     ],
+     "problems": [],
+     "names": 1,
+     "qloo_names": 0,
+     "city_names": 1,
+     "unverified_before": 2,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "scout",
+      "rank",
+      "evidence",
+      "write",
+      "verify",
+      "repair1",
+      "verify_repair1"
+     ],
+     "seconds": 247.7,
+     "credits": 15.05,
+     "targets": [
+      "students"
+     ],
+     "boroughs": [
+      "Brooklyn",
+      "Brooklyn",
+      "Brooklyn",
+      "Manhattan"
+     ],
+     "neighbourhoods": [
+      "Brooklyn Heights",
+      "Clinton Hill",
+      "Financial District"
+     ],
+     "rejected_shortlists": 0,
+     "picks": 4,
+     "actual_credits": 10.01,
+     "passed": true
+    }
+   ],
+   "pass^k": true,
+   "k": 3
+  },
+  "scout-families": {
+   "runs": [
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "111-29 Roosevelt Avenue, Queens",
+      "89-17 139th Street, Queens",
+      "46-10 th Street, Queens",
+      "169-28 Hillside Avenue, Queens"
+     ],
+     "problems": [],
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 1,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "scout",
+      "rank",
+      "evidence",
+      "write",
+      "verify",
+      "repair1",
+      "verify_repair1"
+     ],
+     "seconds": 327.05,
+     "credits": 11.12,
+     "targets": [
+      "families"
+     ],
+     "boroughs": [
+      "Queens",
+      "Queens",
+      "Queens",
+      "Queens"
+     ],
+     "neighbourhoods": [
+      "Corona",
+      "Jamaica",
+      "North Corona"
+     ],
+     "rejected_shortlists": 0,
+     "picks": 4,
+     "actual_credits": 13.83,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": "repair1",
+     "order": [
+      "89-17 139th Street, Queens",
+      "111-29 Roosevelt Avenue, Queens",
+      "41-02 102nd Street, Queens",
+      "169-28 Hillside Avenue, Queens",
+      "87-18 Jamaica Avenue, Queens"
+     ],
+     "problems": [],
+     "names": 4,
+     "qloo_names": 3,
+     "city_names": 0,
+     "unverified_before": 1,
+     "unverified_after": 1,
+     "steps": [
+      "resolve",
+      "scout",
+      "rank",
+      "evidence",
+      "recover1",
+      "write",
+      "verify"
+     ],
+     "seconds": 188.34,
+     "credits": 10.43,
+     "targets": [
+      "families"
+     ],
+     "boroughs": [
+      "Queens",
+      "Queens",
+      "Queens",
+      "Queens",
+      "Queens"
+     ],
+     "neighbourhoods": [
+      "Corona",
+      "Jamaica",
+      "North Corona",
+      "Woodhaven"
+     ],
+     "rejected_shortlists": 0,
+     "picks": 5,
+     "actual_credits": 8.85,
+     "passed": true
+    },
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "111-29 Roosevelt Avenue, Queens",
+      "89-17 139th Street, Queens",
+      "46-10 th Street, Queens",
+      "83-25 Broadway, Queens"
+     ],
+     "problems": [],
+     "names": 2,
+     "qloo_names": 2,
+     "city_names": 0,
+     "unverified_before": 2,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "scout",
+      "rank",
+      "evidence",
+      "write",
+      "verify",
+      "repair1",
+      "verify_repair1",
+      "repair2",
+      "verify_repair2"
+     ],
+     "seconds": 152.2,
+     "credits": 14.31,
+     "targets": [
+      "families"
+     ],
+     "boroughs": [
+      "Queens",
+      "Queens",
+      "Queens",
+      "Queens"
+     ],
+     "neighbourhoods": [
+      "Corona",
+      "Elmhurst",
+      "Jamaica",
+      "North Corona"
+     ],
+     "rejected_shortlists": 0,
+     "picks": 4,
+     "actual_credits": 11.35,
+     "passed": true
+    }
+   ],
+   "pass^k": true,
+   "k": 3
+  },
+  "scout-office": {
+   "runs": [
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "55 Broad Street, Manhattan",
+      "420 Park Avenue South, Manhattan",
+      "750 3rd Avenue, Manhattan",
+      "32 Old Slip, Manhattan"
+     ],
+     "problems": [],
+     "names": 2,
+     "qloo_names": 0,
+     "city_names": 1,
+     "unverified_before": 1,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "scout",
+      "rank",
+      "evidence",
+      "write",
+      "verify",
+      "repair1",
+      "verify_repair1"
+     ],
+     "seconds": 78.03,
+     "credits": 12.97,
+     "targets": [
+      "office_workers"
+     ],
+     "boroughs": [
+      "Manhattan",
+      "Manhattan",
+      "Manhattan",
+      "Manhattan"
+     ],
+     "neighbourhoods": [
+      "East Midtown",
+      "Financial District",
+      "Midtown South"
+     ],
+     "rejected_shortlists": 1,
+     "picks": 4,
+     "actual_credits": null,
+     "usd": 0.182,
+     "passed": true
+    }
+   ],
+   "pass^k": true,
+   "k": 1
+  },
+  "scout-seniors": {
+   "runs": [
+    {
+     "error": null,
+     "failed_step": null,
+     "order": [
+      "1054 Allerton Avenue, Bronx",
+      "1018 Castle Hill, Bronx",
+      "1236 East Gun Hill Road, Bronx"
+     ],
+     "problems": [],
+     "names": 0,
+     "qloo_names": 0,
+     "city_names": 0,
+     "unverified_before": 2,
+     "unverified_after": 0,
+     "steps": [
+      "resolve",
+      "scout",
+      "rank",
+      "evidence",
+      "write",
+      "verify",
+      "repair1",
+      "verify_repair1"
+     ],
+     "seconds": 58.3,
+     "credits": 8.64,
+     "targets": [
+      "seniors"
+     ],
+     "boroughs": [
+      "Bronx",
+      "Bronx",
+      "Bronx"
+     ],
+     "neighbourhoods": [
+      "Castle Hill",
+      "Pelham Gardens"
+     ],
+     "rejected_shortlists": 0,
+     "picks": 3,
+     "actual_credits": null,
+     "usd": 0.122,
+     "passed": true
+    }
+   ],
+   "pass^k": true,
+   "k": 1
+  }
+ }
+}

@@ -1,0 +1,37 @@
+# Whitespace
+
+> A site-selection agent for independent restaurant founders in New York City (Brooklyn, Queens, Manhattan, the Bronx). A founder describes a concept and customers; the agent finds vacant storefronts in the NYC Storefront Registry, ranks them with a lease score built on NYC inspection records, checks competition and foot traffic, writes a positioning brief for the top pick with Qloo taste data, lists local partners and next steps, and answers follow-up questions with tools. Built for the Qloo Agentic Hackathon 2026. MIT licence.
+
+Every claim the product makes about a data source rests on a pre-registered test, committed before its result existed. City records decide where to open; census and jobs data decide who lives nearby; Qloo place records supply competitors' Friday closing times and review mentions, and power the "where else do their fans go" scene explorer. Saved runs replay with no API calls. API keys stay on the server.
+
+## Use the site
+
+- [Home and scout form](/): describe a plan, search an area, or compare two to five addresses
+- [Saved runs](/#saved): recorded live runs that replay instantly with no API calls
+- [How it works](/#how): the six steps of every run and what each source does
+- [Scene explorer](/#scene): name up to three places; Qloo returns where their fans also go
+- [How we know](/#evidence): every test, its result and its caveat
+
+## API (JSON)
+
+- [Health](/health): `{ok, live}`; whether this server can run live
+- [Stats](/api/stats): counts of active restaurants, vacant storefronts, neighbourhoods and tested cuisines
+- [Cuisines](/api/concepts): the 25 cuisines the lease score was tested on
+- [Evidence](/api/evidence): every claim with its test, result, caveat and source files
+- [Saved runs](/api/golden): list of recorded runs; `GET /api/golden/{id}` replays one as server-sent events; `GET /api/golden/{id}/sha256` returns the hash of the recording
+- `POST /api/run`: a live run, body `{concept, cuisine?, goal? | area? | leases?: [{address}]}`, streamed as server-sent events, rate limited
+- `POST /api/ask`: a follow-up question about a run, streamed, rate limited
+- `GET /api/around?concept=&lat=&lon=`: competitors near a point from city records, with Qloo's Friday closing times and review mentions; no model call
+- `POST /api/scene`: body `{anchors: [1 to 3 place names]}`; Qloo's places their fans also go, and the music and brands that crowd follows; no model call
+
+## Key results
+
+- Lease score (restaurants in the block plus same-cuisine supply) found where a cuisine opened next at median AUC 0.851 across 25 cuisines.
+- Asked when a real NYC restaurant closes on Friday, models were right for 0 and 3 of 30 places alone and 29 of 30 with Qloo's record.
+- Qloo's Friday closing times matched Google Maps for 29 of 30 places.
+- A festival timetable built on Qloo's fan-overlap scores put far fewer real shared fans in conflict than a random one (0.663 of the possible gain).
+- The lease score shows where operators open, not where restaurants survive. There is no rent data. Staten Island is not covered.
+
+## Optional
+
+- [Data sources](/#evidence): NYC DOHMH Restaurant Inspection Results, NYC Storefront Registry, NYC 2020 Neighborhood Tabulation Areas, US Census ACS 2023 and LODES jobs data, MTA subway ridership, business improvement districts, NYC Planning GeoSearch, Qloo Insights API

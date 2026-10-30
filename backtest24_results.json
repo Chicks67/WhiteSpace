@@ -1,0 +1,132 @@
+{
+ "acts_listed": 188,
+ "older_acts": 89,
+ "trended_in_qloo": 60,
+ "dropped": {
+  "not_older_or_not_in_musicbrainz": 99,
+  "not_in_qloo": 1,
+  "fewer_than_two_peers": 7
+ },
+ "sets": 52,
+ "all_sets": {
+  "sets": 52,
+  "under_25_score_trended_minus_peers": {
+   "mean": 0.024,
+   "ci95": [
+    -0.058,
+    0.107
+   ],
+   "n": 52
+  },
+  "trended_is_youngest_of_three": {
+   "mean": 0.346,
+   "ci95": [
+    0.231,
+    0.481
+   ],
+   "n": 52
+  },
+  "popularity_trended_minus_peers": {
+   "mean": 0.004,
+   "ci95": [
+    0.001,
+    0.007
+   ],
+   "n": 52
+  },
+  "trended_is_most_popular_of_three": {
+   "mean": 0.5,
+   "ci95": [
+    0.365,
+    0.635
+   ],
+   "n": 52
+  },
+  "model_alone_picks_trended": {
+   "mean": 0.663,
+   "ci95": [
+    0.529,
+    0.788
+   ],
+   "n": 52
+  },
+  "model_with_qloo_picks_trended": {
+   "mean": 0.558,
+   "ci95": [
+    0.423,
+    0.692
+   ],
+   "n": 52
+  },
+  "with_qloo_minus_alone": {
+   "mean": -0.106,
+   "ci95": [
+    -0.26,
+    0.058
+   ],
+   "n": 52
+  }
+ },
+ "sets_without_probe_acts": {
+  "sets": 48,
+  "under_25_score_trended_minus_peers": {
+   "mean": 0.057,
+   "ci95": [
+    -0.021,
+    0.141
+   ],
+   "n": 48
+  },
+  "trended_is_youngest_of_three": {
+   "mean": 0.375,
+   "ci95": [
+    0.25,
+    0.5
+   ],
+   "n": 48
+  },
+  "popularity_trended_minus_peers": {
+   "mean": 0.004,
+   "ci95": [
+    0.001,
+    0.007
+   ],
+   "n": 48
+  },
+  "trended_is_most_popular_of_three": {
+   "mean": 0.521,
+   "ci95": [
+    0.375,
+    0.667
+   ],
+   "n": 48
+  },
+  "model_alone_picks_trended": {
+   "mean": 0.677,
+   "ci95": [
+    0.552,
+    0.802
+   ],
+   "n": 48
+  },
+  "model_with_qloo_picks_trended": {
+   "mean": 0.604,
+   "ci95": [
+    0.458,
+    0.729
+   ],
+   "n": 48
+  },
+  "with_qloo_minus_alone": {
+   "mean": -0.073,
+   "ci95": [
+    -0.229,
+    0.083
+   ],
+   "n": 48
+  }
+ },
+ "reading_1": "not shown",
+ "reading_2_also_more_famous": true,
+ "reading_3_model_with_qloo_against_alone": "no different"
+}

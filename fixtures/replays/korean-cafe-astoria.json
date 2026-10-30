@@ -1,0 +1,1051 @@
+{
+ "title": "Korean cafe: find storefronts in Astoria",
+ "request": {
+  "concept": "Korean cafe",
+  "area": "Astoria, Queens"
+ },
+ "recorded": "2026-10-11",
+ "events": [
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "resolve",
+    "label": "Match concept to a tested cuisine",
+    "status": "running"
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "resolve",
+    "label": "Match concept to a tested cuisine",
+    "status": "done",
+    "seconds": 0.0,
+    "detail": "keyword match"
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "concept",
+    "data": {
+     "cuisine": "Korean",
+     "label": "Korean cafe",
+     "reason": "matched by keyword to Korean"
+    }
+   }
+  ],
+  [
+   0.0,
+   {
+    "type": "step",
+    "id": "area",
+    "label": "Match the area to city neighbourhoods",
+    "status": "running"
+   }
+  ],
+  [
+   0.13,
+   {
+    "type": "step",
+    "id": "area",
+    "label": "Match the area to city neighbourhoods",
+    "status": "done",
+    "seconds": 0.1,
+    "detail": "name match: Astoria (Central), Astoria (East)-Woodside (North), Astoria (North)-Ditmars-Steinway"
+   }
+  ],
+  [
+   0.13,
+   {
+    "type": "step",
+    "id": "find",
+    "label": "Find vacant storefronts in NYC's Storefront Registry",
+    "status": "running"
+   }
+  ],
+  [
+   0.24,
+   {
+    "type": "step",
+    "id": "find",
+    "label": "Find vacant storefronts in NYC's Storefront Registry",
+    "status": "done",
+    "seconds": 0.1,
+    "detail": "118 vacant storefronts reported across 16 blocks; kept the best-scoring one per block"
+   }
+  ],
+  [
+   0.24,
+   {
+    "type": "storefronts",
+    "data": {
+     "area": "Astoria, Queens",
+     "places": [
+      [
+       "Astoria (Central)",
+       "Queens"
+      ],
+      [
+       "Astoria (East)-Woodside (North)",
+       "Queens"
+      ],
+      [
+       "Astoria (North)-Ditmars-Steinway",
+       "Queens"
+      ]
+     ]
+    }
+   }
+  ],
+  [
+   0.24,
+   {
+    "type": "step",
+    "id": "rank",
+    "label": "Rank leases on city inspection records",
+    "status": "running"
+   }
+  ],
+  [
+   0.24,
+   {
+    "type": "step",
+    "id": "rank",
+    "label": "Rank leases on city inspection records",
+    "status": "done",
+    "seconds": 0.0,
+    "detail": "5 leases scored"
+   }
+  ],
+  [
+   0.59,
+   {
+    "type": "leases",
+    "data": [
+     {
+      "address": "37-11 35th Avenue, Queens",
+      "borough": "Queens",
+      "neighbourhood": "Astoria",
+      "lat": 40.75591980000001,
+      "lon": -73.9231217,
+      "storefront": {
+       "reported": "June 30, 2025",
+       "last_use": "Food Services",
+       "area": "Astoria (Central)",
+       "bbl": "4006450001"
+      },
+      "block": "dr5rvg",
+      "density": 71,
+      "density_percentile": 92,
+      "same_cuisine_in_block": 1,
+      "same_cuisine_area": 13,
+      "score": -0.004,
+      "score_percentile": 95,
+      "same_cuisine_400m": [
+       {
+        "name": "Prime No. 7",
+        "cuisine": "Korean",
+        "metres": 165,
+        "opened": "2025-12-08",
+        "lat": 40.756238356218,
+        "lon": -73.921204264201
+       },
+       {
+        "name": "Hunny",
+        "cuisine": "Korean",
+        "metres": 349,
+        "opened": "2026-01-05",
+        "lat": 40.753068276318,
+        "lon": -73.921377667644
+       }
+      ],
+      "openings_800m": [
+       {
+        "name": "Prime No. 7",
+        "cuisine": "Korean",
+        "metres": 165,
+        "opened": "2025-12-08",
+        "lat": 40.756238356218,
+        "lon": -73.921204264201
+       },
+       {
+        "name": "Hunny",
+        "cuisine": "Korean",
+        "metres": 349,
+        "opened": "2026-01-05",
+        "lat": 40.753068276318,
+        "lon": -73.921377667644
+       },
+       {
+        "name": "Treats Of Korea",
+        "cuisine": "Korean",
+        "metres": 633,
+        "opened": "2026-01-27",
+        "lat": 40.76012822857,
+        "lon": -73.918066400231
+       },
+       {
+        "name": "Lim'S Kitchen",
+        "cuisine": "Korean",
+        "metres": 710,
+        "opened": "2025-04-15",
+        "lat": 40.757007810511,
+        "lon": -73.914810821432
+       },
+       {
+        "name": "Kyodong Noodle",
+        "cuisine": "Korean",
+        "metres": 788,
+        "opened": "2024-09-24",
+        "lat": 40.752533918514,
+        "lon": -73.914903188444
+       },
+       {
+        "name": "K-Town",
+        "cuisine": "Korean",
+        "metres": 791,
+        "opened": "2025-07-28",
+        "lat": 40.753612119698,
+        "lon": -73.914244899613
+       },
+       {
+        "name": "Namudol",
+        "cuisine": "Korean",
+        "metres": 791,
+        "opened": "2026-09-14",
+        "lat": 40.753612119698,
+        "lon": -73.914244899613
+       },
+       {
+        "name": "Rice Boy",
+        "cuisine": "Korean",
+        "metres": 791,
+        "opened": "2024-09-03",
+        "lat": 40.753612119698,
+        "lon": -73.914244899613
+       }
+      ],
+      "all_400m": 52,
+      "rank": 1,
+      "subway": {
+       "subway_entries_within_500m": 10441,
+       "stations": [
+        {
+         "station": "Steinway St (M,R)",
+         "metres": 227,
+         "weekday_entries": 10441
+        }
+       ]
+      },
+      "bid": null,
+      "partners": {
+       "bids": [
+        {
+         "bid": "Steinway Street",
+         "website": "https://steinwaystreet.org/",
+         "phone": "(718) 721-8252",
+         "email": "info@steinwaystreet.org",
+         "boundary": "Steinway Street from 25th Avenue to 36th Avenue",
+         "metres": 74
+        },
+        {
+         "bid": "Long Island City Partnership",
+         "website": "https://www.longislandcityqueens.com/",
+         "phone": "(718) 786-5300",
+         "email": "info@licpartnership.org",
+         "boundary": "Jackson Avenue from 51st Avenue to Queens Plaza; Queens Plaza from Jackson Avenue to 21st Street; Vernon Blvd from 51st Street to 44th Drive; 44th Drive to 10th Street to Jackson Avenue",
+         "metres": 419
+        }
+       ],
+       "complements": [
+        {
+         "name": "Paris Oven Bakery",
+         "kind": "bakery",
+         "metres": 216
+        },
+        {
+         "name": "Uncle Drink",
+         "kind": "juice bar",
+         "metres": 307
+        },
+        {
+         "name": "Fusion Juice Bar",
+         "kind": "juice bar",
+         "metres": 351
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "The nearest business improvement district, Steinway Street, is about 74 m away. Its staff know the street and run local events; contact (718) 721-8252, info@steinwaystreet.org.",
+        "source": "https://steinwaystreet.org/",
+        "specific": true
+       },
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: Paris Oven Bakery (bakery, 216 m); Uncle Drink (juice bar, 307 m); Fusion Juice Bar (juice bar, 351 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "The last reported use was food service. Ask the landlord what kitchen equipment, venting and grease trap remain, and check the Certificate of Occupancy covers your use.",
+        "source": "https://data.cityofnewyork.us/d/92iy-9c3n",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     },
+     {
+      "address": "30-94 Steinway Street, Queens",
+      "borough": "Queens",
+      "neighbourhood": "Astoria",
+      "lat": 40.76172350000001,
+      "lon": -73.91710109999998,
+      "storefront": {
+       "reported": "June 30, 2025",
+       "last_use": "Food Services",
+       "area": "Astoria (East)-Woodside (North)",
+       "bbl": "4006600086"
+      },
+      "block": "dr5rvu",
+      "density": 125,
+      "density_percentile": 96,
+      "same_cuisine_in_block": 2,
+      "same_cuisine_area": 7,
+      "score": -0.251,
+      "score_percentile": 94,
+      "same_cuisine_400m": [
+       {
+        "name": "Treats Of Korea",
+        "cuisine": "Korean",
+        "metres": 195,
+        "opened": "2026-01-27",
+        "lat": 40.76012822857,
+        "lon": -73.918066400231
+       },
+       {
+        "name": "Mad For Chicken",
+        "cuisine": "Korean",
+        "metres": 356,
+        "opened": null,
+        "lat": 40.764922714857,
+        "lon": -73.917219351751
+       }
+      ],
+      "openings_800m": [
+       {
+        "name": "Treats Of Korea",
+        "cuisine": "Korean",
+        "metres": 195,
+        "opened": "2026-01-27",
+        "lat": 40.76012822857,
+        "lon": -73.918066400231
+       },
+       {
+        "name": "Lim'S Kitchen",
+        "cuisine": "Korean",
+        "metres": 559,
+        "opened": "2025-04-15",
+        "lat": 40.757007810511,
+        "lon": -73.914810821432
+       },
+       {
+        "name": "Prime No. 7",
+        "cuisine": "Korean",
+        "metres": 701,
+        "opened": "2025-12-08",
+        "lat": 40.756238356218,
+        "lon": -73.921204264201
+       }
+      ],
+      "all_400m": 104,
+      "rank": 2,
+      "subway": {
+       "subway_entries_within_500m": 0,
+       "stations": []
+      },
+      "bid": {
+       "bid": "Steinway Street",
+       "website": "https://steinwaystreet.org/",
+       "phone": "(718) 721-8252",
+       "email": "info@steinwaystreet.org",
+       "boundary": "Steinway Street from 25th Avenue to 36th Avenue"
+      },
+      "partners": {
+       "bids": [
+        {
+         "bid": "Steinway Street",
+         "website": "https://steinwaystreet.org/",
+         "phone": "(718) 721-8252",
+         "email": "info@steinwaystreet.org",
+         "boundary": "Steinway Street from 25th Avenue to 36th Avenue",
+         "metres": 0
+        }
+       ],
+       "complements": [
+        {
+         "name": "Meadow Dessert",
+         "kind": "bakery",
+         "metres": 113
+        },
+        {
+         "name": "Fitrition",
+         "kind": "juice bar",
+         "metres": 230
+        },
+        {
+         "name": "Cinnabon / Auntie Anne's / Carvel",
+         "kind": "bakery",
+         "metres": 278
+        },
+        {
+         "name": "Marvel",
+         "kind": "dessert",
+         "metres": 323
+        },
+        {
+         "name": "New York City Bagel & Coffee House",
+         "kind": "bagels",
+         "metres": 346
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "Call the Steinway Street business improvement district: ask about the space, local foot traffic and opening events. Contact: (718) 721-8252, info@steinwaystreet.org.",
+        "source": "https://steinwaystreet.org/",
+        "specific": true
+       },
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: Meadow Dessert (bakery, 113 m); Fitrition (juice bar, 230 m); Cinnabon / Auntie Anne's / Carvel (bakery, 278 m); Marvel (dessert, 323 m); New York City Bagel & Coffee House (bagels, 346 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "The last reported use was food service. Ask the landlord what kitchen equipment, venting and grease trap remain, and check the Certificate of Occupancy covers your use.",
+        "source": "https://data.cityofnewyork.us/d/92iy-9c3n",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     },
+     {
+      "address": "52-21 Northern Blvd, Queens",
+      "borough": "Queens",
+      "neighbourhood": "Astoria",
+      "lat": 40.7535015,
+      "lon": -73.9079508,
+      "storefront": {
+       "reported": "Dec 31, 2024",
+       "last_use": null,
+       "area": "Astoria (East)-Woodside (North)",
+       "bbl": "4011530037"
+      },
+      "block": "dr5ry4",
+      "density": 24,
+      "density_percentile": 70,
+      "same_cuisine_in_block": 7,
+      "same_cuisine_area": 14,
+      "score": -0.568,
+      "score_percentile": 92,
+      "same_cuisine_400m": [],
+      "openings_800m": [
+       {
+        "name": "K-Town",
+        "cuisine": "Korean",
+        "metres": 530,
+        "opened": "2025-07-28",
+        "lat": 40.753612119698,
+        "lon": -73.914244899613
+       },
+       {
+        "name": "Namudol",
+        "cuisine": "Korean",
+        "metres": 530,
+        "opened": "2026-09-14",
+        "lat": 40.753612119698,
+        "lon": -73.914244899613
+       },
+       {
+        "name": "Rice Boy",
+        "cuisine": "Korean",
+        "metres": 530,
+        "opened": "2024-09-03",
+        "lat": 40.753612119698,
+        "lon": -73.914244899613
+       },
+       {
+        "name": "Kyodong Noodle",
+        "cuisine": "Korean",
+        "metres": 595,
+        "opened": "2024-09-24",
+        "lat": 40.752533918514,
+        "lon": -73.914903188444
+       },
+       {
+        "name": "Lim'S Kitchen",
+        "cuisine": "Korean",
+        "metres": 697,
+        "opened": "2025-04-15",
+        "lat": 40.757007810511,
+        "lon": -73.914810821432
+       }
+      ],
+      "all_400m": 11,
+      "rank": 3,
+      "subway": {
+       "subway_entries_within_500m": 6283,
+       "stations": [
+        {
+         "station": "Northern Blvd (M,R)",
+         "metres": 178,
+         "weekday_entries": 6283
+        }
+       ]
+      },
+      "bid": null,
+      "partners": {
+       "bids": [],
+       "complements": [],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     },
+     {
+      "address": "30-01 30th Avenue, Queens",
+      "borough": "Queens",
+      "neighbourhood": "Astoria",
+      "lat": 40.7674579,
+      "lon": -73.9220181,
+      "storefront": {
+       "reported": "June 30, 2025",
+       "last_use": "Educational Services",
+       "area": "Astoria (Central)",
+       "bbl": "4005950009"
+      },
+      "block": "dr5rvv",
+      "density": 89,
+      "density_percentile": 94,
+      "same_cuisine_in_block": 3,
+      "same_cuisine_area": 5,
+      "score": -0.753,
+      "score_percentile": 91,
+      "same_cuisine_400m": [
+       {
+        "name": "Kal",
+        "cuisine": "Korean",
+        "metres": 331,
+        "opened": null,
+        "lat": 40.765703383239,
+        "lon": -73.918839282115
+       }
+      ],
+      "openings_800m": [],
+      "all_400m": 79,
+      "rank": 4,
+      "subway": {
+       "subway_entries_within_500m": 20650,
+       "stations": [
+        {
+         "station": "30 Av (N,W)",
+         "metres": 88,
+         "weekday_entries": 11584
+        },
+        {
+         "station": "Astoria Blvd (N,W)",
+         "metres": 469,
+         "weekday_entries": 9066
+        }
+       ]
+      },
+      "bid": null,
+      "partners": {
+       "bids": [
+        {
+         "bid": "Steinway Street",
+         "website": "https://steinwaystreet.org/",
+         "phone": "(718) 721-8252",
+         "email": "info@steinwaystreet.org",
+         "boundary": "Steinway Street from 25th Avenue to 36th Avenue",
+         "metres": 641
+        }
+       ],
+       "complements": [
+        {
+         "name": "Didi's Healthy Delights",
+         "kind": "juice bar",
+         "metres": 31
+        },
+        {
+         "name": "Ny Bakery Cafe",
+         "kind": "bakery",
+         "metres": 175
+        },
+        {
+         "name": "New York City Bagel & Coffee House",
+         "kind": "bagels",
+         "metres": 256
+        },
+        {
+         "name": "Ample Hills Creamery",
+         "kind": "dessert",
+         "metres": 330
+        },
+        {
+         "name": "Somedays Bakery",
+         "kind": "bakery",
+         "metres": 370
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "The nearest business improvement district, Steinway Street, is about 641 m away. Its staff know the street and run local events; contact (718) 721-8252, info@steinwaystreet.org.",
+        "source": "https://steinwaystreet.org/",
+        "specific": true
+       },
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: Didi's Healthy Delights (juice bar, 31 m); Ny Bakery Cafe (bakery, 175 m); New York City Bagel & Coffee House (bagels, 256 m); Ample Hills Creamery (dessert, 330 m); Somedays Bakery (bakery, 370 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     },
+     {
+      "address": "34-39 31st Street, Queens",
+      "borough": "Queens",
+      "neighbourhood": "Astoria",
+      "lat": 40.75835200000001,
+      "lon": -73.9279485,
+      "storefront": {
+       "reported": "Dec 31, 2024",
+       "last_use": null,
+       "area": "Astoria (Central)",
+       "bbl": "4006080005"
+      },
+      "block": "dr5rve",
+      "density": 62,
+      "density_percentile": 89,
+      "same_cuisine_in_block": 0,
+      "same_cuisine_area": 6,
+      "score": -0.806,
+      "score_percentile": 91,
+      "same_cuisine_400m": [],
+      "openings_800m": [
+       {
+        "name": "Prime No. 7",
+        "cuisine": "Korean",
+        "metres": 615,
+        "opened": "2025-12-08",
+        "lat": 40.756238356218,
+        "lon": -73.921204264201
+       }
+      ],
+      "all_400m": 65,
+      "rank": 5,
+      "subway": {
+       "subway_entries_within_500m": 16014,
+       "stations": [
+        {
+         "station": "36 Av (N,W)",
+         "metres": 220,
+         "weekday_entries": 5681
+        },
+        {
+         "station": "Broadway (N,W)",
+         "metres": 437,
+         "weekday_entries": 10333
+        }
+       ]
+      },
+      "bid": null,
+      "partners": {
+       "bids": [
+        {
+         "bid": "Steinway Street",
+         "website": "https://steinwaystreet.org/",
+         "phone": "(718) 721-8252",
+         "email": "info@steinwaystreet.org",
+         "boundary": "Steinway Street from 25th Avenue to 36th Avenue",
+         "metres": 537
+        },
+        {
+         "bid": "Long Island City Partnership",
+         "website": "https://www.longislandcityqueens.com/",
+         "phone": "(718) 786-5300",
+         "email": "info@licpartnership.org",
+         "boundary": "Jackson Avenue from 51st Avenue to Queens Plaza; Queens Plaza from Jackson Avenue to 21st Street; Vernon Blvd from 51st Street to 44th Drive; 44th Drive to 10th Street to Jackson Avenue",
+         "metres": 621
+        }
+       ],
+       "complements": [
+        {
+         "name": "J & M Bakery",
+         "kind": "bakery",
+         "metres": 263
+        },
+        {
+         "name": "The Green Lic",
+         "kind": "juice bar",
+         "metres": 299
+        },
+        {
+         "name": "Mediterra",
+         "kind": "bakery",
+         "metres": 319
+        },
+        {
+         "name": "Fusion Juice Bar",
+         "kind": "juice bar",
+         "metres": 335
+        }
+       ],
+       "source": "https://data.cityofnewyork.us/d/43nn-pn8j"
+      },
+      "next_steps": [
+       {
+        "step": "The nearest business improvement district, Steinway Street, is about 537 m away. Its staff know the street and run local events; contact (718) 721-8252, info@steinwaystreet.org.",
+        "source": "https://steinwaystreet.org/",
+        "specific": true
+       },
+       {
+        "step": "Introduce yourself to independent neighbours that serve your customers at another moment, for cross-promotion at opening: J & M Bakery (bakery, 263 m); The Green Lic (juice bar, 299 m); Mediterra (bakery, 319 m); Fusion Juice Bar (juice bar, 335 m).",
+        "source": "https://data.cityofnewyork.us/d/43nn-pn8j",
+        "specific": true
+       },
+       {
+        "step": "Confirm the space has a Certificate of Occupancy for a restaurant use (NYC Department of Buildings). No place may be used until one is issued.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Register as a sales tax vendor and get a Certificate of Authority (NYS Department of Taxation and Finance); its address must match the restaurant's.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Get workers' compensation and disability insurance, with the Health Department listed as certificate holder.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "A supervising manager passes the Food Protection Course (NYC Health Academy) and is on site at all times.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "Apply for the Food Service Establishment Permit online at nyc.gov/dohmhpermits ($280 for most restaurants). You may open 22 days after applying; a pre-permit inspection follows, then an unannounced visit after opening.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/description/food-service-establishment-permit",
+        "specific": false
+       },
+       {
+        "step": "If you will serve alcohol, apply for a new liquor license from the State Liquor Authority (licenses cannot be transferred).",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       },
+       {
+        "step": "Signs nailed or screwed into the building, or lit, need Department of Buildings approval; FDNY fire permits may apply to cooking equipment.",
+        "source": "https://nyc-business.nyc.gov/nycbusiness/resources-by-industry/bar",
+        "specific": false
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  [
+   1.38,
+   {
+    "type": "step",
+    "id": "evidence",
+    "label": "Fetch Qloo audience evidence for Astoria, Queens",
+    "status": "running"
+   }
+  ],
+  [
+   1.66,
+   {
+    "type": "step",
+    "id": "evidence",
+    "label": "Fetch Qloo audience evidence for Astoria, Queens",
+    "status": "done",
+    "seconds": 0.3,
+    "detail": {
+     "tags": 8,
+     "brands": 8,
+     "concept_brands": 8
+    }
+   }
+  ],
+  [
+   1.66,
+   {
+    "type": "step",
+    "id": "write",
+    "label": "Write positioning brief (GPT-6 Astra)",
+    "status": "running"
+   }
+  ],
+  [
+   13.48,
+   {
+    "type": "step",
+    "id": "write",
+    "label": "Write positioning brief (GPT-6 Astra)",
+    "status": "done",
+    "seconds": 11.8,
+    "detail": "11.8 s"
+   }
+  ],
+  [
+   13.48,
+   {
+    "type": "step",
+    "id": "verify",
+    "label": "Verify brief",
+    "status": "running"
+   }
+  ],
+  [
+   16.62,
+   {
+    "type": "step",
+    "id": "verify",
+    "label": "Verify brief",
+    "status": "done",
+    "seconds": 3.1,
+    "detail": "passed"
+   }
+  ],
+  [
+   16.62,
+   {
+    "type": "step",
+    "id": "repair1",
+    "label": "Replace names no source backs up",
+    "status": "running"
+   }
+  ],
+  [
+   23.84,
+   {
+    "type": "step",
+    "id": "repair1",
+    "label": "Replace names no source backs up",
+    "status": "done",
+    "seconds": 7.2,
+    "detail": "replaced Astoria Bookshop"
+   }
+  ],
+  [
+   23.84,
+   {
+    "type": "step",
+    "id": "verify_repair1",
+    "label": "Verify repaired brief",
+    "status": "running"
+   }
+  ],
+  [
+   28.06,
+   {
+    "type": "step",
+    "id": "verify_repair1",
+    "label": "Verify repaired brief",
+    "status": "done",
+    "seconds": 4.2,
+    "detail": "passed"
+   }
+  ],
+  [
+   28.06,
+   {
+    "type": "brief",
+    "data": {
+     "lease": "37-11 35th Avenue, Queens",
+     "area": "Astoria, Queens",
+     "problems": [],
+     "name_check": "done",
+     "names_traced_to_city_records": [],
+     "names_traced_to_qloo": 1,
+     "replaced_unverified_names": [
+      "Astoria Bookshop"
+     ],
+     "unverified_names_left": [],
+     "text": "[brief written from Qloo evidence; on the live site only]"
+    }
+   }
+  ],
+  [
+   28.06,
+   {
+    "type": "done",
+    "credits": 2.87,
+    "provider": "comet",
+    "usd": 0.04
+   }
+  ]
+ ],
+ "followups": [
+  {
+   "q": "Who are the Korean competitors within 300 m of the top storefront?",
+   "tools": [
+    "nearby_restaurants"
+   ],
+   "unchecked_numbers": [],
+   "answer": "NYC inspection records show one Korean competitor within 300 m of 37-11 35th Avenue, Queens:\n\n\u2022 Prime No. 7 \u2014 165 m away; first inspected as a new restaurant on December 8, 2025.\n\nThese records may not capture every current competitor."
+  },
+  {
+   "q": "Find vacant storefronts in Sunnyside and compare the best one with our top storefront.",
+   "tools": [
+    "find_storefronts"
+   ],
+   "unchecked_numbers": [],
+   "answer": "Best Sunnyside storefront: 39-11 Queens Boulevard.\n\nCompared with your top storefront, 37-11 35th Avenue, Queens:\n\n- Lease score: both rank at the 95th NYC percentile for Korean restaurants.\n- Restaurants on block: Sunnyside has 74 versus Astoria\u2019s 71.\n- Korean competition nearby: Sunnyside has 3 within 400 m versus Astoria\u2019s 2.\n- Korean supply in and around block: Sunnyside has 15 versus Astoria\u2019s 13.\n- New Korean openings within 800 m since 2024: 0 at both.\n- Subway entries within 500 m: Sunnyside has 19,923 versus Astoria\u2019s 10,441.\n- Sunnyside is in the Sunnyside Shines BID; Astoria\u2019s storefront has no BID listed.\n\nSunnyside offers substantially more transit activity, but also more Korean competition."
+  }
+ ]
+}

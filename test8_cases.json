@@ -1,0 +1,272 @@
+[
+ {
+  "id": 1,
+  "concept": "Korean",
+  "slug": "korean",
+  "address": "25 Mercer Street, Manhattan",
+  "lat": 40.720945,
+  "lon": -74.002027,
+  "area": "SoHo, Manhattan"
+ },
+ {
+  "id": 2,
+  "concept": "Mexican",
+  "slug": "mexican",
+  "address": "45 Broadway, Manhattan",
+  "lat": 40.7065418,
+  "lon": -74.0132658,
+  "area": "Financial District, Manhattan"
+ },
+ {
+  "id": 3,
+  "concept": "Japanese",
+  "slug": "japanese",
+  "address": "145-14 Jamaica Avenue, Queens",
+  "lat": 40.7016503,
+  "lon": -73.8095456,
+  "area": "Jamaica, Queens"
+ },
+ {
+  "id": 4,
+  "concept": "Thai",
+  "slug": "thai",
+  "address": "350 West 61st Street, Manhattan",
+  "lat": 40.77329199999999,
+  "lon": -73.991584,
+  "area": "Upper West Side, Manhattan"
+ },
+ {
+  "id": 5,
+  "concept": "Indian",
+  "slug": "indian",
+  "address": "347 1st Avenue, Manhattan",
+  "lat": 40.73528399999999,
+  "lon": -73.98003490000002,
+  "area": "Gramercy, Manhattan"
+ },
+ {
+  "id": 6,
+  "concept": "Caribbean",
+  "slug": "caribbean",
+  "address": "2102-2114 Utica Avenue, Brooklyn",
+  "lat": 40.61995759999999,
+  "lon": -73.92734869999998,
+  "area": "Flatlands, Brooklyn"
+ },
+ {
+  "id": 7,
+  "concept": "Coffee shop",
+  "slug": "coffee_shop",
+  "address": "444 2nd Avenue, Manhattan",
+  "lat": 40.7392033,
+  "lon": -73.9789764,
+  "area": "Murray Hill, Manhattan"
+ },
+ {
+  "id": 8,
+  "concept": "Bakery",
+  "slug": "bakery",
+  "address": "200 Dyckman Street, Manhattan",
+  "lat": 40.8647781,
+  "lon": -73.9271861,
+  "area": "Washington Heights, Manhattan"
+ },
+ {
+  "id": 9,
+  "concept": "Chinese",
+  "slug": "chinese",
+  "address": "237 Park Avenue, Manhattan",
+  "lat": 40.753915,
+  "lon": -73.974969,
+  "area": "East Midtown, Manhattan"
+ },
+ {
+  "id": 10,
+  "concept": "Pizza",
+  "slug": "pizza",
+  "address": "852 2nd Avenue, Manhattan",
+  "lat": 40.7520193,
+  "lon": -73.97019469999998,
+  "area": "East Midtown, Manhattan"
+ },
+ {
+  "id": 11,
+  "concept": "Italian",
+  "slug": "italian",
+  "address": "1720 Village Lane, Queens",
+  "lat": 40.60529999999999,
+  "lon": -73.753265,
+  "area": "Far Rockaway, Queens"
+ },
+ {
+  "id": 12,
+  "concept": "Mediterranean",
+  "slug": "mediterranean",
+  "address": "720 5th Avenue, Manhattan",
+  "lat": 40.7625987,
+  "lon": -73.9747311,
+  "area": "Midtown, Manhattan"
+ },
+ {
+  "id": 13,
+  "concept": "Latin American",
+  "slug": "latin_american",
+  "address": "810 Fulton Street, Brooklyn",
+  "lat": 40.683488,
+  "lon": -73.968462,
+  "area": "Clinton Hill, Brooklyn"
+ },
+ {
+  "id": 14,
+  "concept": "Middle Eastern",
+  "slug": "middle_eastern",
+  "address": "2 Penn Plaza, Manhattan",
+  "lat": 40.750017,
+  "lon": -73.991345,
+  "area": "Midtown South, Manhattan"
+ },
+ {
+  "id": 15,
+  "concept": "Korean",
+  "slug": "korean",
+  "address": "206 East 34th Street, Manhattan",
+  "lat": 40.7452992,
+  "lon": -73.977798,
+  "area": "Murray Hill, Manhattan"
+ },
+ {
+  "id": 16,
+  "concept": "Mexican",
+  "slug": "mexican",
+  "address": "3 Essex St, Manhattan",
+  "lat": 40.7148012,
+  "lon": -73.9903867,
+  "area": "Chinatown, Manhattan"
+ },
+ {
+  "id": 17,
+  "concept": "Japanese",
+  "slug": "japanese",
+  "address": "340 West 57th Street, Manhattan",
+  "lat": 40.767231,
+  "lon": -73.984119,
+  "area": "Hell's Kitchen, Manhattan"
+ },
+ {
+  "id": 18,
+  "concept": "Thai",
+  "slug": "thai",
+  "address": "120 Mac Dougal Street, Manhattan",
+  "lat": 40.7297907,
+  "lon": -74.00035,
+  "area": "Greenwich Village, Manhattan"
+ },
+ {
+  "id": 19,
+  "concept": "Indian",
+  "slug": "indian",
+  "address": "808 Columbus Avenue, Manhattan",
+  "lat": 40.794568,
+  "lon": -73.96629000000001,
+  "area": "Upper West Side, Manhattan"
+ },
+ {
+  "id": 20,
+  "concept": "Caribbean",
+  "slug": "caribbean",
+  "address": "2526 Wallace Ave, Bronx",
+  "lat": 40.863760600000006,
+  "lon": -73.86424420000002,
+  "area": "Allerton, Bronx"
+ },
+ {
+  "id": 21,
+  "concept": "Coffee shop",
+  "slug": "coffee_shop",
+  "address": "113 7th Avenue South, Manhattan",
+  "lat": 40.7338694,
+  "lon": -74.0022624,
+  "area": "West Village, Manhattan"
+ },
+ {
+  "id": 22,
+  "concept": "Bakery",
+  "slug": "bakery",
+  "address": "272 Baychester Avenue, Bronx",
+  "lat": 40.8646868,
+  "lon": -73.8280884,
+  "area": "Co-op City, Bronx"
+ },
+ {
+  "id": 23,
+  "concept": "Chinese",
+  "slug": "chinese",
+  "address": "77 West 69th Street, Manhattan",
+  "lat": 40.7749538,
+  "lon": -73.98032269999999,
+  "area": "Upper West Side, Manhattan"
+ },
+ {
+  "id": 24,
+  "concept": "Pizza",
+  "slug": "pizza",
+  "address": "2480 Broadway, Manhattan",
+  "lat": 40.7920685,
+  "lon": -73.9730153,
+  "area": "Upper West Side, Manhattan"
+ },
+ {
+  "id": 25,
+  "concept": "Italian",
+  "slug": "italian",
+  "address": "1476 Pitkin Avenue, Brooklyn",
+  "lat": 40.668200000000006,
+  "lon": -73.9192576,
+  "area": "Brownsville, Brooklyn"
+ },
+ {
+  "id": 26,
+  "concept": "Mediterranean",
+  "slug": "mediterranean",
+  "address": "747 Third Ave, Manhattan",
+  "lat": 40.75347999999999,
+  "lon": -73.9720492,
+  "area": "East Midtown, Manhattan"
+ },
+ {
+  "id": 27,
+  "concept": "Latin American",
+  "slug": "latin_american",
+  "address": "144 Chambers Street, Manhattan",
+  "lat": 40.7155395,
+  "lon": -74.0097685,
+  "area": "Tribeca, Manhattan"
+ },
+ {
+  "id": 28,
+  "concept": "Middle Eastern",
+  "slug": "middle_eastern",
+  "address": "205 W. Houston St, Manhattan",
+  "lat": 40.7283167,
+  "lon": -74.00417079999998,
+  "area": "SoHo, Manhattan"
+ },
+ {
+  "id": 29,
+  "concept": "Korean",
+  "slug": "korean",
+  "address": "254 Park Avenue, Manhattan",
+  "lat": 40.738464,
+  "lon": -73.987641,
+  "area": "Midtown South, Manhattan"
+ },
+ {
+  "id": 30,
+  "concept": "Mexican",
+  "slug": "mexican",
+  "address": "195 Malcolm X Boulevard, Brooklyn",
+  "lat": 40.6865858,
+  "lon": -73.92960180000001,
+  "area": "Bedford-Stuyvesant, Brooklyn"
+ }
+]

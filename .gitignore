@@ -1,0 +1,125 @@
+# =============================================================================
+# Whitespace .gitignore
+#
+# Two rules this file enforces:
+#   1. No API key or secret ever reaches the repository.
+#   2. No Qloo response data reaches the repository. Qloo allows private
+#      server-side caching, not Qloo data in a public repo. Public, redacted
+#      replays live in fixtures/replays and ARE committed on purpose.
+# =============================================================================
+
+# ---- Secrets and local configuration ----------------------------------------
+.env
+.env.*
+!.env.example
+*.env
+.envrc
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+secrets.*
+credentials.json
+service-account*.json
+.render/
+.vercel/
+
+# ---- Python -----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+env/
+.python-version
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# ---- Logs (every *.log, plus the named run logs kept for the record) --------
+*.log
+blind_run.log
+server.log
+bt4.log
+golden_*.log
+eval.log
+eval_suite.log
+eval_suite_v2.log
+eval_suite_v2b.log
+eval_suite_v2c.log
+golden_followups.log
+golden_followups2.log
+clash_baseline_run.log
+clash_srv.log
+test28_run.log
+whitespace_srv.log
+
+# ---- Downloaded city data (rebuild with `python build_data.py`) -------------
+data/
+data/snapshots/
+
+# ---- Private: Qloo responses and anything derived from them -----------------
+# Qloo response cache (several GB locally; on the server it lives on a private disk)
+cache/
+# Full recorded runs replayed by the live site (redacted copies are in fixtures/replays)
+golden/
+eval_runs/
+research_notes/
+reports/
+# Blind-test material: keys and caches must stay hidden from raters
+blind_cache.json
+blind_cache_v2.json
+blind_key.json
+# Per-test working state and detail files that hold Qloo responses
+test8_state.json
+test9_dev_state.json
+test9_state.json
+test10_detail.json
+test11_detail.json
+test12_sheet.csv
+test12_key.json
+test12_sheet_agents_discarded.csv
+screen13_detail.json
+test14_detail.json
+test15_detail.json
+test16_detail.json
+test17_detail.json
+test18_state.json
+test19_state.json
+test22_detail.json
+test22_sheet.csv
+test22_key.json
+test23_detail.json
+test24_detail.json
+test25_a_detail.json
+test25_b_detail.json
+test25_c_detail.json
+test26_detail.json
+test27_detail.json
+test28_detail.json
+backtest28_results.json
+
+# ---- Editors and operating systems -----------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- Local tools -------------------------------------------------------------
+node_modules/
+.claude/settings.local.json
+.vercel
+
+# ---- Personal handoff notes for a new chat (never committed) ----------------
+context.md

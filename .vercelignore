@@ -1,0 +1,47 @@
+# Files never uploaded to Vercel. The Vercel CLI reads this file, not .gitignore.
+# data/ IS uploaded on purpose: the app needs the public city data at runtime (only /tmp is writable on Vercel).
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Private Qloo responses and anything derived from them
+cache/
+golden/
+eval_runs/
+research_notes/
+reports/
+blind_cache.json
+blind_cache_v2.json
+blind_key.json
+test8_state.json
+test9_dev_state.json
+test9_state.json
+test18_state.json
+test19_state.json
+*_detail.json
+test12_sheet.csv
+test12_sheet_agents_discarded.csv
+test12_key.json
+test22_sheet.csv
+test22_key.json
+backtest28_results.json
+
+# Research datasets the app does not use
+data/lastfm/
+data/movielens/
+data/advance/
+data/festivals/
+data/snapshots/
+
+# Local only
+.venv/
+__pycache__/
+*.log
+context.md
+.vscode/
+.idea/
+.DS_Store

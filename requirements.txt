@@ -1,0 +1,9 @@
+fastapi==0.143.0
+uvicorn==0.53.0
+sse-starlette==3.4.11
+pydantic==2.13.5
+shapely==2.2.0
+pygeohash==3.5.1
+numpy==2.5.3
+scipy==1.18.1
+scikit-learn==1.9.1
