@@ -2,7 +2,7 @@
 
 > A site-selection agent for independent restaurant founders in New York City (Brooklyn, Queens, Manhattan, the Bronx). A founder describes a concept and customers; the agent finds vacant storefronts in the NYC Storefront Registry, ranks them with a lease score built on NYC inspection records, checks competition and foot traffic, writes a positioning brief for the top pick with Qloo taste data, lists local partners and next steps, and answers follow-up questions with tools. Built for the Qloo Agentic Hackathon 2026. MIT licence.
 
-Every claim the product makes about a data source rests on a pre-registered test, committed before its result existed. City records decide where to open; census and jobs data decide who lives nearby; Qloo place records supply competitors' Friday closing times and review mentions, and power the "where else do their fans go" scene explorer. Saved runs replay with no API calls. API keys stay on the server.
+Every claim the product makes about a data source rests on a pre-registered test, committed before its result existed. City records decide where to open; census and jobs data decide who lives nearby; Qloo place records supply competitors' Friday closing times and review mentions, and power the "where else do their fans go" scene explorer. Finished runs play back with no API calls. API keys stay on the server. A longer version of this file, with every test's claim, result and caveat, is at [/llms-full.txt](/llms-full.txt).
 
 ## Use the site
 
@@ -10,12 +10,13 @@ Every claim the product makes about a data source rests on a pre-registered test
 - [The business](/#business): yearly openings and vacancies from city records, with a revenue estimate you can adjust
 - [Scout form](/#scout): describe a plan, search an area, or compare two to five addresses
 - [Drop a pin](/#play): score any block on a map, compare up to three, and try what-if changes
+- [Finished runs](/#saved): real recorded runs that open in seconds with no API calls
+- [Why Qloo](/#why): what each model answered in Test 20, as pie charts, and a restaurant-by-restaurant duel
 - [Beat the model](/#game): guess a real restaurant's Friday closing time against GPT-6 Astra alone and with Qloo
-- [Saved runs](/#saved): recorded live runs that replay instantly with no API calls
-- [Why Qloo](/#why): the model alone against the model with Qloo, from pre-registered tests
+- [Results](/#results): every head-to-head of Qloo against its baseline, with a filterable ledger of results
 - [How it works](/#how): the six steps of every run and what each source does
 - [Scene explorer](/#scene): name up to three places; Qloo returns where their fans also go
-- [How we know](/#evidence): every test, its result and its caveat
+- [How we know](/#evidence): what the tests show, and every test in order
 
 ## API (JSON)
 
@@ -23,7 +24,7 @@ Every claim the product makes about a data source rests on a pre-registered test
 - [Stats](/api/stats): counts of active restaurants, vacant storefronts, neighbourhoods and tested cuisines
 - [Cuisines](/api/concepts): the 25 cuisines the lease score was tested on
 - [Evidence](/api/evidence): every claim with its test, result, caveat and source files
-- [Saved runs](/api/golden): list of recorded runs; `GET /api/golden/{id}` replays one as server-sent events; `GET /api/golden/{id}/sha256` returns the hash of the recording
+- [Finished runs](/api/golden): list of recorded runs; `GET /api/golden/{id}` plays one back as server-sent events; `GET /api/golden/{id}/sha256` returns the hash of the recording
 - `POST /api/run`: a live run, body `{concept, cuisine?, goal? | area? | leases?: [{address}]}`, streamed as server-sent events, rate limited
 - `POST /api/ask`: a follow-up question about a run, streamed, rate limited
 - `GET /api/around?concept=&lat=&lon=`: competitors near a point from city records, with Qloo's Friday closing times and review mentions; no model call
@@ -40,9 +41,13 @@ Every claim the product makes about a data source rests on a pre-registered test
 - Qloo's Friday closing times matched Google Maps for 29 of 30 places, checked by a person (Test 12).
 - For 40 real listeners, Qloo ranked the small artists each one plays at AUC 0.841, against 0.516 for popularity (Test 27).
 - A festival timetable built on Qloo's fan-overlap scores reached 0.663 of the possible cut in fan clashes, against 0.043 for popularity (Test 28).
-- The lease score reaches AUC 0.893 with Qloo, against 0.851 without it. There is no rent data. Staten Island is not covered.
+- The lease score reaches AUC 0.893 with Qloo, against 0.851 without it (0.887 across 25 cuisines). There is no rent data. Staten Island is not covered.
+- Qloo finds 92.4% of real competitors (Test 10) and matches price levels for 25 of 27 places (Test 12).
+- Blind raters preferred positioning briefs written with Qloo 78% of the time (Test 3); a blind judge 76% (Test 8).
 - The follow-up agent has twelve tools, including competitor_hours and place_hours, which answer hours questions from Qloo's place records; it never states opening hours from memory.
 
 ## Optional
+
+- [Full version](/llms-full.txt): this file plus every test's claim, result, caveat and source files
 
 - [Data sources](/#evidence): NYC DOHMH Restaurant Inspection Results, NYC Storefront Registry, NYC 2020 Neighborhood Tabulation Areas, US Census ACS 2023 and LODES jobs data, MTA subway ridership, business improvement districts, NYC Planning GeoSearch, Qloo Insights API

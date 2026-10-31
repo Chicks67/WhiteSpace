@@ -6,6 +6,7 @@
 <title>Whitespace: restaurant site selection for New York, grounded in Qloo</title>
 <meta name="description" content="An agent that scouts vacant storefronts in New York City and sizes up the competition with Qloo's record of real places: when rivals close, what their reviewers mention, where their fans also go.">
 <link rel="canonical" href="https://whitespace-nyc.vercel.app/">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="A plain-text guide to this site for language models">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Whitespace">
 <meta property="og:title" content="Whitespace: find the block before you sign the lease">
@@ -33,7 +34,7 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400..600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <!-- the map only appears after a run, so its stylesheet does not hold up the first paint -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="/static/style.css?v=27">
+<link rel="stylesheet" href="/static/style.css?v=31">
 </head>
 <body>
 <div class="scroll-bar" id="scroll-bar" aria-hidden="true"></div>
@@ -383,9 +384,6 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
     <p class="hint">The answers recorded in the pre-registered test; nothing is sent to a model.</p>
   </section>
 </section>
-  <p class="hint why-foot">Each number comes from a test whose rules were committed before its result. All 28 tests,
-    including the ones where Qloo did not help, are under <a href="#evidence">How we know</a>.</p>
-</section>
 
 <section class="band game" id="game">
   <div class="band-head">
@@ -561,6 +559,7 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
 <footer class="foot">
   <a class="logo" href="#top"><span class="logo-mark" aria-hidden="true"></span>Whitespace</a>
   <p>Built for the Qloo Agentic Hackathon 2026.</p>
+  <p class="foot-links"><a href="/llms.txt">llms.txt</a><a href="/llms-full.txt">llms-full.txt</a><a href="https://github.com/Chicks67/WhiteSpace">Source on GitHub</a></p>
   <p>Data: NYC Department of Health restaurant inspections (active restaurants only), NYC Storefront Registry (owner-reported vacancies; a storefront may have been leased since its report), Qloo Insights API,
     NYC Planning GeoSearch. Positioning text by GPT-6 Astra. Map data by OpenStreetMap contributors.</p>
 </footer>
@@ -572,7 +571,7 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
 
 
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script defer src="/static/app.js?v=27"></script>
+<script defer src="/static/app.js?v=30"></script>
 <script defer src="/static/features.js?v=25"></script>
 <script defer src="/static/play.js?v=27"></script>
 </body>

@@ -191,13 +191,14 @@ def index():
 
 @app.get("/robots.txt")
 def robots():
-    return PlainTextResponse(f"User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: {SITE}/sitemap.xml\n")
+    return PlainTextResponse(f"User-agent: *\nAllow: /\nDisallow: /api/\n# A plain-text guide for language models: {SITE}/llms.txt\n"
+                             f"Sitemap: {SITE}/sitemap.xml\n")
 
 
 @app.get("/sitemap.xml")
 def sitemap():
     xml = (f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
-           f"<url><loc>{SITE}/</loc></url><url><loc>{SITE}/llms.txt</loc></url></urlset>\n")
+           f"<url><loc>{SITE}/</loc></url><url><loc>{SITE}/llms.txt</loc></url><url><loc>{SITE}/llms-full.txt</loc></url></urlset>\n")
     return Response(xml, media_type="application/xml")
 
 
@@ -208,9 +209,22 @@ def favicon():
 
 
 @app.get("/llms.txt")
+@app.get("/.well-known/llms.txt")
 def llms_txt():
     """A plain-text guide to the site for language models (llmstxt.org)."""
     return FileResponse(os.path.join(ROOT, "static", "llms.txt"), media_type="text/plain; charset=utf-8")
+
+
+@app.get("/llms-full.txt")
+def llms_full_txt():
+    """llms.txt followed by every evidence entry in full: claim, result, caveat, status and source files."""
+    with open(os.path.join(ROOT, "static", "llms.txt")) as f:
+        head = f.read().rstrip()
+    lines = [head, "", "## Every claim, with its test", ""]
+    for e in evidence.panel()["entries"]:
+        lines += [f"### {e['title']}", "", f"- Claim: {e['claim']}", f"- Result: {e['result']}", f"- Caveat: {e['caveat']}",
+                  f"- Status: {e['confidence']}", f"- Files: {', '.join(e['sources'])}", ""]
+    return PlainTextResponse("\n".join(lines), media_type="text/plain; charset=utf-8")
 
 
 @app.get("/health")

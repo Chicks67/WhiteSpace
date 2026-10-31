@@ -1200,6 +1200,16 @@ details.entry summary:hover { background: var(--field); }
   .biz-why ul { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* ---------- spacing fixes found by the overlap check ---------- */
+.how-it > .band-head { position: static !important; }
+.why-big { gap: .8rem; }
+.why-big > span { display: flex; align-items: baseline; flex-wrap: wrap; gap: .2rem .5rem; line-height: 1.1; }
+.kpi { gap: .55rem !important; }
+.kpi .v { line-height: 1.05; }
+.dr-q .hint { display: block; margin: .35rem 0 0; }
+
+.foot-links { display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; }
+
 /* ---------- smaller screens ---------- */
 @media (max-width: 1080px) {
   .hero { grid-template-columns: minmax(0, 1fr); }

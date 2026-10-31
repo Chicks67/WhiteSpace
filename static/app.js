@@ -112,6 +112,7 @@ async function go(url, opts) {
   state.running = true; state.abort = new AbortController(); showError("");
   $("#run").disabled = true; $("#run").classList.add("busy"); $("#stop").hidden = false;
   try {
+    state.lastError = null;
     reset();
     startClock();
     $("#app").scrollIntoView({ behavior: "smooth", block: "start" });
@@ -129,6 +130,7 @@ async function go(url, opts) {
 
 /* An error ends the run on the page: spinners stop and the message shows beside the results, not only in the form. */
 function runError(msg) {
+  state.lastError = msg;
   stopSlow();
   document.querySelectorAll("#steps li.running").forEach(li => { li.className = "error"; $(".ico", li).textContent = "\u2715"; });
   const t = $("#steps li.thinking"); if (t) t.remove();
@@ -156,10 +158,36 @@ function stopClock() { clearInterval(clock); clock = null; $("#bar").hidden = tr
 /* The run button says plainly when this server cannot run live. */
 function setLive() {
   const run = $("#run");
-  run.disabled = !state.live || state.running;
+  run.disabled = state.running;   // never a dead button: without live runs it plays the closest finished run
   run.textContent = "Scout this location";
   $("#run-hint").textContent = state.live ? "Takes about a minute. Ctrl or Cmd and Enter also runs."
-    : "Open one of the finished runs below to see a full result.";
+    : "Shows the finished run closest to your plan. Ctrl or Cmd and Enter also runs.";
+}
+
+/* When a live run cannot happen (no live connection, the model busy or out of budget, rate limits), the button
+   still gives a result: the finished run closest to the plan, labelled as such. Input errors keep their message. */
+const TRANSIENT = /busy|budget|paused|try again|limited to|request failed|on our side|quota|not available/i;
+function closestRun(body) {
+  const mode = body.goal ? "goal" : body.area ? "area" : "leases";
+  const words = s => new Set(String(s || "").toLowerCase().split(/\W+/).filter(w => w.length > 2));
+  const want = words(body.concept);
+  let best = null, top = -1;
+  for (const r of state.goldenRuns || []) {
+    const m = r.request.goal ? "goal" : r.request.area ? "area" : "leases";
+    let score = m === mode ? 3 : 0;
+    for (const w of words(r.request.concept)) if (want.has(w)) score += 2;
+    if (body.cuisine && body.cuisine === r.request.cuisine) score += 2;
+    if (score > top) { top = score; best = r; }
+  }
+  return best;
+}
+function playFinished(body, why) {
+  const r = closestRun(body);
+  if (!r) { showError(why + " There is no finished run to show on this server."); return; }
+  state.fallbackNote = `${why} Showing the finished run closest to your plan: ${r.title}.`;
+  r.play();
+  $("#credits").textContent = state.fallbackNote;
+  toast("Showing a finished run for a similar plan.");
 }
 
 let toastTimer = null;
@@ -198,7 +226,7 @@ function handle(e) {
     stopSlow();
     announce("Run finished.");
     if (state.live) around();
-    $("#credits").textContent = e.replay ? "A run recorded earlier, shown in full."
+    $("#credits").textContent = e.replay ? (state.fallbackNote || "A run recorded earlier, shown in full.")
       : e.usd != null ? `Model cost of this run: about $${e.usd.toFixed(2)}.` : `Model cost of this run: ${e.credits} Kie credits.`;
   }
 }
@@ -658,11 +686,14 @@ async function loadGolden() {
   state.redacted = !!redacted;
   if (redacted) $("#golden-hint").textContent = "Real runs we recorded earlier. Each one opens in seconds; the brief's full text is shown on the live site.";
   $("#golden").innerHTML = runs.length ? "" : `<li class="hint">No finished runs yet.</li>`;
+  state.goldenRuns = runs;
   for (const r of runs) {
     const li = document.createElement("li");
     li.innerHTML = `<button type="button"><strong>${esc(r.title)}</strong><span>${r.request.goal ? "scouted from a plan" : r.request.area ? "searched " + esc(r.request.area) : r.request.leases.length + " addresses"}, recorded ${esc(r.recorded)}</span></button>`;
-    $("button", li).onclick = () => {
+    r.play = () => $("button", li).click();
+    $("button", li).onclick = ev => {
       if (state.running) return;
+      if (ev && ev.isTrusted) state.fallbackNote = null;   // a visitor's own pick is not a fallback
       document.querySelectorAll("#golden li").forEach(x => x.classList.toggle("active", x === li));
       $("#concept").value = r.request.concept; $("#cuisine").value = r.request.cuisine || "";
       if (r.request.goal) { setWhere("goal"); $("#goal").value = r.request.goal; }
@@ -949,7 +980,11 @@ async function boot() {
       if (leases.length < 2) return showError("Add at least two addresses to compare.");
       body.leases = leases.map(address => ({ address }));
     }
-    go("/api/run", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    state.fallbackNote = null;
+    if (!state.live) return playFinished(body, "Live scouting is not available right now.");
+    go("/api/run", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then(() => {
+      if (state.lastError && !state.leases.length && TRANSIENT.test(state.lastError)) playFinished(body, "The live run could not finish right now.");
+    });
   };
   $("#ask-form").onsubmit = ev => { ev.preventDefault(); ask($("#question").value.trim()); };
   $("#print-report").onclick = () => window.print();
