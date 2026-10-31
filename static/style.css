@@ -76,7 +76,7 @@ button { font: inherit; cursor: pointer; color: inherit; }
 .nav {
   position: sticky; top: 0; z-index: 1200; height: var(--nav);
   display: flex; align-items: center; gap: 1.2rem;
-  padding: 0 max(var(--pad), calc((100vw - var(--max)) / 2));
+  padding: 0 max(var(--pad), calc((100% - var(--max)) / 2));
   background: color-mix(in srgb, var(--bg) 84%, transparent);
   backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px);
   border-bottom: 1px solid var(--rule);
@@ -1087,7 +1087,7 @@ table.data th { font-family: var(--ui); }
 
 /* ---------- how it works: the heading holds the left column while the steps and sources fill the right ---------- */
 .how-it { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 2fr); column-gap: clamp(2rem, 5vw, 5rem); row-gap: clamp(3rem, 6vw, 5rem);
-  padding-inline: max(var(--pad), calc((100vw - var(--max)) / 2)); align-items: start; }
+  padding-inline: max(var(--pad), calc((100% - var(--max)) / 2)); align-items: start; }
 .how-it > * { max-width: none; margin-inline: 0; }
 .how-it > .band-head { grid-column: 1; position: sticky; top: calc(var(--nav) + 24px); margin: 0; }
 .how-it > .band-head.second { margin-top: 0; }
@@ -1209,6 +1209,26 @@ details.entry summary:hover { background: var(--field); }
 .dr-q .hint { display: block; margin: .35rem 0 0; }
 
 .foot-links { display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; }
+
+/* the run's rail stays pinned but never taller than the screen: its own scroll keeps every part reachable */
+.rail { max-height: calc(100vh - var(--nav) - 32px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; padding-right: 2px; }
+.agent-viz.in-rail svg { max-height: 240px; }
+.agent-viz svg { overflow: hidden; }
+@media (max-width: 1080px) { .rail { max-height: none; overflow: visible; padding-right: 0; } }
+
+/* never a sideways scroll: sizes use the page width (100%), not the window width with its scrollbar (100vw) */
+html, body { overflow-x: clip; max-width: 100%; }
+@media (max-width: 700px) {
+  .tests, .tests-acc .tests, .answers table { min-width: 0 !important; table-layout: auto; }
+  .tests th, .tests td { padding: .55rem .5rem; font-size: .82rem; overflow-wrap: anywhere; }
+  .tests td:nth-child(2) { width: auto; }
+  .answers table { font-size: .7rem; }
+  .answers th, .answers td { padding: .35rem .3rem; overflow-wrap: anywhere; }
+}
+
+.answers table { min-width: 0 !important; font-size: .76rem; }
+.answers th, .answers td { padding: .4rem .45rem; overflow-wrap: anywhere; }
+.answers .t20-wrap { overflow-x: visible; }
 
 /* ---------- smaller screens ---------- */
 @media (max-width: 1080px) {

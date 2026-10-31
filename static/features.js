@@ -247,7 +247,7 @@ class Radar {
   constructor(host) {
     this.host = host; this.counts = {}; this.live = false; this.inflight = 0;
     host.innerHTML = `<div class="av-head"><strong>Agent radar</strong><span class="av-state">Idle</span></div>
-      <svg viewBox="0 0 520 300" aria-hidden="true">
+      <svg viewBox="0 0 520 322" aria-hidden="true">
         <g class="edges">${NODES.slice(1).map(n => `<line class="av-edge" data-k="${n.k}" x1="260" y1="150" x2="${n.x}" y2="${n.y}"/>`).join("")}</g>
         <g class="packets"></g>
         ${NODES.map(n => `<g class="av-node ${n.k === "core" ? "core" : ""} ${n.k === "qloo" ? "qloo" : ""}" data-k="${n.k}">
