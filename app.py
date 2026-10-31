@@ -4,6 +4,7 @@ Keys stay in server environment variables. Live runs are rate limited per visito
 daily LLM spend; saved runs replay with zero API calls.
 """
 import asyncio
+import functools
 import json
 import os
 import threading
@@ -11,7 +12,7 @@ import time
 from contextlib import asynccontextmanager
 from datetime import date
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.responses import FileResponse, JSONResponse, PlainTextResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, model_validator
@@ -228,6 +229,13 @@ def stats():
             out[key] = len(fn())
         except Exception:
             out[key] = None
+    try:  # restaurants first inspected in the last full year that are still operating: a floor on yearly openings
+        year = str(date.today().year - 1)
+        city = engine.city()
+        out["opened_last_year"] = {"year": year, "count": sum(1 for r in city.rest if (r["opened"] or "").startswith(year)),
+                                   "active_four_boroughs": len(city.rest)}
+    except Exception:
+        out["opened_last_year"] = None
     return out
 
 
@@ -315,6 +323,62 @@ def around_lookup(concept: str, lat: float, lon: float, request: Request):
         raise HTTPException(422, "give a tested cuisine and a point in New York City")
     lat, lon = round(lat, 3), round(lon, 3)  # about 100 m: nearby requests share one cached Qloo lookup
     return _lookup(request, lambda: around.for_point(concept, lat, lon))
+
+
+PINS_PER_HOUR = int(os.environ.get("PINS_PER_HOUR", "300"))
+CITY_BOX = (40.54, -74.04, 40.915, -73.70)   # south, west, north, east: the four boroughs we cover
+
+
+@functools.lru_cache(maxsize=1)
+def _city_map():
+    """Every active restaurant and every vacant storefront as 16-bit grid positions inside CITY_BOX, packed to
+    base64, with one cuisine index per restaurant. Public city records only; built once per process."""
+    import base64
+    import struct
+    import storefronts
+    s, w, n, e = CITY_BOX
+    q = lambda lat, lon: (round((lon - w) / (e - w) * 65535), round((n - lat) / (n - s) * 65535))
+    inside = lambda r: s <= r["lat"] <= n and w <= r["lon"] <= e
+    rest = [r for r in engine.city().rest if inside(r)]
+    cuisines = sorted({c for c, _ in engine.CONCEPTS.values()})
+    code = {c: i + 1 for i, c in enumerate(cuisines)}
+    shop = [v for v in storefronts.vacant() if v.get("lat") and inside(v)]
+    pack = lambda pts: base64.b64encode(b"".join(struct.pack("<HH", *q(p["lat"], p["lon"])) for p in pts)).decode()
+    return {"box": CITY_BOX, "restaurants": pack(rest), "storefronts": pack(shop),
+            "cuisine": base64.b64encode(bytes(code.get(r["cuisine"], 0) for r in rest)).decode(),
+            "cuisines": cuisines, "concepts": {k: v[0] for k, v in engine.CONCEPTS.items()},
+            "counts": {"restaurants": len(rest), "storefronts": len(shop)}}
+
+
+@app.get("/api/citymap")
+def city_map():
+    return JSONResponse(_city_map(), headers={"Cache-Control": "public, max-age=86400"})
+
+
+@app.get("/api/pin")
+def pin_score(concept: str, lat: float, lon: float, request: Request):
+    """The lease score for any point, from city records only: no Qloo call and no model call."""
+    if concept not in engine.CONCEPTS or not (40.45 <= lat <= 40.95 and -74.3 <= lon <= -73.65):
+        raise HTTPException(422, "give a tested cuisine and a point in New York City")
+    reason = _admit(_visitor(request), "pin", PINS_PER_HOUR, spend=False)
+    if reason:
+        return JSONResponse({"error": reason}, status_code=429)
+    s = engine.city().score(concept, round(lat, 5), round(lon, 5))
+    return {**s, "concept": concept, "lat": lat, "lon": lon,
+            "same_cuisine_400m": s["same_cuisine_400m"][:12], "openings_800m": s["openings_800m"][:12],
+            "same_cuisine_400m_count": len(s["same_cuisine_400m"]), "openings_800m_count": len(s["openings_800m"])}
+
+
+@app.get("/api/whatif")
+def what_if(concept: str, density: int = Query(ge=0, le=200), same: int = Query(ge=0, le=200)):
+    """The lease score percentile for a block with this many restaurants and this much of the cuisine around it."""
+    if concept not in engine.CONCEPTS:
+        raise HTTPException(422, "give a tested cuisine")
+    m = engine.MODEL[concept]
+    score = m["intercept"] + m["D"] * engine.math.log1p(density) + m["S"] * engine.math.log1p(same)
+    c = engine.city()
+    return {"score": round(score, 3), "score_percentile": c.percentile(concept, score),
+            "density_percentile": c.density_percentile(density)}
 
 
 @app.get("/api/test20")

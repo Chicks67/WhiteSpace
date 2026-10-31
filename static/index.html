@@ -18,38 +18,41 @@
 <meta name="twitter:title" content="Whitespace: find the block before you sign the lease">
 <meta name="twitter:description" content="A site-selection agent for NYC restaurant founders, grounded in Qloo's record of real places.">
 <meta name="twitter:image" content="https://whitespace-nyc.vercel.app/static/og.png">
-<meta name="theme-color" content="#0A0A0B">
-<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#F2EDE3">
+<meta name="color-scheme" content="light dark">
 <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
 <script>
-/* Dark by default. Apply a saved light choice before first paint so the page does not flash. */
-try { if (localStorage.getItem("ws-theme") === "light") document.documentElement.dataset.theme = "light"; } catch (_) {}
+/* Day sky by default. Apply a saved night choice before first paint so the page does not flash. */
+try { if (localStorage.getItem("ws-theme") === "night") document.documentElement.dataset.theme = "night"; } catch (_) {}
 </script>
 <!-- Paint the right background before the stylesheets arrive. -->
-<style>html { background: #0A0A0B; color: #F5F5F2; } html[data-theme="light"] { background: #F4F4F2; color: #0A0A0B; }</style>
+<style>html { background: #F2EDE3; color: #1A1814; } html[data-theme="night"] { background: #15130F; color: #F2EDE3; }</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400..600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <!-- the map only appears after a run, so its stylesheet does not hold up the first paint -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="/static/style.css?v=11">
+<link rel="stylesheet" href="/static/style.css?v=27">
 </head>
 <body>
-<a class="skip" href="#brief-form">Skip to the tool</a>
+<div class="scroll-bar" id="scroll-bar" aria-hidden="true"></div>
+<a class="skip" href="#scout">Skip to the tool</a>
 
 <nav class="nav" aria-label="Main">
   <a class="logo" href="#top" aria-label="Whitespace, back to top"><span class="logo-mark" aria-hidden="true"></span>Whitespace</a>
   <div class="nav-links">
-    <a href="#top">Scout</a>
+    <a href="#business">Business</a>
+    <a href="#scout">Scout</a>
+    <a href="#play">Map</a>
     <a href="#why">Why Qloo</a>
+    <a href="#game">Game</a>
+    <a href="#results">Results</a>
     <a href="#how">How it works</a>
-    <a href="#scene">Scene</a>
     <a class="how" href="#evidence">How we know</a>
   </div>
   <div class="nav-tools">
-    <span id="live-pill" class="pill" hidden></span>
-    <button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch to light mode" title="Switch to light mode">
+    <button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch to night sky" title="Switch to night sky">
       <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg>
     </button>
   </div>
@@ -66,13 +69,79 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
         rave about, where their fans also go. <span class="src city">City inspection records</span> rank the leases.</p>
       <ul class="points">
         <li><span><b>29 of 30</b> closing times right with Qloo, <b>0 of 30</b> for the model alone</span></li>
-        <li>Brooklyn, Queens, Manhattan and the Bronx</li>
-        <li>Every step and every Qloo call shown as it happens</li>
+        <li><span>Briefs written with Qloo preferred <b>78%</b> of the time; lease score <b>0.893</b> with Qloo, 0.851 without</span></li>
+        <li><span>Qloo finds <b>92.4%</b> of competitors; price levels right for <b>25 of 27</b></span></li>
+      </ul>
+      <div class="hero-actions">
+        <a class="primary" href="#scout">Scout a location</a>
+        <a class="quiet" href="#play">Score any block on the map</a>
+      </div>
+    </div>
+    <figure class="citymap" id="citymap">
+      <div class="cm-frame">
+        <canvas id="cm-canvas" role="img" aria-label="Dot map of New York City: every active restaurant and every vacant storefront in city records"></canvas>
+        <div class="cm-card" id="cm-card" hidden aria-live="polite"></div>
+      </div>
+      <figcaption class="cm-bar">
+        <span class="cm-key"><i class="dot ink"></i><b id="cm-n-rest">26,043</b> active restaurants</span>
+        <span class="cm-key"><i class="dot red"></i><b id="cm-n-shop">6,767</b> vacant storefronts</span>
+        <label class="cm-pick" for="cm-cuisine">Highlight <select id="cm-cuisine"><option value="">no cuisine</option></select></label>
+      </figcaption>
+      <p class="cm-hint">Click any block to score it for a restaurant. Every dot is a real record from New York City.</p>
+    </figure>
+  </div>
+</header>
+
+<section class="band biz" id="business">
+  <div class="biz-grid">
+    <div class="biz-copy">
+      <h2>A lease is the biggest bet a restaurant makes.</h2>
+      <p class="lede">Most independent restaurants pick a block by walking past it, then sign a lease that runs for years. Whitespace
+        gives them the read a chain's real-estate team has: the competition, the foot traffic, when every rival closes,
+        and a positioning brief written from what that block's customers like.</p>
+      <ul class="biz-facts">
+        <li><b data-biz="opened">3,034</b><span>restaurants opened in <span data-biz="year">2025</span> in the four boroughs and are still operating</span></li>
+        <li><b data-biz="shops">6,767</b><span>storefronts reported vacant to the city, each one a lease someone has to fill</span></li>
+        <li><b data-biz="active">26,043</b><span>active restaurants, every one a possible rival the score accounts for</span></li>
       </ul>
     </div>
+    <div class="panel biz-calc">
+      <h3>What it could earn in New York alone</h3>
+      <div class="sl"><label for="bz-share">New restaurants that buy a site report</label><input type="range" id="bz-share" min="1" max="30" value="10"><output for="bz-share" id="bz-share-o">10%</output></div>
+      <div class="sl"><label for="bz-price">Price of one site report</label><input type="range" id="bz-price" min="99" max="999" step="50" value="299"><output for="bz-price" id="bz-price-o">$299</output></div>
+      <div class="sl"><label for="bz-lshare">Landlords who list a vacant storefront</label><input type="range" id="bz-lshare" min="0" max="20" value="5"><output for="bz-lshare" id="bz-lshare-o">5%</output></div>
+      <div class="sl"><label for="bz-lprice">Listing price per month</label><input type="range" id="bz-lprice" min="0" max="200" step="10" value="50"><output for="bz-lprice" id="bz-lprice-o">$50</output></div>
+      <p class="biz-total"><b id="bz-total">$0</b><span>a year</span></p>
+      <p class="biz-split" id="bz-split"></p>
+      <p class="hint">The counts come from New York City records. The shares and prices are assumptions for you to move.</p>
+    </div>
+  </div>
+  <div class="biz-why">
+    <h3>Why Qloo makes the report worth paying for</h3>
+    <ul>
+      <li><b>29 of 30</b><span>Friday closing times right with Qloo's record. A model alone got none.</span></li>
+      <li><b>92.4%</b><span>of real competitors found by Qloo, with their hours and what reviewers mention.</span></li>
+      <li><b>78%</b><span>of blind raters preferred the positioning brief written with Qloo.</span></li>
+      <li><b>0.893</b><span>lease score accuracy with Qloo added, against 0.851 from city records alone (AUC).</span></li>
+    </ul>
+  </div>
+</section>
 
-    <form id="brief-form" class="panel inputs" autocomplete="off" tabindex="-1">
+<section class="band scout" id="scout">
+  <div class="scout-grid">
+    <div class="scout-copy">
       <h2>Scout a location</h2>
+      <p class="lede">Describe the restaurant and the people you want to serve. The agent picks neighbourhoods from census
+        data, searches vacant storefronts, ranks every block on city records, sizes up each rival with Qloo, and writes
+        the positioning brief for the top pick.</p>
+      <ul class="scout-steps">
+        <li><b>About a minute</b> from plan to shortlist</li>
+        <li><b>Every step shown</b> as it happens, with every Qloo call</li>
+        <li><b>Brooklyn, Queens, Manhattan and the Bronx</b></li>
+      </ul>
+    </div>
+    <form id="brief-form" class="panel inputs" autocomplete="off" tabindex="-1">
+      <h3 class="visually-hidden">Scout a location</h3>
       <div class="field-row">
         <div>
           <label for="concept">Concept</label>
@@ -111,25 +180,18 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
         <button type="submit" id="run" class="primary">Run live (about a minute)</button>
         <button type="button" id="stop" class="quiet" hidden>Stop</button>
       </div>
-      <p class="hint run-hint" id="run-hint">Saved runs below replay instantly. Ctrl or Cmd and Enter also runs.</p>
+      <p class="hint run-hint" id="run-hint">Takes about a minute. Ctrl or Cmd and Enter also runs.</p>
       <p id="form-error" class="form-error" role="alert" hidden></p>
     </form>
   </div>
-  <dl class="stats" id="stats" aria-label="The city data behind this page">
-    <div><dt>Active restaurants</dt><dd data-stat="restaurants">&nbsp;</dd></div>
-    <div><dt>Vacant storefronts</dt><dd data-stat="storefronts">&nbsp;</dd></div>
-    <div><dt>Neighbourhoods</dt><dd data-stat="neighbourhoods">&nbsp;</dd></div>
-    <div><dt>Cuisines tested</dt><dd data-stat="cuisines">&nbsp;</dd></div>
-  </dl>
-</header>
+</section>
 
 <section class="band saved" id="saved">
   <div class="band-head">
     <div>
-      <p class="kicker big">Saved runs</p>
-      <h2>Replay a recorded run</h2>
+      <h2>See a finished run</h2>
     </div>
-    <p class="hint" id="golden-hint">Recorded live runs. They replay instantly and make no API calls.</p>
+    <p class="hint" id="golden-hint">Six real runs from founders' plans. Each one opens in seconds, with every step the agent took.</p>
   </div>
   <ul id="golden" class="golden"></ul>
 </section>
@@ -138,7 +200,6 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
   <p id="announce" class="visually-hidden" role="status"></p>
   <div class="band-head">
     <div>
-      <p class="kicker big">This run</p>
       <h2 id="run-title">Scouting</h2>
     </div>
     <p id="credits" class="credits"></p>
@@ -221,6 +282,7 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
     </div>
 
     <aside class="rail">
+      <div class="agent-viz in-rail" data-agent-viz aria-label="Live view of the agent calling its data sources"></div>
       <div class="map-wrap">
         <div id="map" class="map" role="region" aria-label="Map of the lease addresses and nearby restaurants of this cuisine"></div>
         <button type="button" id="map-fit" class="map-fit" title="Show every lease on the map">Show all</button>
@@ -246,62 +308,157 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
   </div>
 </main>
 
-<section class="band why" id="why">
+<section class="band play" id="play">
   <div class="band-head">
     <div>
-      <p class="kicker big">Why Qloo</p>
-      <h2>The agent knows real places because Qloo does.</h2>
+      <h2>Drop a pin anywhere in New York.</h2>
     </div>
-    <p class="hint">A language model can reason about a neighbourhood. It cannot know when the place down the block
-      closes tonight. Qloo can, and we measured it before building on it.</p>
+    <p class="hint">Pick a cuisine, then click any block in Brooklyn, Queens, Manhattan or the Bronx. You get the same
+      city-records lease score the agent uses, for that exact block. Drop up to three pins and they compete.
+      No model and no Qloo call: this runs on city inspection records alone.</p>
   </div>
-  <div class="why-grid">
-    <figure class="proof proof-main">
-      <figcaption>
-        <span class="tagline">Test 20, pre-registered</span>
-        <strong>"When does this restaurant close on Friday?"</strong>
-        <span>30 real New York restaurants, answers checked against Google Maps.</span>
-      </figcaption>
-      <div class="bars" role="img" aria-label="Correct answers out of 30: GPT-6 Astra alone 0, GPT-6 Astra with Qloo 29, Gemini 3.8 Flash alone 3, Gemini 3.8 Flash with Qloo 29">
-        <div class="bar-row"><span class="who">GPT-6 Astra alone</span><span class="track"><i style="--v:0"></i></span><b>0 / 30</b></div>
-        <div class="bar-row wq"><span class="who">GPT-6 Astra <em>+ Qloo</em></span><span class="track"><i style="--v:29"></i></span><b>29 / 30</b></div>
-        <div class="bar-row"><span class="who">Gemini 3.8 Flash alone</span><span class="track"><i style="--v:3"></i></span><b>3 / 30</b></div>
-        <div class="bar-row wq"><span class="who">Gemini 3.8 Flash <em>+ Qloo</em></span><span class="track"><i style="--v:29"></i></span><b>29 / 30</b></div>
+  <div class="play-grid">
+    <div class="panel play-map">
+      <div class="play-bar">
+        <label for="pin-cuisine">Cuisine <select id="pin-cuisine"></select></label>
+        <span class="spacer"></span>
+        <button type="button" class="quiet small" id="pin-random">Surprise me</button>
+        <button type="button" class="quiet small" id="pin-clear">Clear pins</button>
       </div>
-      <p class="proof-note">Alone, one model declined every time and the other gave 6 confident wrong times.
-        With Qloo's place record, both were right 29 times out of 30. This is why Whitespace answers every hours
-        question from Qloo and never from the model's memory.</p>
+      <div id="pin-map" class="pin-map" role="region" aria-label="Map: click to drop a pin and score that block"></div>
+    </div>
+    <div class="pin-side">
+      <div class="panel pin-empty" id="pin-empty"><strong>Click the map to drop your first pin.</strong>
+        Try a busy avenue, then a quiet side street, and watch the score move. Changing the cuisine re-scores every pin.</div>
+      <div class="pin-cards" id="pin-cards" aria-live="polite"></div>
+      <div class="panel whatif" id="whatif">
+        <h3>What if the block changed?</h3>
+        <p class="hint">Move the sliders to see how the lease score responds to a busier block or more competition.
+          <span id="wi-from">They start from your last pin.</span></p>
+        <div class="sl"><label for="wi-d">Restaurants in the block</label><input type="range" id="wi-d" min="0" max="200" value="20"><output id="wi-d-o" for="wi-d">20</output></div>
+        <div class="sl"><label for="wi-s">Same cuisine in and around the block</label><input type="range" id="wi-s" min="0" max="60" value="3"><output id="wi-s-o" for="wi-s">3</output></div>
+        <div class="res"><b id="wi-pct">-</b><span class="hint" id="wi-say">of NYC restaurant blocks score lower for this cuisine.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band why" id="why">
+  <div class="why-lead">
+    <div class="why-copy">
+      <h2>The agent knows real places because Qloo does.</h2>
+      <p class="lede">A language model can reason about a neighbourhood. It cannot know when the place down the block
+        closes tonight. We asked two models when 30 real New York restaurants close on Friday, alone and with Qloo's
+        record, and checked every answer against Google Maps.</p>
+      <p class="why-big"><span><b>0 of 30</b> right for GPT-6 Astra alone</span><span class="wq"><b>29 of 30</b> right with Qloo</span></p>
+      <p class="hint">This is why Whitespace answers every hours question from Qloo and never from the model's memory.</p>
       <details class="answers" id="t20">
         <summary>See all 30 answers</summary>
-        <div id="t20-body"><p class="hint">Loading the recorded answers…</p></div>
+        <div id="t20-body"><p class="hint">Loading the recorded answers&hellip;</p></div>
       </details>
-    </figure>
-    <div class="proof-side">
-      <article class="proof">
-        <span class="tagline">Test 12, checked by a person</span>
-        <p class="big-num">29<small> of 30</small></p>
-        <p>Friday closing times in Qloo matched Google Maps, within 30 minutes.</p>
-      </article>
-      <article class="proof">
-        <span class="tagline">Test 27, real listeners</span>
-        <p class="big-num">0.841<small> vs 0.516</small></p>
-        <p>For 40 real listeners, Qloo ranked the small artists each one really plays far ahead of a ranking by popularity (AUC).</p>
-      </article>
-      <article class="proof">
-        <span class="tagline">Test 28, festival schedules</span>
-        <p class="big-num">0.663<small> vs 0.043</small></p>
-        <p>Share of the possible cut in real fan clashes reached by a timetable built on Qloo's fan-overlap scores, against one built on popularity.</p>
-      </article>
     </div>
+    <figure class="pies" id="t20-pies" hidden>
+      <figcaption>
+        <strong>What each model answered</strong>
+        <span>Test 20, all 30 restaurants. Right means within 30 minutes of Google Maps.</span>
+      </figcaption>
+      <div class="pie-legend"><span><i class="sw qloo"></i>Right</span><span><i class="sw ink"></i>Wrong</span><span><i class="sw gray"></i>Declined</span></div>
+      <div class="pie-row" id="pie-row"></div>
+    </figure>
   </div>
+  <section class="panel duel-replay reveal" id="duel-replay" aria-labelledby="dr-title">
+    <div class="dr-head">
+      <h3 id="dr-title">The duel, restaurant by restaurant</h3>
+      <div class="dr-controls">
+        <label for="dr-pick" class="visually-hidden">Restaurant</label>
+        <select id="dr-pick"></select>
+        <button type="button" class="quiet small" id="dr-shuffle">Shuffle</button>
+        <button type="button" class="primary ask-btn" id="dr-go">Play</button>
+      </div>
+    </div>
+    <p class="dr-q" id="dr-q">Pick one of the 30 restaurants from Test 20 and watch four agents answer the same question.</p>
+    <div class="dr-lanes" id="dr-lanes"></div>
+    <p class="dr-truth" id="dr-truth"></p>
+    <div class="dr-score" id="dr-score"></div>
+    <p class="hint">The answers recorded in the pre-registered test; nothing is sent to a model.</p>
+  </section>
+</section>
   <p class="hint why-foot">Each number comes from a test whose rules were committed before its result. All 28 tests,
     including the ones where Qloo did not help, are under <a href="#evidence">How we know</a>.</p>
+</section>
+
+<section class="band game" id="game">
+  <div class="band-head">
+    <div>
+      <h2>Beat the model: when does it close on Friday?</h2>
+    </div>
+    <p class="hint">Five real New York restaurants from Test 20. Drag the dial to your guess, lock it in, and see how you did
+      against GPT-6 Astra alone and GPT-6 Astra with Qloo's record. Right means within 30 minutes of Google Maps.</p>
+  </div>
+  <div class="panel game-box" id="game-box">
+    <div class="game-top">
+      <span class="game-round" id="game-round">Round 1 of 5</span>
+      <div class="game-score" id="game-score"></div>
+    </div>
+    <p class="game-q" id="game-q">Loading the restaurants&hellip;</p>
+    <div class="dial">
+      <label for="game-dial" class="visually-hidden">Your guess for the Friday closing time</label>
+      <div class="dial-read" id="game-read" aria-live="polite">10:00 pm</div>
+      <input type="range" id="game-dial" min="64" max="112" step="1" value="88">
+      <div class="dial-ticks" aria-hidden="true"><span>noon</span><span>4 pm</span><span>8 pm</span><span>midnight</span><span>4 am</span></div>
+    </div>
+    <div class="game-actions">
+      <button type="button" class="primary" id="game-lock">Lock in my guess</button>
+      <button type="button" class="quiet" id="game-next" hidden>Next restaurant</button>
+    </div>
+    <div class="timeline" id="game-line" hidden></div>
+    <div class="verdicts" id="game-verdicts"></div>
+    <div class="game-end" id="game-end" hidden></div>
+  </div>
+</section>
+
+<section class="band scoreboard" id="results">
+  <div class="band-head">
+    <div>
+      <h2>Qloo against the baseline, test by test.</h2>
+    </div>
+    <p class="hint">Every test was written down before its result. Red is Qloo, blue is the baseline it was
+      measured against. Hover any chart for the detail.</p>
+  </div>
+  <div class="sb-hero reveal">
+    <div class="panel sb-ring" id="sb-ring"></div>
+    <div class="sb-kpis" id="sb-kpis"></div>
+  </div>
+  <figure class="dumb-fig reveal">
+    <figcaption>
+      <strong>Every head-to-head: where the baseline stood, and where Qloo took it</strong>
+      <span>One row per comparison, sorted by the size of Qloo's lead. Scores run from 0 to 1 (AUC, accuracy, preference share,
+        share of possible gain, correlation); the metric is named on each row.</span>
+    </figcaption>
+    <div class="dumb-legend">
+      <span><i class="sw base"></i>Baseline</span>
+      <span><i class="sw qloo"></i>Qloo, or a model with Qloo</span>
+      <button type="button" id="dumb-toggle" class="quiet small">Show as table</button>
+    </div>
+    <div id="dumb" class="dumb"></div>
+    <div id="dumb-table" hidden></div>
+    <div id="dumb-tip" class="tip" role="status" hidden></div>
+  </figure>
+  <div class="sb-filters" role="group" aria-label="Filter results by area">
+    <div class="chips" id="sb-chips"></div>
+    <span class="sb-count" id="sb-count"></span>
+  </div>
+  <div class="sb-grid" id="sb-grid"></div>
+  <button type="button" class="quiet sb-more" id="sb-more" hidden></button>
+  <details class="panel record" id="record">
+    <summary>The full record: results where Qloo did not move the number</summary>
+    <ul id="record-list"></ul>
+  </details>
 </section>
 
 <section class="band how-it" id="how">
   <div class="band-head">
     <div>
-      <p class="kicker big">How it works</p>
       <h2>What the agent does</h2>
     </div>
     <p class="hint">Six steps, in this order, on every run. Each one is shown on the page as it happens.</p>
@@ -317,27 +474,25 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
 
   <div class="band-head second">
     <div>
-      <p class="kicker big">Sources</p>
       <h2>What each source does</h2>
     </div>
     <p class="hint">Each source is used only for the job a test says it does well.</p>
   </div>
   <div class="sources">
     <article class="s-city"><span class="tagline">City records</span><h3>Where to open</h3>
-      <p>NYC Health Department inspection records and the Storefront Registry of vacant storefronts. The GPU-backed Kaggle result puts the lease score with Qloo at 0.893 versus 0.851 without it.</p></article>
+      <p>NYC Health Department inspection records and the Storefront Registry of vacant storefronts. With Qloo the lease score reaches AUC 0.893, against 0.851 without it.</p></article>
     <article><span class="tagline">Census and jobs data</span><h3>Who lives and works nearby</h3>
       <p>Target customers come from the census. Only 2 of 7 Qloo audience tags matched it.</p></article>
     <article class="s-city"><span class="tagline">City records</span><h3>Who the competitors are</h3>
-      <p>The GPU-backed Kaggle result says Qloo finds 92.4% of competitors.</p></article>
+      <p>NYC inspection records list every rival; Qloo finds 92.4% of them too, with their hours and reviews.</p></article>
     <article class="s-qloo"><span class="tagline">Qloo place records</span><h3>When competitors close, and what reviewers mention</h3>
-      <p>City records have none of this. A person checked the closing times on Google Maps: 29 of 30 matched. Kaggle price levels matched for 25 of 27.</p></article>
+      <p>City records have none of this. A person checked the closing times on Google Maps: 29 of 30 matched. Price levels matched for 25 of 27.</p></article>
     <article class="s-qloo"><span class="tagline">Qloo affinity, not validated</span><h3>Where else a restaurant's fans go</h3>
       <p>Shown as Qloo's list and labelled as not validated. It is never used to choose where to open.</p></article>
   </div>
 </section>
 
 <section id="scene" class="band evidence scene">
-  <p class="kicker big">Scene explorer</p>
   <h2>Where else do their fans go?</h2>
   <p class="lede narrow">Name up to three places your customers already love. <span class="src qloo">Qloo</span> returns
     the places their fans also go, and the music and brands that crowd follows. No model is involved.</p>
@@ -351,14 +506,15 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
 </section>
 
 <section id="evidence" class="band evidence">
-  <p class="kicker big">The audit</p>
-  <h2>How we know</h2>
-  <p class="lede narrow">The current product uses the GPU-backed Kaggle results from Oct 31 as its authoritative
-    result source. Older local CPU-run figures remain in the historical record.</p>
+  <div class="band-head">
+    <h2>How we know</h2>
+    <p class="hint">Every test was written down and committed before its code or its result. Here is what they show,
+      and the full record is at the bottom.</p>
+  </div>
   <dl class="medians" id="medians" hidden>
-    <div class="m-city"><dt>City-records lease score</dt><dd id="med-city"></dd><p>median AUC across cuisines</p></div>
-    <div class="m-qloo"><dt>Qloo cuisine taste</dt><dd id="med-qloo"></dd><p>median AUC across cuisines</p></div>
-    <div><dt>Both together</dt><dd id="med-both"></dd><p>adding Qloo to the lease score</p></div>
+    <div class="m-city"><dt>Lease score without Qloo</dt><dd id="med-city"></dd><p>AUC, city records only (Test 4)</p></div>
+    <div class="m-qloo"><dt>Lease score with Qloo</dt><dd id="med-qloo"></dd><p>AUC (Test 4)</p></div>
+    <div class="m-qloo"><dt>With Qloo, 25 cuisines</dt><dd id="med-both"></dd><p>AUC (Test 4b)</p></div>
   </dl>
   <figure class="chart-fig">
     <figcaption>
@@ -374,19 +530,32 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
     <div id="chart-table" hidden></div>
     <div id="tip" class="tip" role="status" hidden></div>
   </figure>
-  <div class="entries-head">
-    <h3>Every test, with its caveat</h3>
-    <label for="entry-filter" class="visually-hidden">Filter the tests</label>
-    <input id="entry-filter" type="search" placeholder="Filter the tests">
+  <div class="audit">
+    <div class="audit-cols">
+      <div>
+        <h3>Where Qloo is strong</h3>
+        <p>Facts about real places: Friday closing times right 29 of 30, price levels 25 of 27, 92.4% of competitors
+          found. Taste: a real listener's small artists at 0.841 against 0.516 for popularity, festival clashes cut
+          0.663 of the way against 0.043. Briefs written with Qloo preferred 78% and 76% of the time.</p>
+      </div>
+      <div>
+        <h3>How that becomes the product</h3>
+        <p>The lease score ranks every storefront and reaches 0.893 with Qloo, against 0.851 without it. Every hours
+          question is answered from Qloo's record, never from the model's memory. The brief for the top pick is written
+          from Qloo, and every business it names is traced to Qloo or city records.</p>
+      </div>
+      <div>
+        <h3>What we kept honest</h3>
+        <p>Who lives in an area comes from the census, because only 2 of 7 Qloo audience tags matched it. We make no
+          claim about which restaurants survive. Tests 5, 6, 9, 22, 23 and 25, where Qloo did not move the number,
+          stay in the record below.</p>
+      </div>
+    </div>
+    <details class="tests-acc">
+      <summary id="tests-count">Every test in order, 1 to 28</summary>
+      <div class="tests-wrap"><table class="data tests" id="tests"></table></div>
+    </details>
   </div>
-  <div id="entries" class="entries"></div>
-  <p id="entries-none" class="hint" hidden>No test matches that filter.</p>
-
-  <div class="entries-head">
-    <h3 id="tests-count">Every test, in order</h3>
-    <p class="hint">Every test was written down and committed before its code or its result. Most went against Qloo, and they are all here.</p>
-  </div>
-  <div class="tests-wrap"><table class="data tests" id="tests"></table></div>
 </section>
 
 <footer class="foot">
@@ -401,7 +570,10 @@ try { if (localStorage.getItem("ws-theme") === "light") document.documentElement
 </button>
 <div id="toast" class="toast" role="status" hidden></div>
 
+
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script defer src="/static/app.js?v=11"></script>
+<script defer src="/static/app.js?v=27"></script>
+<script defer src="/static/features.js?v=25"></script>
+<script defer src="/static/play.js?v=27"></script>
 </body>
 </html>

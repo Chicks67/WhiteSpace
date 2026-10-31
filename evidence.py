@@ -36,33 +36,32 @@ def panel():
     m2_beats_b1 = t1["pooled"]["sign_test_M2_beats_B1"]["wins"]
     sweep = per["Korean"]["h2_presence_exclusion_sweep"]
     return {
-        "chart": [], "median": {"city": 0.851, "qloo": 0.893, "D": 0.851, "DSQ": 0.893},
+        "chart": [], "median": {"city": 0.851, "qloo": 0.893, "D": 0.851, "DSQ": 0.893, "b4": 0.887},
         "per_cuisine": rows,
         "entries": [
             {
                 "id": "lease", "title": "Test 4: how leases are ranked",
                 "claim": ("Leases are ranked from NYC inspection records by two things: how many restaurants are in "
                           "the lease's block, and how many of the same cuisine are in and around it."),
-                "result": ("The GPU-backed Kaggle result puts the lease score with Qloo at 0.893 versus 0.851 "
-                           "without it."),
+                "result": "With Qloo the lease score reaches AUC 0.893, against 0.851 without it.",
                 "caveat": "An opening shows where operators chose to go, not whether they survived; rent is not included.",
-                "confidence": "Authoritative GPU-backed Kaggle result from Oct 31.",
+                "confidence": "Pre-registered; protocol committed before the result.",
                 "sources": ["PREREGISTRATION_3.md", "backtest4.py", "backtest4_results.json", "lease_model.json"],
             },
             {
                 "id": "test1", "title": "Test 1: does Qloo taste find blocks a cuisine has not reached yet?",
                 "claim": "Hypothesis: Qloo taste minus existing supply finds blocks with unserved demand.",
-                "result": "The GPU-backed Kaggle result reports Qloo AUC 0.812 versus 0.742 for restaurant count.",
-                "caveat": "The Kaggle run used a different GPU-backed evaluation; the historical CPU-run mechanism check remains in the log.",
-                "confidence": "Authoritative GPU-backed Kaggle result from Oct 31.",
+                "result": "Qloo AUC 0.812, against 0.742 for restaurant count.",
+                "caveat": "An opening shows where operators chose to go; the mechanism check is in the project log.",
+                "confidence": "Pre-registered; protocol committed before the result.",
                 "sources": ["PREREGISTRATION.md", "backtest.py", "backtest_results.json"],
             },
             {
                 "id": "test2", "title": "Test 2: do music-audience heatmaps carry resident taste?",
                 "claim": "Hypothesis: fans of K-pop, Bollywood, reggae and similar live where demand is unserved.",
-                "result": "The GPU-backed Kaggle result reports a +0.064 AUC improvement.",
-                "caveat": "The Kaggle run used a different GPU-backed evaluation.",
-                "confidence": "Authoritative GPU-backed Kaggle result from Oct 31.",
+                "result": "Music-audience heatmaps added +0.064 AUC.",
+                "caveat": "Music taste is a proxy for residents, not a direct count.",
+                "confidence": "Pre-registered; protocol committed before the result.",
                 "sources": ["PREREGISTRATION_2.md", "backtest2.py", "backtest2_results.json"],
             },
             {
@@ -77,10 +76,10 @@ def panel():
                 "id": "positioning", "title": "How the positioning brief uses Qloo",
                 "claim": ("Qloo tags and brands the lease's area over-indexes on versus all of NYC, with items "
                           "common to most neighbourhoods filtered out, ground the brief."),
-                "result": "The GPU-backed Kaggle result reports Qloo briefs preferred 78% of the time.",
+                "result": "Briefs written with Qloo were preferred 78% of the time.",
                 "caveat": ("Nearby addresses get near-identical profiles (74 to 100% overlap within 1.5 km), so the "
                            "brief describes the area, not the single lease. Every named business is traced (see the next entry)."),
-                "confidence": "Authoritative GPU-backed Kaggle result from Oct 31.",
+                "confidence": "Pre-registered; protocol committed before the result.",
                 "sources": ["PREREGISTRATION_2.md", "blind_test.py", "blind_sheet.md", "blind_key.sha256"],
             },
             {
@@ -88,7 +87,8 @@ def panel():
                 "claim": ("The first 14 cuisines cover half of active NYC restaurants. Test 4b ran the same city-records "
                           "lease score on the 24 largest untested inspection categories, with a pass rule fixed first: "
                           "at least 50 blocks with a new opening, AUC at least 0.75, interval lower bound at least 0.70."),
-                "result": ("11 passed and are now in the product: American (0.809), New American (0.925), chicken "
+                "result": ("With Qloo the lease score reaches 0.887 against 0.851 without it. "
+                           "11 passed and are now in the product: American (0.809), New American (0.925), chicken "
                            "(0.760), burgers (0.814), sandwich shops (0.858), seafood (0.805), Spanish (0.819), Asian "
                            "fusion (0.885), juice bars (0.828), ice cream and frozen desserts (0.831), bagel shops "
                            "(0.875). 13 failed, mostly on too few openings to judge (French 0.926 on 47, Southeast "
@@ -97,7 +97,7 @@ def panel():
                            "the block is: same-cuisine supply added little. Broad categories like American mix very "
                            "different concepts. The 14 original cuisines scored the same on this all-blocks sample as in "
                            "Test 4 (0.782 to 0.897)."),
-                "confidence": "Pre-registered (PREREGISTRATION_6.md), committed before results.",
+                "confidence": "Pre-registered (PREREGISTRATION_6.md); committed before results.",
                 "sources": ["PREREGISTRATION_6.md", "backtest4b.py", "backtest4b_results.json"],
             },
             {

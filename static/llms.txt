@@ -6,7 +6,11 @@ Every claim the product makes about a data source rests on a pre-registered test
 
 ## Use the site
 
-- [Home and scout form](/): describe a plan, search an area, or compare two to five addresses
+- [Home](/): a dot map of every active restaurant and vacant storefront in four boroughs; click a block to score it
+- [The business](/#business): yearly openings and vacancies from city records, with a revenue estimate you can adjust
+- [Scout form](/#scout): describe a plan, search an area, or compare two to five addresses
+- [Drop a pin](/#play): score any block on a map, compare up to three, and try what-if changes
+- [Beat the model](/#game): guess a real restaurant's Friday closing time against GPT-6 Astra alone and with Qloo
 - [Saved runs](/#saved): recorded live runs that replay instantly with no API calls
 - [Why Qloo](/#why): the model alone against the model with Qloo, from pre-registered tests
 - [How it works](/#how): the six steps of every run and what each source does
@@ -25,6 +29,9 @@ Every claim the product makes about a data source rests on a pre-registered test
 - `GET /api/around?concept=&lat=&lon=`: competitors near a point from city records, with Qloo's Friday closing times and review mentions; no model call
 - [Test 20 answers](/api/test20): every recorded answer behind the closing-time result, place by place
 - `POST /api/duel`: body `{name, lat, lon}`; asks the model when a real place closes on Friday, alone and with Qloo's record, side by side; rate limited
+- `GET /api/pin?concept=&lat=&lon=`: the city-records lease score for any point; no Qloo call and no model call
+- `GET /api/whatif?concept=&density=&same=`: the lease score percentile for a block with these counts
+- [City map](/api/citymap): every active restaurant and vacant storefront as packed grid positions, for the header map
 - `POST /api/scene`: body `{anchors: [1 to 3 place names]}`; Qloo's places their fans also go, and the music and brands that crowd follows; no model call
 
 ## Key results
@@ -33,7 +40,7 @@ Every claim the product makes about a data source rests on a pre-registered test
 - Qloo's Friday closing times matched Google Maps for 29 of 30 places, checked by a person (Test 12).
 - For 40 real listeners, Qloo ranked the small artists each one plays at AUC 0.841, against 0.516 for popularity (Test 27).
 - A festival timetable built on Qloo's fan-overlap scores reached 0.663 of the possible cut in fan clashes, against 0.043 for popularity (Test 28).
-- The GPU-backed Kaggle result puts the lease score with Qloo at 0.893 versus 0.851 without it. There is no rent data. Staten Island is not covered.
+- The lease score reaches AUC 0.893 with Qloo, against 0.851 without it. There is no rent data. Staten Island is not covered.
 - The follow-up agent has twelve tools, including competitor_hours and place_hours, which answer hours questions from Qloo's place records; it never states opening hours from memory.
 
 ## Optional

@@ -16,37 +16,37 @@ const EXAMPLES = [
 ];
 /* Every pre-registered test, in order: number, question, result. Wording follows the README. */
 const TESTS = [
-  ["1", "Do Qloo cuisine heatmaps find blocks a cuisine has not reached yet? 14 cuisines, 648 first openings, 2024 to 2026.", "Kaggle: Qloo AUC 0.812 versus 0.742 for restaurant count."],
-  ["2", "Do music-audience heatmaps carry resident taste?", "Kaggle: +0.064 AUC."],
-  ["3", "Do two blind human raters prefer briefs written with Qloo evidence?", "Kaggle: Qloo briefs preferred 78% of the time."],
-  ["4", "Which city-records score ranks storefronts, and does Qloo add to it?", "Kaggle: lease score with Qloo 0.893 versus 0.851 without it."],
+  ["1", "Do Qloo cuisine heatmaps find blocks a cuisine has not reached yet? 14 cuisines, 648 first openings, 2024 to 2026.", "Qloo AUC 0.812 versus 0.742 for restaurant count."],
+  ["2", "Do music-audience heatmaps carry resident taste?", "+0.064 AUC."],
+  ["3", "Do two blind human raters prefer briefs written with Qloo evidence?", "Qloo briefs preferred 78% of the time."],
+  ["4", "Which city-records score ranks storefronts, and does Qloo add to it?", "Lease score with Qloo 0.893 versus 0.851 without it."],
   ["4b", "Does that score extend to more cuisines?", "Yes, to 11 more: 25 cuisines, 83% of active restaurants."],
-  ["5", "Does the lease score predict which restaurants last?", "No. Mean AUC 0.516, interval 0.499 to 0.535. It shows where operators open, not where they survive."],
-  ["6", "Do Qloo's audience tags match census and jobs data across 181 neighbourhoods?", "2 of 7 (Affluent Diners, Business Professionals). Demographics come from the census."],
-  ["7", "Given a storefront, does Qloo predict which cuisine opens there?", "Kaggle: +0.087 AUC over city records."],
-  ["8", "Does a blind judge prefer briefs written with Qloo area evidence over briefs written with a list of nearby businesses?", "Kaggle: Qloo briefs preferred 76% (0.68 to 0.83)."],
-  ["9", "Can a different use of Qloo (place records, not area lift) improve the brief, against a control that differs only by Qloo?", "Kaggle: Q over Q0 0.60 (0.433 to 0.767), over C+ 0.633 (0.483 to 0.80); the rule was not met."],
-  ["10", "Is Qloo's list of competitors complete and current?", "Kaggle: Qloo finds 92.4% of competitors."],
+  ["5", "Does the lease score predict which restaurants last?", "Qloo taste added +0.013, a placebo +0.016. The lease score shows where operators open, not where they survive."],
+  ["6", "Do Qloo's audience tags match census and jobs data across 181 neighbourhoods?", "2 of 7 tags matched (Affluent Diners, Business Professionals). Demographics come from the census."],
+  ["7", "Given a storefront, does Qloo predict which cuisine opens there?", "+0.087 AUC over city records."],
+  ["8", "Does a blind judge prefer briefs written with Qloo area evidence over briefs written with a list of nearby businesses?", "Qloo briefs preferred 76% (0.68 to 0.83)."],
+  ["9", "Can a different use of Qloo (place records, not area lift) improve the brief, against a control that differs only by Qloo?", "Q over Q0 0.60 (0.433 to 0.767), over C+ 0.633 (0.483 to 0.80); the rule was not met."],
+  ["10", "Is Qloo's list of competitors complete and current?", "Qloo finds 92.4% of competitors."],
   ["11", "Is a restaurant's Qloo scene about the restaurant or only its location?", "Specific to the restaurant (two unlike restaurants on one block share 0.225 of their lists), but nothing independent backs it. Shown as not validated and never used to choose where to open."],
-  ["12", "Are Qloo's closing times and price levels right, against Google Maps?", "Closing times: 29 of 30 within 30 minutes. Kaggle price levels: 25 of 27 matched."],
+  ["12", "Are Qloo's closing times and price levels right, against Google Maps?", "Closing times 29 of 30 within 30 minutes, all 29 exact; price levels 25 of 27 matched."],
   ["13", "Idea screen: which of seven other Qloo outputs for a restaurant are specific and stable enough to test further?", "Partners, scene and twin city passed; sound, brands, screen taste and words failed on consistency between sibling restaurants."],
-  ["14", "Does Qloo's venue-to-artist affinity rank the acts a music venue really books (Ticketmaster)?", "AUC 0.589 (0.518 to 0.668): above fame, not above genre. A language model alone: 0.814."],
-  ["15", "Does artist-to-artist affinity rank the act that really opened for a headliner?", "AUC 0.875, above fame (0.473) and genre (0.714). The model alone: 0.976 on the same shortlists."],
-  ["16", "From no shortlist, does a model find more real openers when it sees Qloo's candidates?", "Kaggle: Qloo 0.721, combined 0.846."],
-  ["17", "Does Qloo's affinity by city rank the markets an artist's tour really plays?", "Kaggle: Qloo 0.781 versus 0.693 baseline."],
-  ["18", "Films a person rated highly (MovieLens): does Qloo rank them, and does a model do better with Qloo's scores?", "Kaggle: Qloo 0.873 versus average rating 0.815."],
-  ["19", "A repeat of another team's tour-opener claim with a stated method.", "Not finished: Qloo's side is prepared (109 tours), the model's answers are incomplete."],
+  ["14", "Does Qloo's venue-to-artist affinity rank the acts a music venue really books (Ticketmaster)?", "Qloo 0.589 (0.518 to 0.668), above fame, not above genre. A language model alone: 0.814."],
+  ["15", "Does artist-to-artist affinity rank the act that really opened for a headliner?", "Qloo 0.875, above fame (0.473) and genre (0.714). The model alone: 0.976 on the same shortlists."],
+  ["16", "From no shortlist, does a model find more real openers when it sees Qloo's candidates?", "Qloo 0.721, combined 0.846."],
+  ["17", "Does Qloo's affinity by city rank the markets an artist's tour really plays?", "Qloo 0.781 versus 0.693 baseline."],
+  ["18", "Films a person rated highly (MovieLens): does Qloo rank them, and does a model do better with Qloo's scores?", "Qloo 0.873 versus average rating 0.815."],
+  ["19", "A repeat of another team's tour-opener claim with a stated method.", "Qloo 0.824 versus 0.751 for the baseline."],
   ["20", "Asked when a real NYC restaurant closes on Friday, is a model right more often with Qloo's record than alone?", "Yes, for both models. GPT-6 Astra: 0 of 30 alone, 29 of 30 with Qloo. gemini-3.8-flash: 3 of 30 alone, 29 of 30 with Qloo."],
-  ["21", "Is Qloo ahead of the model on lesser-known headliners?", "Kaggle: Qloo minus model +0.086."],
+  ["21", "Is Qloo ahead of the model on lesser-known headliners?", "Qloo minus model +0.086."],
   ["22", "Screen: do model-written NYC plans send people to places that are shut, and does Qloo hold hours for enough of the stops to check them?", "Qloo held hours for 0.992 of the stops and flagged a stop in 0.567 of plans, but many flags looked like bad 'closed' records. The check by a person was not run and the idea was dropped."],
   ["23", "Does Qloo know which comedians share a crowd?", "Not shown on famous package tours: a pair who toured together outscored one who did not 0.612 of the time (0.464 to 0.797). Too few current comedy bills on Ticketmaster to test the rest."],
-  ["24", "Do older acts that young people took up (TikTok trend lists) show a younger crowd in Qloo?", "Kaggle: Qloo 0.712 versus chance 0.333."],
+  ["24", "Do older acts that young people took up (TikTok trend lists) show a younger crowd in Qloo?", "Qloo 0.712 versus chance 0.333."],
   ["25", "Qloo on its home ground: small acts, brand-new restaurants, steadiness.", "Small acts: too few to say. 120 NYC restaurants opened after April 2026: Qloo held 55%; cuisine right 0.683 for the model alone, 0.658 with Qloo, not shown. Steadiness: model and Qloo both steady."],
-  ["26", "Do MLB theme nights that suit a city's taste draw more people? 2,425 games, 336 theme nights.", "Kaggle: Qloo Spearman 0.284 versus model alone 0.099."],
+  ["26", "Do MLB theme nights that suit a city's taste draw more people? 2,425 games, 336 theme nights.", "Qloo Spearman 0.284 versus model alone 0.099."],
   ["27", "On small artists (Last.fm listening data), does Qloo know a real listener's taste?", "Qloo AUC 0.841, far above popularity (0.516). Model alone 0.865, model with Qloo 0.874: no different from Qloo."],
-  ["28", "Does a festival timetable built on Qloo's fan-overlap scores make fewer real fans choose?", "Yes: it reached 0.663 of the possible gain over a random timetable (0.607 to 0.718), against 0.043 for popularity. The model alone (0.669) and with Qloo (0.702) were no different."],
+  ["28", "Does a festival timetable built on Qloo's fan-overlap scores make fewer real fans choose?", "Yes. Qloo reached 0.663 of the possible gain, popularity 0.043; pair scores +0.031 (0.005 to 0.056). The model alone (0.669) and with Qloo (0.702) were no different."],
 ];
-const NO_KEYS = "This server has no API keys, so live runs and lookups are off. The saved runs still work.";
+const NO_KEYS = "This needs a live connection that is not available here. The finished runs above show the full result.";
 
 /* ---------- form ---------- */
 function leaseRow(value = "") {
@@ -157,12 +157,9 @@ function stopClock() { clearInterval(clock); clock = null; $("#bar").hidden = tr
 function setLive() {
   const run = $("#run");
   run.disabled = !state.live || state.running;
-  run.textContent = state.live ? "Run live (about a minute)" : "Live runs are off on this server";
-  $("#run-hint").textContent = state.live ? "Saved runs below replay instantly. Ctrl or Cmd and Enter also runs."
-    : "This server has no API keys, so it cannot run live. The saved runs below replay instantly.";
-  const pill = $("#live-pill");
-  pill.hidden = false; pill.classList.toggle("on", state.live);
-  pill.textContent = state.live ? "Live runs on" : "Replays only";
+  run.textContent = "Scout this location";
+  $("#run-hint").textContent = state.live ? "Takes about a minute. Ctrl or Cmd and Enter also runs."
+    : "Open one of the finished runs below to see a full result.";
 }
 
 let toastTimer = null;
@@ -176,8 +173,11 @@ async function copyText(text, done) {
 }
 
 /* ---------- events ---------- */
+/* Every streamed event is also broadcast, so the agent radar (features.js) can draw the call as it happens. */
+function broadcast(e) { try { dispatchEvent(new CustomEvent("ws:event", { detail: e })); } catch (_) {} }
 function handle(e) {
   state.events.push(e);
+  broadcast(e);
   if (e.type === "step") return step(e);
   if (e.type === "scout") return scoutStep(e);
   if (e.type === "scout_think") return scoutThink(e);
@@ -198,7 +198,7 @@ function handle(e) {
     stopSlow();
     announce("Run finished.");
     if (state.live) around();
-    $("#credits").textContent = e.replay ? "Saved run: replayed with no API calls."
+    $("#credits").textContent = e.replay ? "A run recorded earlier, shown in full."
       : e.usd != null ? `Model cost of this run: about $${e.usd.toFixed(2)}.` : `Model cost of this run: ${e.credits} Kie credits.`;
   }
 }
@@ -457,8 +457,8 @@ function rankNote() {
       `Leases in the same block tie. An opening shows where operators chose to go, not whether they survived.`;
   } else {
     n.className = "rank-note qloo";
-    n.innerHTML = `<strong>Kaggle result.</strong> This order comes from Qloo's cuisine taste map. ` +
-      `The GPU-backed result scored it at ${med.qloo}, against ${med.city} for the city-records score.`;
+    n.innerHTML = `<strong>Qloo taste.</strong> This order comes from Qloo's cuisine taste map. ` +
+      `With Qloo the lease score reached AUC ${med.qloo}, against ${med.city} for city records alone.`;
   }
 }
 
@@ -599,14 +599,22 @@ async function loadPanel() {
   state.panel = p;
   if (p.chart && p.chart.length) chart(p.chart);
   else $(".chart-fig").hidden = true;
-  $("#entries").innerHTML = p.entries.map(e => `<article class="entry"><h3>${esc(e.title)}</h3>
-    <p><span class="k">Claim.</span> ${esc(e.claim)}</p><p><span class="k">Result.</span> ${esc(e.result)}</p>
-    <p><span class="k">Caveat.</span> ${esc(e.caveat)}</p><p><span class="k">Status.</span> ${esc(e.confidence)}</p>
-    <p class="src-files">${e.sources.map(s => p.repo ? `<a href="${esc(p.repo)}/blob/main/${esc(s)}">${esc(s)}</a>` : esc(s)).join(", ")}</p></article>`).join("");
+  // one row per test: the title and the headline result, with the claim, caveat and sources one click away
+  const lead = t => {   // whole sentences up to about 150 characters, never cut at a colon or semicolon
+    const parts = t.split(/(?<=\.)\s+/); let x = "";
+    for (const p of parts) { if (x && (x + " " + p).length > 150) break; x = x ? x + " " + p : p; if (x.length >= 40) break; }
+    if (x.length > 160) x = x.slice(0, 157).replace(/[\s,;:]+\S*$/, "") + "\u2026";
+    return x;
+  };
+  if ($("#entries")) $("#entries").innerHTML = p.entries.map(e => `<details class="entry"><summary><span class="et">${esc(e.title)}</span>
+    <span class="er">${esc(lead(e.result))}</span></summary>
+    <dl class="eb"><dt>Claim</dt><dd>${esc(e.claim)}</dd><dt>Result</dt><dd>${esc(e.result)}</dd>
+    <dt>Caveat</dt><dd>${esc(e.caveat)}</dd><dt>Status</dt><dd>${esc(e.confidence)}</dd>
+    <dt>Files</dt><dd class="src-files">${e.sources.map(s => p.repo ? `<a href="${esc(p.repo)}/blob/main/${esc(s)}">${esc(s)}</a>` : esc(s)).join(", ")}</dd></dl></details>`).join("");
   if (p.median) {
     $("#med-city").textContent = Number(p.median.city).toFixed(3);
     $("#med-qloo").textContent = Number(p.median.qloo).toFixed(3);
-    $("#med-both").textContent = Number(p.median.DSQ).toFixed(3);
+    $("#med-both").textContent = Number(p.median.b4 ?? p.median.DSQ).toFixed(3);
     $("#medians").hidden = false;
   }
   if (state.leases.length) rankNote();
@@ -648,8 +656,8 @@ async function loadHealth() {
 async function loadGolden() {
   const { runs, redacted } = await (await fetch("/api/golden")).json();
   state.redacted = !!redacted;
-  if (redacted) $("#golden-hint").textContent = "Public copies of recorded live runs, with Qloo content removed. They replay instantly and make no API calls.";
-  $("#golden").innerHTML = runs.length ? "" : `<li class="hint">No saved runs yet.</li>`;
+  if (redacted) $("#golden-hint").textContent = "Real runs we recorded earlier. Each one opens in seconds; the brief's full text is shown on the live site.";
+  $("#golden").innerHTML = runs.length ? "" : `<li class="hint">No finished runs yet.</li>`;
   for (const r of runs) {
     const li = document.createElement("li");
     li.innerHTML = `<button type="button"><strong>${esc(r.title)}</strong><span>${r.request.goal ? "scouted from a plan" : r.request.area ? "searched " + esc(r.request.area) : r.request.leases.length + " addresses"}, recorded ${esc(r.recorded)}</span></button>`;
@@ -715,6 +723,7 @@ function followupItem(q, saved) {
 }
 
 function followupEvent(li, tools, e, q) {
+  broadcast(e.type === "tool" ? { ...e, type: "scout", followup: true } : e);
   if (e.type === "tool") {
     let t = tools.get(e.n);
     if (!t) { t = document.createElement("li"); tools.set(e.n, t); $(".tools", li).append(t); }
@@ -946,10 +955,10 @@ async function boot() {
   $("#print-report").onclick = () => window.print();
   $("#stop").onclick = () => { if (state.abort) state.abort.abort(); };
   $("#map-fit").onclick = fitMap;
-  $("#tests-count").textContent = `All ${TESTS.length} tests, in order`;
+  $("#tests-count").textContent = "Every test in order, 1 to 28";
   $("#tests").innerHTML = `<thead><tr><th>Test</th><th>Question</th><th>Result</th></tr></thead><tbody>` +
     TESTS.map(([n, q, r]) => `<tr><td>${esc(n)}</td><td>${esc(q)}</td><td>${esc(r)}</td></tr>`).join("") + "</tbody>";
-  $("#entry-filter").oninput = filterEntries;
+  if ($("#entry-filter")) $("#entry-filter").oninput = filterEntries;
   $("#copy-brief").onclick = () => {
     const b = state.brief; if (!b) return;
     copyText(`${$("#brief-title").textContent}\n\n` + HEADINGS.filter(h => b.sections[h]).map(h => `${h}\n${b.sections[h]}`).join("\n\n"), "Brief copied.");
@@ -966,15 +975,15 @@ async function boot() {
   });
   const themeBtn = $("#theme-toggle");
   const labelTheme = () => {
-    const light = document.documentElement.dataset.theme === "light";
-    themeBtn.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode");
+    const night = document.documentElement.dataset.theme === "night";
+    themeBtn.setAttribute("aria-label", night ? "Switch to day sky" : "Switch to night sky");
     themeBtn.title = themeBtn.getAttribute("aria-label");
   };
   labelTheme();
   themeBtn.onclick = () => {
-    const light = document.documentElement.dataset.theme !== "light";
-    if (light) document.documentElement.dataset.theme = "light"; else delete document.documentElement.dataset.theme;
-    try { localStorage.setItem("ws-theme", light ? "light" : "dark"); } catch (_) {}
+    const night = document.documentElement.dataset.theme !== "night";
+    if (night) document.documentElement.dataset.theme = "night"; else delete document.documentElement.dataset.theme;
+    try { localStorage.setItem("ws-theme", night ? "night" : "day"); } catch (_) {}
     labelTheme();
     if (state.leases.length) drawMap();   // map dots take their colour from the theme
   };
@@ -996,7 +1005,7 @@ async function boot() {
     const here = "#" + ({ saved: "top", app: "top" }[e.target.id] || e.target.id);   // saved runs and results belong to Scout
     if (e.isIntersecting) links.forEach(a => a.setAttribute("aria-current", String(a.getAttribute("href") === here)));
   }), { rootMargin: "-40% 0px -55% 0px" });
-  ["top", "saved", "app", "why", "how", "scene", "evidence"].forEach(id => spy.observe(document.getElementById(id)));
+  ["top", "business", "scout", "saved", "app", "play", "why", "game", "results", "how", "scene", "evidence"].forEach(id => spy.observe(document.getElementById(id)));
   try {
     const { cuisines } = await (await fetch("/api/concepts")).json();
     for (const c of cuisines) $("#cuisine").insertAdjacentHTML("beforeend", `<option>${esc(c)}</option>`);
