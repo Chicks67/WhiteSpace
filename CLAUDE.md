@@ -62,10 +62,10 @@ KAGGLE_RESULTS.md (kept locally and git-ignored, never published; the site and d
 
 ## Pending
 
-1. Shared rate limits: run `vercel integration add upstash`, then `vercel deploy --prod`; app.py switches to the
-   shared store by itself when KV_REST_API_URL and KV_REST_API_TOKEN are set.
-2. One live test run on the site to confirm the Kie key has credit; if it does not, the page falls back to the
-   closest finished run.
+1. Optional, not needed: shared rate limits through Upstash (the marketplace has no free plan; a free database from
+   console.upstash.com works by setting UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN). The Vercel Firewall rule
+   and per-instance limits already protect the paid endpoints.
+2. Done Oct 31: a live run on Kie succeeded in production.
 3. Real prices for the business calculator (now $299 per site report and $50 a month per listing, placeholders).
 4. Real founder or broker feedback, and two outside raters for the brief.
 

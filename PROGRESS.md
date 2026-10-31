@@ -28,5 +28,6 @@ Full table: README "What we tested", and on the site under Results and How we kn
 
 ## Open
 
-- Shared rate limits: run `vercel integration add upstash`, then redeploy; the code switches on by itself.
-- One live test run on the site, to confirm the Kie key has credit.
+- Nothing blocking. Live runs on Kie are confirmed working (Oct 31). Shared rate limits through Upstash are optional:
+  the Vercel Firewall rule and each instance's own limits already protect the paid endpoints, and app.py switches to
+  a shared store by itself if one is ever connected.
