@@ -94,7 +94,7 @@ scene.py (scene explorer). Endpoints tested; the two buttons not yet clicked in 
 1. Next test idea: a Qloo plus model test on long-tail local places with outside ground truth (for example the
    Yelp open dataset, which a person must download after accepting its terms). Test 19 needs model credit.
 2. Team decisions: Test 3 (report as not run?); what the brief uses after Test 9; how the write-up frames the audit.
-3. Rotate the CometAPI keys pasted into chat on Oct 12; confirm the account in use is a funded one (rule above).
+3. Done Oct 31: the old CometAPI keys are retired; the live site runs on Kie (LLM_PROVIDER=kie, KIE_API_KEY on Vercel).
 4. Push to GitHub (the team's repository; many local commits are unpushed); deploy to Render (render.yaml; upload
    golden/ to the private disk; test that replays survive a restart). README covers Tests 1 to 21. The repo is private; check before every push.
 5. Real founder or broker feedback; two outside raters; write-up in the kit's six-item format.

@@ -76,7 +76,7 @@ the block.
 
 ## How it is built
 
-- Python FastAPI server; the agent loop uses GPT-6 Astra (OpenAI Responses-compatible API via CometAPI) with function
+- Python FastAPI server; the agent loop uses GPT-6 Astra (OpenAI Responses-compatible API via Kie, with CometAPI as an alternative provider) with function
   calling, hedged requests and an Azure fallback.
 - Qloo Insights API through a cached client with a monthly quota guard; a private warm cache ships with the server.
 - NYC Open Data (restaurant inspections, Storefront Registry, business improvement districts, subway ridership),

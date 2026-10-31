@@ -554,8 +554,8 @@ vercel deploy --prod                           # production
 
   ```bash
   vercel env add QLOO_API_KEY production
-  vercel env add LLM_PROVIDER production       # comet
-  vercel env add COMET_API_KEY production
+  vercel env add LLM_PROVIDER production       # kie (the live site), or comet
+  vercel env add KIE_API_KEY production        # or COMET_API_KEY when LLM_PROVIDER=comet
   vercel deploy --prod
   ```
 
