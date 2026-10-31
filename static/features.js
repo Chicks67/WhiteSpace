@@ -1,73 +1,44 @@
 "use strict";
-/* Page features on top of app.js: the agent radar, the results scoreboard, the Test 20 duel replay, scroll
+/* Page features on top of app.js: the agent radar, the results scoreboard, the closing-time duel replay, scroll
    reveals and count-ups. Nothing here calls a model: the radar draws the events
    a run already streams, and every result matches the project's authoritative results table. */
 
 /* ---------- the test results, as the page shows them ---------- */
-const DOMAINS = { places: "Places", restaurants: "Restaurants", briefs: "Briefs", music: "Music", film: "Film", sports: "Sports" };
-/* kind: race (several bars out of a total), donut (a share), pair (Qloo against its baseline), gain (a difference).
-   badge: win (beat its baseline), fact (Qloo was right), built (a model using Qloo, no outside baseline), mix (mixed). */
+const DOMAINS = { places: "Places", restaurants: "Restaurants", briefs: "Briefs" };
+/* Each test has a name, not a number. kind: race (several bars out of a total), donut (a share), pair (Qloo against
+   its baseline), gain (a difference). badge: win (beat its baseline), fact (Qloo was right). */
 const RESULTS = [
-  { id: "F20", test: "20", dom: "places", badge: "win", kind: "race", of: 30, title: "When does this restaurant close on Friday?",
+  { id: "hours-qa", name: "Closing-time check", dom: "places", badge: "win", kind: "race", of: 30, title: "When does this restaurant close on Friday?",
     rows: [["GPT-6 Astra alone", 0, "b"], ["GPT-6 Astra + Qloo", 29, "q"], ["Gemini 3.8 Flash alone", 3, "b"], ["Gemini 3.8 Flash + Qloo", 29, "q"]],
     note: "30 real New York restaurants, answers checked against Google Maps." },
-  { id: "F12", test: "12", dom: "places", badge: "fact", kind: "donut", n: 29, of: 30, title: "Qloo's Friday closing times against Google Maps",
+  { id: "hours", name: "Hours and prices", dom: "places", badge: "fact", kind: "donut", n: 29, of: 30, title: "Qloo's Friday closing times against Google Maps",
     note: "Within 30 minutes for 29 of 30, and all 29 exact." },
-  { id: "S12", test: "12", dom: "places", badge: "fact", kind: "donut", n: 25, of: 27, title: "Qloo's price levels against Google Maps",
+  { id: "prices", name: "Hours and prices", dom: "places", badge: "fact", kind: "donut", n: 25, of: 27, title: "Qloo's price levels against Google Maps",
     note: "Price levels matched for 25 of 27 places." },
-  { id: "S10", test: "10", dom: "restaurants", badge: "fact", kind: "donut", n: .924, of: 1, pct: true, title: "Share of real competitors Qloo finds",
+  { id: "rivals", name: "Competitor coverage", dom: "restaurants", badge: "fact", kind: "donut", n: .924, of: 1, pct: true, title: "Share of real competitors Qloo finds",
     note: "Against the city's inspection records." },
-  { id: "S3", test: "3", dom: "briefs", badge: "win", kind: "donut", n: .78, of: 1, pct: true, title: "Human raters prefer the brief written with Qloo",
+  { id: "raters", name: "Brief, human raters", dom: "briefs", badge: "win", kind: "donut", n: .78, of: 1, pct: true, title: "Human raters prefer the brief written with Qloo",
     note: "Positioning briefs, rated blind.", base: [.5, "no preference"] },
-  { id: "S8", test: "8", dom: "briefs", badge: "win", kind: "donut", n: .76, of: 1, pct: true, title: "A blind judge prefers the brief written with Qloo",
+  { id: "judge", name: "Brief, blind judge", dom: "briefs", badge: "win", kind: "donut", n: .76, of: 1, pct: true, title: "A blind judge prefers the brief written with Qloo",
     note: "Interval 0.68 to 0.83.", base: [.5, "no preference"] },
-  { id: "S4", test: "4", dom: "restaurants", badge: "win", kind: "pair", metric: "AUC", title: "Lease score: where a cuisine opens next",
+  { id: "lease", name: "Lease score", dom: "restaurants", badge: "win", kind: "pair", metric: "AUC", title: "Lease score: where a cuisine opens next",
     q: ["With Qloo", .893], b: ["Without Qloo", .851], note: "The score that ranks every storefront in the product." },
-  { id: "S4b", test: "4b", dom: "restaurants", badge: "win", kind: "pair", metric: "AUC", title: "Lease score across 25 cuisines",
-    q: ["With Qloo", .887], b: ["Without Qloo", .851], note: "The same score on the cuisines added in Test 4b." },
-  { id: "S1", test: "1", dom: "restaurants", badge: "win", kind: "pair", metric: "AUC", title: "Cuisine heatmaps find the next opening",
+  { id: "lease25", name: "Lease score, 25 cuisines", dom: "restaurants", badge: "win", kind: "pair", metric: "AUC", title: "Lease score across 25 cuisines",
+    q: ["With Qloo", .887], b: ["Without Qloo", .851], note: "The same score on the cuisines added later." },
+  { id: "heatmaps", name: "Cuisine heatmaps", dom: "restaurants", badge: "win", kind: "pair", metric: "AUC", title: "Cuisine heatmaps find the next opening",
     q: ["Qloo heatmap", .812], b: ["Restaurant count", .742], note: "Against the count of restaurants already on each block." },
-  { id: "S7", test: "7", dom: "restaurants", badge: "win", kind: "gain", delta: .087, metric: "AUC over city records", title: "Which cuisine opens in a storefront",
+  { id: "storefront", name: "Storefront cuisine", dom: "restaurants", badge: "win", kind: "gain", delta: .087, metric: "AUC over city records", title: "Which cuisine opens in a storefront",
     note: "Qloo added to city records when predicting a storefront's cuisine." },
-  { id: "S2", test: "2", dom: "music", badge: "win", kind: "gain", delta: .064, metric: "AUC", title: "Music-audience heatmaps carry local taste",
-    note: "Gain from Qloo's music-audience heatmaps." },
-  { id: "F27", test: "27", dom: "music", badge: "win", kind: "pair", metric: "AUC", title: "Small artists a real listener plays",
-    q: ["Qloo", .841], b: ["Popularity", .516], note: "40 real Last.fm listeners. Model alone 0.865, model + Qloo 0.874: no meaningful difference." },
-  { id: "F28", test: "28", dom: "music", badge: "win", kind: "pair", metric: "share of possible gain", title: "A festival timetable with fewer fan clashes",
-    q: ["Qloo", .663], b: ["Popularity", .043], note: "Pair scores +0.031 (0.005 to 0.056). Model 0.669, model + Qloo 0.702: no different." },
-  { id: "F15", test: "15", dom: "music", badge: "win", kind: "race", of: 1, metric: "AUC", title: "The act that really opened the tour",
-    rows: [["Qloo", .875, "q"], ["Genre", .714, "b"], ["Fame", .473, "b"]], note: "A model alone scored 0.976 on the same shortlists." },
-  { id: "S16", test: "16", dom: "music", badge: "built", kind: "race", of: 1, metric: "AUC", title: "Finding real openers with no shortlist",
-    rows: [["Qloo candidates", .721, "q"], ["Model + Qloo", .846, "q"]], note: "A model shown Qloo's candidates found the most." },
-  { id: "S17", test: "17", dom: "music", badge: "win", kind: "pair", metric: "AUC", title: "Cities an artist's tour really plays",
-    q: ["Qloo", .781], b: ["Baseline", .693] },
-  { id: "S19", test: "19", dom: "music", badge: "win", kind: "pair", metric: "AUC", title: "Another team's tour-opener claim, repeated",
-    q: ["Qloo", .824], b: ["Baseline", .751] },
-  { id: "S21", test: "21", dom: "music", badge: "win", kind: "gain", delta: .086, metric: "Qloo minus model", title: "Lesser-known headliners: Qloo against the model",
-    note: "Where a model knows least, Qloo leads." },
-  { id: "S24", test: "24", dom: "music", badge: "win", kind: "pair", metric: "AUC", title: "Older acts that young people took up",
-    q: ["Qloo", .712], b: ["Chance", .333], note: "TikTok trend lists." },
-  { id: "S18", test: "18", dom: "film", badge: "win", kind: "pair", metric: "AUC", title: "Films a person rated highly (MovieLens)",
-    q: ["Qloo", .873], b: ["Average rating", .815] },
-  { id: "S26", test: "26", dom: "sports", badge: "win", kind: "pair", metric: "Spearman", title: "MLB theme nights that suit a city's taste",
-    q: ["Qloo", .284], b: ["Model alone", .099], note: "2,425 games, 336 theme nights." },
-  { id: "F14", test: "14", dom: "music", badge: "mix", kind: "race", of: 1, metric: "AUC", title: "Which acts a music venue books",
-    rows: [["Qloo", .589, "q"], ["Model alone", .814, "b"]], note: "Qloo 0.589 (0.518 to 0.668): above fame, not above genre." },
 ];
 /* Results where Qloo did not move the number. Kept on the page: every test stays in the record. */
 const RECORD = [
-  "Test 9, brief from Qloo place records: Q over Q0 0.60 (0.433 to 0.767), over C+ 0.633 (0.483 to 0.80); the registered rule was not met.",
-  "Test 6, Qloo audience tags against census: 2 of 7 tags matched. Demographics come from the census.",
-  "Test 11, scene specificity: location share 0.225; what a scene means is not validated.",
-  "Test 5, survival with Qloo taste: +0.013, against +0.016 for a placebo.",
-  "Test 22, Qloo hours for model-written plans: hours held for 0.992 of stops; the human check was not run.",
-  "Test 25, brand-new restaurants: Qloo held 55% of 120; cuisine 0.683 for the model alone, 0.658 with Qloo.",
-  "Test 23, comedians who share a crowd: 0.612 (0.464 to 0.797), too few bills to say.",
-  "Test 13, idea screen: partners, scene and twin city passed; the other outputs failed on consistency.",
-  "Tests 14 and 15: a model alone scored 0.814 and 0.976, above Qloo's 0.589 and 0.875.",
+  "Brief from place records: Q over Q0 0.60 (0.433 to 0.767), over C+ 0.633 (0.483 to 0.80); the registered rule was not met.",
+  "Audience tags: 2 of 7 Qloo tags matched against the census. Demographics come from the census.",
+  "Restaurant scene: location share 0.225; what a scene means is not validated, so it never chooses where to open.",
+  "Survival: Qloo taste added +0.013, against +0.016 for a placebo. We make no survival claim.",
 ];
 const WINS = RESULTS.filter(k => k.badge === "win");
-const COMPARED = WINS.length + 4;   // the wins, plus the head-to-heads Qloo did not win: Tests 5, 9, 14 and 25
+const COMPARED = WINS.length + 2;   // the wins, plus the two head-to-heads Qloo did not win: survival and the brief from place records
 const fmt = v => (v < 1 && v > -1 ? v.toFixed(3) : String(v));
 const still = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -97,11 +68,11 @@ function scoreboard() {
     <p class="lbl">Test results where Qloo, or a model with Qloo, beat the baseline it was measured against.</p>`;
   const kpis = [
     ["Friday closing times", 29, "/ 30", "With Qloo's record, for both models. Alone: 0 and 3.", 0],
-    ["Brief preferred", 78, "%", "Blind raters chose the brief written with Qloo (Test 3).", 0],
-    ["Lease score", .893, "AUC", "With Qloo, against 0.851 without it (Test 4).", 3],
-    ["Competitors found", 92.4, "%", "Of real competitors, found by Qloo (Test 10).", 1],
-    ["Festival clashes cut", .663, "of max", "Qloo's timetable; popularity reached 0.043 (Test 28).", 3],
-    ["Small artists", .841, "AUC", "A real listener's taste; popularity 0.516 (Test 27).", 3],
+    ["Brief preferred", 78, "%", "Blind human raters chose the brief written with Qloo.", 0],
+    ["Lease score", .893, "AUC", "With Qloo, against 0.851 from city records alone.", 3],
+    ["Competitors found", 92.4, "%", "Of real competitors, found by Qloo.", 1],
+    ["Price levels right", 25, "/ 27", "Qloo's price levels against Google Maps.", 0],
+    ["Storefront cuisine", .087, "AUC gain", "Qloo added to city records when predicting what opens in a storefront.", 3],
   ];
   $("#sb-kpis").innerHTML = kpis.map(([t, v, u, p, d]) => `<article class="panel kpi"><span class="t">${esc(t)}</span>
     <span class="v"><span data-to="${v}" data-dec="${d}">0</span><small>${esc(u)}</small></span><p>${esc(p)}</p></article>`).join("");
@@ -126,7 +97,7 @@ function card(k) {
   }
   const badge = { win: ["", "Qloo ahead"], fact: ["fact", "Qloo was right"], built: ["", "Built on Qloo"], mix: ["mix", "Mixed"] }[k.badge];
   return `<article class="panel card reveal" data-dom="${k.dom}">
-    <span class="id"><span>Test ${esc(k.test)} &middot; ${esc(k.id)}</span><span class="dom">${esc(DOMAINS[k.dom])}</span></span>
+    <span class="id"><span>${esc(k.name)}</span><span class="dom">${esc(DOMAINS[k.dom])}</span></span>
     <h3>${esc(k.title)}</h3>
     <div class="mini">${viz}</div>
     <span class="badge ${badge[0]}">${badge[1]}</span>
@@ -163,13 +134,12 @@ function dumbbell() {
   const rows = [];
   for (const k of RESULTS) {
     if (k.badge !== "win") continue;
-    if (k.kind === "pair") rows.push({ t: `T${k.test} ${k.title}`, m: k.metric, b: k.b[1], bl: k.b[0], q: k.q[1], ql: k.q[0] });
-    if (k.id === "F20") {
-      rows.push({ t: "T20 Closing times, GPT-6 Astra", m: "accuracy", b: 0, bl: "alone, 0 of 30", q: 29 / 30, ql: "with Qloo, 29 of 30" });
-      rows.push({ t: "T20 Closing times, Gemini 3.8 Flash", m: "accuracy", b: .1, bl: "alone, 3 of 30", q: 29 / 30, ql: "with Qloo, 29 of 30" });
+    if (k.kind === "pair") rows.push({ t: k.title, m: k.metric, b: k.b[1], bl: k.b[0], q: k.q[1], ql: k.q[0] });
+    if (k.id === "hours-qa") {
+      rows.push({ t: "Closing times, GPT-6 Astra", m: "accuracy", b: 0, bl: "alone, 0 of 30", q: 29 / 30, ql: "with Qloo, 29 of 30" });
+      rows.push({ t: "Closing times, Gemini 3.8 Flash", m: "accuracy", b: .1, bl: "alone, 3 of 30", q: 29 / 30, ql: "with Qloo, 29 of 30" });
     }
-    if (k.id === "F15") rows.push({ t: "T15 Real tour openers", m: "AUC", b: .714, bl: "genre (fame 0.473)", q: .875, ql: "Qloo" });
-    if (k.base) rows.push({ t: `T${k.test} ${k.title}`, m: "preference share", b: k.base[0], bl: k.base[1], q: k.n, ql: "brief with Qloo" });
+    if (k.base) rows.push({ t: k.title, m: "preference share", b: k.base[0], bl: k.base[1], q: k.n, ql: "brief with Qloo" });
   }
   rows.sort((a, b) => (b.q - b.b) - (a.q - a.b));
   // on a narrow screen each label sits above its line, so the chart keeps a readable size
@@ -351,21 +321,21 @@ function radarsBoot() {
   }, 1100);
 }
 
-/* ---------- Test 20 duel replay ---------- */
+/* ---------- the closing-time duel replay ---------- */
 const ARMS = [["large_alone", "GPT-6 Astra alone", false], ["large_with_qloo", "GPT-6 Astra + Qloo", true],
   ["small_alone", "Gemini 3.8 Flash alone", false], ["small_with_qloo", "Gemini 3.8 Flash + Qloo", true]];
 let duelData = null, duelBusy = false;
 async function duelLoad() {
   if (duelData) return duelData;
   const res = await fetch("/api/test20");
-  if (!res.ok) throw new Error("The recorded Test 20 answers are not on this server.");
+  if (!res.ok) throw new Error("The recorded closing-time answers are not on this server.");
   duelData = await res.json();
   pies(duelData);
   $("#dr-pick").innerHTML = duelData.rows.map((r, i) => `<option value="${i}">${esc(r.name)}</option>`).join("");
   $("#dr-score").innerHTML = ARMS.map(([a, l, q]) => `<span class="${q ? "q" : ""}">${esc(l)}: ${esc(duelData.totals[a])} of ${duelData.rows.length}</span>`).join("");
   return duelData;
 }
-/* Test 20 as four pies: how each model's 30 answers split into right, wrong and declined. */
+/* The closing-time check as four pies: how each model's 30 answers split into right, wrong and declined. */
 function pies(d) {
   const arc = (cx, cy, r, a0, a1) => {
     const p = a => [cx + r * Math.sin(a), cy - r * Math.cos(a)], [x0, y0] = p(a0), [x1, y1] = p(a1);

@@ -40,11 +40,11 @@ Every number below comes from a test whose rules were committed before its resul
 
 | What the agent needs to know | Without Qloo | With Qloo | Test |
 |---|---|---|---|
-| When a real NYC restaurant closes on Friday (30 places, checked against Google Maps) | GPT-6 Astra: **0 of 30** (declined every time). Gemini 3.8 Flash: **3 of 30**, with 6 confident wrong times | **29 of 30** for both models | 20 |
-| Are Qloo's closing times right? (checked by a person on Google Maps) | | **29 of 30** within 30 minutes | 12 |
-| Which small artists a real listener plays (40 Last.fm listeners) | Ranking by popularity: AUC **0.516** | Qloo's taste graph: AUC **0.841** | 27 |
-| A festival timetable that keeps shared fans apart (10 bills, real listening data) | Built on popularity: **0.043** of the possible gain | Built on Qloo's fan overlap: **0.663** | 28 |
-| Which act really opened for a headliner | Fame: AUC **0.473**, genre: **0.714** | Qloo: AUC **0.875** | 15 |
+| When a real NYC restaurant closes on Friday (30 places, checked against Google Maps) | GPT-6 Astra: **0 of 30** (declined every time). Gemini 3.8 Flash: **3 of 30**, with 6 confident wrong times | **29 of 30** for both models | Closing-time check |
+| Are Qloo's closing times right? (checked by a person on Google Maps) | | **29 of 30** within 30 minutes, all 29 exact | Hours and prices |
+| Does Qloo find the real competitors? | | **92.4%** of them | Competitor coverage |
+| Do blind raters prefer the brief written with Qloo? | | **78%** of the time | Brief, human raters |
+| Which storefront block gets the next opening of a cuisine? | City records alone: AUC **0.851** | With Qloo: AUC **0.893** | Lease score |
 
 So Qloo sits where a model is blind: every fact about a specific real place. In the product:
 
@@ -54,10 +54,10 @@ So Qloo sits where a model is blind: every fact about a specific real place. In 
 | **Hours of any place the founder asks about** | Qloo, through the agent's `place_hours` and `competitor_hours` tools; the agent never states hours from memory |
 | **Where else a restaurant's fans go, and the music and brands they follow** | Qloo entity affinity (scene explorer) |
 | **The brief's local evidence** | Qloo, against a 10-area NYC baseline so only what is distinctive about the area is used |
-| **Where to open** | NYC Health Department inspection records and the NYC Storefront Registry (lease score, Test 4) |
+| **Where to open** | NYC Health Department inspection records and the NYC Storefront Registry (the lease score) |
 | **Who lives and works nearby** | Census and LODES jobs data |
 
-All 28 tests, including the ones where Qloo did not help, are listed under [What we tested](#what-we-tested), and the
+All 13 tests, including the ones where Qloo did not help, are listed under [What we tested](#what-we-tested), and the
 reasoning behind every decision is in `PROJECT_LOG.md`.
 
 ---
@@ -74,7 +74,7 @@ reasoning behind every decision is in `PROJECT_LOG.md`.
      pick is sent back once.
    - **Search an area**: vacant storefronts in a named neighbourhood (nicknames such as LIC or Bed-Stuy work).
    - **My addresses**: two to five addresses the founder already has.
-3. **Ranks the storefronts** on city records (the Test 4 lease score: restaurants in the block plus same-cuisine supply
+3. **Ranks the storefronts** on city records (the lease score: restaurants in the block plus same-cuisine supply
    in and around it).
 4. **Writes a positioning brief** for the top pick from Qloo's evidence for the area, streamed to the page, then checks
    it in code. Every named business is traced to Qloo, to NYC inspection records near the address, to a business
@@ -88,10 +88,10 @@ reasoning behind every decision is in `PROJECT_LOG.md`.
 
 Two ways to see the Qloo difference for yourself, on the page:
 
-- **See all 30 answers:** under "Why Qloo", every recorded answer behind Test 20, place by place: Google Maps' closing
+- **See all 30 answers:** under "Why Qloo", every recorded answer behind the closing-time check, place by place: Google Maps' closing
   time, what each model said alone and with Qloo, and whether it was right.
 - **Ask the model (live duel):** beside each rival with Qloo hours, one click asks GPT-6 Astra when it closes on
-  Friday twice, side by side: alone, and with Qloo's record. The same question as Test 20, rerun live.
+  Friday twice, side by side: alone, and with Qloo's record. The same question as the closing-time check, rerun live.
 
 The scene explorer works on its own: name up to three places your customers love and see the places Qloo says their
 fans also go, and the music and brands that crowd follows. No model is involved.
@@ -141,7 +141,7 @@ one. Variables set on the host take priority over `.env`.
 | `KIE_API_KEY` | Live runs when `LLM_PROVIDER=kie` | |
 | `CENSUS_API_KEY` | `build_data.py` | Neighbourhood profiles from the US Census API. |
 | `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_DEPLOYMENT` | Optional | Outage fallback (Azure OpenAI v1 Responses API). Used only when the primary call fails; every fallback is labelled in the trace. |
-| `TICKETMASTER_API_KEY`, `GEMINI_API_KEY` | Research scripts only | Not needed to run the app. |
+| `GEMINI_API_KEY` | The closing-time check's second model only | Not needed to run the app. |
 
 A live run needs `QLOO_API_KEY` **and** the key for the chosen provider. `/health` reports `live: true` or `false`,
 never a key.
@@ -194,8 +194,8 @@ flowchart LR
   Qloo call and each piece of the brief is sent to the page as a server-sent event, so the trace fills in as it happens.
 - **The lease score** (`engine.py`, fitted by `fit_lease_model.py` and `fit_lease_model_4b.py` into
   `lease_model.json`) is a per-cuisine logistic regression on two features of a city block: `log(1 + restaurants in the
-  block)` and `log(1 + same-cuisine restaurants in the block and its 8 neighbours)`. It was the winner of Test 4 and
-  extended in Test 4b.
+  block)` and `log(1 + same-cuisine restaurants in the block and its 8 neighbours)`. It won the lease-score test and
+  was extended to 25 cuisines.
 - **Code checks the model.** The scout's shortlist is checked in code (addresses from this run's searches only,
   numbers from tool results only). The brief's business names are traced to a source or marked, and untraceable lines
   are repaired or dropped. Follow-up answers have their numbers checked against tool output.
@@ -295,7 +295,7 @@ Follow-ups stream `tool` and `answer` events; `answer` carries `unchecked_number
 | Brief evidence (`positioning.py`) | Insights for places and tags near the lease, against a 10-area NYC baseline for distinctiveness | Highlighted names in the brief, and the "Qloo evidence given to the model" list |
 | What is around the top pick (`around.py`) | Place records for city-record competitors: Friday closing time, review keywords; places tagged with the cuisine; neighbours fans of the cuisine rate highest | Runs automatically when a run finishes: a Friday closing-time timeline and red Qloo details beside each competitor |
 | Scene explorer (`scene.py`) | Entity search, then places, artists and brands with affinity to 1 to 3 named places | "Where else do their fans go", labelled not validated |
-| Ranking toggle (`engine.taste`) | Cuisine heatmaps by borough (Test 1) | "Qloo taste" order, labelled with its test result |
+| Ranking toggle (`engine.taste`) | Cuisine heatmaps by borough (cuisine heatmaps test) | "Qloo taste" order, labelled with its test result |
 | Follow-up tools (`followup.py`) | `competitor_hours` (Friday closing times and review mentions of nearby competitors), `place_hours` (any named place's hours, matched by name within 2 km), `area_profile` | Each tool call in the thread; the agent is told never to state hours from memory |
 
 Every Qloo call goes through `qloo.py`, is cached on disk, counts against the monthly reserve and appears in the run's
@@ -318,7 +318,7 @@ the server deployment, so a fresh server instance spends no quota on them.
 ## The web page
 
 `static/index.html`, `static/style.css`, `static/app.js` (runs, replays, the brief, follow-ups), `static/features.js`
-(agent radar, results scoreboard, Test 20 pies and duel) and `static/play.js` (city map, drop a pin, both games, the
+(agent radar, results scoreboard, closing-time pies and duel) and `static/play.js` (city map, drop a pin, both games, the
 business estimate). Plain HTML, CSS and JavaScript with no build step. Leaflet (from cdnjs) draws the pin map; the
 header map is drawn on a canvas; fonts are Instrument Serif and Geist from Google Fonts.
 
@@ -337,7 +337,7 @@ header map is drawn on a canvas; fonts are Instrument Serif and Geist from Googl
      next steps and follow-ups, with the agent radar, the map and the step trace in a rail beside them.
   6. Drop a pin: score any block on a map (click, or type an address), compare up to three, try what-if changes to
      the block, and a challenge to find a block above the 95th percentile.
-  7. Why Qloo: Test 20 as four pie charts (right, wrong, declined for each model) and a restaurant-by-restaurant duel.
+  7. Why Qloo: the closing-time check as four pie charts (right, wrong, declined for each model) and a restaurant-by-restaurant duel.
   8. Two games: guess a real restaurant's Friday closing time against GPT-6 Astra alone and with Qloo's record, then
      "Qloo or the baseline?", eight rounds over the results where Qloo beat its baseline.
   9. Results: Qloo against the baseline for every head-to-head (a ring, the headline numbers, a dumbbell chart with a
@@ -360,7 +360,8 @@ header map is drawn on a canvas; fonts are Instrument Serif and Geist from Googl
 |---|---|
 | `GET /` | The page. |
 | `GET /llms.txt`, `GET /.well-known/llms.txt` | A plain-text guide to the site for language models. |
-| `GET /llms-full.txt` | The guide plus every claim with its test, result, caveat and source files. |
+| `GET /llms.md` | The same guide as Markdown. |
+| `GET /llms-full.txt`, `GET /.well-known/llms-full.txt`, `GET /llms-full.md` | The guide, then every test behind the product (the table below) and every claim with its result, caveat and source files. |
 | `GET /robots.txt`, `GET /sitemap.xml`, `GET /favicon.ico` | For search engines and browsers. |
 | `GET /health` | `{ok, spend_today, cap, live}`. `live` says whether this server has the keys for a live run. |
 | `GET /api/stats` | Counts behind the page: active restaurants, vacant storefronts, neighbourhoods, cuisines, and last year's openings still operating. |
@@ -371,7 +372,7 @@ header map is drawn on a canvas; fonts are Instrument Serif and Geist from Googl
 | `GET /api/golden/{id}/sha256` | Hash of the full saved run this server replays. Compare with `fixtures/replays/SHA256SUMS`. |
 | `POST /api/run` | A live run. Body: `{concept, cuisine?, goal? \| area? \| leases?: [{address}]}`. Streams events. Rate limited. |
 | `POST /api/ask` | A follow-up question about a run. Body: `{question, context, history}`. Streams events. Rate limited. |
-| `GET /api/test20` | Every recorded answer behind Test 20 (30 places, four arms), scored by the test's rule. |
+| `GET /api/test20` | Every recorded answer behind the closing-time check (30 places, four arms), scored by the test's rule. |
 | `POST /api/duel` | Body: `{name, lat, lon}`. Asks the model when a real place closes on Friday, alone and with Qloo's record. Two short model calls; rate limited. |
 | `GET /api/around?concept=&lat=&lon=` | What is around a point (city records plus Qloo place details). No model call. |
 | `POST /api/scene` | Scene explorer. Body: `{anchors: [1 to 3 place names]}`. No model call. |
@@ -424,8 +425,8 @@ Rebuild the public copies after any re-record: `python redact_replays.py`.
 | `evidence.py` | The "How we know" panel, read from the committed results files. |
 | `nyc.py`, `storefronts.py`, `census.py`, `transit.py`, `bids.py`, `partners.py`, `next_steps.py` | City data: inspections and neighbourhoods, vacant storefronts, census and jobs, subway ridership, business improvement districts, local partners, next steps. |
 | `build_data.py` | Build step: downloads city data and warms the Qloo cache. |
-| `warm_cache.py` | Copies the Qloo responses every server needs into the private `qloo_warm/` before a deploy, with Test 20's recorded answers for the page's table. |
-| `duel.py` | The live duel: Test 20's question to the model, alone and with Qloo's record, for a place the founder picks. |
+| `warm_cache.py` | Copies the Qloo responses every server needs into the private `qloo_warm/` before a deploy, with the closing-time check's recorded answers for the page's table. |
+| `duel.py` | The live duel: the closing-time check's question to the model, alone and with Qloo's record, for a place the founder picks. |
 | `lease_model.json` | Fitted lease score coefficients and percentiles. |
 | `static/` | The page (`index.html`, `style.css`, `app.js`, `features.js`, `play.js`), plus `llms.txt` (served at `/llms.txt`). |
 | `fixtures/replays/` | Public, redacted saved runs and their hashes. |
@@ -437,13 +438,13 @@ Rebuild the public copies after any re-record: `python redact_replays.py`.
 | File | Role |
 |---|---|
 | `PREREGISTRATION*.md` | The protocol of each test, committed before its code and results. |
-| `backtest*.py`, `test*.py`, `screen13*.py`, `blind_test.py` | Code for the tests. |
+| `backtest*.py`, `test*.py`, `blind_test.py` | Code for the tests. |
 | `*_results.json` | Results of the tests (aggregates; files that hold Qloo responses are git-ignored). |
-| `fit_lease_model.py`, `fit_lease_model_4b.py` | Fit the lease score (Tests 4 and 4b). |
-| `eval_suite.py`, `eval_runs.py`, `eval_suite_results_*.json`, `PROBES.md` | Agent reliability tests and their results. |
+| `fit_lease_model.py`, `fit_lease_model_4b.py` | Fit the lease score (lease score tests). |
+| `eval_suite.py`, `eval_suite_results_*.json`, `PROBES.md` | Agent reliability tests and their results. |
 | `checks.py` | Trust checks: Qloo supply against inspection records; whether cuisine heatmaps differ. |
-| `experiment.py`, `gaps.py`, `backtest5_exploratory_placebo.py` | Early exploration from before pre-registration, kept for the record. |
-| `blind_sheet.md`, `blind_key.sha256` | Test 3's rating sheet and the hash of its hidden key. |
+| `backtest5_exploratory_placebo.py` | The survival test's exploratory placebo check. |
+| `blind_sheet.md`, `blind_key.sha256` | The human raters' sheet and the hash of its hidden key. |
 | `golden.py`, `golden_refresh.py`, `golden_followups.py`, `redact_replays.py` | Recording and publishing saved runs. |
 
 ### Documents
@@ -451,8 +452,6 @@ Rebuild the public copies after any re-record: `python redact_replays.py`.
 | File | Contents |
 |---|---|
 | `PROJECT_LOG.md` | Every decision, deviation and correction to our own numbers, in order. |
-| `SPEC.md` | The product spec. |
-| `HANDOFF.md` | Context from the first build conversation: how the team works, decisions, things tried and rejected. |
 | `CLAUDE.md` | Working notes and rules for coding agents. |
 | `SUBMISSION.md` | The hackathon submission text: what the project does and what makes it Qloo-powered. |
 | `LICENSE` | MIT. |
@@ -468,49 +467,30 @@ cache, rebuilt by `warm_cache.py`), `golden/` (full saved runs), `eval_runs/`, `
 
 All pre-registered. Each protocol is committed before its code and results, and the commit is the timestamp.
 `PROJECT_LOG.md` records every decision, deviation and correction. AUC: 0.5 is a coin flip, 1 is perfect. Intervals
-are 95%.
+are 95%. These are the 13 tests behind the product: where to open, what to write, and what Qloo knows about
+real places. The ones where Qloo did not move the number are kept here too.
 
-### Where to open and what to write (Tests 1 to 13)
+| Test | Protocol | Question | Result |
+|---|---|---|---|
+| Cuisine heatmaps | `PREREGISTRATION.md` | Do Qloo cuisine heatmaps find blocks a cuisine has not reached yet? 14 cuisines, 648 first openings, 2024 to 2026 | Qloo AUC 0.812 versus 0.742 for restaurant count. |
+| Brief, human raters | `PREREGISTRATION_2.md` | Do two blind human raters prefer briefs written with Qloo evidence? | Qloo briefs preferred 78% of the time. |
+| Lease score | `PREREGISTRATION_3.md` | Which city-records score ranks storefronts, and does Qloo add to it? | lease score with Qloo 0.893 versus 0.851 without it. |
+| Lease score, 25 cuisines | `PREREGISTRATION_6.md` | Does that score extend to more cuisines? | Yes, to 11 more: 25 cuisines, 83% of active restaurants. |
+| Survival | `PREREGISTRATION_5.md` | Does the lease score predict which restaurants last? | No. Mean AUC 0.516 (0.499 to 0.535). It shows where operators open, not where they survive, and the page says so. |
+| Audience tags | `PREREGISTRATION_4.md` | Do Qloo's audience tags match census and jobs data across 181 neighbourhoods? | 2 of 7 (Affluent Diners, Business Professionals). Demographics come from the census. |
+| Storefront cuisine | `PREREGISTRATION_7.md` | Given a storefront, does Qloo predict which cuisine opens there? | +0.087 AUC over city records. |
+| Brief, blind judge | `PREREGISTRATION_8.md` | Does a blind judge prefer briefs written with Qloo area evidence over briefs written with a list of nearby businesses? | Qloo briefs preferred 76% (0.68 to 0.83). |
+| Brief from place records | `PREREGISTRATION_9.md` | Can a different use of Qloo (place records, not area lift) improve the brief, against a control that differs only by Qloo? | Q over Q0 0.60 (0.433 to 0.767), over C+ 0.633 (0.483 to 0.80); the rule was not met. |
+| Competitor coverage | `PREREGISTRATION_10.md` | Is Qloo's list of competitors complete and current? | Qloo finds 92.4% of competitors. |
+| Restaurant scene | `PREREGISTRATION_11.md` | Is a restaurant's Qloo scene about the restaurant or only its location? | Specific to the restaurant (two unlike restaurants on one block share 0.225 of their lists), but it does not follow the city's cuisine category, so nothing independent backs it. Shown as "not validated", never used to choose where to open. |
+| Hours and prices | `PREREGISTRATION_12.md` | Are Qloo's closing times and price levels right, against Google Maps? | Closing times: 29 of 30 within 30 minutes. Price levels: 25 of 27 matched. |
+| Closing-time check | `PREREGISTRATION_20.md` | Asked when a real NYC restaurant closes on Friday, is a model right more often with Qloo's record than alone? | **Yes, for both models.** GPT-6 Astra: 0 of 30 alone (it declined every time), 29 of 30 with Qloo. gemini-3.8-flash: 3 of 30 alone with 6 confident wrong times, 29 of 30 with Qloo. |
 
-| Test | Question | Result |
-|---|---|---|
-| 1 (`PREREGISTRATION.md`) | Do Qloo cuisine heatmaps find blocks a cuisine has not reached yet? 14 cuisines, 648 first openings, 2024 to 2026 | Qloo AUC 0.812 versus 0.742 for restaurant count. |
-| 2 (`PREREGISTRATION_2.md`) | Do music-audience heatmaps carry resident taste? | +0.064 AUC. |
-| 3 (`PREREGISTRATION_2.md`) | Do two blind human raters prefer briefs written with Qloo evidence? | Qloo briefs preferred 78% of the time. |
-| 4 (`PREREGISTRATION_3.md`) | Which city-records score ranks storefronts, and does Qloo add to it? | lease score with Qloo 0.893 versus 0.851 without it. |
-| 4b (`PREREGISTRATION_6.md`) | Does that score extend to more cuisines? | Yes, to 11 more: 25 cuisines, 83% of active restaurants. |
-| 5 (`PREREGISTRATION_5.md`) | Does the lease score predict which restaurants last? | No. Mean AUC 0.516 (0.499 to 0.535). It shows where operators open, not where they survive, and the page says so. |
-| 6 (`PREREGISTRATION_4.md`) | Do Qloo's audience tags match census and jobs data across 181 neighbourhoods? | 2 of 7 (Affluent Diners, Business Professionals). Demographics come from the census. |
-| 7 (`PREREGISTRATION_7.md`) | Given a storefront, does Qloo predict which cuisine opens there? | +0.087 AUC over city records. |
-| 8 (`PREREGISTRATION_8.md`) | Does a blind judge prefer briefs written with Qloo area evidence over briefs written with a list of nearby businesses? | Qloo briefs preferred 76% (0.68 to 0.83). |
-| 9 (`PREREGISTRATION_9.md`) | Can a different use of Qloo (place records, not area lift) improve the brief, against a control that differs only by Qloo? | Q over Q0 0.60 (0.433 to 0.767), over C+ 0.633 (0.483 to 0.80); the rule was not met. |
-| 10 (`PREREGISTRATION_10.md`) | Is Qloo's list of competitors complete and current? | Qloo finds 92.4% of competitors. |
-| 11 (`PREREGISTRATION_11.md`) | Is a restaurant's Qloo scene about the restaurant or only its location? | Specific to the restaurant (two unlike restaurants on one block share 0.225 of their lists), but it does not follow the city's cuisine category, so nothing independent backs it. Shown as "not validated", never used to choose where to open. |
-| 12 (`PREREGISTRATION_12.md`) | Are Qloo's closing times and price levels right, against Google Maps? | Closing times: 29 of 30 within 30 minutes. Price levels: 25 of 27 matched. |
-| 13 (`PREREGISTRATION_13.md`) | Idea screen: which of seven other Qloo outputs for a restaurant are specific and stable enough to test further? | Partners, scene and twin city passed; sound, brands, screen taste and words failed on consistency between sibling restaurants. |
+**The pattern.** Qloo helps with facts about real places (closing times, prices, competitors), the positioning brief,
+and the lease score. Demographics come from the census, and the lease score makes no claim about which restaurants
+survive. Earlier figures stay in the historical protocols and the project log.
 
-### Qloo against a strong model (Tests 14 to 28)
-
-| Test | Question | Result |
-|---|---|---|
-| 14 (`PREREGISTRATION_14.md`) | Does Qloo's venue-to-artist affinity rank the acts a music venue really books (Ticketmaster)? | AUC 0.589 (0.518 to 0.668): above fame, not above genre. A language model alone: 0.814. |
-| 15 (`PREREGISTRATION_15.md`) | Does artist-to-artist affinity rank the act that really opened for a headliner? | AUC 0.875, above fame (0.473) and genre (0.714). The model alone: 0.976 on the same shortlists. |
-| 16 (`PREREGISTRATION_16.md`) | From no shortlist, does a model find more real openers when it sees Qloo's candidates? | Qloo 0.721, combined 0.846. |
-| 17 (`PREREGISTRATION_17.md`) | Does Qloo's affinity by city rank the markets an artist's tour really plays? | Qloo 0.781 versus 0.693 baseline. |
-| 18 (`PREREGISTRATION_18.md`) | Films a person rated highly (MovieLens): does Qloo rank them, and does a model do better with Qloo's scores? | Qloo 0.873 versus average rating 0.815. |
-| 19 (`PREREGISTRATION_19.md`) | A repeat of another team's tour-opener claim with a stated method. | Not finished: Qloo's side is prepared (109 tours), the model's answers are incomplete. |
-| 20 (`PREREGISTRATION_20.md`) | Asked when a real NYC restaurant closes on Friday, is a model right more often with Qloo's record than alone? | **Yes, for both models.** GPT-6 Astra: 0 of 30 alone (it declined every time), 29 of 30 with Qloo. gemini-3.8-flash: 3 of 30 alone with 6 confident wrong times, 29 of 30 with Qloo. |
-| 21 (`PREREGISTRATION_21.md`) | Is Qloo ahead of the model on lesser-known headliners? | Qloo minus model +0.086. |
-| 22 (`PREREGISTRATION_22.md`) | Screen: do model-written NYC plans send people to places that are shut, and does Qloo hold hours to check them? | Qloo held hours for 0.992 of stops and flagged a stop in 0.567 of plans, but many flags looked like bad "closed" records. The check by a person was not run and the idea was dropped. |
-| 23 (`PREREGISTRATION_23.md`) | Does Qloo know which comedians share a crowd? | Not shown on famous package tours: a pair who toured together outscored one who did not 0.612 of the time (0.464 to 0.797). Too few current comedy bills on Ticketmaster to test the rest. |
-| 24 (`PREREGISTRATION_24.md`) | Do older acts that young people took up (TikTok trend lists) show a younger crowd in Qloo? | Qloo 0.712 versus chance 0.333. |
-| 25 (`PREREGISTRATION_25.md`) | Qloo on its home ground: small acts, brand-new restaurants, steadiness. | Small acts: too few to say (279 of 300 played artists had Qloo popularity 0.5 or more). 120 NYC restaurants opened after April 2026: Qloo held 55%; cuisine right 0.683 alone, 0.658 with Qloo, not shown. Steadiness: model and Qloo both steady. |
-| 26 (`PREREGISTRATION_26.md`) | Do MLB theme nights that suit a city's taste draw more people? 2,425 games, 336 theme nights. | Qloo Spearman 0.284 versus model alone 0.099. |
-| 27 (`PREREGISTRATION_27.md`) | On small artists (Last.fm listening data), does Qloo know a real listener's taste better than a model? | No different. AUC: Qloo 0.841, fame 0.516, model alone 0.865, model with Qloo 0.874. The hidden artists had Qloo popularity 0.953 on average, so "obscure" was again not reached. |
-| 28 (`PREREGISTRATION_28.md`) | Does a festival timetable built on Qloo's fan-overlap scores make fewer real fans choose? | Qloo reached 0.663 of the possible gain versus 0.043 for popularity; the combined model reached 0.702. |
-
-**The pattern.** Qloo helps with facts about real places, positioning briefs, lease ranking and several taste
-tasks. Earlier figures stay in the historical protocols and the project log.
+---
 
 ## Agent reliability
 
@@ -615,20 +595,18 @@ The `starter` plan keeps the service awake; free plans sleep when idle. Health c
 - NYC 2020 Neighborhood Tabulation Areas, US Census ACS 2023 and LODES jobs data, MTA subway ridership, business
   improvement districts, NYC Planning GeoSearch
 - Qloo Insights API (hackathon key)
-- Research tests also used Ticketmaster, MovieLens, GroupLens HetRec 2011 Last.fm, MusicBrainz, ListenBrainz, MLB's
-  public API and Google Maps (checked by a person)
+- Google Maps, checked by a person, as the truth for closing times and price levels
 - Map tiles by OpenStreetMap contributors
 
 ---
 
 ## Limits
 
-- The lease score shows where operators chose to open, not where restaurants survive (Test 5).
+- The lease score shows where operators chose to open, not where restaurants survive (survival test).
 - We have no rent data.
 - Storefront vacancies are owner-reported and can be out of date.
 - Staten Island is not covered.
 - The brief is judged by a language model in our tests, not by founders.
-- Qloo's "closed that day" entries cannot be trusted without a second source (Test 22).
 
 ---
 

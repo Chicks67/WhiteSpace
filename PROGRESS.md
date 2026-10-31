@@ -2,30 +2,31 @@
 
 ## Product
 
-Whitespace, a site-selection agent for independent restaurant founders in NYC, is built and runs locally
-(README "Quick start"). Saved runs replay with no API calls. The hackathon entry since Oct 28 is Clash Court
-(../clash-court), which uses Test 28.
+Whitespace is the project: a site-selection agent for independent restaurant founders in New York City, live at
+https://whitespace-nyc.vercel.app. A founder describes a concept and customers; the agent scouts vacant storefronts,
+ranks them on city records, sizes up every rival with Qloo, writes a positioning brief, and answers follow-ups.
+Finished runs play back with no API calls. Live runs use GPT-6 Astra through Kie.
 
-## Current results
+## Results behind the product
 
-- Qloo plus a model answers facts about specific real places: Friday closing times 29 of 30 with Qloo, 0 to 3 of 30
-  without (Test 20); Qloo's closing times match Google Maps 29 of 30 (Test 12).
-- Qloo taste beats popularity on music audiences (Tests 14, 15, 16, 17, 18, 27, 28). Qloo
-  briefs preferred 78% (Test 3) and 76% (Test 8), and lease scoring of 0.893/0.887 with Qloo versus 0.851
-  without it (Tests 4/4b).
+- Closing-time check: asked when 30 real NYC restaurants close on Friday, GPT-6 Astra was right 0 times alone and
+  29 times with Qloo's record; Gemini 3.8 Flash 3 and 29.
+- Hours and prices: Qloo's Friday closing times match Google Maps for 29 of 30 places; price levels for 25 of 27.
+- Competitor coverage: Qloo finds 92.4% of real competitors.
+- Briefs: written with Qloo, preferred 78% of the time by human raters and 76% by a blind judge.
+- Lease score: AUC 0.893 with Qloo against 0.851 from city records alone (0.887 across 25 cuisines).
+- Cuisine heatmaps 0.812 against 0.742 for restaurant count; storefront cuisine +0.087 AUC over city records.
 
-## Current limits
+## Where Qloo did not move the number
 
-- Qloo finds 92.4% of competitors (Test 10), price levels match 25 of 27 (Test 12), and the
-  combined opener score reaches 0.846 (Test 16).
+- Survival: Qloo taste added +0.013, a placebo +0.016; no survival claim is made.
+- Audience tags: 2 of 7 matched the census, so demographics come from the census.
+- Brief from place records: the registered rule was not met.
+- Restaurant scene: specific to each restaurant but not validated, so it never chooses where to open.
 
-Full table of all tests: README "What we tested" and PROJECT_LOG.md.
-
-## Source of truth
-
-The results table the product uses is kept locally (not published). Older figures remain in the historical
-protocols and project log.
+Full table: README "What we tested", and on the site under Results and How we know.
 
 ## Open
 
-Test 3's result is the current brief result.
+- Shared rate limits: run `vercel integration add upstash`, then redeploy; the code switches on by itself.
+- One live test run on the site, to confirm the Kie key has credit.

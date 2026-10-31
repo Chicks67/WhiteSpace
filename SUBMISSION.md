@@ -36,7 +36,7 @@ that matters.
 6. **Scene explorer:** name up to three places your customers love; Qloo returns where their fans also go, and the
    music and brands that crowd follows.
 
-7. **See the Qloo difference yourself.** A table of all 30 recorded answers behind Test 20 (Google Maps, each model
+7. **See the Qloo difference yourself.** A table of all 30 recorded answers behind the closing-time check (Google Maps, each model
    alone, each model with Qloo), and a live "ask the model" duel beside every rival: one click asks GPT-6 Astra when the
    place closes on Friday, alone and with Qloo's record, side by side.
 
@@ -67,8 +67,6 @@ before its result:
 | Does Qloo find the real competitors? | | 92.4% of them |
 | Do raters prefer the brief written with Qloo? (blind) | | 78% of the time |
 | Which storefront block gets the next opening of a cuisine? (AUC) | city records alone: 0.851 | with Qloo: 0.893 |
-| Which small artists does a real listener play? (40 listeners) | popularity: AUC 0.516 | Qloo: AUC 0.841 |
-| A festival timetable that keeps shared fans apart | popularity: 0.043 of the possible gain | Qloo: 0.663 |
 
 Without Qloo, the competition panel, the closing-time timeline, the hours answers, the brief's local evidence and the
 scene explorer would all be empty or guessed. With it, the agent answers the questions a founder actually asks about
@@ -84,7 +82,7 @@ the block.
 - Plain HTML, CSS and JavaScript page: a canvas dot map of the city, a Leaflet pin map, charts in SVG, day and night
   themes, runs streamed over server-sent events. No build step.
 - Hosted on Vercel. Keys stay on the server; live runs are rate limited per visitor with a daily model budget.
-- 28 pre-registered tests, a reliability suite, and a full decision log in the repository.
+- 13 pre-registered tests, a reliability suite, and a full decision log in the repository.
 
 ## Results
 

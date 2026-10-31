@@ -10,7 +10,6 @@ import time
 
 import numpy as np
 
-import backtest18 as b18
 import llm
 import qloo
 import test12 as t12
@@ -20,6 +19,65 @@ ALONE = ("You are asked about one restaurant in New York City. Answer with the t
 WITH = ALONE.replace("If you do not know", "A place-data record is given; use it if it helps. If you do not know")
 ARMS = [("large_alone", False, False), ("large_with_qloo", False, True), ("small_alone", True, False), ("small_with_qloo", True, True)]
 
+
+
+# The small model (Gemini 3.8 Flash), one JSON reply per call. Moved here from the retired films test script.
+SMALL = "gemini-3.8-flash"
+_GKEY = {"i": 0}  # which Gemini key is in use
+
+
+def small_json(instructions, prompt, check):
+    """One JSON reply from the small model on CometAPI (Amendment 1), with the same prompts as the large model."""
+    import time
+    import urllib.error
+    import urllib.request
+    google = os.environ.get("SMALL_HOST") == "google"  # the same model on Google's own API, as test8.gemini_google does
+    kie = os.environ.get("SMALL_HOST") == "kie"        # the same model on Kie: the model is in the path, content is in parts
+    if kie:
+        part = lambda t: [{"type": "text", "text": t}]
+        body = {"messages": [{"role": "system", "content": part(instructions + "\nReply with JSON only.")},
+                             {"role": "user", "content": part(prompt)}], "stream": False, "reasoning_effort": "low"}
+        req = urllib.request.Request("https://api.kie.ai/gemini-3-8-flash-openai/v1/chat/completions", data=json.dumps(body).encode(),
+                                     headers={"Content-Type": "application/json", "Authorization": "Bearer " + llm._env()["KIE_API_KEY"]})
+    elif google:
+        env = llm._env()
+        body = {"systemInstruction": {"parts": [{"text": instructions + "\nReply with JSON only."}]}, "contents": [{"parts": [{"text": prompt}]}],
+                "generationConfig": {"responseMimeType": "application/json"}}
+        req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/models/{SMALL}:generateContent",
+                                     data=json.dumps(body).encode(),
+                                     headers={"Content-Type": "application/json", "x-goog-api-key": env.get("GEMINI_API_KEY_3") or env["GEMINI_API_KEY"]})
+    else:
+        body = {"model": SMALL, "response_format": {"type": "json_object"},
+                "messages": [{"role": "system", "content": instructions + "\nReply with JSON only."}, {"role": "user", "content": prompt}]}
+        req = urllib.request.Request("https://api.cometapi.com/v1/chat/completions", data=json.dumps(body).encode(),
+                                     headers={"Content-Type": "application/json", "Authorization": "Bearer " + llm._env()["COMET_API_KEY"]})
+    # Google: every key in .env named GEMINI_API_KEY* is used in turn; a key that is out of quota or busy hands on
+    # to the next. The team's keys are separate projects on one Google account.
+    gkeys = [v for k, v in sorted(llm._env().items()) if k.startswith("GEMINI_API_KEY") and v] if google else []
+    tries = max(6, 3 * len(gkeys))
+    for attempt in range(tries):
+        if google:
+            req.add_header("x-goog-api-key", gkeys[_GKEY["i"] % len(gkeys)])
+        try:
+            d = json.load(urllib.request.urlopen(req, timeout=90 if google else 180))
+            if kie and d.get("code") not in (None, 200):  # Kie reports errors inside an HTTP 200 reply
+                if d["code"] in (401, 402):
+                    raise llm.LLMError(f"provider error {d['code']}: {str(d.get('msg'))[:120]}")
+                raise ConnectionError(f"Kie {d['code']}: {str(d.get('msg'))[:80]}")
+            txt = d["candidates"][0]["content"]["parts"][0]["text"] if google else d["choices"][0]["message"]["content"]
+            o = json.loads(txt[txt.find("{"):txt.rfind("}") + 1])
+            check(o)
+            return o
+        except urllib.error.HTTPError as e:
+            if (e.code in (401, 402, 403) and not google) or attempt == tries - 1:
+                raise llm.LLMError(f"HTTP {e.code}: {e.read()[:200].decode(errors='replace')}") from None
+            _GKEY["i"] += 1  # next key (Google); elsewhere this only counts
+            time.sleep(4 if google else 15 * (attempt + 1))
+        except (TimeoutError, urllib.error.URLError, ConnectionError, ValueError, KeyError):
+            if attempt == tries - 1:
+                raise
+            _GKEY["i"] += 1
+            time.sleep(5 if google else 5 * (attempt + 1))
 
 def places():
     key = json.load(open(t12.KEY, encoding="utf-8"))
@@ -42,7 +100,7 @@ def answer(p, arm, small, with_qloo):
     def check(o):
         if "closes" not in o or (o["closes"] is not None and t12.minutes(str(o["closes"])) is None):
             raise ValueError('reply as {"closes": "HH:MM"} or {"closes": null}')
-    o = b18.small_json(WITH if with_qloo else ALONE, prompt, check) if small else \
+    o = small_json(WITH if with_qloo else ALONE, prompt, check) if small else \
         llm.complete_json(WITH if with_qloo else ALONE, prompt, check=check, timeout=120)[0]
     out = {"closes": o["closes"], "host": (os.environ.get("SMALL_HOST") or "comet") if small else llm.PROVIDER}
     json.dump(out, open(name, "w"))

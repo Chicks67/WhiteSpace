@@ -7,6 +7,8 @@
 <meta name="description" content="An agent that scouts vacant storefronts in New York City and sizes up the competition with Qloo's record of real places: when rivals close, what their reviewers mention, where their fans also go.">
 <link rel="canonical" href="https://whitespace-nyc.vercel.app/">
 <link rel="alternate" type="text/plain" href="/llms.txt" title="A plain-text guide to this site for language models">
+<link rel="alternate" type="text/markdown" href="/llms.md" title="The same guide as Markdown">
+<link rel="alternate" type="text/plain" href="/llms-full.txt" title="The full guide: every test and every claim">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Whitespace">
 <meta property="og:title" content="Whitespace: find the block before you sign the lease">
@@ -34,7 +36,7 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400..600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <!-- the map only appears after a run, so its stylesheet does not hold up the first paint -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="/static/style.css?v=41">
+<link rel="stylesheet" href="/static/style.css?v=42">
 </head>
 <body>
 <div class="scroll-bar" id="scroll-bar" aria-hidden="true"></div>
@@ -367,7 +369,7 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
     <figure class="pies" id="t20-pies" hidden>
       <figcaption>
         <strong>What each model answered</strong>
-        <span>Test 20, all 30 restaurants. Right means within 30 minutes of Google Maps.</span>
+        <span>The closing-time check, all 30 restaurants. Right means within 30 minutes of Google Maps.</span>
       </figcaption>
       <div class="pie-legend"><span><i class="sw qloo"></i>Right</span><span><i class="sw ink"></i>Wrong</span><span><i class="sw gray"></i>Declined</span></div>
       <div class="pie-row" id="pie-row"></div>
@@ -383,7 +385,7 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
         <button type="button" class="primary ask-btn" id="dr-go">Play</button>
       </div>
     </div>
-    <p class="dr-q" id="dr-q">Pick one of the 30 restaurants from Test 20 and watch four agents answer the same question.</p>
+    <p class="dr-q" id="dr-q">Pick one of the 30 restaurants from the closing-time check and watch four agents answer the same question.</p>
     <div class="dr-lanes" id="dr-lanes"></div>
     <p class="dr-truth" id="dr-truth"></p>
     <div class="dr-score" id="dr-score"></div>
@@ -397,7 +399,7 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
       <h2>Two games, played on real results.</h2>
     </div>
     <p class="hint">First, guess when real New York restaurants close on Friday against GPT-6 Astra alone and with Qloo's
-      record. Then pick who scored higher, Qloo or the baseline, on tasks from films to festival timetables.</p>
+      record. Then pick who scored higher, Qloo or the baseline, on the tests behind the product: the lease score, the briefs and the closing times.</p>
   </div>
   <div class="panel game-box" id="game-box">
     <h3 class="game-title">Beat the model</h3>
@@ -423,7 +425,7 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
   <div class="panel game-box quiz-box" id="quiz">
     <h3 class="game-title">Qloo or the baseline?</h3>
     <div class="game-top">
-      <span class="game-round" id="qz-round">Question 1 of 8</span>
+      <span class="game-round" id="qz-round">Question 1 of 7</span>
       <div class="game-score"><span class="you">You <b id="qz-score">0/0</b></span></div>
     </div>
     <p class="game-q" id="qz-q">Loading the results&hellip;</p>
@@ -529,9 +531,9 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
       and the full record is at the bottom.</p>
   </div>
   <dl class="medians" id="medians" hidden>
-    <div class="m-city"><dt>Lease score without Qloo</dt><dd id="med-city"></dd><p>AUC, city records only (Test 4)</p></div>
-    <div class="m-qloo"><dt>Lease score with Qloo</dt><dd id="med-qloo"></dd><p>AUC (Test 4)</p></div>
-    <div class="m-qloo"><dt>With Qloo, 25 cuisines</dt><dd id="med-both"></dd><p>AUC (Test 4b)</p></div>
+    <div class="m-city"><dt>Lease score without Qloo</dt><dd id="med-city"></dd><p>AUC, city records only</p></div>
+    <div class="m-qloo"><dt>Lease score with Qloo</dt><dd id="med-qloo"></dd><p>AUC, city records plus Qloo</p></div>
+    <div class="m-qloo"><dt>With Qloo, 25 cuisines</dt><dd id="med-both"></dd><p>AUC, on the 11 cuisines added later</p></div>
   </dl>
   <figure class="chart-fig">
     <figcaption>
@@ -564,8 +566,7 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
       <div>
         <h3>What we kept honest</h3>
         <p>Who lives in an area comes from the census, because only 2 of 7 Qloo audience tags matched it. We make no
-          claim about which restaurants survive. Tests 5, 6, 9, 22, 23 and 25, where Qloo did not move the number,
-          stay in the record below.</p>
+          claim about which restaurants survive. The tests where Qloo did not move the number stay in the record below.</p>
       </div>
     </div>
     <details class="tests-acc">
@@ -590,8 +591,8 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
 
 
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script defer src="/static/app.js?v=41"></script>
-<script defer src="/static/features.js?v=41"></script>
-<script defer src="/static/play.js?v=41"></script>
+<script defer src="/static/app.js?v=42"></script>
+<script defer src="/static/features.js?v=42"></script>
+<script defer src="/static/play.js?v=42"></script>
 </body>
 </html>

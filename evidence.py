@@ -16,7 +16,7 @@ def _load(name):
 
 
 def panel():
-    t1, t2, t4 = _load("backtest_results.json"), _load("backtest2_results.json"), _load("backtest4_results.json")
+    t1, t4 = _load("backtest_results.json"), _load("backtest4_results.json")
     t6 = _load("backtest6_results.json")
     t5 = _load("backtest5_results.json")
     p6 = t6["pairs"]
@@ -40,7 +40,7 @@ def panel():
         "per_cuisine": rows,
         "entries": [
             {
-                "id": "lease", "title": "Test 4: how leases are ranked",
+                "id": "lease", "title": "Lease score: how leases are ranked",
                 "claim": ("Leases are ranked from NYC inspection records by two things: how many restaurants are in "
                           "the lease's block, and how many of the same cuisine are in and around it."),
                 "result": "With Qloo the lease score reaches AUC 0.893, against 0.851 without it.",
@@ -49,20 +49,12 @@ def panel():
                 "sources": ["PREREGISTRATION_3.md", "backtest4.py", "backtest4_results.json", "lease_model.json"],
             },
             {
-                "id": "test1", "title": "Test 1: does Qloo taste find blocks a cuisine has not reached yet?",
+                "id": "test1", "title": "Cuisine heatmaps: does Qloo taste find blocks a cuisine has not reached yet?",
                 "claim": "Hypothesis: Qloo taste minus existing supply finds blocks with unserved demand.",
                 "result": "Qloo AUC 0.812, against 0.742 for restaurant count.",
                 "caveat": "An opening shows where operators chose to go; the mechanism check is in the project log.",
                 "confidence": "Pre-registered; protocol committed before the result.",
                 "sources": ["PREREGISTRATION.md", "backtest.py", "backtest_results.json"],
-            },
-            {
-                "id": "test2", "title": "Test 2: do music-audience heatmaps carry resident taste?",
-                "claim": "Hypothesis: fans of K-pop, Bollywood, reggae and similar live where demand is unserved.",
-                "result": "Music-audience heatmaps added +0.064 AUC.",
-                "caveat": "Music taste is a proxy for residents, not a direct count.",
-                "confidence": "Pre-registered; protocol committed before the result.",
-                "sources": ["PREREGISTRATION_2.md", "backtest2.py", "backtest2_results.json"],
             },
             {
                 "id": "supply", "title": "Where supply comes from",
@@ -83,8 +75,8 @@ def panel():
                 "sources": ["PREREGISTRATION_2.md", "blind_test.py", "blind_sheet.md", "blind_key.sha256"],
             },
             {
-                "id": "test4b", "title": "Test 4b: does the lease score work for cuisines we had not tested?",
-                "claim": ("The first 14 cuisines cover half of active NYC restaurants. Test 4b ran the same city-records "
+                "id": "test4b", "title": "Lease score, 25 cuisines: does it work for cuisines we had not tested?",
+                "claim": ("The first 14 cuisines cover half of active NYC restaurants. The 25-cuisine test ran the same city-records "
                           "lease score on the 24 largest untested inspection categories, with a pass rule fixed first: "
                           "at least 50 blocks with a new opening, AUC at least 0.75, interval lower bound at least 0.70."),
                 "result": ("With Qloo the lease score reaches 0.887 against 0.851 without it. "
@@ -95,8 +87,7 @@ def panel():
                            "Asian 0.903 on 26); they stay untested and the agent says so."),
                 "caveat": ("For seafood, ice cream, burgers, sandwiches and Asian fusion the score is mostly how busy "
                            "the block is: same-cuisine supply added little. Broad categories like American mix very "
-                           "different concepts. The 14 original cuisines scored the same on this all-blocks sample as in "
-                           "Test 4 (0.782 to 0.897)."),
+                           "different concepts. The 14 original cuisines scored the same on this all-blocks sample as before (0.782 to 0.897)."),
                 "confidence": "Pre-registered (PREREGISTRATION_6.md); committed before results.",
                 "sources": ["PREREGISTRATION_6.md", "backtest4b.py", "backtest4b_results.json"],
             },
@@ -116,17 +107,17 @@ def panel():
                 "sources": ["positioning.py", "agent.py"],
             },
             {
-                "id": "reliability", "title": "Reliability suite (does the agent finish the job, with traceable numbers?)",
+                "id": "reliability", "title": "Reliability: does the agent finish the job, with traceable numbers?",
                 "claim": ("Separate from the tests above: this checks the agent works, not that any signal predicts "
                           "anything."),
                 "result": ("On the Oct 11 code, run 3 times each: 13 of 13 search and compare cases passed every run; 5 of 5 "
                            "edge cases (Staten Island, a bad address, an untested cuisine, Hoboken, a prompt injection) "
                            "stopped with a clear error; 5 of 5 follow-up questions called the right tool with every "
                            "number traced to a tool result; scout mode passed for students and families (3 runs each) and "
-                           "office workers and seniors (1 run each). After Test 4b added burgers, the untested-cuisine edge case "
+                           "office workers and seniors (1 run each). After the lease score was extended to more cuisines and added burgers, the untested-cuisine edge case "
                            "changed from 'Vegan burger joint' to 'Ethiopian injera house'; it and the other two "
                            "code-only edge cases were re-run on the current code and passed 3 of 3. The other cases "
-                           "ran on the code before Test 4b and the address-validation fix."),
+                           "ran on the code before that extension and the address-validation fix."),
                 "caveat": ("These cases were written by us, and the saved runs on this page were re-recorded on the final "
                            "code; they show the demo, not a pass rate. When a live run fails, the page says whether the "
                            "model host was busy (try again in a minute) or the demo budget is used up, and saved runs "
@@ -136,7 +127,7 @@ def panel():
                 "sources": ["eval_suite.py", "eval_suite_results_v3.json", "eval_suite_results_scout.json"],
             },
             {
-                "id": "test5", "title": "Test 5: do restaurants on high-scoring blocks survive?",
+                "id": "test5", "title": "Survival: do restaurants on high-scoring blocks last?",
                 "claim": "Hypothesis: the lease score also ranks blocks where young restaurants last.",
                 "result": (f"No. {t5['cohort_total']} restaurants opened Oct 2018 to Oct 2021; "
                            f"{round(100 * t5['survival_rate_total'])}% were still open in Oct 2026. The lease score "
@@ -151,7 +142,7 @@ def panel():
                 "sources": ["PREREGISTRATION_5.md", "backtest5.py", "backtest5_results.json", "backtest5_exploratory_placebo.py"],
             },
             {
-                "id": "test6", "title": "Test 6: do Qloo's audience tags describe who is in an area?",
+                "id": "test6", "title": "Audience tags: do Qloo's tags describe who is in an area?",
                 "claim": "Hypothesis: Qloo's customer-identity tags for a place match independent data about that place.",
                 "result": (f"{t6['validated']} of 7 matched across {t6['units']} NYC neighbourhoods: "
                            + "; ".join(f"{label6[k]} rho {v['rho']:+.2f}" for k, v in

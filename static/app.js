@@ -14,37 +14,21 @@ const EXAMPLES = [
   { concept: "Caribbean restaurant", goal: "Caribbean families and commuters in Brooklyn or the Bronx, near a busy subway station." },
   { concept: "Bakery", goal: "Morning commuters and parents in Queens or Brooklyn, away from other bakeries." },
 ];
-/* Every pre-registered test, in order: number, question, result. Wording follows the README. */
+/* Every pre-registered test behind the product, by name. Each protocol was committed before its result. */
 const TESTS = [
-  ["1", "Do Qloo cuisine heatmaps find blocks a cuisine has not reached yet? 14 cuisines, 648 first openings, 2024 to 2026.", "Qloo AUC 0.812 versus 0.742 for restaurant count."],
-  ["2", "Do music-audience heatmaps carry resident taste?", "+0.064 AUC."],
-  ["3", "Do two blind human raters prefer briefs written with Qloo evidence?", "Qloo briefs preferred 78% of the time."],
-  ["4", "Which city-records score ranks storefronts, and does Qloo add to it?", "Lease score with Qloo 0.893 versus 0.851 without it."],
-  ["4b", "Does that score extend to more cuisines?", "Yes, to 11 more: 25 cuisines, 83% of active restaurants."],
-  ["5", "Does the lease score predict which restaurants last?", "Qloo taste added +0.013, a placebo +0.016. The lease score shows where operators open, not where they survive."],
-  ["6", "Do Qloo's audience tags match census and jobs data across 181 neighbourhoods?", "2 of 7 tags matched (Affluent Diners, Business Professionals). Demographics come from the census."],
-  ["7", "Given a storefront, does Qloo predict which cuisine opens there?", "+0.087 AUC over city records."],
-  ["8", "Does a blind judge prefer briefs written with Qloo area evidence over briefs written with a list of nearby businesses?", "Qloo briefs preferred 76% (0.68 to 0.83)."],
-  ["9", "Can a different use of Qloo (place records, not area lift) improve the brief, against a control that differs only by Qloo?", "Q over Q0 0.60 (0.433 to 0.767), over C+ 0.633 (0.483 to 0.80); the rule was not met."],
-  ["10", "Is Qloo's list of competitors complete and current?", "Qloo finds 92.4% of competitors."],
-  ["11", "Is a restaurant's Qloo scene about the restaurant or only its location?", "Specific to the restaurant (two unlike restaurants on one block share 0.225 of their lists), but nothing independent backs it. Shown as not validated and never used to choose where to open."],
-  ["12", "Are Qloo's closing times and price levels right, against Google Maps?", "Closing times 29 of 30 within 30 minutes, all 29 exact; price levels 25 of 27 matched."],
-  ["13", "Idea screen: which of seven other Qloo outputs for a restaurant are specific and stable enough to test further?", "Partners, scene and twin city passed; sound, brands, screen taste and words failed on consistency between sibling restaurants."],
-  ["14", "Does Qloo's venue-to-artist affinity rank the acts a music venue really books (Ticketmaster)?", "Qloo 0.589 (0.518 to 0.668), above fame, not above genre. A language model alone: 0.814."],
-  ["15", "Does artist-to-artist affinity rank the act that really opened for a headliner?", "Qloo 0.875, above fame (0.473) and genre (0.714). The model alone: 0.976 on the same shortlists."],
-  ["16", "From no shortlist, does a model find more real openers when it sees Qloo's candidates?", "Qloo 0.721, combined 0.846."],
-  ["17", "Does Qloo's affinity by city rank the markets an artist's tour really plays?", "Qloo 0.781 versus 0.693 baseline."],
-  ["18", "Films a person rated highly (MovieLens): does Qloo rank them, and does a model do better with Qloo's scores?", "Qloo 0.873 versus average rating 0.815."],
-  ["19", "A repeat of another team's tour-opener claim with a stated method.", "Qloo 0.824 versus 0.751 for the baseline."],
-  ["20", "Asked when a real NYC restaurant closes on Friday, is a model right more often with Qloo's record than alone?", "Yes, for both models. GPT-6 Astra: 0 of 30 alone, 29 of 30 with Qloo. gemini-3.8-flash: 3 of 30 alone, 29 of 30 with Qloo."],
-  ["21", "Is Qloo ahead of the model on lesser-known headliners?", "Qloo minus model +0.086."],
-  ["22", "Screen: do model-written NYC plans send people to places that are shut, and does Qloo hold hours for enough of the stops to check them?", "Qloo held hours for 0.992 of the stops and flagged a stop in 0.567 of plans, but many flags looked like bad 'closed' records. The check by a person was not run and the idea was dropped."],
-  ["23", "Does Qloo know which comedians share a crowd?", "Not shown on famous package tours: a pair who toured together outscored one who did not 0.612 of the time (0.464 to 0.797). Too few current comedy bills on Ticketmaster to test the rest."],
-  ["24", "Do older acts that young people took up (TikTok trend lists) show a younger crowd in Qloo?", "Qloo 0.712 versus chance 0.333."],
-  ["25", "Qloo on its home ground: small acts, brand-new restaurants, steadiness.", "Small acts: too few to say. 120 NYC restaurants opened after April 2026: Qloo held 55%; cuisine right 0.683 for the model alone, 0.658 with Qloo, not shown. Steadiness: model and Qloo both steady."],
-  ["26", "Do MLB theme nights that suit a city's taste draw more people? 2,425 games, 336 theme nights.", "Qloo Spearman 0.284 versus model alone 0.099."],
-  ["27", "On small artists (Last.fm listening data), does Qloo know a real listener's taste?", "Qloo AUC 0.841, far above popularity (0.516). Model alone 0.865, model with Qloo 0.874: no different from Qloo."],
-  ["28", "Does a festival timetable built on Qloo's fan-overlap scores make fewer real fans choose?", "Yes. Qloo reached 0.663 of the possible gain, popularity 0.043; pair scores +0.031 (0.005 to 0.056). The model alone (0.669) and with Qloo (0.702) were no different."],
+  ["Cuisine heatmaps", "Do Qloo cuisine heatmaps find blocks a cuisine has not reached yet? 14 cuisines, 648 first openings, 2024 to 2026.", "Qloo AUC 0.812 versus 0.742 for restaurant count."],
+  ["Brief, human raters", "Do two blind human raters prefer briefs written with Qloo evidence?", "Qloo briefs preferred 78% of the time."],
+  ["Lease score", "Which city-records score ranks storefronts, and does Qloo add to it?", "Lease score with Qloo 0.893 versus 0.851 without it."],
+  ["Lease score, 25 cuisines", "Does that score extend to more cuisines?", "Yes, to 11 more: 25 cuisines, 83% of active restaurants. With Qloo 0.887 versus 0.851."],
+  ["Survival", "Does the lease score predict which restaurants last?", "Qloo taste added +0.013, a placebo +0.016. The lease score shows where operators open, not where they survive."],
+  ["Audience tags", "Do Qloo's audience tags match census and jobs data across 181 neighbourhoods?", "2 of 7 tags matched (Affluent Diners, Business Professionals). Demographics come from the census."],
+  ["Storefront cuisine", "Given a storefront, does Qloo predict which cuisine opens there?", "+0.087 AUC over city records."],
+  ["Brief, blind judge", "Does a blind judge prefer briefs written with Qloo area evidence over briefs written with a list of nearby businesses?", "Qloo briefs preferred 76% (0.68 to 0.83)."],
+  ["Brief from place records", "Can a different use of Qloo (place records, not area lift) improve the brief, against a control that differs only by Qloo?", "Q over Q0 0.60 (0.433 to 0.767), over C+ 0.633 (0.483 to 0.80); the rule was not met."],
+  ["Competitor coverage", "Is Qloo's list of competitors complete and current?", "Qloo finds 92.4% of competitors."],
+  ["Restaurant scene", "Is a restaurant's Qloo scene about the restaurant or only its location?", "Specific to the restaurant (two unlike restaurants on one block share 0.225 of their lists), but nothing independent backs it. Shown as not validated and never used to choose where to open."],
+  ["Hours and prices", "Are Qloo's closing times and price levels right, against Google Maps?", "Closing times 29 of 30 within 30 minutes, all 29 exact; price levels 25 of 27 matched."],
+  ["Closing-time check", "Asked when a real NYC restaurant closes on Friday, is a model right more often with Qloo's record than alone?", "Yes, for both models. GPT-6 Astra: 0 of 30 alone, 29 of 30 with Qloo. Gemini 3.8 Flash: 3 of 30 alone, 29 of 30 with Qloo."],
 ];
 const NO_KEYS = "This needs a live connection that is not available here. The finished runs above show the full result.";
 
@@ -812,7 +796,7 @@ function hoursChart(places) {
   const late = rows.filter(r => r.late).length;
   return `<h3>When they close on Friday</h3>
     <p class="hint">${rows.length} nearby place${rows.length > 1 ? "s" : ""} with hours in Qloo; ${late ? `${late} stay${late > 1 ? "" : "s"} open past 11 pm` : "none of these stays open past 11 pm"}.
-      Qloo's Friday closing times matched Google Maps for 29 of 30 places in our Test 12.</p>
+      Qloo's Friday closing times matched Google Maps for 29 of 30 places in our hours and prices test.</p>
     <div class="hours" role="img" aria-label="${esc(rows.map(r => `${r.name} closes ${r.t}`).join("; "))}">
       <div class="hours-axis" aria-hidden="true"><span></span><span class="ticks"><span>noon</span><span>4 pm</span><span>8 pm</span><span>midnight</span><span>4 am</span></span><span></span></div>
       ${rows.map(r => `<div class="hours-row${r.late ? " late" : ""}"><span class="nm" title="${esc(r.name)}">${esc(r.name)}</span>
@@ -853,7 +837,7 @@ async function around() {
   } catch (e) { if (run === state.runId) body.innerHTML = `<p class="form-error">${esc(e.message)}</p>`; }
   finally { btn.disabled = false; }
 }
-/* Test 20, live: the model alone against the model with Qloo's record, for one rival the founder picks. */
+/* The closing-time check, live: the model alone against the model with Qloo's record, for one rival the founder picks. */
 async function duel(btn) {
   const top = topLease(), li = btn.closest("li"), run = state.runId;
   if (!top) return;
@@ -870,13 +854,13 @@ async function duel(btn) {
     box.innerHTML = `<div><span class="k">${esc(d.model)} alone</span><b>${said(d.alone)}</b></div>
       <div class="wq"><span class="k">${esc(d.model)} + Qloo</span><b>${said(d.with_qloo)}</b></div>
       <div class="rec"><span class="k">Qloo's record</span><b>${esc(d.qloo_closes_friday)}</b></div>
-      <p class="duel-note">Friday closing time of ${esc(d.name)}. The same question as our Test 20, where the model alone was right
+      <p class="duel-note">Friday closing time of ${esc(d.name)}. The same question as our closing-time check, where the model alone was right
         for ${d.test20.alone_right} of ${d.test20.of} places and with Qloo for ${d.test20.with_qloo_right}. This live answer is not checked against Google Maps.</p>`;
   } catch (e) { if (run === state.runId) box.innerHTML = `<p class="duel-note">${esc(e.message)}</p>`; }
   finally { btn.disabled = false; }
 }
 
-/* Every recorded answer behind Test 20, loaded the first time the table is opened. */
+/* Every recorded answer behind the closing-time check, loaded the first time the table is opened. */
 async function loadTest20() {
   const body = $("#t20-body");
   if (body.dataset.loaded) return;
@@ -912,7 +896,7 @@ async function showScene() {
       html += `<div class="scene-grid"><div class="panel">
           <h3>${esc(s.label)}</h3>
           <p class="hint">${Math.round(100 * s.share_within_1500m_of_an_anchor)}% of these are within 1.5 km of a place you named.
-            In our Test 11 a restaurant's list was specific to it, not just to its block, but nothing independent confirmed
+            In our restaurant scene test a restaurant's list was specific to it, not just to its block, but nothing independent confirmed
             what the list means. We do not use it to choose where to open.</p>
           <ol class="scene-list">${s.places.map(p => `<li${p.in_city_records ? "" : ' class="unc"'}><b>${esc(p.name)}</b>
             <span class="m">${[p.kind, p.neighbourhood].filter(Boolean).map(esc).join(" · ")}</span></li>`).join("")}</ol>
@@ -967,7 +951,7 @@ async function boot() {
   $("#print-report").onclick = () => window.print();
   $("#stop").onclick = () => { if (state.abort) state.abort.abort(); };
   $("#map-fit").onclick = fitMap;
-  $("#tests-count").textContent = "Every test in order, 1 to 28";
+  $("#tests-count").textContent = `All ${TESTS.length} tests behind the product`;
   $("#tests").innerHTML = `<thead><tr><th>Test</th><th>Question</th><th>Result</th></tr></thead><tbody>` +
     TESTS.map(([n, q, r]) => `<tr><td>${esc(n)}</td><td>${esc(q)}</td><td>${esc(r)}</td></tr>`).join("") + "</tbody>";
   $("#copy-brief").onclick = () => {

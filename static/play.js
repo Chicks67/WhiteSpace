@@ -1,7 +1,7 @@
 "use strict";
 /* The two things to play with: drop a pin (the city-records lease score for any block, from /api/pin and
    /api/whatif, which call neither a model nor Qloo) and beat the model (a closing-time guessing game over the
-   recorded Test 20 answers from /api/test20). Uses $ and esc from app.js. */
+   recorded closing-time answers from /api/test20). Uses $ and esc from app.js. */
 
 const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const cssVar = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
@@ -196,7 +196,7 @@ function gameEnd() {
   const line = game.you > game.wq ? "You beat the model with Qloo. Impressive." : game.you === game.wq ? "You tied the model with Qloo." :
     game.you > game.alone ? "You beat the model alone, but not the model with Qloo's record." : "The model with Qloo's record won this one.";
   end.innerHTML = `<strong>${esc(line)}</strong>
-    <p class="hint">You ${game.you} of 5, GPT-6 Astra alone ${game.alone} of 5, GPT-6 Astra with Qloo ${game.wq} of 5. Across all 30 restaurants in Test 20 the model alone was right 0 times and with Qloo 29 times.</p>
+    <p class="hint">You ${game.you} of 5, GPT-6 Astra alone ${game.alone} of 5, GPT-6 Astra with Qloo ${game.wq} of 5. Across all 30 restaurants in the closing-time check the model alone was right 0 times and with Qloo 29 times.</p>
     <div class="game-actions"><button type="button" class="primary" id="game-again">Play again</button>
     <button type="button" class="quiet" id="game-share">Copy my score</button></div>`;
   end.hidden = false;
@@ -219,7 +219,7 @@ function gameBoot() {
     if (!es.some(e => e.isIntersecting)) return;
     io.disconnect();
     try { game.rows = (await getJSON("/api/test20")).rows; gameStart(); }
-    catch (e) { $("#game-q").textContent = "The recorded Test 20 answers are not on this server, so the game cannot run here."; $("#game-lock").disabled = true; }
+    catch (e) { $("#game-q").textContent = "The recorded closing-time answers are not on this server, so the game cannot run here."; $("#game-lock").disabled = true; }
   }, { rootMargin: "200px" });
   io.observe($("#game-box"));
 }
@@ -329,21 +329,26 @@ async function bizBoot() {
 /* ---------- Qloo or the baseline: a quiz over the results where Qloo beat its baseline ---------- */
 const quiz = { rounds: [], i: 0, right: 0, done: false };
 function quizRounds() {
+  // every head-to-head where Qloo beat its baseline, as a two-way choice
   const out = [];
   for (const k of RESULTS) {
     if (k.badge !== "win") continue;
-    if (k.kind === "pair") out.push({ task: k.title, test: k.test, metric: k.metric, q: k.q, b: k.b, note: k.note });
-    if (k.id === "F15") out.push({ task: k.title, test: k.test, metric: k.metric, q: ["Qloo", .875], b: ["Genre", .714], note: k.note });
+    if (k.kind === "pair") out.push({ task: k.title, name: k.name, metric: k.metric, q: k.q, b: k.b, note: k.note });
+    if (k.base) out.push({ task: k.title, name: k.name, metric: "preference share", q: ["Brief with Qloo", k.n], b: ["Brief without Qloo", 1 - k.n], note: k.note });
+    if (k.id === "hours-qa") {
+      out.push({ task: "GPT-6 Astra on Friday closing times", name: k.name, metric: "share right", q: ["With Qloo's record", 29 / 30], b: ["Alone", 0], note: k.note });
+      out.push({ task: "Gemini 3.8 Flash on Friday closing times", name: k.name, metric: "share right", q: ["With Qloo's record", 29 / 30], b: ["Alone", .1], note: k.note });
+    }
   }
   for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; }
-  return out.slice(0, 8);
+  return out;
 }
 function quizShow() {
   const r = quiz.rounds[quiz.i];
   $("#qz-round").textContent = `Question ${quiz.i + 1} of ${quiz.rounds.length}`;
   $("#qz-score").textContent = `${quiz.right}/${quiz.i}`;
   $("#qz-q").textContent = `${r.task}: who scored higher?`;
-  $("#qz-sub").textContent = `Test ${r.test}. Measured as ${r.metric}.`;
+  $("#qz-sub").textContent = `${r.name}. Measured as ${r.metric}.`;
   const opts = Math.random() < .5 ? [r.q, r.b] : [r.b, r.q];
   $("#qz-opts").innerHTML = opts.map(o => `<button type="button" class="qz-opt" data-who="${esc(o[0])}">${esc(o[0])}</button>`).join("");
   $("#qz-reveal").innerHTML = ""; $("#qz-next").hidden = true;

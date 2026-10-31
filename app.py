@@ -239,14 +239,15 @@ def index():
 
 @app.get("/robots.txt")
 def robots():
-    return PlainTextResponse(f"User-agent: *\nAllow: /\nDisallow: /api/\n# A plain-text guide for language models: {SITE}/llms.txt\n"
+    return PlainTextResponse(f"User-agent: *\nAllow: /\nDisallow: /api/\n# Guides for language models: {SITE}/llms.txt, {SITE}/llms.md and {SITE}/llms-full.txt\n"
                              f"Sitemap: {SITE}/sitemap.xml\n")
 
 
 @app.get("/sitemap.xml")
 def sitemap():
     xml = (f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
-           f"<url><loc>{SITE}/</loc></url><url><loc>{SITE}/llms.txt</loc></url><url><loc>{SITE}/llms-full.txt</loc></url></urlset>\n")
+           f"<url><loc>{SITE}/</loc></url><url><loc>{SITE}/llms.txt</loc></url><url><loc>{SITE}/llms.md</loc></url>"
+           f"<url><loc>{SITE}/llms-full.txt</loc></url></urlset>\n")
     return Response(xml, media_type="application/xml")
 
 
@@ -256,23 +257,55 @@ def favicon():
                         headers={"Cache-Control": "public, max-age=86400"})
 
 
-@app.get("/llms.txt")
-@app.get("/.well-known/llms.txt")
-def llms_txt():
-    """A plain-text guide to the site for language models (llmstxt.org)."""
-    return FileResponse(os.path.join(ROOT, "static", "llms.txt"), media_type="text/plain; charset=utf-8")
-
-
-@app.get("/llms-full.txt")
-def llms_full_txt():
-    """llms.txt followed by every evidence entry in full: claim, result, caveat, status and source files."""
+def _llms():
     with open(os.path.join(ROOT, "static", "llms.txt")) as f:
-        head = f.read().rstrip()
-    lines = [head, "", "## Every claim, with its test", ""]
+        return f.read().rstrip() + "\n"
+
+
+def _tests_table():
+    """The "What we tested" table from README.md, so llms-full.txt always lists exactly the tests the docs list."""
+    try:
+        with open(os.path.join(ROOT, "README.md")) as f:
+            readme = f.read()
+        section = readme.split("## What we tested", 1)[1].split("\n---", 1)[0]
+        return "\n".join(line for line in section.splitlines() if line.startswith("|")).strip()
+    except (OSError, IndexError):
+        return ""
+
+
+def _llms_full():
+    lines = [_llms().rstrip(), "", "## Every test behind the product", "",
+             "Each was pre-registered: its protocol was committed before its code or its result.", "", _tests_table(), "",
+             "## Every claim the product makes, with its test", ""]
     for e in evidence.panel()["entries"]:
         lines += [f"### {e['title']}", "", f"- Claim: {e['claim']}", f"- Result: {e['result']}", f"- Caveat: {e['caveat']}",
                   f"- Status: {e['confidence']}", f"- Files: {', '.join(e['sources'])}", ""]
-    return PlainTextResponse("\n".join(lines), media_type="text/plain; charset=utf-8")
+    return "\n".join(lines).rstrip() + "\n"
+
+
+@app.api_route("/llms.txt", methods=["GET", "HEAD"])
+@app.api_route("/.well-known/llms.txt", methods=["GET", "HEAD"])
+def llms_txt():
+    """A plain-text guide to the site for language models (llmstxt.org)."""
+    return PlainTextResponse(_llms(), media_type="text/plain; charset=utf-8")
+
+
+@app.api_route("/llms.md", methods=["GET", "HEAD"])
+def llms_md():
+    """The same guide, served as Markdown."""
+    return PlainTextResponse(_llms(), media_type="text/markdown; charset=utf-8")
+
+
+@app.api_route("/llms-full.txt", methods=["GET", "HEAD"])
+@app.api_route("/.well-known/llms-full.txt", methods=["GET", "HEAD"])
+def llms_full_txt():
+    """llms.txt, then every test behind the product and every claim in full: result, caveat, status and files."""
+    return PlainTextResponse(_llms_full(), media_type="text/plain; charset=utf-8")
+
+
+@app.api_route("/llms-full.md", methods=["GET", "HEAD"])
+def llms_full_md():
+    return PlainTextResponse(_llms_full(), media_type="text/markdown; charset=utf-8")
 
 
 @app.get("/health")

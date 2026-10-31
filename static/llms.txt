@@ -2,7 +2,7 @@
 
 > A site-selection agent for independent restaurant founders in New York City (Brooklyn, Queens, Manhattan, the Bronx). A founder describes a concept and customers; the agent finds vacant storefronts in the NYC Storefront Registry, ranks them with a lease score built on NYC inspection records, checks competition and foot traffic, writes a positioning brief for the top pick with Qloo taste data, lists local partners and next steps, and answers follow-up questions with tools. Built for the Qloo Agentic Hackathon 2026. MIT licence.
 
-Every claim the product makes about a data source rests on a pre-registered test, committed before its result existed. City records decide where to open; census and jobs data decide who lives nearby; Qloo place records supply competitors' Friday closing times and review mentions, and power the "where else do their fans go" scene explorer. Finished runs play back with no API calls. API keys stay on the server. A longer version of this file, with every test's claim, result and caveat, is at [/llms-full.txt](/llms-full.txt).
+Every claim the product makes about a data source rests on a pre-registered test, committed before its result existed. City records decide where to open; census and jobs data decide who lives nearby; Qloo place records supply competitors' Friday closing times and review mentions, and power the "where else do their fans go" scene explorer. Finished runs play back with no API calls. API keys stay on the server. This guide is also served as Markdown at [/llms.md](/llms.md). A longer version, with every test behind the product and every claim's result and caveat, is at [/llms-full.txt](/llms-full.txt).
 
 ## Use the site
 
@@ -11,9 +11,9 @@ Every claim the product makes about a data source rests on a pre-registered test
 - [Scout form](/#scout): describe a plan, search an area, or compare two to five addresses
 - [Drop a pin](/#play): score any block on a map, compare up to three, and try what-if changes
 - [Finished runs](/#saved): real recorded runs that open in seconds with no API calls
-- [Why Qloo](/#why): what each model answered in Test 20, as pie charts, and a restaurant-by-restaurant duel
+- [Why Qloo](/#why): what each model answered in the closing-time check, as pie charts, and a restaurant-by-restaurant duel
 - [Beat the model](/#game): guess a real restaurant's Friday closing time against GPT-6 Astra alone and with Qloo
-- [Results](/#results): every head-to-head of Qloo against its baseline, with a filterable ledger of results
+- [Results](/#results): every head-to-head of Qloo against its baseline, with a ledger of results by area
 - [How it works](/#how): the six steps of every run and what each source does
 - [Scene explorer](/#scene): name up to three places; Qloo returns where their fans also go
 - [How we know](/#evidence): what the tests show, and every test in order
@@ -28,7 +28,7 @@ Every claim the product makes about a data source rests on a pre-registered test
 - `POST /api/run`: a live run, body `{concept, cuisine?, goal? | area? | leases?: [{address}]}`, streamed as server-sent events, rate limited
 - `POST /api/ask`: a follow-up question about a run, streamed, rate limited
 - `GET /api/around?concept=&lat=&lon=`: competitors near a point from city records, with Qloo's Friday closing times and review mentions; no model call
-- [Test 20 answers](/api/test20): every recorded answer behind the closing-time result, place by place
+- [Closing-time answers](/api/test20): every recorded answer behind the closing-time check, place by place
 - `POST /api/duel`: body `{name, lat, lon}`; asks the model when a real place closes on Friday, alone and with Qloo's record, side by side; rate limited
 - `GET /api/pin?concept=&lat=&lon=`: the city-records lease score for any point; no Qloo call and no model call
 - `GET /api/whatif?concept=&density=&same=`: the lease score percentile for a block with these counts
@@ -37,17 +37,16 @@ Every claim the product makes about a data source rests on a pre-registered test
 
 ## Key results
 
-- Asked when 30 real NYC restaurants close on Friday, GPT-6 Astra alone was right 0 times and Gemini 3.8 Flash 3 times; with Qloo's place record both were right 29 times (Test 20).
-- Qloo's Friday closing times matched Google Maps for 29 of 30 places, checked by a person (Test 12).
-- For 40 real listeners, Qloo ranked the small artists each one plays at AUC 0.841, against 0.516 for popularity (Test 27).
-- A festival timetable built on Qloo's fan-overlap scores reached 0.663 of the possible cut in fan clashes, against 0.043 for popularity (Test 28).
+- Asked when 30 real NYC restaurants close on Friday, GPT-6 Astra alone was right 0 times and Gemini 3.8 Flash 3 times; with Qloo's place record both were right 29 times (closing-time check).
+- Qloo's Friday closing times matched Google Maps for 29 of 30 places, checked by a person (hours and prices).
 - The lease score reaches AUC 0.893 with Qloo, against 0.851 without it (0.887 across 25 cuisines). There is no rent data. Staten Island is not covered.
-- Qloo finds 92.4% of real competitors (Test 10) and matches price levels for 25 of 27 places (Test 12).
-- Blind raters preferred positioning briefs written with Qloo 78% of the time (Test 3); a blind judge 76% (Test 8).
+- Qloo finds 92.4% of real competitors (competitor coverage) and matches price levels for 25 of 27 places (hours and prices).
+- Blind raters preferred positioning briefs written with Qloo 78% of the time; a blind judge 76%.
 - The follow-up agent has twelve tools, including competitor_hours and place_hours, which answer hours questions from Qloo's place records; it never states opening hours from memory.
 
 ## Optional
 
-- [Full version](/llms-full.txt): this file plus every test's claim, result, caveat and source files
+- [Full version](/llms-full.txt): this file plus every test behind the product and every claim's result, caveat and source files
+- [Markdown version](/llms.md): this file as Markdown
 
 - [Data sources](/#evidence): NYC DOHMH Restaurant Inspection Results, NYC Storefront Registry, NYC 2020 Neighborhood Tabulation Areas, US Census ACS 2023 and LODES jobs data, MTA subway ridership, business improvement districts, NYC Planning GeoSearch, Qloo Insights API
