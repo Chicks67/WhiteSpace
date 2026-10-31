@@ -72,6 +72,13 @@ class NTALookup:
         self.areas = ntas()
         self.tree = STRtree([a[2] for a in self.areas])
 
+    def borough(self, lat, lon):
+        p = Point(lon, lat)
+        for i in self.tree.query(p):
+            if self.areas[i][2].contains(p):
+                return self.areas[i][1]
+        return None
+
     def name(self, lat, lon):
         p = Point(lon, lat)
         for i in self.tree.query(p):

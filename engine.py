@@ -82,7 +82,8 @@ class LeaseError(Exception):
 
 _GENERIC = {"st", "street", "ave", "av", "avenue", "rd", "road", "blvd", "boulevard", "pl", "place", "dr", "drive",
             "ln", "lane", "pkwy", "parkway", "e", "w", "n", "s", "east", "west", "north", "south", "ny", "new", "york",
-            "nyc", "usa", "apt", "unit", "suite", "ste", "fl", "floor", "the", "of", "and", "at"}
+            "nyc", "usa", "apt", "unit", "suite", "ste", "fl", "floor", "the", "of", "and", "at", "square", "sq", "plaza",
+            "court", "ct", "terrace", "ter", "place", "pl"}
 _BORO_WORDS = {"Brooklyn": ["brooklyn", "bklyn"], "Queens": ["queens"] + "flushing astoria jamaica bayside woodside "
                "sunnyside corona elmhurst ridgewood woodhaven".split(), "Manhattan": ["manhattan"],
                "Bronx": ["bronx"], "Staten Island": ["staten island"]}
@@ -100,6 +101,11 @@ def _street_ok(asked, label):
     return not want or bool(want & _tokens(label.split(",")[0]))
 
 
+# Places outside New York City that GeoSearch would otherwise match to a same-named NYC street.
+_OUTSIDE = re.compile(r"\b(hoboken|jersey city|new jersey|nj|newark|weehawken|union city|west new york|fort lee|bayonne|"
+                      r"yonkers|mount vernon|new rochelle|westchester|nassau|hempstead|connecticut|ct \d{5})\b", re.I)
+
+
 def _named_borough(text):
     t = " " + text.lower() + " "
     hits = {b for b, words in _BORO_WORDS.items() if any(f" {w}" in t for w in words)}
@@ -108,6 +114,8 @@ def _named_borough(text):
 
 @lru_cache(maxsize=512)
 def _geosearch(address):
+    if _OUTSIDE.search(address):
+        raise LeaseError(f"{address} is outside New York City; we cover Brooklyn, Queens, Manhattan and the Bronx")
     url = "https://geosearch.planninglabs.nyc/v2/search?" + urllib.parse.urlencode({"text": address, "size": 5})
     try:
         feats = json.load(urllib.request.urlopen(url, timeout=20)).get("features", [])

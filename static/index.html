@@ -34,7 +34,7 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400..600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <!-- the map only appears after a run, so its stylesheet does not hold up the first paint -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="/static/style.css?v=37">
+<link rel="stylesheet" href="/static/style.css?v=41">
 </head>
 <body>
 <div class="scroll-bar" id="scroll-bar" aria-hidden="true"></div>
@@ -409,7 +409,7 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
     <div class="dial">
       <label for="game-dial" class="visually-hidden">Your guess for the Friday closing time</label>
       <div class="dial-read" id="game-read" aria-live="polite">10:00 pm</div>
-      <input type="range" id="game-dial" min="64" max="112" step="1" value="88">
+      <input type="range" id="game-dial" min="48" max="112" step="1" value="88">
       <div class="dial-ticks" aria-hidden="true"><span>noon</span><span>4 pm</span><span>8 pm</span><span>midnight</span><span>4 am</span></div>
     </div>
     <div class="game-actions">
@@ -590,8 +590,8 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
 
 
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script defer src="/static/app.js?v=30"></script>
-<script defer src="/static/features.js?v=32"></script>
-<script defer src="/static/play.js?v=36"></script>
+<script defer src="/static/app.js?v=41"></script>
+<script defer src="/static/features.js?v=41"></script>
+<script defer src="/static/play.js?v=41"></script>
 </body>
 </html>

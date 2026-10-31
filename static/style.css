@@ -1213,6 +1213,13 @@ html, body { overflow-x: clip; max-width: 100%; }
   .rail { max-height: none !important; overflow: visible !important; }
 }
 
+/* the agent radar: long log lines must never widen the card (a grid item's minimum width is its content) */
+.rail { grid-template-columns: minmax(0, 1fr); }
+.agent-viz, .av-log, .av-log li { min-width: 0; }
+.agent-viz { max-width: 100%; overflow: hidden; }
+.agent-viz.in-rail svg { width: auto; max-width: 100%; margin-inline: auto; }
+.av-node text.cl { font-size: 9px; }
+
 /* ---------- smaller screens ---------- */
 @media (max-width: 1080px) {
   .hero { grid-template-columns: minmax(0, 1fr); }

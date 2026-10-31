@@ -70,10 +70,15 @@ def _redis(*commands):
                                  headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"})
     try:
         with urllib.request.urlopen(req, timeout=2) as r:
-            return [x.get("result") for x in json.load(r)]
+            body = json.load(r)
     except Exception as e:  # the store is a convenience: if it is down, fall back to this instance's own counts
         print("shared counters unavailable:", repr(e)[:200], flush=True)
         return None
+    # Upstash answers 200 even when one command fails, with {"error": ...} in that item: treat any of that as no answer
+    if not isinstance(body, list) or len(body) != len(commands) or any(not isinstance(x, dict) or "error" in x for x in body):
+        print("shared counters gave an error:", str(body)[:200], flush=True)
+        return None
+    return [x.get("result") for x in body]
 
 
 def _add_spend(spent):
@@ -190,11 +195,16 @@ def _admit(ip, kind="run", per_hour=None, spend=True):
     shared = _redis(["GET", f"spend:{date.today()}"], ["INCR", f"hits:{ip}:{int(now // 3600)}"],
                     ["EXPIRE", f"hits:{ip}:{int(now // 3600)}", 3700])
     if shared is not None:   # one count for every instance: a fixed hourly window per visitor and kind
-        if spend and float(shared[0] or 0) >= DAILY_CREDITS:
-            return "Today's live-run budget is used up. The saved runs still work."
-        if int(shared[1]) > per_hour:
-            return f"Live {kind}s are limited to {per_hour} per hour per visitor. The saved runs still work."
-        return None
+        try:
+            spent_today, hits = float(shared[0] or 0), int(shared[1])
+        except (TypeError, ValueError):
+            spent_today = hits = None
+        if hits is not None:
+            if spend and spent_today >= DAILY_CREDITS:
+                return "Today's live-run budget is used up. The saved runs still work."
+            if hits > per_hour:
+                return f"Live {kind}s are limited to {per_hour} per hour per visitor. The saved runs still work."
+            return None
     with _lock:
         if _spend["day"] != str(date.today()):
             _spend.update(day=str(date.today()), credits=0.0)
@@ -402,20 +412,52 @@ def _city_map():
             "counts": {"restaurants": len(rest), "storefronts": len(shop)}}
 
 
+def _accepts_gzip(header):
+    """True when Accept-Encoding allows gzip (directly or through *) with a quality above zero."""
+    q = {}
+    for part in header.lower().split(","):
+        name, _, params = part.strip().partition(";")
+        weight = 1.0
+        for p in params.split(";"):
+            k, _, v = p.strip().partition("=")
+            if k == "q":
+                try:
+                    weight = float(v)
+                except ValueError:
+                    weight = 0.0
+        if name:
+            q[name] = weight
+    return q.get("gzip", q.get("*", 0.0)) > 0
+
+
 @functools.lru_cache(maxsize=1)
 def _city_map_bytes():
     raw = json.dumps(_city_map(), separators=(",", ":")).encode()
     return raw, gzip.compress(raw, 9)
 
 
-@app.get("/api/citymap")
+@app.api_route("/api/citymap", methods=["GET", "HEAD"])
 def city_map(request: Request):
     """The header map's data, sent gzipped when the browser accepts it (about a third of the size)."""
     raw, packed = _city_map_bytes()
     headers = {"Cache-Control": "public, max-age=86400", "Vary": "Accept-Encoding"}
-    if "gzip" in request.headers.get("accept-encoding", ""):
+    if _accepts_gzip(request.headers.get("accept-encoding", "")):
         return Response(packed, media_type="application/json", headers={**headers, "Content-Encoding": "gzip"})
     return Response(raw, media_type="application/json", headers=headers)
+
+
+_nta_lock = threading.Lock()
+
+
+@functools.lru_cache(maxsize=1)
+def _nta_build():
+    import nyc
+    return nyc.NTALookup()
+
+
+def _nta():
+    with _nta_lock:   # concurrent first requests must not each build the boundary index
+        return _nta_build()
 
 
 @app.get("/api/pin")
@@ -426,6 +468,9 @@ def pin_score(concept: str, lat: float, lon: float, request: Request):
     reason = _admit(_visitor(request), "pin", PINS_PER_HOUR, spend=False)
     if reason:
         return JSONResponse({"error": reason}, status_code=429)
+    if _nta().borough(lat, lon) not in engine.BOROUGHS:   # the city's own neighbourhood boundaries, not a box
+        return JSONResponse({"error": "That point is outside Brooklyn, Queens, Manhattan and the Bronx, the four boroughs "
+                                      "we cover."}, status_code=422)
     s = engine.city().score(concept, round(lat, 5), round(lon, 5))
     return {**s, "concept": concept, "lat": lat, "lon": lon,
             "same_cuisine_400m": s["same_cuisine_400m"][:12], "openings_800m": s["openings_800m"][:12],
@@ -496,7 +541,7 @@ def duel_lookup(req: DuelRequest, request: Request):
 
 @app.post("/api/run")
 async def run(req: RunRequest, request: Request):
-    reason = _admit(_visitor(request))
+    reason = await asyncio.to_thread(_admit, _visitor(request))   # the shared store is a network call: off the loop
     if reason:
         return JSONResponse({"error": reason}, status_code=429)
     loop, queue, gone = asyncio.get_running_loop(), asyncio.Queue(), threading.Event()
@@ -523,7 +568,7 @@ async def run(req: RunRequest, request: Request):
 async def ask(req: AskRequest, request: Request):
     if len(json.dumps(req.context)) > 20000:
         return JSONResponse({"error": "Run context too large."}, status_code=413)
-    reason = _admit(_visitor(request), "question", ASKS_PER_HOUR)
+    reason = await asyncio.to_thread(_admit, _visitor(request), "question", ASKS_PER_HOUR)
     if reason:
         return JSONResponse({"error": reason}, status_code=429)
     loop, queue, gone = asyncio.get_running_loop(), asyncio.Queue(), threading.Event()

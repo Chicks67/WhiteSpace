@@ -93,7 +93,7 @@ function pinBoot() {
   const fill = list => { $("#pin-cuisine").innerHTML = list.map(c => `<option${c === "Korean" ? " selected" : ""}>${esc(c)}</option>`).join(""); };
   fetch("/api/concepts").then(r => r.json()).then(j => { fill(j.cuisines); pinGoal(); }).catch(() => { fill(["Korean"]); pinGoal(); });
   $("#pin-cuisine").onchange = () => { rescoreAll(); pinGoal(); };
-  $("#pin-clear").onclick = () => { pins.list = []; drawPins(); };
+  $("#pin-clear").onclick = () => { pins.list = []; drawPins(); pinGoal(); $("#wi-from").textContent = "They start from your last pin."; };
   $("#pin-addr").onsubmit = async ev => {   // the keyboard route to the map: type an address, get a scored pin
     ev.preventDefault();
     const q = $("#pin-q").value.trim(); if (q.length < 3) return;
@@ -120,7 +120,7 @@ function pinBoot() {
     if (c && pins.map) { const p = pins.list[+c.dataset.i]; pins.map.flyTo([p.lat, p.lon], 16, { duration: reduced() ? 0 : .6 }); }
   });
   // the map loads when the section first comes near the screen, so Leaflet has its size
-  const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); const t = setInterval(() => { if (window.L) { clearInterval(t); pinMap(); } }, 100); } }, { rootMargin: "200px" });
+  const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); let tries = 0; const t = setInterval(() => { if (window.L) { clearInterval(t); pinMap(); } else if (++tries > 50) clearInterval(t); }, 100); } }, { rootMargin: "200px" });
   io.observe($("#pin-map"));
   for (const id of ["wi-d", "wi-s"]) $("#" + id).addEventListener("input", () => { $(`#${id}-o`).textContent = $("#" + id).value; whatIf(); });
   whatIf();
@@ -274,7 +274,11 @@ async function cmClick(ev) {
     card.innerHTML = `<span class="sub">${esc(concept)} on this block</span><b class="big">${d.score_percentile}%</b>
       of NYC restaurant blocks score lower. ${d.density} restaurants here, ${d.same_cuisine_area} of the same cuisine around it.
       <br><a href="#play" id="cm-more">Compare it on the big map</a>`;
-    $("#cm-more").onclick = () => { $("#pin-cuisine").value = concept; setTimeout(() => dropPin(lat, lon), 600); };
+    $("#cm-more").onclick = () => {
+      const changed = $("#pin-cuisine").value !== concept;
+      $("#pin-cuisine").value = concept;
+      setTimeout(async () => { if (changed) await rescoreAll(); pinGoal(); dropPin(lat, lon); }, 600);
+    };
   } catch (e) { card.textContent = /422/.test(e.message) || /tested cuisine/.test(e.message) ? "That point is outside the four boroughs we cover." : e.message; }
 }
 async function cmBoot() {

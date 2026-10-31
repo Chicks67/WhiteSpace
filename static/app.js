@@ -108,7 +108,7 @@ function reset() {
 }
 
 async function go(url, opts) {
-  if (state.running) return;
+  if (state.running) return false;
   state.running = true; state.abort = new AbortController(); showError("");
   $("#run").disabled = true; $("#run").classList.add("busy"); $("#stop").hidden = false;
   try {
@@ -125,7 +125,9 @@ async function go(url, opts) {
   finally {
     state.running = false; state.abort = null; stopClock(); stopSlow();
     $("#run").classList.remove("busy"); $("#stop").hidden = true; setLive();
+    broadcast({ type: "run_end" });   // Stop or a dropped connection must end the radar's "Calling" too
   }
+  return true;
 }
 
 /* An error ends the run on the page: spinners stop and the message shows beside the results, not only in the form. */
@@ -166,7 +168,7 @@ function setLive() {
 
 /* When a live run cannot happen (no live connection, the model busy or out of budget, rate limits), the button
    still gives a result: the finished run closest to the plan, labelled as such. Input errors keep their message. */
-const TRANSIENT = /busy|budget|paused|try again|limited to|request failed|on our side|quota|not available/i;
+const TRANSIENT = /busy|budget|paused|try again|limited to|request failed|on our side|quota|not available|unavailable|failed to fetch|networkerror|load failed|network/i;
 function closestRun(body) {
   const mode = body.goal ? "goal" : body.area ? "area" : "leases";
   const words = s => new Set(String(s || "").toLowerCase().split(/\W+/).filter(w => w.length > 2));
@@ -181,11 +183,23 @@ function closestRun(body) {
   }
   return best;
 }
+/* The visitor's plan as typed, so a fallback replay (which fills the form with its own plan) can put it back. */
+function formSnapshot() {
+  return { concept: $("#concept").value, cuisine: $("#cuisine").value, where: state.where, goal: $("#goal").value,
+    area: $("#area").value, leases: [...$("#leases").querySelectorAll("input")].map(i => i.value) };
+}
+function formRestore(f) {
+  $("#concept").value = f.concept; $("#cuisine").value = f.cuisine; $("#goal").value = f.goal; $("#area").value = f.area;
+  $("#leases").innerHTML = ""; (f.leases.length ? f.leases : ["", ""]).forEach(a => leaseRow(a));
+  setWhere(f.where);
+}
 function playFinished(body, why) {
   const r = closestRun(body);
   if (!r) { showError(why + " There is no finished run to show on this server."); return; }
   state.fallbackNote = `${why} Showing the finished run closest to your plan: ${r.title}.`;
+  const typed = formSnapshot();
   r.play();
+  formRestore(typed);
   $("#credits").textContent = state.fallbackNote;
   toast("Showing a finished run for a similar plan.");
 }
@@ -394,8 +408,7 @@ function renderLeases() {
       ${l.bid ? `<p class="nearby">Business improvement district: <a href="${esc(/^https?:/.test(l.bid.website || "") ? l.bid.website : "https://" + (l.bid.website || ""))}" target="_blank" rel="noopener">${esc(l.bid.bid)}</a>${l.bid.phone ? ", " + esc(l.bid.phone) : ""}</p>` : ""}
       ${reasonFor(l) ? `<p class="reason">${esc(reasonFor(l))}</p>` : ""}`;
     li.tabIndex = 0;
-    li.setAttribute("role", "button");
-    li.title = "Show this lease on the map";
+    li.setAttribute("aria-label", `${l.address.replace(/, NY, USA$/, "")}: press Enter to show it on the map`);
     li.onclick = ev => { if (!ev.target.closest("a")) focusLease(l.address); };
     li.onkeydown = ev => { if ((ev.key === "Enter" || ev.key === " ") && ev.target === li) { ev.preventDefault(); focusLease(l.address); } };
     list.append(li);
@@ -627,18 +640,6 @@ async function loadPanel() {
   state.panel = p;
   if (p.chart && p.chart.length) chart(p.chart);
   else $(".chart-fig").hidden = true;
-  // one row per test: the title and the headline result, with the claim, caveat and sources one click away
-  const lead = t => {   // whole sentences up to about 150 characters, never cut at a colon or semicolon
-    const parts = t.split(/(?<=\.)\s+/); let x = "";
-    for (const p of parts) { if (x && (x + " " + p).length > 150) break; x = x ? x + " " + p : p; if (x.length >= 40) break; }
-    if (x.length > 160) x = x.slice(0, 157).replace(/[\s,;:]+\S*$/, "") + "\u2026";
-    return x;
-  };
-  if ($("#entries")) $("#entries").innerHTML = p.entries.map(e => `<details class="entry"><summary><span class="et">${esc(e.title)}</span>
-    <span class="er">${esc(lead(e.result))}</span></summary>
-    <dl class="eb"><dt>Claim</dt><dd>${esc(e.claim)}</dd><dt>Result</dt><dd>${esc(e.result)}</dd>
-    <dt>Caveat</dt><dd>${esc(e.caveat)}</dd><dt>Status</dt><dd>${esc(e.confidence)}</dd>
-    <dt>Files</dt><dd class="src-files">${e.sources.map(s => p.repo ? `<a href="${esc(p.repo)}/blob/main/${esc(s)}">${esc(s)}</a>` : esc(s)).join(", ")}</dd></dl></details>`).join("");
   if (p.median) {
     $("#med-city").textContent = Number(p.median.city).toFixed(3);
     $("#med-qloo").textContent = Number(p.median.qloo).toFixed(3);
@@ -648,32 +649,7 @@ async function loadPanel() {
   if (state.leases.length) rankNote();
 }
 
-function filterEntries() {
-  const q = $("#entry-filter").value.trim().toLowerCase();
-  let shown = 0;
-  document.querySelectorAll("#entries .entry, #tests tbody tr").forEach(a => {
-    const hit = !q || a.textContent.toLowerCase().includes(q);
-    a.hidden = !hit; if (hit && a.matches(".entry")) shown++;
-  });
-  $("#entries-none").hidden = shown > 0;
-}
 
-async function loadStats() {
-  const s = await (await fetch("/api/stats")).json();
-  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  document.querySelectorAll("#stats [data-stat]").forEach(dd => {
-    const n = s[dd.dataset.stat];
-    if (n == null) { dd.textContent = "not loaded"; return; }
-    if (still) { dd.textContent = n.toLocaleString("en-US"); return; }
-    const t0 = performance.now(), dur = 900;
-    const frame = t => {
-      const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
-      dd.textContent = Math.round(n * e).toLocaleString("en-US");
-      if (k < 1) requestAnimationFrame(frame);
-    };
-    requestAnimationFrame(frame);
-  });
-}
 
 async function loadHealth() {
   const h = await (await fetch("/health")).json();
@@ -740,7 +716,7 @@ function context() {
     if (e.type === "leases") ctx.leases = e.data.map(l => ({ rank_in_this_set: l.rank, lease_score_percentile_nyc: l.score_percentile,
       address: l.address, restaurants_in_block: l.density, same_cuisine_in_and_around_block: l.same_cuisine_area,
       same_cuisine_within_400m: l.same_cuisine_400m.length, opened_within_800m_since_2024: l.openings_800m.length, storefront: l.storefront || undefined }));
-    if (e.type === "brief") { ctx.brief_area = e.data.area; ctx.brief = e.data.text.slice(0, 2500); }
+    if (e.type === "brief") { ctx.brief_area = e.data.area; if (e.data.text) ctx.brief = e.data.text.slice(0, 2500); }
   }
   return ctx;
 }
@@ -800,7 +776,7 @@ async function ask(q) {
       }
     }
   } catch (err) { $(".a", li).textContent = err.message; }
-  finally { state.asking = false; $(".ask-btn").disabled = false; $("#question").value = ""; }
+  finally { state.asking = false; $(".ask-btn").disabled = false; if (run === state.runId) $("#question").value = ""; }
 }
 
 /* ---------- boot ---------- */
@@ -981,9 +957,10 @@ async function boot() {
       body.leases = leases.map(address => ({ address }));
     }
     state.fallbackNote = null;
+    document.querySelectorAll("#golden li").forEach(x => x.classList.remove("active"));   // the visitor's own plan now
     if (!state.live) return playFinished(body, "Live scouting is not available right now.");
-    go("/api/run", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then(() => {
-      if (state.lastError && !state.leases.length && TRANSIENT.test(state.lastError)) playFinished(body, "The live run could not finish right now.");
+    go("/api/run", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then(ran => {
+      if (ran && state.lastError && !state.leases.length && TRANSIENT.test(state.lastError)) playFinished(body, "The live run could not finish right now.");
     });
   };
   $("#ask-form").onsubmit = ev => { ev.preventDefault(); ask($("#question").value.trim()); };
@@ -993,7 +970,6 @@ async function boot() {
   $("#tests-count").textContent = "Every test in order, 1 to 28";
   $("#tests").innerHTML = `<thead><tr><th>Test</th><th>Question</th><th>Result</th></tr></thead><tbody>` +
     TESTS.map(([n, q, r]) => `<tr><td>${esc(n)}</td><td>${esc(q)}</td><td>${esc(r)}</td></tr>`).join("") + "</tbody>";
-  if ($("#entry-filter")) $("#entry-filter").oninput = filterEntries;
   $("#copy-brief").onclick = () => {
     const b = state.brief; if (!b) return;
     copyText(`${$("#brief-title").textContent}\n\n` + HEADINGS.filter(h => b.sections[h]).map(h => `${h}\n${b.sections[h]}`).join("\n\n"), "Brief copied.");
@@ -1037,7 +1013,7 @@ async function boot() {
   addEventListener("scroll", () => { toTop.hidden = scrollY < 900; }, { passive: true });
   const links = [...document.querySelectorAll(".nav-links a")];
   const spy = new IntersectionObserver(es => es.forEach(e => {
-    const here = "#" + ({ saved: "top", app: "top" }[e.target.id] || e.target.id);   // saved runs and results belong to Scout
+    const here = "#" + ({ top: "business", saved: "scout", app: "scout", scene: "how" }[e.target.id] || e.target.id);   // sections without a link light up their nearest one
     if (e.isIntersecting) links.forEach(a => a.setAttribute("aria-current", String(a.getAttribute("href") === here)));
   }), { rootMargin: "-40% 0px -55% 0px" });
   ["top", "business", "scout", "saved", "app", "play", "why", "game", "results", "how", "scene", "evidence"].forEach(id => spy.observe(document.getElementById(id)));
@@ -1047,7 +1023,6 @@ async function boot() {
   } catch (_) {}
   loadPanel().catch(() => {});
   loadGolden().catch(() => {});
-  loadStats().catch(() => {});
   loadHealth().catch(() => {});
 }
 boot();

@@ -245,7 +245,7 @@ const NODES = [
 const radars = [];
 class Radar {
   constructor(host) {
-    this.host = host; this.counts = {}; this.live = false; this.inflight = 0;
+    this.host = host; this.counts = {}; this.hot = {}; this.live = false; this.inflight = 0;
     host.innerHTML = `<div class="av-head"><strong>Agent radar</strong><span class="av-state">Idle</span></div>
       <svg viewBox="0 0 520 322" aria-hidden="true">
         <g class="edges">${NODES.slice(1).map(n => `<line class="av-edge" data-k="${n.k}" x1="260" y1="150" x2="${n.x}" y2="${n.y}"/>`).join("")}</g>
@@ -253,7 +253,7 @@ class Radar {
         ${NODES.map(n => `<g class="av-node ${n.k === "core" ? "core" : ""} ${n.k === "qloo" ? "qloo" : ""}" data-k="${n.k}">
           <circle class="halo" cx="${n.x}" cy="${n.y}" r="${n.r}"/>
           <circle class="ring" cx="${n.x}" cy="${n.y}" r="${n.r}"/>
-          <text x="${n.x}" y="${n.k === "core" ? n.y - 1 : n.y + n.r + 13}">${esc(n.label)}</text>
+          <text x="${n.x}" y="${n.k === "core" ? n.y - 1 : n.y + n.r + 13}"${n.k === "core" ? ' class="cl"' : ""}>${esc(n.label)}</text>
           <text class="n" x="${n.x}" y="${n.k === "core" ? n.y + 12 : n.y + 4}">${n.k === "core" ? "the agent" : "0"}</text></g>`).join("")}
       </svg>
       <ol class="av-log"><li>Waiting for a run. Start one, or open a finished run, to watch the real calls.</li></ol>`;
@@ -263,13 +263,19 @@ class Radar {
   setLive(on) { this.live = on; this.state.textContent = on ? "Calling" : "Idle"; this.state.classList.toggle("live", on); }
   fire(k, dim = false) {
     const n = NODES.find(x => x.k === k); if (!n || k === "core") return this.pulseCore();
-    if (this.inflight > 10) return;
-    this.inflight++;
     const edge = this.svg.querySelector(`.av-edge[data-k="${k}"]`), node = this.svg.querySelector(`.av-node[data-k="${k}"]`);
-    if (!dim) {
-      edge.classList.add("hot"); this.counts[k] = (this.counts[k] || 0) + 1;
+    if (!dim) {   // every real call is counted, even when too many are in flight to animate them all
+      this.counts[k] = (this.counts[k] || 0) + 1;
       node.querySelector("text.n").textContent = this.counts[k];
     }
+    if (this.inflight > 10) return;
+    this.inflight++;
+    if (!dim) { edge.classList.add("hot"); this.hot[k] = (this.hot[k] || 0) + 1; }
+    const cool = () => {   // only a real packet ends a highlight, and only when it was the last one on that edge
+      if (dim) return;
+      this.hot[k] = Math.max(0, (this.hot[k] || 1) - 1);
+      if (!this.hot[k]) { node.classList.remove("flash"); setTimeout(() => { if (!this.hot[k]) edge.classList.remove("hot"); }, 250); }
+    };
     const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     dot.setAttribute("r", dim ? 2.5 : 4.5); dot.setAttribute("class", "av-packet"); if (dim) dot.style.opacity = .45;
     this.pk.append(dot);
@@ -279,9 +285,9 @@ class Radar {
       dot.setAttribute("cx", 260 + (n.x - 260) * e); dot.setAttribute("cy", 150 + (n.y - 150) * e);
       if (!out && dot.getAttribute("class") !== "av-packet back") { dot.setAttribute("class", "av-packet back"); if (!dim) node.classList.add("flash"); }
       if (p < 1) requestAnimationFrame(step);
-      else { dot.remove(); this.inflight--; node.classList.remove("flash"); setTimeout(() => edge.classList.remove("hot"), 250); }
+      else { dot.remove(); this.inflight--; cool(); }
     };
-    if (still()) { dot.remove(); this.inflight--; node.classList.add("flash"); setTimeout(() => { node.classList.remove("flash"); edge.classList.remove("hot"); }, 400); return; }
+    if (still()) { dot.remove(); this.inflight--; if (!dim) node.classList.add("flash"); setTimeout(cool, 400); return; }
     requestAnimationFrame(step);
   }
   pulseCore() { const c = this.svg.querySelector(".av-node.core .ring"); c.animate && c.animate([{ r: 32 }, { r: 37 }, { r: 32 }], { duration: 500 }); }
@@ -298,7 +304,8 @@ class Radar {
 function route(e) {
   const nm = String(e.name || e.id || "").toLowerCase();
   if (e.type === "qloo") return "qloo";
-  if (/qloo|taste|hours|scene|profile|insight/.test(nm)) return "qloo";
+  if (/neighbourhood|census|customer|demograph/.test(nm)) return "census";
+  if (/qloo|taste|hours|scene|insight/.test(nm)) return "qloo";
   if (/storefront|vacan|find|area/.test(nm)) return "store";
   if (/neighbourhood|census|customer|demograph|resolve/.test(nm)) return nm === "resolve" ? "core" : "census";
   if (/subway|transit/.test(nm)) return "subway";
@@ -327,6 +334,7 @@ function onEvent(e) {
   else if (e.type === "answer") { line = "<i>result</i> answer ready"; radars.forEach(r => r.setLive(false)); }
   else if (e.type === "done" || e.type === "error") { line = e.type === "done" ? "<i>done</i> run finished" : `<i>stopped</i> ${esc(e.message || "")}`; radars.forEach(r => r.setLive(false)); }
   else if (e.type === "run_start") { radars.forEach(r => r.reset()); return; }
+  else if (e.type === "run_end") { radars.forEach(r => r.setLive(false)); return; }
   if (k) radars.forEach(r => r.fire(k));
   if (line) radars.forEach(r => r.say(line));
 }
@@ -399,7 +407,6 @@ async function duelPlay() {
   await wait(500);
   for (const ln of lanes.filter(l => l.classList.contains("wq"))) {
     ln.querySelector(".call").textContent = "→ calling Qloo place record…";
-    onEvent({ type: "qloo", path: "/v2/insights place record", status: 200, cached: true });
   }
   await wait(800);
   for (const ln of lanes.filter(l => l.classList.contains("wq"))) ln.querySelector(".call").textContent = `← Qloo: closes ${r.qloo || "(no record)"} Friday`;
