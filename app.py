@@ -10,6 +10,7 @@ import json
 import os
 import threading
 import time
+import urllib.request
 from contextlib import asynccontextmanager
 from datetime import date
 
@@ -53,6 +54,34 @@ app = FastAPI(title="Whitespace", lifespan=lifespan, docs_url=None, redoc_url=No
 app.mount("/static", StaticFiles(directory=os.path.join(ROOT, "static")), name="static")
 _lock = threading.Lock()
 _hits, _spend = {}, {"day": str(date.today()), "credits": 0.0}
+
+# Shared counters: with an Upstash Redis store connected (Vercel Marketplace sets these variables), rate limits and the
+# daily budget hold across every server instance. Without one, each instance counts on its own, as before.
+_REDIS = (os.environ.get("KV_REST_API_URL") or os.environ.get("UPSTASH_REDIS_REST_URL"),
+          os.environ.get("KV_REST_API_TOKEN") or os.environ.get("UPSTASH_REDIS_REST_TOKEN"))
+
+
+def _redis(*commands):
+    """Run Redis commands in one pipeline over Upstash's REST API. None when no store is set or it does not answer."""
+    url, token = _REDIS
+    if not (url and token):
+        return None
+    req = urllib.request.Request(url.rstrip("/") + "/pipeline", data=json.dumps(commands).encode(),
+                                 headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(req, timeout=2) as r:
+            return [x.get("result") for x in json.load(r)]
+    except Exception as e:  # the store is a convenience: if it is down, fall back to this instance's own counts
+        print("shared counters unavailable:", repr(e)[:200], flush=True)
+        return None
+
+
+def _add_spend(spent):
+    with _lock:
+        _spend["credits"] += spent
+    if spent:
+        key = f"spend:{date.today()}"
+        _redis(["INCRBYFLOAT", key, str(spent)], ["EXPIRE", key, 172800])
 _slots = threading.BoundedSemaphore(MAX_CONCURRENT)
 _ask_slots = threading.BoundedSemaphore(2 * MAX_CONCURRENT)
 
@@ -158,6 +187,14 @@ def _admit(ip, kind="run", per_hour=None, spend=True):
     per_hour = per_hour or RUNS_PER_HOUR
     ip = f"{kind}:{ip}"
     now = time.time()
+    shared = _redis(["GET", f"spend:{date.today()}"], ["INCR", f"hits:{ip}:{int(now // 3600)}"],
+                    ["EXPIRE", f"hits:{ip}:{int(now // 3600)}", 3700])
+    if shared is not None:   # one count for every instance: a fixed hourly window per visitor and kind
+        if spend and float(shared[0] or 0) >= DAILY_CREDITS:
+            return "Today's live-run budget is used up. The saved runs still work."
+        if int(shared[1]) > per_hour:
+            return f"Live {kind}s are limited to {per_hour} per hour per visitor. The saved runs still work."
+        return None
     with _lock:
         if _spend["day"] != str(date.today()):
             _spend.update(day=str(date.today()), credits=0.0)
@@ -453,8 +490,7 @@ def duel_lookup(req: DuelRequest, request: Request):
     except Exception as e:
         msg = _friendly(e)
         return JSONResponse({"error": msg[:1].upper() + msg[1:]}, status_code=502)
-    with _lock:
-        _spend["credits"] += spent
+    _add_spend(spent)
     return out
 
 
@@ -473,8 +509,7 @@ async def run(req: RunRequest, request: Request):
             return
         try:
             spent = agent.run(req.model_dump(exclude_none=True), emit)
-            with _lock:
-                _spend["credits"] += spent
+            _add_spend(spent)
         except Cancelled:
             pass
         finally:
@@ -502,8 +537,7 @@ async def ask(req: AskRequest, request: Request):
             return
         try:
             spent = followup.ask(req.question, req.context, history, emit)
-            with _lock:
-                _spend["credits"] += spent
+            _add_spend(spent)
         except Cancelled:
             pass
         except Exception as e:
