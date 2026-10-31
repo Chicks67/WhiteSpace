@@ -137,7 +137,6 @@ button { font: inherit; cursor: pointer; color: inherit; }
 /* ---------- shared pieces ---------- */
 .panel { background: var(--surface); color: var(--ink); border: 1px solid var(--rule); border-radius: 16px; padding: 22px; box-shadow: var(--shadow); }
 .ph { font-size: 1.08rem; font-weight: 600; }
-.kicker { font: 500 .7rem var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 .7rem; }
 .band { padding: clamp(2.5rem, 6vw, 4.5rem) var(--pad); }
 .band > * { max-width: var(--max); margin-inline: auto; }
 .band + .band { border-top: 1px solid var(--rule); }
@@ -437,10 +436,6 @@ table.data { border-collapse: collapse; font-size: .86rem; width: 100%; }
 table.data th { font: 500 .68rem var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 table.data th, table.data td { text-align: left; padding: .5rem .7rem; border-bottom: 1px solid var(--rule); font-variant-numeric: tabular-nums; vertical-align: top; }
 #chart-table td:not(:first-child) { font-family: var(--mono); font-size: .82rem; }
-.entries-head { display: flex; justify-content: space-between; align-items: flex-end; gap: .8rem 2rem; flex-wrap: wrap; margin-top: clamp(2.5rem, 5vw, 3.5rem); }
-.entries-head h3 { font: 400 clamp(1.6rem, 2.8vw, 2.2rem)/1.1 var(--display); }
-.entries-head .hint { margin: 0; max-width: 56ch; }
-.entries-head input { max-width: 260px; border-radius: 999px; padding: .45rem .9rem; background: var(--surface); }
 .entries { columns: 3 340px; column-gap: 16px; margin-top: 1.2rem; }
 .entry { break-inside: avoid; margin: 0 0 16px; background: var(--surface); border: 1px solid var(--rule); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); display: grid; gap: .55rem; }
 .entry h3 { font-size: 1.02rem; margin-bottom: .2rem; }
@@ -464,32 +459,7 @@ table.data th, table.data td { text-align: left; padding: .5rem .7rem; border-bo
 
 /* ---------- why Qloo ---------- */
 .why { background: color-mix(in srgb, var(--qloo) 4%, var(--bg)); }
-.why-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 16px; align-items: start; }
-.proof { margin: 0; background: var(--surface); border: 1px solid var(--rule); border-radius: 16px; padding: 22px; box-shadow: var(--shadow); }
-.proof-main { border-top: 3px solid var(--qloo); display: grid; gap: 1.2rem; align-content: space-between; }
-.proof-main figcaption { display: grid; gap: .35rem; }
-.proof-main figcaption strong { font: 400 clamp(1.5rem, 2.6vw, 2rem)/1.15 var(--display); letter-spacing: -.01em; }
-.proof-main figcaption > span:last-child { color: var(--muted); font-size: .9rem; }
-.bars { display: grid; gap: .7rem; }
-.bar-row { display: grid; grid-template-columns: minmax(9.5rem, 13rem) minmax(0, 1fr) 4.2rem; gap: .9rem; align-items: center; font-size: .9rem; }
-.bar-row .who { color: var(--ink-2); }
-.bar-row .who em { font-style: normal; color: var(--qloo); font-weight: 600; }
-.bar-row .track { height: 12px; border-radius: 999px; background: var(--field); border: 1px solid var(--rule); overflow: hidden; }
-.bar-row .track i { display: block; height: 100%; width: calc(var(--v) / 30 * 100%); min-width: 3px; border-radius: inherit;
-  background: var(--faint); transform-origin: left; animation: grow .9s cubic-bezier(.2, .7, .2, 1) both; }
-.bar-row.wq .track i { background: var(--qloo); }
-.bar-row b { font: 600 .9rem var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
-.bar-row.wq b { color: var(--qloo); }
-.proof-note { font-size: .9rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: .9rem; max-width: 70ch; }
-.proof-side { display: grid; gap: 16px; }
-.proof-side .proof { padding: 18px 20px; display: grid; gap: .3rem; align-content: start; }
-.big-num { font: 400 clamp(2rem, 3.4vw, 2.6rem)/1 var(--display); color: var(--qloo); font-variant-numeric: tabular-nums; margin-top: .2rem; }
-.big-num small { font: 500 .8rem var(--mono); color: var(--muted); letter-spacing: .02em; margin-left: .35rem; }
-.proof-side p:not(.big-num) { font-size: .88rem; color: var(--muted); }
-.why-foot { margin-top: 1.2rem; }
-.why-foot a { color: var(--ink); }
-
-.proof-main, .proof-main > * { min-width: 0; }   /* lets the wide answers table scroll inside the card */
+.bars { display: grid; gap: .7rem; }   /* lets the wide answers table scroll inside the card */
 .answers { border-top: 1px solid var(--rule); padding-top: .8rem; }
 .answers summary { font-size: .9rem; color: var(--qloo); }
 .answers .t20-wrap { overflow-x: auto; margin-top: .8rem; max-height: 420px; overflow-y: auto; }
@@ -542,7 +512,7 @@ a:hover { text-decoration-color: var(--qloo); }
 .icon-btn:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 
 /* Headings carry their own weight: no eyebrow labels above them. */
-.kicker.big, .eyebrow, .grid-art { display: none; }
+ .eyebrow, .grid-art { display: none; }
 .top { border-bottom: 1px solid var(--rule); }
 .wordmark em { font-style: italic; color: var(--qloo); }
 .points li::before { border: 0; background: var(--qloo); width: 7px; height: 7px; }
@@ -553,7 +523,7 @@ a:hover { text-decoration-color: var(--qloo); }
 .stats { border-top: 1px solid var(--ink); }
 .stats > div + div { border-left-color: var(--rule); }
 
-.panel, .golden button, .sources article, .entry, .chart-fig, .proof, .tests-wrap { background: var(--surface); border: 1px solid var(--rule); box-shadow: var(--shadow); }
+.panel, .golden button, .sources article, .entry, .chart-fig, .tests-wrap { background: var(--surface); border: 1px solid var(--rule); box-shadow: var(--shadow); }
 .partner, .thread > li { background: none; border-color: var(--rule); }
 input, select, textarea { background: var(--surface); border-color: var(--rule-2); color: var(--ink); }
 input:hover, select:hover, textarea:hover { border-color: var(--muted); }
@@ -573,7 +543,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--ink); background
 .form-error { color: var(--err); background: var(--qloo-tint); border-color: var(--err); }
 
 /* Labels in the body face; monospace is kept for numbers and code. */
-.tagline, .kicker, .entry .k, .stats dt, .medians dt, table.data th, .partner .m, .hours-axis {
+.tagline, .entry .k, .stats dt, .medians dt, table.data th, .partner .m, .hours-axis {
   font-family: var(--body); letter-spacing: 0; text-transform: none; font-size: .8rem; font-weight: 600; color: var(--muted); }
 
 .golden button:hover { border-color: var(--ink); transform: translateY(-2px); }
@@ -606,13 +576,6 @@ input:focus, select:focus, textarea:focus { border-color: var(--ink); background
 .duel-btn:hover:not(:disabled) { background: var(--qloo); color: var(--on-qloo); }
 .duel .wq { border-color: var(--qloo); }
 .why { background: var(--bg); }
-.proof-main { border-top: 3px solid var(--qloo); }
-.bar-row .who em, .bar-row.wq b { color: var(--qloo); }
-.bar-row .track { background: var(--field); border: 0; }
-.bar-row .track i { background: var(--base); }
-.bar-row.wq .track i { background: var(--qloo); }
-.big-num { color: var(--ink); }
-.big-num small { color: var(--muted); }
 .flow { border-top-color: var(--ink); }
 .flow li::before { color: var(--qloo); }
 .sources article { border-top: 3px solid var(--ink); }
@@ -850,7 +813,6 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 .game-end { border-top: 1px solid var(--rule); padding-top: 1rem; }
 .game-end strong { display: block; font: 400 clamp(1.6rem, 3vw, 2.2rem)/1.15 var(--display); }
 
-
 @media (max-width: 1080px) {
   .sb-hero, .play-grid { grid-template-columns: minmax(0, 1fr); }
   .pin-map { height: 400px; }
@@ -864,25 +826,23 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
   .pin-map { height: 340px; }
   .timeline .mk span { font-size: .66rem; padding: .05rem .3rem; }
 }
-@media (prefers-reduced-motion: reduce) {
-}
 
 /* ======================================================================
    House rules (taste-skill, impeccable): tone steps instead of outlines and resting shadows, Geist for
    controls and Instrument Serif for display, no tracked caps, no index numbers, no styled accent words, generous section gaps
    ====================================================================== */
 h3, h4 { font-family: var(--ui); font-weight: 600; letter-spacing: -.01em; }
-button, input, select, textarea, label, .nav, .chips, .toggle, .hint, .facts, .tagline, .kicker, table.data, .credits,
+button, input, select, textarea, label, .nav, .chips, .toggle, .hint, .facts, .tagline, table.data, .credits,
 .hint { font-size: .9rem; }
 
 /* the big type: Instrument Serif, one weight, set close */
 .wordmark { font: 400 clamp(3rem, 1rem + 5.8vw, 6.6rem)/.95 var(--display); letter-spacing: -.025em; max-width: 13ch; margin-left: -.03em; }
 .wordmark em { font-style: normal; color: inherit; }
 .band-head h2, .evidence > h2 { font: 400 clamp(2.3rem, 1.4rem + 3.4vw, 4.4rem)/1 var(--display); letter-spacing: -.02em; text-shadow: none; max-width: 22ch; }
-.inputs h2, .dr-head h3, .whatif h3, .dumb-fig figcaption strong, .entries-head h3, .proof-main figcaption strong, .game-end strong, .pin-empty strong {
+.inputs h2, .dr-head h3, .whatif h3, .dumb-fig figcaption strong, .game-end strong, .pin-empty strong {
   font-family: var(--display); font-weight: 400; letter-spacing: -.01em; }
 .game-q { font: 400 clamp(1.9rem, 1.2rem + 2.6vw, 3.3rem)/1.05 var(--display); letter-spacing: -.015em; }
-.dial-read, .pin-card .pct, .whatif .res b, .kpi .v, .stats dd, .medians dd, .big-num, .gain .g, .donut-wrap p b, .rank-list .pos, .ring-num, .duel b {
+.dial-read, .pin-card .pct, .whatif .res b, .kpi .v, .stats dd, .medians dd, .gain .g, .donut-wrap p b, .rank-list .pos, .ring-num, .duel b {
   font-family: var(--display); font-weight: 400; letter-spacing: -.01em; }
 .lede { font-size: clamp(1.1rem, 1rem + .45vw, 1.3rem); line-height: 1.5; max-width: 46ch; color: var(--ink-2); }
 .evidence .lede { font-size: clamp(1.15rem, 1.05rem + .4vw, 1.35rem); color: var(--ink); max-width: 60ch; }
@@ -897,7 +857,7 @@ button, input, select, textarea, label, .nav, .chips, .toggle, .hint, .facts, .t
 .scoreboard .panel, .play .panel, .game .panel, .scoreboard .dumb-fig { background: var(--bg); }
 
 /* surfaces: steps in tone, no outlines, nothing at rest casts a shadow */
-.panel, .golden button, .sources article, .entry, .chart-fig, .proof, .tests-wrap, .agent-viz, .dumb-fig, .map, .pin-map, .lane, .partner, .thread > li {
+.panel, .golden button, .sources article, .entry, .chart-fig, .tests-wrap, .agent-viz, .dumb-fig, .map, .pin-map, .lane, .partner, .thread > li {
   border: 0 !important; box-shadow: none !important; }
 .golden button { background: var(--surface); }
 .golden button:hover { transform: none; background: var(--well); }
@@ -906,7 +866,6 @@ button, input, select, textarea, label, .nav, .chips, .toggle, .hint, .facts, .t
 .sources article h3::before { content: ""; display: block; width: 28px; height: 4px; background: var(--ink); margin-bottom: .8rem; }
 .sources .s-city h3::before { background: var(--city); }
 .sources .s-qloo h3::before { background: var(--qloo); }
-.proof-main { border-top: 0 !important; }
 .entry { background: var(--surface); }
 .lane { background: var(--surface); }
 .lane.won { box-shadow: inset 0 -3px 0 var(--qloo) !important; }
@@ -946,7 +905,6 @@ table.data th { font-family: var(--ui); }
 .av-log { font-family: var(--code); }
 .calls ol { font-family: var(--code); }
 .steps .sub { font-family: var(--ui); font-size: .8rem; }
-.why-foot a { color: var(--ink); }
 
 /* the scoreboard: ring and numbers, then one ledger of every result instead of a grid of identical cards */
 .sb-kpis { border-top: 0; gap: 2px; }
@@ -967,7 +925,7 @@ table.data th { font-family: var(--ui); }
 .card .donut { width: 72px; height: 72px; }
 .mini .donut-wrap p b { font-size: 1.4rem; }
 .badge, .card .badge { border-radius: 4px; }
-.pair-row .trk, .gain .trk, .pin-card .gauge, .bar-row .track, .meter { background: var(--well); }
+.pair-row .trk, .gain .trk, .pin-card .gauge, .meter { background: var(--well); }
 .donut .bg { stroke: var(--well); }
 .dumb .d-b, .dumb .d-q { stroke: var(--bg); }
 .dumb .grid { stroke: var(--surface); }
@@ -1074,8 +1032,6 @@ table.data th { font-family: var(--ui); }
 /* ---------- alignment: every section head is one column on one left edge ---------- */
 .band-head { display: grid; justify-items: start; align-items: start; gap: 1rem; margin-bottom: clamp(1.8rem, 3vw, 2.6rem); }
 .band-head .hint { max-width: 64ch; font-size: 1rem; line-height: 1.55; margin: 0; }
-.why-grid { align-items: stretch; }
-.proof-side { align-content: stretch; }
 .pin-card .ph-row > span { display: inline-flex; align-items: center; gap: .4rem; }
 .pin-card h3 { min-width: 0; }
 
@@ -1127,8 +1083,6 @@ table.data th { font-family: var(--ui); }
 /* ---------- how we know: one column of rows that open ---------- */
 .medians { margin-top: 0; }
 .audit { margin-top: clamp(2rem, 4vw, 3rem); display: grid; gap: 2px; }
-.audit-tools { display: flex; justify-content: flex-end; margin-bottom: 12px; }
-.audit-tools input { max-width: 300px; }
 .entries { columns: auto; display: grid; gap: 2px; margin: 0; }
 details.entry { display: block; background: var(--surface); border-radius: 0; padding: 0; margin: 0; }
 details.entry:first-child { border-radius: 10px 10px 0 0; }
@@ -1157,7 +1111,6 @@ details.entry summary:hover { background: var(--field); }
   .entry .er { grid-column: 1; grid-row: 2; }
   .entry .eb { grid-template-columns: minmax(0, 1fr); gap: .15rem; }
   .entry .eb dd { margin-bottom: .5rem; }
-  .audit-tools input { max-width: none; }
 }
 
 /* ---------- the business ---------- */
@@ -1230,6 +1183,36 @@ html, body { overflow-x: clip; max-width: 100%; }
 .answers th, .answers td { padding: .4rem .45rem; overflow-wrap: anywhere; }
 .answers .t20-wrap { overflow-x: visible; }
 
+/* ---------- the two games and the pin challenge ---------- */
+.game-title { font: 400 clamp(1.5rem, 2.4vw, 2rem)/1.1 var(--display); }
+.quiz-box { margin-top: 20px !important; }
+.qz-opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.qz-opt { padding: 1.1rem 1rem; border: 0; border-radius: 8px; background: var(--field); font: 600 1.05rem var(--ui); color: var(--ink); text-align: left; transition: background .2s, color .2s; }
+.qz-opt:hover:not(:disabled) { background: var(--ink); color: var(--bg); }
+.qz-opt:disabled { cursor: default; }
+.qz-opt.win { background: var(--qloo); color: var(--on-qloo); }
+.qz-opt.picked:not(.win) { background: var(--well); color: var(--muted); }
+.qz-reveal { display: grid; gap: .8rem; }
+.qz-reveal .pair-row { grid-template-columns: 9rem minmax(0, 1fr) 3.6rem; font-size: .9rem; }
+.qz-reveal .pair-row .trk { height: 14px; }
+.qz-verdict { font: 600 1rem var(--ui); }
+.qz-verdict.ok { color: var(--ok); }
+.qz-verdict.no { color: var(--err); }
+.pin-goal { font: 500 .95rem/1.45 var(--ui); padding: .8rem 1rem; border-radius: 8px; background: var(--bg); margin: 0; }
+.pin-goal.done { background: var(--qloo); color: var(--on-qloo); }
+@media (max-width: 700px) { .qz-opts { grid-template-columns: minmax(0, 1fr); } .qz-reveal .pair-row { grid-template-columns: 6rem minmax(0, 1fr) 3.2rem; } }
+
+.pin-addr { display: flex; gap: .4rem; flex: 1 1 260px; max-width: 360px; }
+.pin-addr input { padding: .4rem .6rem; font-size: .9rem; }
+@media (max-width: 700px) { .pin-addr { max-width: none; } }
+
+/* the founder report: printing shows only the run, never the rest of the page */
+@media print {
+  .top, .biz, .scout, .saved, .play, .why, .game, .scoreboard, .how-it, .scene, #evidence, .agent-viz, .scroll-bar, .foot { display: none !important; }
+  .app { padding-top: 0 !important; }
+  .rail { max-height: none !important; overflow: visible !important; }
+}
+
 /* ---------- smaller screens ---------- */
 @media (max-width: 1080px) {
   .hero { grid-template-columns: minmax(0, 1fr); }
@@ -1238,7 +1221,6 @@ html, body { overflow-x: clip; max-width: 100%; }
   .rail { position: static; order: -1; }
   .trace { max-height: 320px; }
   .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .why-grid { grid-template-columns: minmax(0, 1fr); }
   .flow li:not(:nth-child(3n + 1)) { padding-left: 0; border-left: 0; }
   .flow li:nth-child(even) { padding-left: 1.6rem; border-left: 1px solid var(--rule); }
 }
@@ -1252,9 +1234,7 @@ html, body { overflow-x: clip; max-width: 100%; }
   .field-row { grid-template-columns: minmax(0, 1fr); }
   .points li:not(:first-child) { display: none; }
   .eyebrow span { display: block; margin: .35rem 0 0; padding: 0; border: 0; }
-  .bar-row { grid-template-columns: minmax(0, 1fr) 3.8rem; gap: .25rem .7rem; }
   .duel { grid-template-columns: minmax(0, 1fr); }
-  .bar-row .track { grid-column: 1 / -1; grid-row: 2; }
   .hours-axis, .hours-row { grid-template-columns: minmax(0, 7rem) minmax(0, 1fr) 3rem; }
   .inputs { padding: 18px; }
   .mode-toggle button { font-size: .78rem; white-space: normal; line-height: 1.2; }
@@ -1275,7 +1255,6 @@ html, body { overflow-x: clip; max-width: 100%; }
   .legend button { margin-left: 0; }
   .redacted dl { grid-template-columns: minmax(0, 1fr); gap: .1rem; }
   .redacted dd { margin-bottom: .5rem; }
-  .entries-head input { max-width: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

@@ -45,7 +45,8 @@ Run locally (from this folder): `pip install -r requirements.txt`, `python build
 
 ## Test status
 
-The GPU-backed Kaggle run from Oct 31 is the current source of truth. Use the results in KAGGLE_RESULTS.md
+The GPU-backed Kaggle run from Oct 31 is the current source of truth. Use the results in KAGGLE_RESULTS.md (kept locally and git-ignored since Oct 31; not published; the public site and
+docs give the numbers without naming the run)
 throughout the product and documentation; older local CPU-run figures below remain historical only. Current
 headline results include Qloo brief preference of 78% (Test 3) and 76% (Test 8), lease score AUC 0.893 with
 Qloo versus 0.851 without it (Tests 4/4b), 92.4% competitor coverage (Test 10), and 25 of 27 price levels

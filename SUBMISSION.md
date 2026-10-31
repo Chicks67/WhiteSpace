@@ -40,7 +40,20 @@ that matters.
    alone, each model with Qloo), and a live "ask the model" duel beside every rival: one click asks GPT-6 Astra when the
    place closes on Friday, alone and with Qloo's record, side by side.
 
-Every step and every Qloo call is shown live in an agent trace. Saved runs replay instantly with no API calls.
+8. **Play with the city itself.** The page opens on a dot map of all 26,043 active restaurants and 6,767 vacant
+   storefronts in the four boroughs: click any block to score it. Drop up to three pins on a street map (or type an
+   address), compare them, and move what-if sliders to see how the score responds.
+9. **Two games on real results.** Guess when a real restaurant closes on Friday against GPT-6 Astra alone and with
+   Qloo's record, then "Qloo or the baseline?", eight rounds over the tests where Qloo won.
+
+Every step and every Qloo call is shown live in an agent radar and trace. Finished runs play back instantly with no API
+calls, and if a live run cannot run, the page shows the finished run closest to the plan, labelled as such.
+
+## The business
+
+About 3,000 new restaurants open in the four boroughs each year (3,034 that opened in 2025 are still operating, from
+city inspection records), and 6,767 storefronts are reported vacant. A site report for founders and paid listings for
+landlords are the two revenue lines; the page carries an estimate whose shares and prices the visitor sets.
 
 ## What makes it Qloo-powered
 
@@ -50,7 +63,10 @@ before its result:
 | Question | Without Qloo | With Qloo |
 |---|---|---|
 | When does this NYC restaurant close on Friday? (30 places, Google Maps as truth) | GPT-6 Astra 0 of 30; Gemini 3.8 Flash 3 of 30 | 29 of 30 for both |
-| Are Qloo's closing times right? (40 places checked by a person) | | 29 of 30 within 30 minutes |
+| Are Qloo's closing times right? (30 places checked by a person against Google Maps) | | 29 of 30 within 30 minutes, all 29 exact |
+| Does Qloo find the real competitors? | | 92.4% of them |
+| Do raters prefer the brief written with Qloo? (blind) | | 78% of the time |
+| Which storefront block gets the next opening of a cuisine? (AUC) | city records alone: 0.851 | with Qloo: 0.893 |
 | Which small artists does a real listener play? (40 listeners) | popularity: AUC 0.516 | Qloo: AUC 0.841 |
 | A festival timetable that keeps shared fans apart | popularity: 0.043 of the possible gain | Qloo: 0.663 |
 
@@ -65,20 +81,22 @@ the block.
 - Qloo Insights API through a cached client with a monthly quota guard; a private warm cache ships with the server.
 - NYC Open Data (restaurant inspections, Storefront Registry, business improvement districts, subway ridership),
   US Census ACS and LODES jobs data.
-- Plain HTML, CSS and JavaScript page with a Leaflet map, dark and light modes, streamed over server-sent events.
+- Plain HTML, CSS and JavaScript page: a canvas dot map of the city, a Leaflet pin map, charts in SVG, day and night
+  themes, runs streamed over server-sent events. No build step.
 - Hosted on Vercel. Keys stay on the server; live runs are rate limited per visitor with a daily model budget.
 - 28 pre-registered tests, a reliability suite, and a full decision log in the repository.
 
 ## Results
 
-Status of every test: [PROGRESS.md](PROGRESS.md). The authoritative GPU-backed Kaggle results used by the
-product are in [KAGGLE_RESULTS.md](KAGGLE_RESULTS.md).
+Every test, its question and its result: README "What we tested", and on the page under Results and How we know.
+Status notes: [PROGRESS.md](PROGRESS.md).
 
 ## Try it
 
-1. Open https://whitespace-nyc.vercel.app and click a saved run: it replays a recorded live run in seconds.
-2. Scroll to "What is around": the Friday closing-time timeline loads from Qloo.
-3. Click "ask the model" beside a rival to see the model alone against the model with Qloo, live.
-4. Under "Why Qloo", open "See all 30 answers".
-5. Ask a follow-up such as "When do the competitors near the top lease close on Friday?"
-6. Or run your own plan live (about a minute).
+1. Open https://whitespace-nyc.vercel.app and click any block on the city map to score it.
+2. Click a finished run: it plays back a recorded live run in seconds.
+3. Scroll to "What is around": the Friday closing-time timeline loads from Qloo.
+4. Click "ask the model" beside a rival to see the model alone against the model with Qloo, live.
+5. Under "Why Qloo", see the four pie charts and open "See all 30 answers"; then play both games.
+6. Ask a follow-up such as "When do the competitors near the top lease close on Friday?"
+7. Or scout your own plan live (about a minute).

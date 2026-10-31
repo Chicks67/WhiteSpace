@@ -125,3 +125,6 @@ node_modules/
 
 # ---- Personal handoff notes for a new chat (never committed) ----------------
 context.md
+
+# ---- Private results table (kept locally, not published) ----------------------
+KAGGLE_RESULTS.md

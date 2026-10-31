@@ -81,6 +81,7 @@ function drawPins() {
   requestAnimationFrame(() => document.querySelectorAll("#pin-cards [data-w]").forEach(g => { g.style.width = g.dataset.w + "%"; }));
   const last = [...pins.list].reverse().find(p => p.data);
   if (last) seedWhatIf(last.data, LETTERS[pins.list.indexOf(last)]);
+  pinGoal();
 }
 async function rescoreAll() {
   await Promise.all(pins.list.map(scorePin));
@@ -90,9 +91,21 @@ async function rescoreAll() {
 function pinBoot() {
   if (!$("#play")) return;
   const fill = list => { $("#pin-cuisine").innerHTML = list.map(c => `<option${c === "Korean" ? " selected" : ""}>${esc(c)}</option>`).join(""); };
-  fetch("/api/concepts").then(r => r.json()).then(j => fill(j.cuisines)).catch(() => fill(["Korean"]));
-  $("#pin-cuisine").onchange = rescoreAll;
+  fetch("/api/concepts").then(r => r.json()).then(j => { fill(j.cuisines); pinGoal(); }).catch(() => { fill(["Korean"]); pinGoal(); });
+  $("#pin-cuisine").onchange = () => { rescoreAll(); pinGoal(); };
   $("#pin-clear").onclick = () => { pins.list = []; drawPins(); };
+  $("#pin-addr").onsubmit = async ev => {   // the keyboard route to the map: type an address, get a scored pin
+    ev.preventDefault();
+    const q = $("#pin-q").value.trim(); if (q.length < 3) return;
+    const btn = $("#pin-addr button"); btn.disabled = true;
+    try {
+      const g = await getJSON(`/api/geocode?q=${encodeURIComponent(q)}`);
+      if (pins.map) pins.map.flyTo([g.lat, g.lon], 16, { duration: reduced() ? 0 : .8 });
+      await dropPin(g.lat, g.lon, g.label);
+      $("#pin-q").value = "";
+    } catch (e) { $("#pin-goal").textContent = e.message; }
+    finally { btn.disabled = false; }
+  };
   $("#pin-random").onclick = () => {
     const taken = new Set(pins.list.map(p => p.name));
     const free = SPOTS.filter(s => !taken.has(s[0]));
@@ -309,7 +322,72 @@ async function bizBoot() {
   } catch (_) {}
 }
 
+/* ---------- Qloo or the baseline: a quiz over the results where Qloo beat its baseline ---------- */
+const quiz = { rounds: [], i: 0, right: 0, done: false };
+function quizRounds() {
+  const out = [];
+  for (const k of RESULTS) {
+    if (k.badge !== "win") continue;
+    if (k.kind === "pair") out.push({ task: k.title, test: k.test, metric: k.metric, q: k.q, b: k.b, note: k.note });
+    if (k.id === "F15") out.push({ task: k.title, test: k.test, metric: k.metric, q: ["Qloo", .875], b: ["Genre", .714], note: k.note });
+  }
+  for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; }
+  return out.slice(0, 8);
+}
+function quizShow() {
+  const r = quiz.rounds[quiz.i];
+  $("#qz-round").textContent = `Question ${quiz.i + 1} of ${quiz.rounds.length}`;
+  $("#qz-score").textContent = `${quiz.right}/${quiz.i}`;
+  $("#qz-q").textContent = `${r.task}: who scored higher?`;
+  $("#qz-sub").textContent = `Test ${r.test}. Measured as ${r.metric}.`;
+  const opts = Math.random() < .5 ? [r.q, r.b] : [r.b, r.q];
+  $("#qz-opts").innerHTML = opts.map(o => `<button type="button" class="qz-opt" data-who="${esc(o[0])}">${esc(o[0])}</button>`).join("");
+  $("#qz-reveal").innerHTML = ""; $("#qz-next").hidden = true;
+  $("#qz-opts").querySelectorAll(".qz-opt").forEach(b => b.onclick = () => quizPick(b));
+}
+function quizPick(btn) {
+  const r = quiz.rounds[quiz.i], right = btn.dataset.who === r.q[0];
+  quiz.right += right;
+  $("#qz-opts").querySelectorAll(".qz-opt").forEach(b => { b.disabled = true; b.classList.toggle("win", b.dataset.who === r.q[0]); b.classList.toggle("picked", b === btn); });
+  const bar = (who, v, cls) => `<div class="pair-row ${cls}"><span class="who">${esc(who)}</span><span class="trk"><i style="width:0" data-w="${Math.max(1.5, v * 100).toFixed(1)}"></i></span><b>${v.toFixed(3)}</b></div>`;
+  $("#qz-reveal").innerHTML = `<p class="qz-verdict ${right ? "ok" : "no"}">${right ? "Right." : "Not this time."} ${esc(r.q[0])} scored ${r.q[1].toFixed(3)}, ${esc(r.b[0].toLowerCase())} ${r.b[1].toFixed(3)}.</p>
+    <div class="pair">${bar(r.q[0], r.q[1], "is-q")}${bar(r.b[0], r.b[1], "is-b")}</div>${r.note ? `<p class="hint">${esc(r.note)}</p>` : ""}`;
+  requestAnimationFrame(() => requestAnimationFrame(() => $("#qz-reveal").querySelectorAll("[data-w]").forEach(i => { i.style.width = i.dataset.w + "%"; })));
+  $("#qz-score").textContent = `${quiz.right}/${quiz.i + 1}`;
+  const last = quiz.i === quiz.rounds.length - 1;
+  $("#qz-next").textContent = last ? "See my score" : "Next question";
+  $("#qz-next").hidden = false;
+}
+function quizNext() {
+  if (quiz.i < quiz.rounds.length - 1) { quiz.i++; quizShow(); return; }
+  const n = quiz.rounds.length;
+  $("#qz-round").textContent = "Finished";
+  $("#qz-q").textContent = quiz.right === n ? `All ${n} right. You read Qloo as well as the tests do.` : `You picked the winner ${quiz.right} of ${n} times.`;
+  $("#qz-sub").textContent = `In every one of these ${n} results, from pre-registered tests, Qloo scored higher than its baseline.`;
+  $("#qz-opts").innerHTML = ""; $("#qz-reveal").innerHTML = "";
+  $("#qz-next").textContent = "Play again"; $("#qz-next").hidden = false;
+  quiz.done = true;
+}
+function quizStart() { Object.assign(quiz, { rounds: quizRounds(), i: 0, right: 0, done: false }); quizShow(); }
+function quizBoot() {
+  if (!$("#quiz") || typeof RESULTS === "undefined") return;
+  $("#qz-next").onclick = () => { if (quiz.done) quizStart(); else quizNext(); };
+  quizStart();
+}
+
+/* ---------- the pin challenge: find a block that beats a target for the chosen cuisine ---------- */
+const GOAL = 95;
+function pinGoal() {
+  const el = $("#pin-goal"); if (!el) return;
+  const c = $("#pin-cuisine").value || "Korean";
+  const hit = pins.list.map((p, i) => [p, i]).filter(([p]) => p.data && p.data.score_percentile >= GOAL);
+  el.classList.toggle("done", hit.length > 0);
+  el.innerHTML = hit.length ? `Challenge done: pin ${LETTERS[hit[0][1]]} beats ${hit[0][0].data.score_percentile}% of New York blocks for ${esc(c)}.`
+    : `Challenge: find a block that beats ${GOAL}% of New York blocks for ${esc(c)}. Busy streets with a little competition score best.`;
+}
+
 pinBoot();
 gameBoot();
 cmBoot();
 bizBoot();
+quizBoot();

@@ -5,6 +5,7 @@ daily LLM spend; saved runs replay with zero API calls.
 """
 import asyncio
 import functools
+import gzip
 import json
 import os
 import threading
@@ -364,9 +365,20 @@ def _city_map():
             "counts": {"restaurants": len(rest), "storefronts": len(shop)}}
 
 
+@functools.lru_cache(maxsize=1)
+def _city_map_bytes():
+    raw = json.dumps(_city_map(), separators=(",", ":")).encode()
+    return raw, gzip.compress(raw, 9)
+
+
 @app.get("/api/citymap")
-def city_map():
-    return JSONResponse(_city_map(), headers={"Cache-Control": "public, max-age=86400"})
+def city_map(request: Request):
+    """The header map's data, sent gzipped when the browser accepts it (about a third of the size)."""
+    raw, packed = _city_map_bytes()
+    headers = {"Cache-Control": "public, max-age=86400", "Vary": "Accept-Encoding"}
+    if "gzip" in request.headers.get("accept-encoding", ""):
+        return Response(packed, media_type="application/json", headers={**headers, "Content-Encoding": "gzip"})
+    return Response(raw, media_type="application/json", headers=headers)
 
 
 @app.get("/api/pin")
@@ -381,6 +393,21 @@ def pin_score(concept: str, lat: float, lon: float, request: Request):
     return {**s, "concept": concept, "lat": lat, "lon": lon,
             "same_cuisine_400m": s["same_cuisine_400m"][:12], "openings_800m": s["openings_800m"][:12],
             "same_cuisine_400m_count": len(s["same_cuisine_400m"]), "openings_800m_count": len(s["openings_800m"])}
+
+
+@app.get("/api/geocode")
+def geocode_lookup(q: str = Query(min_length=3, max_length=120), request: Request = None):
+    """An address in the four boroughs to a point, through NYC Planning's free GeoSearch; for the map's address box."""
+    reason = _admit(_visitor(request), "pin", PINS_PER_HOUR, spend=False)
+    if reason:
+        return JSONResponse({"error": reason}, status_code=429)
+    try:
+        label, boro, lat, lon, hood = engine.geocode(q)
+    except engine.LeaseError as e:
+        return JSONResponse({"error": str(e)[:200]}, status_code=404)
+    if boro not in engine.BOROUGHS:
+        return JSONResponse({"error": f"{label} is outside Brooklyn, Queens, Manhattan and the Bronx."}, status_code=422)
+    return {"label": label.replace(", New York, NY, USA", "").replace(", NY, USA", ""), "lat": lat, "lon": lon, "neighbourhood": hood}
 
 
 @app.get("/api/whatif")

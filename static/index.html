@@ -12,13 +12,13 @@
 <meta property="og:title" content="Whitespace: find the block before you sign the lease">
 <meta property="og:description" content="A site-selection agent for NYC restaurant founders. Asked when 30 real NYC restaurants close on Friday, GPT-6 Astra alone got 0 right; grounded in Qloo, 29.">
 <meta property="og:url" content="https://whitespace-nyc.vercel.app/">
-<meta property="og:image" content="https://whitespace-nyc.vercel.app/static/og.png">
+<meta property="og:image" content="https://whitespace-nyc.vercel.app/static/og.png?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Whitespace: find the block before you sign the lease">
 <meta name="twitter:description" content="A site-selection agent for NYC restaurant founders, grounded in Qloo's record of real places.">
-<meta name="twitter:image" content="https://whitespace-nyc.vercel.app/static/og.png">
+<meta name="twitter:image" content="https://whitespace-nyc.vercel.app/static/og.png?v=2">
 <meta name="theme-color" content="#F2EDE3">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
@@ -34,7 +34,7 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400..600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <!-- the map only appears after a run, so its stylesheet does not hold up the first paint -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="/static/style.css?v=34">
+<link rel="stylesheet" href="/static/style.css?v=37">
 </head>
 <body>
 <div class="scroll-bar" id="scroll-bar" aria-hidden="true"></div>
@@ -322,6 +322,11 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
     <div class="panel play-map">
       <div class="play-bar">
         <label for="pin-cuisine">Cuisine <select id="pin-cuisine"></select></label>
+        <form class="pin-addr" id="pin-addr" autocomplete="off">
+          <label for="pin-q" class="visually-hidden">Address in Brooklyn, Queens, Manhattan or the Bronx</label>
+          <input id="pin-q" maxlength="120" placeholder="Or type an address">
+          <button type="submit" class="quiet small">Drop pin</button>
+        </form>
         <span class="spacer"></span>
         <button type="button" class="quiet small" id="pin-random">Surprise me</button>
         <button type="button" class="quiet small" id="pin-clear">Clear pins</button>
@@ -331,6 +336,7 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
     <div class="pin-side">
       <div class="panel pin-empty" id="pin-empty"><strong>Click the map to drop your first pin.</strong>
         Try a busy avenue, then a quiet side street, and watch the score move. Changing the cuisine re-scores every pin.</div>
+      <p class="pin-goal" id="pin-goal" aria-live="polite"></p>
       <div class="pin-cards" id="pin-cards" aria-live="polite"></div>
       <div class="panel whatif" id="whatif">
         <h3>What if the block changed?</h3>
@@ -388,12 +394,13 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
 <section class="band game" id="game">
   <div class="band-head">
     <div>
-      <h2>Beat the model: when does it close on Friday?</h2>
+      <h2>Two games, played on real results.</h2>
     </div>
-    <p class="hint">Five real New York restaurants from Test 20. Drag the dial to your guess, lock it in, and see how you did
-      against GPT-6 Astra alone and GPT-6 Astra with Qloo's record. Right means within 30 minutes of Google Maps.</p>
+    <p class="hint">First, guess when real New York restaurants close on Friday against GPT-6 Astra alone and with Qloo's
+      record. Then pick who scored higher, Qloo or the baseline, on tasks from films to festival timetables.</p>
   </div>
   <div class="panel game-box" id="game-box">
+    <h3 class="game-title">Beat the model</h3>
     <div class="game-top">
       <span class="game-round" id="game-round">Round 1 of 5</span>
       <div class="game-score" id="game-score"></div>
@@ -412,6 +419,18 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
     <div class="timeline" id="game-line" hidden></div>
     <div class="verdicts" id="game-verdicts"></div>
     <div class="game-end" id="game-end" hidden></div>
+  </div>
+  <div class="panel game-box quiz-box" id="quiz">
+    <h3 class="game-title">Qloo or the baseline?</h3>
+    <div class="game-top">
+      <span class="game-round" id="qz-round">Question 1 of 8</span>
+      <div class="game-score"><span class="you">You <b id="qz-score">0/0</b></span></div>
+    </div>
+    <p class="game-q" id="qz-q">Loading the results&hellip;</p>
+    <p class="hint" id="qz-sub"></p>
+    <div class="qz-opts" id="qz-opts" role="group" aria-label="Pick who scored higher"></div>
+    <div class="qz-reveal" id="qz-reveal" aria-live="polite"></div>
+    <div class="game-actions"><button type="button" class="primary" id="qz-next" hidden>Next question</button></div>
   </div>
 </section>
 
@@ -573,6 +592,6 @@ try { if (localStorage.getItem("ws-theme") === "night") document.documentElement
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script defer src="/static/app.js?v=30"></script>
 <script defer src="/static/features.js?v=32"></script>
-<script defer src="/static/play.js?v=27"></script>
+<script defer src="/static/play.js?v=36"></script>
 </body>
 </html>
